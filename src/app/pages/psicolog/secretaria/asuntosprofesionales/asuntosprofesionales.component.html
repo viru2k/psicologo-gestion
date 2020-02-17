@@ -1,0 +1,68 @@
+<div class="header-inicio   cuadro-size pt-4 ">
+  
+  <div class="pt-5 d-flex justify-content-center"><label><p class="text-center txt-azul-oscuro-colegio pt-5 label-h3 ">SECRETARIA DE ASUNTOS PROFESIONALES</p></label></div>
+
+    <hr class="hr-50"> 
+
+    <app-loading *ngIf="loading" class="text-center txt-noticia-inicio"></app-loading>
+  
+    <p-scrollPanel  [style]="{width: '99%', height: '800px'}">
+      
+      <div  *ngIf="errornoticia" class=" row  row mt-5">
+          <div class="col-5"></div>
+          <div class="col-2" *ngIf="errornoticia">
+              <div id="container center"><b><h6 class="text-white">A ocurrido un error</h6></b></div>
+              <div id="container">
+                  <button class="learn-more " (click)="loadListNoticias()"> Volver a cargar</button>    
+                </div>                  
+          </div>
+          <div class="col-5"></div>
+      </div>
+  
+  
+      <div  *ngFor="let elemento of elementos" class=" row ">
+      
+          <div *ngIf="elemento.pagina ==='ASUNTOSPROFESIONALES'" class=" col-xs-0 col-sm-0 col-md-3"></div>
+         
+          <div *ngIf="elemento.pagina ==='ASUNTOSPROFESIONALES'"  class="  xs-12 col-sm-12 col-md-6 mt-4 m-1 movie_card "> 
+            <div class="row">
+              <div class="col-md-12 xs-12 col-sm-12">
+                  
+                <label class="txt-gris-oscuro-colegio label-h4 mt-3 d-flex justify-content-center ">{{elemento.titulo}}</label>
+                <hr class="hr-50 ">
+                <img *ngIf="elemento.tiene_imagen === 'SI'" src="{{elemento.imagen}}" alt="No se encuentra la imagen" class=" img-noticia imagen-fit mb-2 rounded  d-block ">
+                <label class="txt-gris-oscuro-colegio "><p class="text-justify label-h6" [innerHTML]="elemento.descripcion"></p></label>              
+                <a *ngIf="elemento.tiene_enlace === 'SI'" class="btn btn-info btn-block text-white d-flex align-items-center d-flex justify-content-center mb-3"  href="{{elemento.enlace}}" target="_blank" ><i class="far fa-arrow-alt-circle-down mr-2 fa-2x"></i>Descargar </a>
+              </div>
+              
+              <div class="col-xs-0 col-sm-0 col-md-3">
+                  
+              </div>
+            </div>
+            
+  
+            <div class="xs-12 col-sm-12 col-md-6 mt-4 m-1 " *ngIf="elemento.es_video == 'SI' || elemento.es_youtube == 'SI'"> 
+              <div class="row d-flex justify-content-center">
+          
+                    
+                    <hr class="hr-50 mb-5">              
+                    <h6 class="txt-gris-oscuro-colegio"><p class="text-justify" [innerHTML]="elemento.descripcion"></p></h6>              
+                    <video *ngIf="elemento.es_video === 'SI'" class="mt-5 mb-5 d-flex justify-content-center" width="100%" height="400" controls> 
+                        <source  src="{{elemento.enlace_video}}" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                      </video>
+                      <iframe *ngIf="elemento.es_youtube === 'SI'" [src]="photoURL(elemento.enlace_video_youtube)"  width="100%" height="400" class=" d-flex justify-content-center d-flex align-items-center"  frameborder="0" allowfullscreen></iframe>
+            
+                
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-2 xs-0 col-sm-0  col-md-3"></div>
+    
+    </div>
+    
+    </p-scrollPanel>
+    </div>
+    
+    

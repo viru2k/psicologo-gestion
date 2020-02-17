@@ -1,0 +1,52 @@
+<div >
+    <app-loading *ngIf="loading"> </app-loading> 
+   
+  </div>
+  
+      <p-table  #dt class="pt-2" tableStyleClass="prime-table" selectionMode="single" [columns]="cols"  [value]="elementos"   columnResizeMode="expand" [responsive]="true"
+      scrollHeight="400px" [scrollable]="true" >
+               
+                  <ng-template pTemplate="header" let-columns  [pSelectableRow]="elementos" > 
+                      <tr>
+                          <th  *ngFor="let col of columns" [pSortableColumn]="col.field" [width]="col.width"  >
+                              {{col.header}}
+                              <p-sortIcon [field]="col.field"  ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                          </th>
+                       
+                      </tr>
+                      <tr>
+                          <th *ngFor="let col of columns" [ngSwitch]="col.field" >
+                              <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'id_liquidacion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_fecha_hasta'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" autofocus>
+                              <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                      
+                              <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_sesion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                      
+                              <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >                      
+                              <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_precio_sesion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                      
+                              <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_precio_total'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                                                  
+                          </th>
+                      </tr>
+                  </ng-template>
+        
+                  <ng-template pTemplate="body" let-elementos >
+                    <tr style="height:20px" >
+    
+                      <td style="width: 10%">{{elementos.os_fecha_hasta | date: 'dd/MM/yyyy'}}</td>
+                      <td style="width: 25%">{{elementos.os_nombre}}</td>                                                                                              
+                      <td style="width: 15%">{{elementos.os_sesion }}</td>                    
+                      <td style="width: 8%">{{elementos.os_cantidad }}</td>
+                      <td style="width: 8%">{{elementos.os_precio_sesion |  number : '1.2-2'}}</td>
+                      <td style="width: 8%">{{elementos.os_precio_total |  number : '1.2-2'}}</td>
+                     
+              </tr>
+          </ng-template>
+  
+          <ng-template pTemplate="summary">
+            <ul>
+               <div class="row float-right mr-2">
+                   <h6 class="text-info pr-2">CANTIDAD ORDENES : {{cantidad_practica}}  -</h6>                 
+                   <h6 class="text-info"> TOTAL : {{total_facturado|  number : '1.2-2' }} $</h6>
+               </div>
+             </ul>
+         </ng-template> 
+      </p-table>
+    

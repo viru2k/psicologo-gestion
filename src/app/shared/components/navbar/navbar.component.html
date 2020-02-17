@@ -1,0 +1,126 @@
+
+
+
+
+	
+		<div class="flexbox-max-height">
+	<nav class=" navbar navbar-expand-lg navbar-default  container-fluid-nav fixed-top animated slideInDown " *ngIf="loggedIn">
+    
+			
+			<a class="navbar-brand"  routerLink="inicio"><img src="assets/images/psicologos-logo.png" height="40" alt=""> </a>
+			<button class="navbar-toggler my-hover  navbar-toggler-left  navbar-button" type="button" data-toggle="collapse" 
+			(click)="toggleNavbar()">
+			<i class="fa fa-navicon"></i>
+			</button>
+		
+	
+		  
+			<div class="collapse navbar-collapse animated fadeIn slow navbar-round "
+			[ngClass]="{ 'show': navbarOpen}">
+			<ul class="nav navbar-nav slideInDown d-flex justify-content-center">
+
+
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="inicio" (click)="toggleNavbar()" href="#"><label class="label-h7">INICIO</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="asuntosprofesionales" (click)="toggleNavbar()" href="#"><label class="label-h7 ">SEC. ASUNTOS PROFESIONALES</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="curso" (click)="toggleNavbar()" href="#"><label class="label-h7 ">SEC. SOCIAL</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="secgral" (click)="toggleNavbar()" ><label class="label-h7 ">SEC. GENERAL</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="tesoreria" (click)="toggleNavbar()" href="#"><label class="label-h7 ">TESORERIA</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="revisores" (click)="toggleNavbar()"> <label class="label-h7 ">REVISORES</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="autorizacion" (click)="toggleNavbar()" href="#"> <label class="label-h7 ">AUTORIZACION</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="gestion" (click)="toggleNavbar()" href="#"><label class="label-h7 ">AUTOGESTION</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="cuenta" (click)="toggleNavbar()" href="#"><label class="label-h7 ">MI CUENTA</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="liquidacion" (click)="toggleNavbar()" href="#"><label class="label-h7 "></label>MIS LIQUIDACIONES</a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none btn-menu-salir" routerLink="institucional" (click)="cerrarSesion()" href="#"><label class="label-h7 "></label>CERRAR SESION</a>
+				
+
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="inicio" (click)="toggleNavbar()" href="#"><label class="label-h7">INICIO</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="asuntosprofesionales" (click)="toggleNavbar()" href="#"><label class="label-h7 ">SEC. ASUNTOS PROFESIONALES</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="curso" (click)="toggleNavbar()" href="#"><label class="label-h7 ">SEC. SOCIAL</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="secgral" (click)="toggleNavbar()" ><label class="label-h7 ">SEC. GENERAL</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="tesoreria" (click)="toggleNavbar()" href="#"><label class="label-h7 ">TESORERIA</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="revisores" (click)="toggleNavbar()"> <label class="label-h7 ">REVISORES</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="autorizacion" (click)="toggleNavbar()" href="#"><label class="label-h7 ">AUTORIZACION</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="gestion" (click)="toggleNavbar()" href="#"><label class="label-h7 ">AUTOGESTION</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="cuenta" (click)="toggleNavbar()" href="#"><label class="label-h7 ">MI CUENTA</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="liquidacion" (click)="toggleNavbar()" href="#"><label class="label-h7 ">MIS LIQUIDACIONES</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-salir" routerLink="institucional" (click)="cerrarSesion()" href="#"><label class="label-h7 ">CERRAR SESION</label></a>
+			  </ul>
+			</div>
+			
+					
+				
+		  </nav>
+		  <div class=" background-white   ">
+			<router-outlet  *ngIf="loggedIn"></router-outlet> 
+			
+  
+  <div class="wrapper fadeInDown background-white" *ngIf="!loggedIn">
+  
+	<div style="background-color: #666666;">
+		<div class="limiter">
+			
+			<div class="container-login100">
+				
+				<div class="wrap-login100"> 
+					
+					<form [formGroup]="loginForm"  class="login100-form validate-form" (ngSubmit)="onSubmit()">
+						<div class="login100-form-title mb-1">
+							<img  src="assets/images/psicologos-logo.png" height="50" alt="">
+						</div>
+						<span class="login100-form-title p-b-43 texto-monserrat">
+							Bienvenido
+						</span>
+						
+						
+						
+						<div class="wrap-input100 validate-input" data-validate = "Usuario válido es requerido">
+							<input class="input100" type="text" name="email" formControlName="username"   autofocus>
+							<span  class="focus-input100" ></span>
+							<span   class="label-input100" >Usuario</span>
+							
+						</div>
+						
+						
+						<div class="wrap-input100 validate-input" data-validate="Contraseña es requerida">
+							<input class="input100" type="password" name="pass" formControlName="password" >
+							<span class="focus-input100"></span>
+							<span class="label-input100" >Contraseña</span>
+						</div>
+	
+					
+				
+	
+						<div class="container-login100-form-btn">
+							<button class="login100-form-btn">
+								Ingresar
+							</button>
+						</div>
+						
+						
+					</form>
+	
+					<div class="login100-more" style="background-image: url(assets/images/psicologo-login.jpg);">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+		</div>
+	   
+<!-- 
+	<p-menubar  [model]="general" *ngIf="loggedIn" autoZIndex="false"  [autoDisplay]="false"  >
+            
+               
+      <div class="flexbox row" >                      
+       <div class=" float-right mr-3 mt-2">  <h6 class="text-secondary">Usuario : {{username}}</h6></div>                                             
+			  
+			  <div class="button mr-2"> 
+                <i #aa (click)="cerrarSesion()" class="fas fa-power-off fa-2x my-hover nav-links"></i>
+			</div>
+		</div> 
+  </p-menubar> 
+   -->
+  
+  
+</div>

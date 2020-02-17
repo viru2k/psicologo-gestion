@@ -1,0 +1,12 @@
+<div class="header-inicio   cuadro-size pt-4 ">
+  <div class="pt-5 d-flex justify-content-center"><label><p class="text-center txt-azul-oscuro-colegio pt-5 label-h3 ">AUTOGESTION</p></label></div>
+  <label>Desde aquí podra subir sus facturas para ser gestionadas por el colegio</label>
+  <p-fileUpload name="images[]" url=" {{url}}multiuploads/estudios/{{this.userData['name']}}" (onUpload)="onUpload($event)" chooseLabel="Seleccionar Archivo"  uploadLabel = "Subir"  cancelLabel="Cancelar"
+  multiple="multiple"  >
+
+</p-fileUpload>
+  </div>
+
+
+
+  
