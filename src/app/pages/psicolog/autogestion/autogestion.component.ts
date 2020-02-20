@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { URL_ARCHIVO,calendarioIdioma } from './../../../config/config';
+import { URL_ARCHIVO_SUBIDA,calendarioIdioma } from './../../../config/config';
 import swal from 'sweetalert2';
 
 @Component({
@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 })
 export class AutogestionComponent implements OnInit {
   uploadedFiles: any[] = [];
-  public url:string  = URL_ARCHIVO;
+  public url:string  = URL_ARCHIVO_SUBIDA;
   userData:any;
   constructor() {
     this.userData = JSON.parse(localStorage.getItem('userData'));

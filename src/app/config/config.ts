@@ -3,8 +3,9 @@
   
 export const URL_SERVICIOS = 'https://colegiodepsicologossj.com.ar/api-psicologo/public/api/'; 
 export const URL_ARCHIVO = 'https://colegiodepsicologossj.com.ar/api-psicologo/public/uploads/'; 
+export const URL_ARCHIVO_SUBIDA = 'https://colegiodepsicologossj.com.ar/api-psicologo/public/api/'; 
 export const URL_ARCHIVO_IMAGEN = 'https://colegiodepsicologossj.com.ar/api-psicologo/public/uploads/imagenes/'; 
-export const URL_ARCHIVO_VIDEO = 'https://colegiodepsicologossj.com.ar/api-psicologo/public/uploads/videos/'; 
+export const URL_ARCHIVO_VIDEO =  'https://colegiodepsicologossj.com.ar/api-psicologo/public/uploads/videos/'; 
 
 
 /***********SERVER DE PRUEBAS ********************** */
