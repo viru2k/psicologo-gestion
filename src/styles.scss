@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 /****************FUENTES PARA USAR ******************/
+
 @import "~bootstrap/scss/bootstrap.scss";
 @import url('https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|Open+Sans|Oxygen&display=swap');
 
@@ -9,6 +10,26 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap');
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                                 PIVOT TABLE                                */
+/* -------------------------------------------------------------------------- */
+
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-grids/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-pivotview/styles/material.css';
+
+
+
+
 
 h6{
     font-family: 'Montserrat', sans-serif !important ;
@@ -91,6 +112,7 @@ a{
     font-size:12px;
   } 
 
+  
   
   .ui-calendar button {
     right: 0;
@@ -1198,3 +1220,14 @@ FIN  ESTILO DE LA BARRA
 body {
     background-color: #FFFFFF;
   }
+
+/* -------------------------------------------------------------------------- */
+/*                                   FLEXBOX                                  */
+/* -------------------------------------------------------------------------- */
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

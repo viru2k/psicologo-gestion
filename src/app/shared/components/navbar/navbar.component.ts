@@ -20,7 +20,7 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  styleUrls: ['./navbar.component.scss'],
   providers: [MessageService,DialogService,DatePipe]
 })
 export class NavbarComponent implements OnInit {
@@ -357,7 +357,7 @@ menuList(){
       label: 'Producción', 
       visible:!this.gestion_produccion,
       items: [
-        {label: 'Datos de producción',visible:!this.gestion_produccion, 'routerLink': 'recepcion/agenda'},
+        {label: 'Indicadores de producción',visible:!this.gestion_produccion, 'routerLink': '/produccion/indicadores'},
         {
               label: 'Gestión de producción',
               visible:!this.administracion_produccion,
@@ -401,36 +401,27 @@ menuList(){
     label: 'Mantenimiento',
     
     items: [{
-            label: 'Gestión de agendas',
+            label: 'Parametros',
             visible:! this.administracion_produccion,
             items: [
-              {label: 'Agenda de medico', 'routerLink': 'agenda/medico'},
-              {label: 'Bloquear agenda', 'routerLink': 'agenda/medico/bloquear'},
-              {label: 'Desbloquear agenda', 'routerLink': 'agenda/medico/desbloquear'},
+              {label: 'Articulo', 'routerLink': 'mantenimiento/articulo'},
+              {label: 'Articulo confección', 'routerLink': 'mantenimiento/articulo/confeccion'},
+              {label: 'Insumo', 'routerLink': 'mantenimiento/insumo'},              
             ]
         },
         {
-                  label: 'Convenios',
-                  visible:! this.administracion_produccion,
-                  items: [
-                    {label: 'Convenios', 'routerLink': 'convenios/convenio'},
-                    {label: 'Obra social', 'routerLink': 'convenios/obrasocial'},
-                    {label: 'Pmo', 'routerLink': 'convenios/pmo'},
-                    {label: 'Distribucion de práctica', 'routerLink': 'distribucion'}
+            label: 'Calidad',
+            visible:! this.administarcion_auditoria,
+            items: [
+              {label: 'Encabezado de planilla', 'routerLink': 'calidad/encabezado'},
+              {label: 'Datos de planilla', 'routerLink': 'calidad/planilla'},
+              {label: 'Datos de columnas', 'routerLink': 'calidad/columnas'}
           ]
       },
-        {
-          label: 'Paciente',
-          visible:! this.administarcion_auditoria,
-         'routerLink': 'paciente'},
-        {
-          label: 'Medicos',
-          visible:! this.administarcion_auditoria,
-         'routerLink': 'medico'},
-         {
-          label: 'Usuario',
-          visible:! this.administarcion_auditoria,
-         'routerLink': 'usuario'},
+      {
+       label: 'Usuario',
+       visible:! this.mantenimiento,
+      'routerLink': 'usuario'},
  
 
     ]

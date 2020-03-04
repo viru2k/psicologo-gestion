@@ -49,6 +49,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
 
+
 /* -------------------------------------------------------------------------- */
 /*                            LIBRERIAS DE TERCEROS                           */
 /* -------------------------------------------------------------------------- */
@@ -56,6 +57,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { AutofocusModule } from 'angular-autofocus-fix'; 
 import localeEsAR from '@angular/common/locales/es-AR';
+import { PivotViewModule } from '@syncfusion/ej2-angular-pivotview';
 
 /* -------------------------------------------------------------------------- */
 /*                                 COMPONENTES                                */
@@ -64,6 +66,7 @@ import localeEsAR from '@angular/common/locales/es-AR';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { EmptyComponent } from './pages/info/empty/empty.component';
 import { NotFoundComponent } from './pages/info/not-found/not-found.component';
+import { DateFormatPipe } from './shared/pipes/date-format.pipe';
 
 /* -------------------------------------------------------------------------- */
 /*                                 DIRECTIVAS                                 */
@@ -72,17 +75,66 @@ import { NotFoundComponent } from './pages/info/not-found/not-found.component';
 
 
 import { NgxPopper } from 'angular-popper';
+import { ProduccionindicadoresComponent } from './pages/produccion/produccionindicadores/produccionindicadores.component';
+import { CalidadindicadoresComponent } from './pages/calidad/calidadindicadores/calidadindicadores.component';
+import { ArticuloComponent } from './pages/mantenimiento/articulo/articulo.component';
+import { ArticuloEditarComponent } from './pages/mantenimiento/articulo-editar/articulo-editar.component';
+import { ArticuloConfeccionEditarComponent } from './pages/mantenimiento/articulo-confeccion-editar/articulo-confeccion-editar.component';
+import { ArticuloConfeccionComponent } from './pages/mantenimiento/articulo-confeccion/articulo-confeccion.component';
+import { InsumoComponent } from './pages/mantenimiento/insumo/insumo.component';
+import { InsumoEditarComponent } from './pages/mantenimiento/insumo-editar/insumo-editar.component';
+import { UsuarioComponent } from './pages/mantenimiento/usuario/usuario.component';
+import { UsuarioEditarComponent } from './pages/mantenimiento/usuario-editar/usuario-editar.component';
+import { UnidadComponent } from './pages/mantenimiento/unidad/unidad.component';
+import { UnidadEditarComponent } from './pages/mantenimiento/unidad-editar/unidad-editar.component';
+import { CalidadControlComponent } from './pages/mantenimiento/calidad/calidad-control/calidad-control.component';
+import { CalidadControlEditarComponent } from './pages/mantenimiento/calidad/calidad-control/calidad-control-editar/calidad-control-editar.component';
+import { CalidadDatoRelevadoComponent } from './pages/mantenimiento/calidad/calidad-dato-relevado/calidad-dato-relevado.component';
+import { CalidadDatoRelevadoEditarComponent } from './pages/mantenimiento/calidad/calidad-dato-relevado/calidad-dato-relevado-editar/calidad-dato-relevado-editar.component';
+import { CalidadTipoControlComponent } from './pages/mantenimiento/calidad/calidad-tipo-control/calidad-tipo-control.component';
+import { CalidadTipoControlEditarComponent } from './pages/mantenimiento/calidad/calidad-tipo-control/calidad-tipo-control-editar/calidad-tipo-control-editar.component';
+import { CustomPreloaderComponent } from './shared/components/custom-preloader/custom-preloader.component';
+import { PopupArticuloConsultaComponent } from './shared/components/popups/popup-articulo-consulta/popup-articulo-consulta.component';
+import { PopupInsumoConsultaComponent } from './shared/components/popups/popup-insumo-consulta/popup-insumo-consulta.component';
+import { PopupArticuloDistribucionConsultaComponent } from './shared/components/popups/popup-articulo-distribucion-consulta/popup-articulo-distribucion-consulta.component';
+import { PopupUsuarioComponent } from './shared/components/popups/popup-usuario/popup-usuario.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,   
+    DateFormatPipe, 
     NavbarComponent,
     EmptyComponent,
-    NotFoundComponent
+    NotFoundComponent,    
+    ProduccionindicadoresComponent,
+    CalidadindicadoresComponent,
+    ArticuloComponent,
+    ArticuloEditarComponent,
+    ArticuloConfeccionEditarComponent,
+    ArticuloConfeccionComponent,
+    InsumoComponent,
+    InsumoEditarComponent,
+    UsuarioComponent,
+    UsuarioEditarComponent,
+    UnidadComponent,
+    UnidadEditarComponent,
+    CalidadControlComponent,
+    CalidadControlEditarComponent,
+    CalidadDatoRelevadoComponent,
+    CalidadDatoRelevadoEditarComponent,
+    CalidadTipoControlComponent,
+    CalidadTipoControlEditarComponent,
+    CustomPreloaderComponent,
+    PopupArticuloConsultaComponent,
+    PopupInsumoConsultaComponent,
+    PopupArticuloDistribucionConsultaComponent,
+    PopupUsuarioComponent
   ],
   imports: [
-    
 
+
+  
+    
     BrowserModule,
     FormsModule,
     MultiSelectModule,
@@ -109,11 +161,28 @@ import { NgxPopper } from 'angular-popper';
     ProgressSpinnerModule,
     PanelModule,
     AutoCompleteModule,
+    PivotViewModule ,
     SweetAlert2Module.forRoot(),
     AutofocusModule,
     NgxPopper,
-    RouterModule.forRoot([]) 
+    AppRoutingModule 
+    
   ],
+  entryComponents: [ArticuloEditarComponent,
+     ArticuloConfeccionEditarComponent,
+     CalidadTipoControlEditarComponent,
+     InsumoEditarComponent,
+     UsuarioEditarComponent,
+     UnidadEditarComponent,
+
+/* -------------------------------------------------------------------------- */
+/*                             POPUPS COMPARTIDOS                             */
+/* -------------------------------------------------------------------------- */
+    PopupArticuloConsultaComponent,
+    PopupInsumoConsultaComponent,
+    PopupArticuloDistribucionConsultaComponent,
+    PopupUsuarioComponent
+    ],
   providers: [CurrencyPipe,DecimalPipe,
     PushNotificationService,ExcelService,{ provide: LOCALE_ID, useValue: 'es-Ar' },
  {
@@ -128,3 +197,6 @@ import { NgxPopper } from 'angular-popper';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+//08103330303

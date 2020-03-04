@@ -1,9 +1,9 @@
 
  
   
-export const URL_SERVICIOS = 'http://localhost/api-calidad/public/api/';
-export const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
-export const URL_ARCHIVO = 'http://localhost/api-calidad/public/';
+//export const URL_SERVICIOS = 'http://localhost/api-calidad/public/api/';
+//export const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
+//export const URL_ARCHIVO = 'http://localhost/api-calidad/public/';
 
 /***********SERVER DE PRUEBAS ********************** */
  
@@ -14,9 +14,9 @@ export const URL_ARCHIVO = 'http://localhost/api-calidad/public/';
 
 // REMOTO WEB
 
-//export const URL_SERVICIOS = 'http://clinicaz.com.ar/api-vision/public/api/'; 
-//export const config: SocketIoConfig = { url: 'http://clinicaz.com.ar:4444', options: {} };
-//export const URL_ARCHIVO = 'http://clinicaz.com.ar/api-vision/public/';
+export const URL_SERVICIOS = 'https://clinicaz.com.ar/graziani/api-calidad/public/api/'; 
+export const config: SocketIoConfig = { url: 'http://clinicaz.com.ar:4444', options: {} };
+export const URL_ARCHIVO = 'http://clinicaz.com.ar/graziani/api-calidad/public/';
 
 export const VAPID_PUBLIC ='BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg'; // SIN USO
 
