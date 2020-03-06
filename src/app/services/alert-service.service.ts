@@ -21,6 +21,14 @@ throwAlert(estado:string, mensaje:string, motivo:string, errorNumero:string){
         })
   }
 
+  if(estado== 'warning'){
+    swal({
+        type: 'warning',
+        title: motivo,
+        text: mensaje
+      })
+}
+
   if(errorNumero =='422'){
     mensaje ='Los datos que esta tratando de guardar son iguales a los que ya poseia';
     swal({   

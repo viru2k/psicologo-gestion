@@ -351,40 +351,44 @@ try {
 menuList(){
 
   this.general = [
-    
+
     {
 
       label: 'Producción', 
       visible:!this.gestion_produccion,
       items: [
-        {label: 'Indicadores de producción',visible:!this.gestion_produccion, 'routerLink': '/produccion/indicadores'},
+        {label: 'Indicadores de producción',visible:!this.gestion_produccion, routerLink: '/produccion/indicadores'},
         {
-              label: 'Gestión de producción',
-              visible:!this.administracion_produccion,
-              items: [
-                {label: 'Parametros de producción', 'routerLink': 'recepcion//telefonista/agenda'},
-                {label: 'Gestion de turnos', 'routerLink': 'recepcion/turnos'},
-              ]
-          },
+            label: 'Producción',
+            visible:!this.administracion_produccion,
+            items: [
+              {label: 'Ingreso orden de pedido', routerLink: 'orden/pedido/ingreso'},
+              {label: 'Orden de pedido', routerLink: 'orden/pedido'},
+            ]
+        },
+        {
+          label: 'Gestión de producción',
+          visible:!this.gestion_produccion,
+          items: [
+            {label: 'Movimientos de producción', routerLink: 'recepcion/telefonista/agenda'},
+            {label: 'Movimientos de insumos', routerLink: 'recepcion/turnos'},
+          ]
+      },
 
-         
-          {label: 'Operación de cobro',visible:!this.gestion_produccion, 'routerLink': 'recepcion/operacioncobro'},
-          {label: 'Detalle de operaciones de cobro',visible:! this.gestion_produccion, 'routerLink': 'liquidacion/operacioncobro/detalle'},
-          {label: 'Historia clínica',visible:!this.gestion_produccion, 'routerLink': 'medico/historiaclinica/consulta'},
       ]
   },
   {
     label: 'Auditoria',
     visible:!this.gestion_auditoria,
     items: [
-      {label: 'Atención', 'routerLink': 'gestion/agenda'},
-      {label: 'Gestion de turnos', 'routerLink': 'recepcion/turnos'},
+      {label: 'Control de producción', routerLink: 'gestion/agenda'},
+      {label: 'Control de maquina', routerLink: 'recepcion/turnos'},
 
       {
-            label: 'Cobros',
+            label: 'Indicadores',
             items: [
-              {label: 'Operación de cobro',visible:!this.gestion_auditoria, 'routerLink': 'asesoramiento/operacioncobro'},
-              {label: 'Rendición de caja',visible:!this.gestion_auditoria, 'routerLink': 'asesoramiento/facturacion/rendicion'},
+              {label: 'Indicadores de producción',visible:!this.gestion_auditoria, routerLink: 'asesoramiento/operacioncobro'},
+              {label: 'Indicadores de máquina',visible:!this.gestion_auditoria, routerLink: 'asesoramiento/facturacion/rendicion'},
 
             ]
         }
@@ -404,24 +408,24 @@ menuList(){
             label: 'Parametros',
             visible:! this.administracion_produccion,
             items: [
-              {label: 'Articulo', 'routerLink': 'mantenimiento/articulo'},
-              {label: 'Articulo confección', 'routerLink': 'mantenimiento/articulo/confeccion'},
-              {label: 'Insumo', 'routerLink': 'mantenimiento/insumo'},              
+              {label: 'Articulo', routerLink: 'mantenimiento/articulo'},
+              {label: 'Articulo confección', routerLink: 'mantenimiento/articulo/confeccion'},
+              {label: 'Insumo', routerLink: 'mantenimiento/insumo'},              
             ]
         },
         {
             label: 'Calidad',
             visible:! this.administarcion_auditoria,
             items: [
-              {label: 'Encabezado de planilla', 'routerLink': 'calidad/encabezado'},
-              {label: 'Datos de planilla', 'routerLink': 'calidad/planilla'},
-              {label: 'Datos de columnas', 'routerLink': 'calidad/columnas'}
+              {label: 'Encabezado de planilla', routerLink: 'calidad/encabezado'},
+              {label: 'Datos de planilla', routerLink: 'calidad/planilla'},
+              {label: 'Datos de columnas', routerLink: 'calidad/columnas'}
           ]
       },
       {
        label: 'Usuario',
        visible:! this.mantenimiento,
-      'routerLink': 'usuario'},
+      routerLink: 'usuario'},
  
 
     ]

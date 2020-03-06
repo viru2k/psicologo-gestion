@@ -14,6 +14,8 @@ import { CalidadControlComponent } from './pages/mantenimiento/calidad/calidad-c
 import { CalidadTipoControlComponent } from './pages/mantenimiento/calidad/calidad-tipo-control/calidad-tipo-control.component';
 import { CalidadDatoRelevadoComponent } from './pages/mantenimiento/calidad/calidad-dato-relevado/calidad-dato-relevado.component';
 import { UsuarioComponent } from './pages/mantenimiento/usuario/usuario.component';
+import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ingreso/orden-pedido-ingreso.component';
+import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedido.component';
 
 const routes: Routes = [
   
@@ -31,6 +33,7 @@ const routes: Routes = [
 { path: 'calidad/encabezado', component: CalidadTipoControlComponent },
 { path: 'calidad/planilla', component: CalidadControlComponent },
 { path: 'calidad/columnas', component: CalidadDatoRelevadoComponent },
+
 { path: 'usuario', component: UsuarioComponent },
 
 /* -------------------------------------------------------------------------- */
@@ -44,6 +47,8 @@ const routes: Routes = [
 /* -------------------------------------------------------------------------- */
 
 { path: 'produccion/indicadores', component: ProduccionindicadoresComponent },
+{ path: 'orden/pedido/ingreso', component: OrdenPedidoIngresoComponent },
+{ path: 'orden/pedido', component: OrdenPedidoComponent },
 
 /* -------------------------------------------------------------------------- */
 /*                              PAGINAS DEL SITIO                             */
@@ -55,6 +60,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+
 
 
 

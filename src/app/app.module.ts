@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector,LOCALE_ID } from '@angular/core';
+import { NgModule, Injector,LOCALE_ID, } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +45,7 @@ import {MenuItem, MessageService,DialogService,SelectItem} from 'primeng/api';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {PanelModule} from 'primeng/panel';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+registerLocaleData(localeEsAR, 'es-Ar');
 
 
 
@@ -98,6 +99,10 @@ import { PopupArticuloConsultaComponent } from './shared/components/popups/popup
 import { PopupInsumoConsultaComponent } from './shared/components/popups/popup-insumo-consulta/popup-insumo-consulta.component';
 import { PopupArticuloDistribucionConsultaComponent } from './shared/components/popups/popup-articulo-distribucion-consulta/popup-articulo-distribucion-consulta.component';
 import { PopupUsuarioComponent } from './shared/components/popups/popup-usuario/popup-usuario.component';
+import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedido.component';
+import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ingreso/orden-pedido-ingreso.component';
+import { MovimientoProduccionComponent } from './pages/produccion/movimiento-produccion/movimiento-produccion.component';
+import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/movimiento-insumo.component';
 
 @NgModule({
   declarations: [
@@ -128,7 +133,11 @@ import { PopupUsuarioComponent } from './shared/components/popups/popup-usuario/
     PopupArticuloConsultaComponent,
     PopupInsumoConsultaComponent,
     PopupArticuloDistribucionConsultaComponent,
-    PopupUsuarioComponent
+    PopupUsuarioComponent,
+    OrdenPedidoComponent,
+    OrdenPedidoIngresoComponent,
+    MovimientoProduccionComponent,
+    MovimientoInsumoComponent
   ],
   imports: [
 
