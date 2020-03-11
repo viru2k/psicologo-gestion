@@ -370,8 +370,9 @@ menuList(){
           label: 'Gestión de producción',
           visible:!this.gestion_produccion,
           items: [
-            {label: 'Movimientos de producción', routerLink: 'recepcion/telefonista/agenda'},
-            {label: 'Movimientos de insumos', routerLink: 'recepcion/turnos'},
+            {label: 'Cargar producción', routerLink: 'produccion/ingreso'},
+            {label: 'Movimientos de producción', routerLink: 'produccion/movimientos'},
+            {label: 'Movimientos de insumos', routerLink: 'insumo/movimientos'},
           ]
       },
 

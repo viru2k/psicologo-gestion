@@ -16,6 +16,9 @@ import { CalidadDatoRelevadoComponent } from './pages/mantenimiento/calidad/cali
 import { UsuarioComponent } from './pages/mantenimiento/usuario/usuario.component';
 import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ingreso/orden-pedido-ingreso.component';
 import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedido.component';
+import { MovimientoProduccionComponent } from './pages/produccion/movimiento-produccion/movimiento-produccion.component';
+import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/movimiento-insumo.component';
+import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
 
 const routes: Routes = [
   
@@ -49,6 +52,9 @@ const routes: Routes = [
 { path: 'produccion/indicadores', component: ProduccionindicadoresComponent },
 { path: 'orden/pedido/ingreso', component: OrdenPedidoIngresoComponent },
 { path: 'orden/pedido', component: OrdenPedidoComponent },
+{ path: 'produccion/ingreso', component: IngresoProduccionComponent },
+{ path: 'produccion/movimientos', component: MovimientoProduccionComponent },
+{ path: 'insumo/movimientos', component: MovimientoInsumoComponent },
 
 /* -------------------------------------------------------------------------- */
 /*                              PAGINAS DEL SITIO                             */
@@ -60,6 +66,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+
+
+
 
 
 

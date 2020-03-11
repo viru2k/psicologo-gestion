@@ -35,6 +35,10 @@ export class ProduccionService {
     getOrdenPedidoDetalleById(id: string){
       return this.http.get<any[]>(this.url+'produccion/orden/pedido/by/id?id='+id);
     }
+    
+    getOrdenPedidoDetalleByEstado(estado: string){
+      return this.http.get<any[]>(this.url+'produccion/orden/pedido/by/estado?estado='+estado);
+    }
 
       getOrdenPedidoEstado(estado: string){
         return this.http.get<any[]>(this.url+'produccion/orden/pedido/estado?estado='+estado);
@@ -43,5 +47,11 @@ export class ProduccionService {
     getUnidad(){
       return this.http.get<any[]>(this.url+'unidad');
       }
+
+      setProduccionOrdenPedido(produccion:any){
+        return this.http.post<any>(this.url+'produccion/crear', produccion);
+        }
+
+      
 
 }

@@ -46,12 +46,11 @@ export class OrdenPedidoComponent implements OnInit {
     this.cols = [
     { field: 'accion', header: 'Accion' , width: '6%'} ,
     { field: 'fecha_pedido', header: 'Fecha creación',  width: '40%' },
-    { field: 'estado', header: 'Estado',  width: '30%' },
-    { field: 'nombreyapellido', header: 'Usuario',  width: '20%' },
-    { field: '', header: 'Accion',  width: '10%' },
+    { field: 'estado', header: 'Estado',  width: '20%' },
+    { field: 'nombreyapellido', header: 'Usuario',  width: '40%' }
   ];
 
-  this.pedido = [
+    this.pedido = [
     {label: 'ACTIVO',value: 'ACTIVO'},
     {label: 'FINALIZADO',value: 'FINALIZADO'},
     {label: 'PAUSADO',value: 'PAUSADO'},
@@ -144,12 +143,12 @@ actualizarFecha(event){
 
 
 
-verDetalle(elementos){
-  console.log(elementos);
-
-  this.loading = true;
-  try {
-      this.produccionService.getOrdenPedidoDetalleById(elementos['id'])
+verDetalle(){
+ 
+console.log(this.selectedElemento);
+this.loading = true;
+try {
+      this.produccionService.getOrdenPedidoDetalleById(this.selectedElemento['id'])
       .subscribe(resp => {
        
        this.elementos_produccion = resp;
@@ -162,6 +161,7 @@ verDetalle(elementos){
           this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
        });
   } catch (error) {
+    this.loading = false;
     this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
   }
 }
@@ -169,14 +169,14 @@ verDetalle(elementos){
 modificarEstado(estado:string){
   
     console.log(this.selectedElemento);
-  this.loading = true;
-  try {
+    this.loading = true;
+    try {
       this.produccionService.updateOrdenPedido(this.selectedElemento['id'],estado)
       .subscribe(resp => {
        
         this.loadlist();
-       this.loading = false;
-       console.log(resp);
+        this.loading = false;
+        console.log(resp);
       },
       error => { // error path
           console.log(error);

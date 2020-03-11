@@ -103,6 +103,7 @@ import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedi
 import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ingreso/orden-pedido-ingreso.component';
 import { MovimientoProduccionComponent } from './pages/produccion/movimiento-produccion/movimiento-produccion.component';
 import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/movimiento-insumo.component';
+import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
 
 @NgModule({
   declarations: [
@@ -137,7 +138,8 @@ import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/
     OrdenPedidoComponent,
     OrdenPedidoIngresoComponent,
     MovimientoProduccionComponent,
-    MovimientoInsumoComponent
+    MovimientoInsumoComponent,
+    IngresoProduccionComponent
   ],
   imports: [
 

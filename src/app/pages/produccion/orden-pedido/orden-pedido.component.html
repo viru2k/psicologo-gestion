@@ -49,16 +49,24 @@
                 </td>
   
                       <td style="width: 40%">{{elementos.fecha_pedido | date: 'dd/MM/yyyy'}}</td>
-                      <td style="width: 30%">{{elementos.estado}}</td>
-                      <td style="width: 20%" pEditableColumn>{{elementos.nombreyapellido}}</td>   
-                       <td style="width: 10%">
-                         <button class="btn btn-sm btn-success"  (click)="verDetalle(elementos)">Detalle</button>
-                       </td>
+                      <td style="width: 20%">{{elementos.estado}}</td>
+                      <td style="width: 40%" pEditableColumn>{{elementos.nombreyapellido}}</td>   
+                     
               </tr>
           </ng-template>
     
          
       </p-table>
+      <p-overlayPanel #op [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" >                          
+ 
+        <span>   <a class="nav-link azul text-warning  my-hover" (click)="modificarEstado('PAUSADO')">Pausado</a></span>
+        <span>   <a class="nav-link azul text-info  my-hover" (click)="modificarEstado('ACTIVO')">Activo</a></span>
+        <span>   <a class="nav-link azul text-danger  my-hover" (click)="modificarEstado('FINALIZADO')">Finalizar</a></span>
+        <span> <hr></span>
+        <span>   <a class="nav-link azul text-success  my-hover"   (click)="verDetalle()">Ver detalle</a></span>
+      
+      </p-overlayPanel>  
+      
       <div class="d-flex justify-content-center mt-3">
         <label>DETALLE DE PRODUCTOS</label>
       </div>
@@ -101,11 +109,3 @@
       </p-table>
     </div>
 
-    <p-overlayPanel #op [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" >                          
- 
-        <span>   <a class="nav-link azul text-danger  my-hover" (click)="modificarEstado('PAUSADO')">Pausado</a></span>
-        <span>   <a class="nav-link azul text-danger  my-hover" (click)="modificarEstado('ACTIVO')">Activo</a></span>
-        <span> <hr></span>
-        <span>   <a class="nav-link azul text-info  my-hover" (click)="modificarEstado('FINALIZADO')">Finalizar</a></span>
-      </p-overlayPanel>  
-      
