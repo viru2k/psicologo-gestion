@@ -57,7 +57,7 @@ verDetalle(){
   console.log(this.selectedElemento);
   this.loading = true;
   try {
-        this.produccionService.getProduccionByOrdenPedido(this.config.data['id'])
+        this.produccionService.getProduccionByOrdenPedido(this.config.data['id'], this.config.data['articulo_id'])
         .subscribe(resp => {
           console.log(resp);
           let i = 0;
@@ -69,7 +69,7 @@ verDetalle(){
           this.cantidad_litros =  Number(this.cantidad_litros)+ Number(this.elementos[i]['cantidad_litros']);
           this.cantidad_original = this.elementos[i]['cantidad_original'];
           this.cantidad_salida =Number(this.cantidad_salida)+ Number(this.elementos[i]['cantidad_salida']);
-          this.existencia = this.elementos[i]['existencia'];
+          this.existencia = Number(this.existencia)+ Number(this.elementos[i]['existencia']);
           i++;
         });
           this.loading = false;
@@ -87,5 +87,39 @@ verDetalle(){
   }
 
 
+  verDetalleTodos(){
+ 
+    console.log(this.selectedElemento);
+    this.loading = true;
+    try {
+          this.produccionService.getProduccionByOrdenPedidoTodos(this.config.data['id'])
+          .subscribe(resp => {
+            console.log(resp);
+            let i = 0;
+            this.elementos = resp;
+            console.log(this.elementos);
+            resp.forEach(element => {
+            this.cantidad = this.elementos[i]['cantidad'];
+            this.cantidad_botella = Number(this.cantidad_botella)+ Number(this.elementos[i]['cantidad_botella']);
+            this.cantidad_litros =  Number(this.cantidad_litros)+ Number(this.elementos[i]['cantidad_litros']);
+            this.cantidad_original = this.elementos[i]['cantidad_original'];
+            this.cantidad_salida =Number(this.cantidad_salida)+ Number(this.elementos[i]['cantidad_salida']);
+            this.existencia = Number(this.existencia)+ Number(this.elementos[i]['existencia']);
+            
+            i++;
+          }); 
+            this.loading = false;
+           
+          },
+          error => { // error path
+              console.log(error);
+              this.loading = false;
+              this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+           });
+      } catch (error) {
+        this.loading = false;
+        this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+      }
+    }
 
 }

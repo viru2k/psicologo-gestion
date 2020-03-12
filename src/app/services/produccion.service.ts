@@ -52,9 +52,14 @@ export class ProduccionService {
         return this.http.post<any>(this.url+'produccion/crear', produccion);
         }
 
-    getProduccionByOrdenPedido(id: string){
-      return this.http.get<any[]>(this.url+'produccion/asociar/orden/pedido/articulo?id='+id);
+    getProduccionByOrdenPedido(id: string, articulo_id:string){
+      return this.http.get<any[]>(this.url+'produccion/asociar/orden/pedido/articulo?id='+id+'&articulo_id='+articulo_id);
     }
+
+    getProduccionByOrdenPedidoTodos(id: string){
+      return this.http.get<any[]>(this.url+'produccion/asociar/orden/pedido/articulo/todos?id='+id);
+    }
+    
   
         
 

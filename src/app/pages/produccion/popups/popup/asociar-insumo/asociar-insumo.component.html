@@ -1,1 +1,85 @@
-<p>asociar-insumo works!</p>
+
+  <div class="m-1">
+    <button class="btn btn-info btn-md btn-block" (click)="verDetalleTodos()"> Listar toda la producción de la orden de pedido</button>
+</div>
+<p-overlayPanel #op [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" >                          
+
+    <span>   <a class="nav-link azul text-info  my-hover" (click)="asociarInsumo()">Asociar insumo</a></span>
+    <span>   <a class="nav-link azul text-success  my-hover" (click)="moverAdeposito()">Mover a otro depósito</a></span>
+  </p-overlayPanel> 
+<div  class="m-3">
+
+     
+    <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+    scrollHeight="300px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
+   
+    <ng-template pTemplate="caption">
+      <div class="row">
+              <div class="col-md-3" style="text-align:left">
+                
+                          </div>
+              <div class="col-md-4" style="text-align:left"></div>
+      <div class="col-md-5" style="text-align:right">                                
+          <input  class="form-control col-md-12 form-control-sm" type="text"  placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')"  >
+      </div>
+   </div>
+  </ng-template>
+ 
+               <ng-template pTemplate="header" let-columns >
+              
+                          <tr >
+                               
+                            <th  *ngFor="let col of columns" [pSortableColumn]="col.field"  [ngStyle]="{'width': col.width}">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                            </th> 
+                         
+                        </tr> 
+                        <tr>
+                        <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_pedido'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_botella'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_litros'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_ingreso'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_egreso'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_original'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_salida'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'existencia'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombreyapellido'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                        </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+              
+        <ng-template pTemplate="body" let-elementos  >
+            <tr style="height:20px">
+                <td style="width: 6%" >                   
+                    <a     (click)="accion($event,op,elementos)"    ><i class="far fa-edit fa-2x icon-color-purple my-hover"></i></a>
+                 
+                </td>
+                    <td style="width: 4%">{{elementos.id}}</td>
+                    <td style="width: 10%">{{elementos.fecha_pedido | date: 'dd/MM/yyyy'}}</td>
+                    <td style="width: 30%">{{elementos.descripcion}}</td>
+                    <td style="width: 10%" >{{elementos.cantidad}}</td>
+                    <td style="width: 10%" >{{elementos.fecha_produccion | date: 'dd/MM/yyyy'}}</td>
+                    <td style="width: 10%">{{elementos.cantidad_botella}}</td>
+                    <td style="width: 10%" >{{elementos.cantidad_litros}}</td>
+                    <td style="width: 10%" >{{elementos.fecha_ingreso | date: 'dd/MM/yyyy'}}</td>
+                    <td style="width: 10%">{{elementos.fecha_egreso | date: 'dd/MM/yyyy'}}</td>
+                    <td style="width: 10%" >{{elementos.cantidad_original}}</td>
+                    <td style="width: 10%" >{{elementos.cantidad_salida}}</td>
+                    <td style="width: 10%">{{elementos.existencia}}</td>                      
+                    <td style="width: 15%" >{{elementos.nombreyapellido}}</td>
+                    
+            </tr>
+        </ng-template>
+     
+       
+    </p-table>
+
+
+  </div>
