@@ -1,20 +1,8 @@
-<div class="d-flex justify-content-center mt-3">
-    <label>AGREGAR PRODUCCION A ORDEN DE PEDIDO</label>
-  </div>
+
     <div  class="m-3">
   
     
-      <p-overlayPanel #op [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" >                          
- 
-        <span>   <a class="nav-link azul text-info  my-hover" (click)="AsociarProduccion()">Asociar producción a orden de pedido</a></span>
-        <span>   <a class="nav-link azul text-success  my-hover" (click)="AsociarInsumo()">Asociar insumos a producción</a></span>
-        <span> <hr></span>
-        <span>   <a class="nav-link azul text-warning  my-hover" (click)="AsociarProduccionDetalle()">Detalle de producción a orden de pedido</a></span>        
-        <span>   <a class="nav-link azul text-warning  my-hover" (click)="AsociarInsumoDetalle()">Detalle de insumos a producción</a></span>        
-        
-        
-      
-      </p-overlayPanel>  
+     
       <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
       scrollHeight="300px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
      
@@ -52,20 +40,40 @@
                 
           <ng-template pTemplate="body" let-elementos  >
               <tr style="height:20px">
-                     
-                <td style="width: 6%" >                   
-                  <a     (click)="accion($event,op,elementos)"    ><i class="far fa-edit fa-2x icon-color-purple my-hover"></i></a>
-               
-              </td>
-                <td style="width: 6%">{{elementos.id}}</td>
+                      <td style="width: 4%">{{elementos.id}}</td>
                       <td style="width: 10%">{{elementos.fecha_pedido | date: 'dd/MM/yyyy'}}</td>
-                      <td style="width: 40%">{{elementos.descripcion}}</td>
-                       <td style="width: 10%" >{{elementos.cantidad}}</td>
-                       <td style="width: 40%" >{{elementos.nombreyapellido}}</td>
+                      <td style="width: 30%">{{elementos.descripcion}}</td>
+                      <td style="width: 10%" >{{elementos.cantidad}}</td>
+                      <td style="width: 10%" >{{elementos.fecha_produccion | date: 'dd/MM/yyyy'}}</td>
+                      <td style="width: 10%">{{elementos.cantidad_botella}}</td>
+                      <td style="width: 10%" >{{elementos.cantidad_litros}}</td>
+                      <td style="width: 10%" >{{elementos.fecha_ingreso | date: 'dd/MM/yyyy'}}</td>
+                      <td style="width: 10%">{{elementos.fecha_egreso | date: 'dd/MM/yyyy'}}</td>
+                      <td style="width: 10%" >{{elementos.cantidad_original}}</td>
+                      <td style="width: 10%" >{{elementos.cantidad_salida}}</td>
+                      <td style="width: 10%">{{elementos.existencia}}</td>                      
+                      <td style="width: 15%" >{{elementos.nombreyapellido}}</td>
                       
               </tr>
           </ng-template>
-    
+          <ng-template pTemplate="footer">
+            <tr>                
+                <td style="width: 14%"  class="text-info"></td>
+                <td style="width: 10%"  class="text-info">CANTIDAD</td>
+                <td style="width: 10%"  class="text-info">{{cantidad}}</td>
+                <td style="width: 10%"  class="text-success">BOTELLAS</td>
+                <td style="width: 10%"  class="text-success">{{cantidad_botella}}</td>
+                <td style="width: 10%"  class="text-warning">LITROS</td>
+                <td style="width: 10%"  class="text-warning">{{cantidad_litros}}</td>
+                <td style="width: 10%"  class="text-info">ORIGINAL</td>
+                <td style="width: 10%"  class="text-info">{{cantidad_original}}</td>
+                <td style="width: 10%"  class="text-success">SALIDA</td>
+                <td style="width: 10%"  class="text-success">{{cantidad_salida}}</td>
+                <td style="width: 10%"  class="text-warning">EXISTENCIA</td>
+                <td style="width: 10%"  class="text-warning">{{existencia}}</td>                      
+                <td style="width: 15%"></td>       
+            </tr>
+        </ng-template>
          
       </p-table>
 

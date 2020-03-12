@@ -53,7 +53,13 @@ export class MovimientoProduccionComponent implements OnInit {
     console.log(new Date(this.fecha));
   }
   
-
+  accion(event:any,overlaypanel: OverlayPanel,elementos:any){
+    if(elementos){
+      this.selectedElemento = elementos;
+      console.log(elementos);
+    }     
+    overlaypanel.toggle(event);
+    }
   
 verDetalle(){
  

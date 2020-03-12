@@ -104,6 +104,10 @@ import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ing
 import { MovimientoProduccionComponent } from './pages/produccion/movimiento-produccion/movimiento-produccion.component';
 import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/movimiento-insumo.component';
 import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
+import { AsociarProduccionComponent } from './pages/produccion/popups/popup/asociar-produccion/asociar-produccion.component';
+import { AsociarProduccionDetalleComponent } from './pages/produccion/popups/popup/asociar-produccion-detalle/asociar-produccion-detalle.component';
+import { AsociarInsumoDetalleComponent } from './pages/produccion/popups/popup/asociar-insumo-detalle/asociar-insumo-detalle.component';
+import { AsociarInsumoComponent } from './pages/produccion/popups/popup/asociar-insumo/asociar-insumo.component';
 
 @NgModule({
   declarations: [
@@ -139,7 +143,11 @@ import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccio
     OrdenPedidoIngresoComponent,
     MovimientoProduccionComponent,
     MovimientoInsumoComponent,
-    IngresoProduccionComponent
+    IngresoProduccionComponent,
+    AsociarProduccionComponent,
+    AsociarProduccionDetalleComponent,
+    AsociarInsumoDetalleComponent,
+    AsociarInsumoComponent
   ],
   imports: [
 
@@ -185,6 +193,15 @@ import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccio
      InsumoEditarComponent,
      UsuarioEditarComponent,
      UnidadEditarComponent,
+
+/* -------------------------------------------------------------------------- */
+/*                        ASOCIAR PRODUCCION Y INSUMOS                        */
+/* -------------------------------------------------------------------------- */
+
+     AsociarProduccionComponent,
+     AsociarProduccionDetalleComponent,
+     AsociarInsumoDetalleComponent,
+     AsociarInsumoComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             POPUPS COMPARTIDOS                             */
