@@ -108,6 +108,8 @@ import { AsociarProduccionComponent } from './pages/produccion/popups/popup/asoc
 import { AsociarProduccionDetalleComponent } from './pages/produccion/popups/popup/asociar-produccion-detalle/asociar-produccion-detalle.component';
 import { AsociarInsumoDetalleComponent } from './pages/produccion/popups/popup/asociar-insumo-detalle/asociar-insumo-detalle.component';
 import { AsociarInsumoComponent } from './pages/produccion/popups/popup/asociar-insumo/asociar-insumo.component';
+import { AsociarInsumoAltaComponent } from './pages/produccion/asociar-insumo/asociar-insumo-alta/asociar-insumo-alta.component';
+import { PopupCalculdorPalletsComponent } from './shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 
 @NgModule({
   declarations: [
@@ -147,7 +149,9 @@ import { AsociarInsumoComponent } from './pages/produccion/popups/popup/asociar-
     AsociarProduccionComponent,
     AsociarProduccionDetalleComponent,
     AsociarInsumoDetalleComponent,
-    AsociarInsumoComponent
+    AsociarInsumoComponent,
+    AsociarInsumoAltaComponent,
+    PopupCalculdorPalletsComponent
   ],
   imports: [
 
@@ -184,7 +188,7 @@ import { AsociarInsumoComponent } from './pages/produccion/popups/popup/asociar-
     SweetAlert2Module.forRoot(),
     AutofocusModule,
     NgxPopper,
-    AppRoutingModule 
+    AppRoutingModule
     
   ],
   entryComponents: [ArticuloEditarComponent,
@@ -202,6 +206,7 @@ import { AsociarInsumoComponent } from './pages/produccion/popups/popup/asociar-
      AsociarProduccionDetalleComponent,
      AsociarInsumoDetalleComponent,
      AsociarInsumoComponent,
+     AsociarInsumoAltaComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             POPUPS COMPARTIDOS                             */
@@ -209,7 +214,8 @@ import { AsociarInsumoComponent } from './pages/produccion/popups/popup/asociar-
     PopupArticuloConsultaComponent,
     PopupInsumoConsultaComponent,
     PopupArticuloDistribucionConsultaComponent,
-    PopupUsuarioComponent
+    PopupUsuarioComponent,
+    PopupCalculdorPalletsComponent 
     ],
   providers: [CurrencyPipe,DecimalPipe,
     PushNotificationService,ExcelService,{ provide: LOCALE_ID, useValue: 'es-Ar' },

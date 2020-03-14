@@ -59,8 +59,11 @@ export class ProduccionService {
     getProduccionByOrdenPedidoTodos(id: string){
       return this.http.get<any[]>(this.url+'produccion/asociar/orden/pedido/articulo/todos?id='+id);
     }
-    
+
+    getInsumosByArticuloId(id: string){
+      return this.http.get<any[]>(this.url+'produccion/articulo/insumo?articulo_id='+id);
+    }
   
-        
+    
 
 }

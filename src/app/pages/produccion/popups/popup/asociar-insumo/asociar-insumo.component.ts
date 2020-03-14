@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertServiceService } from './../../../../../services/alert-service.service';
 import { ProduccionService } from './../../../../../services/produccion.service';
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
+import { DynamicDialogRef, DynamicDialogConfig, MessageService, DialogService } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { AsociarInsumoAltaComponent } from '../../../asociar-insumo/asociar-insumo-alta/asociar-insumo-alta.component';
 
 @Component({
   selector: 'app-asociar-insumo',
@@ -29,7 +30,7 @@ export class AsociarInsumoComponent implements OnInit {
   existencia:number=0;
 
   constructor(private produccionService: ProduccionService, private alertServiceService: AlertServiceService,
-              public ref: DynamicDialogRef, public config: DynamicDialogConfig) { 
+              public ref: DynamicDialogRef, public config: DynamicDialogConfig, public dialogService: DialogService, private messageService: MessageService) { 
     this.cols = [
       { field: '', header: '',  width: '6%' },
       { field: 'id', header: 'Nª',  width: '4%' },
@@ -63,6 +64,22 @@ export class AsociarInsumoComponent implements OnInit {
     }
 
   
+
+    asociarInsumo(){
+      console.log('asociar');
+      let data:any; 
+     data =  this.selectedElemento;
+      const ref = this.dialogService.open(AsociarInsumoAltaComponent, {
+      data,
+       header: 'Carga de insumo a producción', 
+       width: '98%',
+       height: '90%'
+      });
+      ref.onClose.subscribe((AsociarInsumoAltaComponent:any) => {
+    
+      });
+    }
+
 verDetalle(){
  
   console.log(this.selectedElemento);
@@ -133,7 +150,7 @@ verDetalle(){
       }
     }
 
-    asociarInsumo(){}
+    
 
     moverAdeposito(){}
 

@@ -1,0 +1,44 @@
+<div class="row">
+
+    <div class="col-6">
+        <div class="row m-2">
+            <label class="mr-1">Cantidad de pallets :</label>
+            <input type="number" class="mr-1 ml-1 form-control form-control-sm" [(ngModel)]="pallet" (change)="calcular()">
+            
+        </div>
+    
+        <div class="row m-2">
+            <label class="mr-1">Cantidad de pisos :</label>
+            <input type="number" class="mr-1 ml-1 form-control form-control-sm" [(ngModel)]="piso" (change)="calcular()">
+            <label class="mr-1 ml-1">Calculo :</label>
+            <label class="mr-1 ml-1">{{piso_calculo}}</label>
+        </div>
+    
+        <div class="row m-2">
+            <label class="mr-1">Cantidad de pack :</label>
+            <input type="number" class="mr-1 ml-1 form-control form-control-sm" [(ngModel)]="pack" (change)="calcular()">
+            <label class="mr-1 ml-1">Calculo :</label>
+            <label class="mr-1 ml-1">{{pack_calculo}}</label>
+        </div>
+    
+        <div class="row m-2">
+            <label class="mr-1">Cantidad de botellas :</label>
+            <input type="number" class="mr-1 ml-1 form-control form-control-sm  " [(ngModel)]="botella" (change)="calcular()">
+            <label class="mr-1 ml-1">Calculo :</label>
+            <label class="mr-1 ml-1">{{botella_calculo}}</label>
+        </div>
+    
+        <div class="row m-2">
+            <label class="mr-1">TOTAL EN BOTELLAS :</label>        
+            <label class="mr-1 ml-1">Calculo :</label>
+            <label class="mr-1 ml-1">{{pack_calculo}}</label>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="row m-2">
+            <label class="mr-1 ml-1">Botellas :</label>
+            <label class="mr-1 ml-1">{{pallet_calculo}}</label>
+        </div>
+    </div>
+</div>
+

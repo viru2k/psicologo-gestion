@@ -12,6 +12,7 @@ import { AsociarInsumoComponent } from '../popups/popup/asociar-insumo/asociar-i
 import { AsociarInsumoDetalleComponent } from './../popups/popup/asociar-insumo-detalle/asociar-insumo-detalle.component';
 import { AsociarProduccionComponent } from './../popups/popup/asociar-produccion/asociar-produccion.component';
 import { AsociarProduccionDetalleComponent } from './../popups/popup/asociar-produccion-detalle/asociar-produccion-detalle.component';
+import { PopupCalculdorPalletsComponent } from '../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 
 @Component({
   selector: 'app-ingreso-produccion',
@@ -84,7 +85,7 @@ verDetalle(){
   }
 
 
-AsociarInsumo(elemento:any){
+AsociarInsumo(){
 
   let data:any; 
  data =  this.selectedElemento;
@@ -99,7 +100,7 @@ AsociarInsumo(elemento:any){
   });
 }
 
-AsociarInsumoDetalle(elemento:any){
+AsociarInsumoDetalle(){
   
   let data:any; 
  data =  this.selectedElemento;
@@ -115,7 +116,7 @@ AsociarInsumoDetalle(elemento:any){
 }
 
 
-AsociarProduccion(elemento:any){
+AsociarProduccion(){
   
   let data:any; 
  data =  this.selectedElemento;
@@ -132,7 +133,7 @@ AsociarProduccion(elemento:any){
 
 
 
-AsociarProduccionDetalle(elemento:any){
+AsociarProduccionDetalle(){
   
   let data:any; 
  data = this.selectedElemento;

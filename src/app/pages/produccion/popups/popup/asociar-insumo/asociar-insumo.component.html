@@ -2,16 +2,16 @@
   <div class="m-1">
     <button class="btn btn-info btn-md btn-block" (click)="verDetalleTodos()"> Listar toda la producción de la orden de pedido</button>
 </div>
-<p-overlayPanel #op [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" >                          
 
-    <span>   <a class="nav-link azul text-info  my-hover" (click)="asociarInsumo()">Asociar insumo</a></span>
-    <span>   <a class="nav-link azul text-success  my-hover" (click)="moverAdeposito()">Mover a otro depósito</a></span>
-  </p-overlayPanel> 
 <div  class="m-3">
+    <p-overlayPanel #op [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" >                          
 
+        <span>   <a class="nav-link azul text-info  my-hover" (click)="asociarInsumo()">Asociar insumo</a></span>
+        <span>   <a class="nav-link azul text-success  my-hover" (click)="moverAdeposito()">Mover a otro depósito</a></span>
+      </p-overlayPanel> 
      
     <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
-    scrollHeight="300px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
+    scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
    
     <ng-template pTemplate="caption">
       <div class="row">

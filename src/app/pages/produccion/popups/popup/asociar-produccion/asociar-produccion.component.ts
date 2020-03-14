@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { OrdenPedido } from '../../../../../models/orden-pedido.model';
 import { Produccion } from 'src/app/models/produccion.model';
 import { calendarioIdioma } from './../../../../../config/config';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/api';
+import { DynamicDialogConfig, DynamicDialogRef, DialogService, MessageService } from 'primeng/api';
 import { AlertServiceService } from './../../../../../services/alert-service.service';
 import { formatDate} from '@angular/common';
 import { ProduccionService } from './../../../../../services/produccion.service';
+import { PopupCalculdorPalletsComponent } from './../../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 
 @Component({
   selector: 'app-asociar-produccion',
@@ -23,7 +24,8 @@ export class AsociarProduccionComponent implements OnInit {
   produccion: Produccion;
   loading;
 
-  constructor( private produccionService: ProduccionService, private alertServiceService:AlertServiceService, public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
+  constructor( private produccionService: ProduccionService, private alertServiceService:AlertServiceService, public ref: DynamicDialogRef, public config: DynamicDialogConfig,
+    public dialogService: DialogService, private messageService: MessageService) { }
 
   ngOnInit() {
     console.log(this.config.data);
@@ -62,6 +64,23 @@ export class AsociarProduccionComponent implements OnInit {
     this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
   }
     this.ref.close();
+}
+
+
+
+calcularPallet(){
+  
+  let data:any; 
+ data =  this.config.data;
+  const ref = this.dialogService.open(PopupCalculdorPalletsComponent, {
+  data,
+   header: 'calculo de pallet', 
+   width: '50%',
+   height: '50%'
+  });
+  ref.onClose.subscribe((PopupCalculdorPalletsComponent:any) => {
+
+  });
 }
 
 

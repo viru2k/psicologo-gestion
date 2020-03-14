@@ -7,9 +7,9 @@ export const URL_ARCHIVO = 'http://localhost/api-calidad/public/';
 
 /***********SERVER DE PRUEBAS ********************** */
  
-//export const URL_SERVICIOS = 'http://messageserver/api-vision-prueba/public/api/'; 
-//export const config: SocketIoConfig = { url: 'http://messageserver:4444', options: {} };
-//export const URL_ARCHIVO = 'http://messageserver/api-vision/public/';
+
+
+
 
 
 // REMOTO WEB
