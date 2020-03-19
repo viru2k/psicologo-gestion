@@ -7,6 +7,7 @@ import { ProduccionService } from './../../../services/produccion.service';
 import { OrdenPedido } from 'src/app/models/orden-pedido.model';
 import { formatDate} from '@angular/common';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { PopupOrdenPedidoDetalleComponent } from './popup-orden-pedido-detalle/popup-orden-pedido-detalle.component';
 
 @Component({
   selector: 'app-orden-pedido',
@@ -35,20 +36,18 @@ export class OrdenPedidoComponent implements OnInit {
   constructor(private alertServiceService: AlertServiceService, 
               private articuloService: ArticuloService,private produccionService: ProduccionService,
               public dialogService: DialogService, private messageService: MessageService) {
-    this.cols_produccion = [
 
-      { field: 'fecha_pedido', header: 'Fecha creación',  width: '30%' },
-      { field: 'descripcion', header: 'Estado',  width: '50%' },
-      { field: 'cantidad', header: 'Cantidad',  width: '20%' }      
+                this.cols = [
+                  { field: 'accion', header: 'Accion' , width: '6%'} ,
+                  { field: 'id', header: 'Producción' , width: '10%'} ,
+                  { field: 'sector_nombre', header: 'Sector' , width: '25%'} ,
+                  { field: 'fecha_pedido', header: 'Fecha creación',  width: '10%' },
+                  { field: 'estado', header: 'Estado',  width: '20%' },
+                  { field: 'nombreyapellido', header: 'Generó',  width: '30%' }
+                ];
+   
 
-   ];
 
-    this.cols = [
-    { field: 'accion', header: 'Accion' , width: '6%'} ,
-    { field: 'fecha_pedido', header: 'Fecha creación',  width: '40%' },
-    { field: 'estado', header: 'Estado',  width: '20%' },
-    { field: 'nombreyapellido', header: 'Usuario',  width: '40%' }
-  ];
 
     this.pedido = [
     {label: 'ACTIVO',value: 'ACTIVO'},
@@ -144,26 +143,17 @@ actualizarFecha(event){
 
 
 verDetalle(){
+  let data:any; 
+  data =  this.selectedElemento;
+   const ref = this.dialogService.open(PopupOrdenPedidoDetalleComponent, {
+   data,
+    header: 'Detalle de insumos en producción', 
+    width: '98%',
+    height: '90%'
+   });
+   ref.onClose.subscribe((PopupOrdenPedidoDetalleComponent:any) => {
  
-console.log(this.selectedElemento);
-this.loading = true;
-try {
-      this.produccionService.getOrdenPedidoDetalleById(this.selectedElemento['id'])
-      .subscribe(resp => {
-       
-       this.elementos_produccion = resp;
-       this.loading = false;
-       console.log(resp);
-      },
-      error => { // error path
-          console.log(error);
-
-          this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-       });
-  } catch (error) {
-    this.loading = false;
-    this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-  }
+   });
 }
 
 modificarEstado(estado:string){

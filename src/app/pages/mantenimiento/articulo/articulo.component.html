@@ -33,7 +33,10 @@
                         <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'botellas'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pisos'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pack'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'litros'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                         </th>
                         <th></th>
                     </tr>
@@ -43,10 +46,14 @@
             <tr style="height:20px">
                    
 
-                    <td style="width: 50%">{{elementos.descripcion}}</td>
-                    <td style="width: 30%">{{elementos.unidad_descripcion}}</td>
+                    <td style="width: 40%">{{elementos.descripcion}}</td>
+                    <td style="width: 20%">{{elementos.unidad_descripcion}}</td>
+                    <td style="width: 10%">{{elementos.botellas}}</td>
+                    <td style="width: 10%">{{elementos.pisos}}</td>
+                    <td style="width: 10%">{{elementos.pack}}</td>
+                    <td style="width: 10%">{{elementos.litros}}</td>
                                 
-                    <td style="width: 20%">
+                    <td style="width: 15%">
                         <button class="btn btn-success btn-sm" (click)="buscar(elementos)">Editar</button>
                         </td>
             </tr>

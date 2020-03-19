@@ -24,21 +24,23 @@ export class ArticuloConfeccionComponent implements OnInit {
 
     this.cols = [
     
-      { field: 'descripcion', header: 'Articulo',  width: '50%' },
-      { field: 'unidad_descripcion', header: 'unidad',  width: '30%' },
-      { field: '', header: 'Acción',  width: '20%' },
-      
+      { field: 'descripcion', header: 'Articulo',  width: '40%' },
+      { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
+      { field: 'botellas', header: 'botellas',  width: '10%' },
+      { field: 'pisos', header: 'Pisos',  width: '10%' },
+      { field: 'pack', header: 'Pack',  width: '10%' },
+      { field: 'litros', header: 'Litros',  width: '10%' },
+      { field: '', header: 'Acción',  width: '6%' },
    ];    
    
    
     this.colsConfeccion = [
     
-    { field: 'insumo_descripcion', header: 'Insumo',  width: '45%' },
-    { field: 'cantidad', header: 'Cantidad',  width: '10%' },
-    { field: 'VOLUMEN', header: 'Volumen',  width: '10%' },
-    { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
+    { field: 'insumo_descripcion', header: 'Insumo',  width: '64%' },
+    { field: 'cantidad', header: 'Cantidad',  width: '10%' },    
+    { field: 'unidad_descripcion', header: 'Descripción unidad',  width: '20%' },
     { field: 'unidad', header: 'Unidad',  width: '10%' },    
-    { field: '', header: 'Quitar',  width: '5%' }
+    { field: '', header: 'Quitar',  width: '6%' }
     
  ];   
   }

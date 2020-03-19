@@ -22,9 +22,13 @@ export class ArticuloComponent implements OnInit {
 
     this.cols = [
     
-      { field: 'descripcion', header: 'Articulo',  width: '50%' },
-      { field: 'unidad_descripcion', header: 'Unidad',  width: '30%' },
-      { field: '', header: 'Acción',  width: '20%' },
+      { field: 'descripcion', header: 'Articulo',  width: '40%' },
+      { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
+      { field: 'botellas', header: 'botellas',  width: '10%' },
+      { field: 'pisos', header: 'Pisos',  width: '10%' },
+      { field: 'pack', header: 'Pack',  width: '10%' },
+      { field: 'litros', header: 'Litros',  width: '10%' },
+      { field: '', header: 'Acción',  width: '15%' },
       
    ];     
   }

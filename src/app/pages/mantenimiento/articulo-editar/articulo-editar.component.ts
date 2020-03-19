@@ -22,6 +22,10 @@ export class ArticuloEditarComponent implements OnInit {
       'descripcion': new FormControl('', Validators.required),
       'unidad_descripcion': new FormControl(''),
       'unidad_id': new FormControl('1'),
+      'botellas': new FormControl('1'),
+      'pisos': new FormControl('1'),
+      'pack': new FormControl('1'),
+      'litros': new FormControl('1'),
       'id': new FormControl('' ),
      
   });

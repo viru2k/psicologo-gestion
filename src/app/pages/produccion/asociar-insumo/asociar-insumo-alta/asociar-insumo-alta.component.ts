@@ -6,6 +6,7 @@ import { calendarioIdioma } from './../../../../config/config';
 import { ProduccionService } from './../../../../services/produccion.service';
 import { OrdenPedido } from 'src/app/models/orden-pedido.model';
 import { formatDate} from '@angular/common';
+import { PopupCalculdorPalletsComponent } from './../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class AsociarInsumoAltaComponent implements OnInit {
   loading;
   fecha: Date;
   orden_pedido:OrdenPedido;
+  cantidad_botella:number = 1;
+  cantidad_litros :number = 1;
   // tslint:disable-next-line: variable-name
   _fecha: string;
 
@@ -35,6 +38,8 @@ export class AsociarInsumoAltaComponent implements OnInit {
       { field: 'insumo_descripcion', header: 'Insumo',  width: '40%' },
       { field: 'unidad', header: 'Unidad',  width: '20%' },
       { field: 'cantidad', header: 'Cantidad',  width: '20%' },
+      { field: 'cantidad_calculada', header: 'Calculado',  width: '20%' },
+      
       { field: 'cantidad_carga', header: 'Agregar',  width: '20%' },
 
    ];
@@ -49,6 +54,30 @@ export class AsociarInsumoAltaComponent implements OnInit {
    // this.alertServiceService.throwAlert('success','Articulo guardado','','201');
     this.loadlist();
   }
+
+
+  
+calcularPallet(){
+  
+  let data:any; 
+ data =  this.config.data;
+  const ref = this.dialogService.open(PopupCalculdorPalletsComponent, {
+  data,
+   header: 'calculo de pallet', 
+   width: '50%',
+   height: '50%'
+  });
+  ref.onClose.subscribe((PopupCalculdorPalletsComponent:any) => {
+    let i = 0;
+    this.cantidad_botella =  PopupCalculdorPalletsComponent[0]['botellas'];
+    this.cantidad_litros =  PopupCalculdorPalletsComponent[1]['litros'];
+    this.elementos.forEach(element => {      
+      this.elementos[i]['cantidad_calculada'] = this.cantidad_botella *   Number(this.elementos[i]['cantidad']);
+      i++;
+    });
+  });
+}
+
 
   loadlist(){
 
@@ -125,4 +154,5 @@ limpiarDatos(){
   
 }
 }
+
 

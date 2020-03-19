@@ -1,6 +1,6 @@
      
-            <form class="col-12"  [formGroup]="updateDataForm">
-                <div class="row">
+            <form class="col-12 "  [formGroup]="updateDataForm">
+                <div class="row d-flex justify-content-center">
                     <div class="col-8">
                         <div class="form-group ">
                                 <label  >Descripcion</label>
@@ -9,22 +9,66 @@
                                         * Este campo es requerido
                                 </div>
                         </div>   
-                        
-                       
-                    
                     </div>
-        </div>
+                </div>
              
+                <div class="row d-flex justify-content-center">
+                    <div class="col-8">
+                        <div class="form-group ">
+                                <label  >Botellas</label>
+                                <input  type="number"  class="form-control col-md-12 form-control-sm" formControlName="botellas"    />
+                                <div *ngIf="updateDataForm.controls['botellas'].errors?.required && updateDataForm.controls['botellas'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div>   
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-8">
+                        <div class="form-group ">
+                                <label  >Pisos</label>
+                                <input  type="number"  class="form-control col-md-12 form-control-sm" formControlName="pisos"    />
+                                <div *ngIf="updateDataForm.controls['pisos'].errors?.required && updateDataForm.controls['pisos'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div>   
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-8">
+                        <div class="form-group ">
+                                <label  >Packs</label>
+                                <input  type="number"  class="form-control col-md-12 form-control-sm" formControlName="pack"    />
+                                <div *ngIf="updateDataForm.controls['pack'].errors?.required && updateDataForm.controls['pack'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div>   
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-8">
+                        <div class="form-group ">
+                                <label  >Litros</label>
+                                <input type="number" class="form-control col-md-12 form-control-sm" formControlName="litros"    />
+                                <div *ngIf="updateDataForm.controls['litros'].errors?.required && updateDataForm.controls['litros'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div>   
+                    </div>
+                </div>
             </form>
-            <div class="form-group ">
-                <label  >Unidad</label>
+            <div class="form-group d-flex justify-content-center col-8">
+                <label class="mr-1" >Unidad</label>
                 <p-dropdown [options]="unidades" [(ngModel)]="selectedForma" optionLabel="descripcion" ></p-dropdown>
          
         </div>   
         
             <p-footer>
                     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-                            <button  [disabled]="!updateDataForm.valid" class="btn btn-info texto-roboto" type="submit" (click)="guardarDatos()" >Guardar</button>
+                            <button  [disabled]="!updateDataForm.valid" class="btn btn-info  btn-block" type="submit" (click)="guardarDatos()" >GUARDAR</button>
                             
                     </div>
                 </p-footer>

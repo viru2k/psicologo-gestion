@@ -1,9 +1,7 @@
 <div class="d-flex justify-content-center mt-3">
-  <label>CONFECCION DE INSUMOS EN ARTICULO</label>
+  <label>ASOCIAR INSUMOS A PRODUCTOS</label>
 </div>
-<div class="d-flex justify-content-center mt-3">
-  <label>CONFECCION DEL PRODUCTO</label>
-</div>
+
   <div class="row m-3">
     <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"   [(selection)]="selecteditems" columnResizeMode="expand" [responsive]="true"
     scrollHeight="300px" [scrollable]="true"   [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
@@ -21,9 +19,12 @@
     </tr> 
     <tr>
     <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
-        <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-        <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-        
+      <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+      <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+      <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'botellas'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+      <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pisos'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+      <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pack'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+      <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'litros'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
     </th>
     <th></th>
 </tr>
@@ -32,12 +33,16 @@
 <ng-template pTemplate="body" let-elementos  >
 <tr style="height:20px">
 
-
-<td style="width: 50%">{{elementos.descripcion}}</td>
-<td style="width: 30%">{{elementos.unidad_descripcion}}</td>
+  <td style="width: 40%">{{elementos.descripcion}}</td>
+  <td style="width: 20%">{{elementos.unidad_descripcion}}</td>
+  <td style="width: 10%">{{elementos.botellas}}</td>
+  <td style="width: 10%">{{elementos.pisos}}</td>
+  <td style="width: 10%">{{elementos.pack}}</td>
+  <td style="width: 10%">{{elementos.litros}}</td>
             
-<td style="width: 20%">
-    <button class="btn btn-success btn-sm" (click)="loadlistConfeccion(elementos)">Ver insumos</button>
+<td style="width: 6%">
+  <a     (click)="loadlistConfeccion(elementos)"    ><i class="far fa-eye fa-2x icon-color-purple my-hover"></i></a>
+    
     </td>
 </tr>
 </ng-template>
@@ -56,15 +61,9 @@
    
     <ng-template pTemplate="caption">
       <div class=" row">
-          <div class="col-4" style="text-align: left" >
-            <button class="btn btn-success" (click)="buscar()">Nuevo Insumo</button>  
+          <div class="col-12" style="text-align: left" >
+            <button class="btn btn-success btn-block" (click)="buscar()">AGREGAR INSUMO A PRODUCTO</button>  
           </div>
-        
-        <div class="col-8 mt-2" style="text-align: right">     
-          
-            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-            <input   size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-        </div>
       </div>
       
     </ng-template>
@@ -81,8 +80,7 @@
                         <tr>
                         <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'insumo_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'VOLUMEN'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                            
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                           
@@ -95,14 +93,13 @@
             <tr style="height:20px"  >
 
                    
-                    <td style="width: 45%">{{elementos.insumo_descripcion}}</td>
-                    <td style="width: 10%">{{elementos.cantidad}}</td>
-                    <td style="width: 10%">{{elementos.VOLUMEN}}</td>
+                    <td style="width: 64%">{{elementos.insumo_descripcion}}</td>
+                    <td style="width: 10%">{{elementos.cantidad}}</td>                    
                     <td style="width: 20%">{{elementos.unidad_descripcion}}</td>
                     <td style="width: 10%">{{elementos.unidad}}</td>
                                                 
-                    <td style="width: 5%">
-                            <button class="btn btn-danger btn-sm" (click)="borrar(elementos)">X</button>
+                    <td style="width: 6%">
+                      <a     (click)="borrar(elementos)"    ><i class="fas fa-trash fa-2x icon-color-red my-hover"></i></a>                          
                         </td>
             </tr>
         </ng-template>

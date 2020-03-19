@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DynamicDialogConfig } from 'primeng/api';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/api';
 
 @Component({
   selector: 'app-popup-calculdor-pallets',
@@ -29,8 +29,9 @@ export class PopupCalculdorPalletsComponent implements OnInit {
   _botella_calculo:number;
   _litros:number;
   _litros_calculo:number;
+  calculos:any[] = [];
 
-  constructor(public config: DynamicDialogConfig) { }
+  constructor(public config: DynamicDialogConfig,  public ref: DynamicDialogRef) { }
 
   ngOnInit() {
     console.log(this.config.data);
@@ -44,6 +45,15 @@ export class PopupCalculdorPalletsComponent implements OnInit {
 
   calcular(){
     this.pallet_calculo = (this.pallet * this._pallet_calculo) + (this.piso * this._piso) + (this.pack * this._pack) + (this.botella * this._botella);
+    this.litros_calculo = this.pallet_calculo * Number(this.config.data['litros']);
+  }
+
+  guardarCalculo(){
+    if (this.pallet_calculo> 0){
+      this.calculos.push({'botellas' : this.pallet_calculo},{'litros' : this.litros_calculo});
+      console.log(this.calculos);
+      this.ref.close(this.calculos);
+    }
   }
 
 }

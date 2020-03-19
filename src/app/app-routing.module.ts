@@ -50,11 +50,11 @@ const routes: Routes = [
 /* -------------------------------------------------------------------------- */
 
 { path: 'produccion/indicadores', component: ProduccionindicadoresComponent },
-{ path: 'orden/pedido/ingreso', component: OrdenPedidoIngresoComponent },
-{ path: 'orden/pedido', component: OrdenPedidoComponent },
+{ path: 'orden/produccion/ingreso', component: OrdenPedidoIngresoComponent },
+{ path: 'orden/produccion/estado', component: OrdenPedidoComponent },
 { path: 'produccion/ingreso', component: IngresoProduccionComponent },
 { path: 'produccion/movimientos', component: MovimientoProduccionComponent },
-{ path: 'insumo/movimientos', component: MovimientoInsumoComponent },
+{ path: 'produccion/asociar/insumo', component: MovimientoInsumoComponent },
 
 /* -------------------------------------------------------------------------- */
 /*                              PAGINAS DEL SITIO                             */

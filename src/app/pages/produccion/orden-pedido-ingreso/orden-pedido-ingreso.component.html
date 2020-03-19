@@ -1,16 +1,22 @@
 <div class="d-flex justify-content-center mt-3">
-    <label>CREACION DE ORDEN DE PEDIDO</label>
+    <label>CREACION DE ORDEN DE PRODUCCION</label>
+  </div>
+  <div class="row ml-3 mr-3 mb-1">
+    <span class="pr-1 pt-1 mt-1"><h6>fecha de pedido:</h6></span>
+    <p-calendar [inputStyle]="{'height':'29.1px'}"    class="mr-2 " [(ngModel)]="fecha"  (onSelect)="actualizarFecha($event)" tabindex="0"  [locale]="es" dateFormat="dd/mm/yy"   [readonlyInput]="true" showButtonBar="true"[monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2100">
+      <ng-template pTemplate="date" let-date>
+           <span    style="border-radius:50%;padding: .25em;width: 1.75em; height:1.75em; display:block;">{{date.day}}</span>
+       </ng-template> 
+     </p-calendar>
+     <h6 class="mr-1 mt-2 ml-1 ">Designar sector :</h6>
+     <p-dropdown [options]="sector" [(ngModel)]="selectedSector" placeholder="Sector" optionLabel="nombre" [showClear]="false" (onChange)="guardarSector($event)"></p-dropdown>
+  </div>
+  <div class="m-3 ">
+     <button    class="ml-2 btn  btn-info btn-md  btn-block"  (click)="nuevo()" >Guardar orden de producción</button>
   </div>
     <div  class="m-3">
-      <div class="row ml-1 mr-1">
-        <span class="pr-1 pt-1"><h6>fecha de pedido:</h6></span>
-        <p-calendar [inputStyle]="{'height':'29.1px'}"    class="mr-2 " [(ngModel)]="fecha"  (onSelect)="actualizarFecha($event)" tabindex="0"  [locale]="es" dateFormat="dd/mm/yy"   [readonlyInput]="true" showButtonBar="true"[monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2100">
-          <ng-template pTemplate="date" let-date>
-               <span    style="border-radius:50%;padding: .25em;width: 1.75em; height:1.75em; display:block;">{{date.day}}</span>
-           </ng-template> 
-         </p-calendar>
-          <button    class="ml-2 btn  btn-info btn-sm float-right btn-block"  (click)="nuevo()" >Guardar orden de pedido</button>
-      </div>
+     
+      
       <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
       scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
      
@@ -51,9 +57,11 @@
                      
   
                       <td style="width: 50%">{{elementos.descripcion}}</td>
-                      <td style="width: 30%">{{elementos.unidad_descripcion}}</td>
+                      <td style="width: 20%">{{elementos.unidad_descripcion}}</td>
                   <!--     <td style="width: 20%" pEditableColumn>{{elementos.cantidad}}</td>    -->
-                  <td  style="width: 20%" [pEditableColumn]="elementos" [pEditableColumnField]="'cantidad'"  >
+                  <td  style="width: 30%" [pEditableColumn]="elementos" [pEditableColumnField]="'cantidad'"  >
+                    
+                    <a     (click)="calcularPallet(elementos)" class="ml-1 mr-1"   ><i class="fas fa-calculator fa-2x icon-color-purple my-hover"></i></a> 
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input type="text" class="form-control" [(ngModel)]="elementos.cantidad">

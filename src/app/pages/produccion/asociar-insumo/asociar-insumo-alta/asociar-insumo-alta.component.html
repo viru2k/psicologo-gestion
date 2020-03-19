@@ -1,15 +1,17 @@
 <div class="d-flex justify-content-center mt-3">
-    <label>CREACION DE ORDEN DE PEDIDO</label>
+    <label>AGREGAR INSUMOS A LA PRODUCCION</label>
   </div>
     <div  class="m-3">
       <div class="row ml-1 mr-1">
-        <span class="pr-1 pt-1"><h6>fecha de confeccion:</h6></span>
+        <span class="pr-1 pt-1"><h6>fecha de asociación:</h6></span>
         <p-calendar [inputStyle]="{'height':'29.1px'}"    class="mr-2 " [(ngModel)]="fecha"  (onSelect)="actualizarFecha($event)" tabindex="0"  [locale]="es" dateFormat="dd/mm/yy"   [readonlyInput]="true" showButtonBar="true"[monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2100">
           <ng-template pTemplate="date" let-date>
                <span    style="border-radius:50%;padding: .25em;width: 1.75em; height:1.75em; display:block;">{{date.day}}</span>
            </ng-template> 
          </p-calendar>
-          <button    class="ml-2 btn  btn-info btn-sm float-right btn-block"  (click)="nuevo()" >Guardar orden de pedido</button>
+         <label class="mr-1 ml-1">Calcular producción :</label>
+         <a     (click)="calcularPallet()" class="ml-1 mr-1"   ><i class="fas fa-calculator fa-2x icon-color-purple my-hover"></i></a>
+          <button    class="ml-2 btn  btn-info btn-sm float-right btn-block"  (click)="nuevo()" >Guardar insumos asociados</button>
       </div>
       <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
       scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
@@ -53,6 +55,7 @@
                       <td style="width: 40%">{{elementos.insumo_descripcion}}</td>
                       <td style="width: 20%">{{elementos.unidad}}</td>
                       <td style="width: 20%">{{elementos.cantidad}}</td>
+                      <td style="width: 20%">{{elementos.cantidad_calculada}}</td>                      
                   <!--     <td style="width: 20%" pEditableColumn>{{elementos.cantidad}}</td>    -->
                   <td  style="width: 20%" [pEditableColumn]="elementos" [pEditableColumnField]="'cantidad_carga'"  >
                     <p-cellEditor>

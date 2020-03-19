@@ -63,6 +63,10 @@ export class ProduccionService {
     getInsumosByArticuloId(id: string){
       return this.http.get<any[]>(this.url+'produccion/articulo/insumo?articulo_id='+id);
     }
+
+    getSector(){
+      return this.http.get<any[]>(this.url+'produccion/sector/carga');
+    }
   
     
 

@@ -110,6 +110,7 @@ import { AsociarInsumoDetalleComponent } from './pages/produccion/popups/popup/a
 import { AsociarInsumoComponent } from './pages/produccion/popups/popup/asociar-insumo/asociar-insumo.component';
 import { AsociarInsumoAltaComponent } from './pages/produccion/asociar-insumo/asociar-insumo-alta/asociar-insumo-alta.component';
 import { PopupCalculdorPalletsComponent } from './shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
+import { PopupOrdenPedidoDetalleComponent } from './pages/produccion/orden-pedido/popup-orden-pedido-detalle/popup-orden-pedido-detalle.component';
 
 @NgModule({
   declarations: [
@@ -151,7 +152,8 @@ import { PopupCalculdorPalletsComponent } from './shared/components/popups/popup
     AsociarInsumoDetalleComponent,
     AsociarInsumoComponent,
     AsociarInsumoAltaComponent,
-    PopupCalculdorPalletsComponent
+    PopupCalculdorPalletsComponent,
+    PopupOrdenPedidoDetalleComponent
   ],
   imports: [
 
@@ -207,6 +209,7 @@ import { PopupCalculdorPalletsComponent } from './shared/components/popups/popup
      AsociarInsumoDetalleComponent,
      AsociarInsumoComponent,
      AsociarInsumoAltaComponent,
+     PopupOrdenPedidoDetalleComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             POPUPS COMPARTIDOS                             */

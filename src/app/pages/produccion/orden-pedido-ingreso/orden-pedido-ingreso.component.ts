@@ -6,6 +6,7 @@ import { calendarioIdioma } from './../../../config/config';
 import { ProduccionService } from './../../../services/produccion.service';
 import { OrdenPedido } from 'src/app/models/orden-pedido.model';
 import { formatDate} from '@angular/common';
+import { PopupCalculdorPalletsComponent } from './../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 
 @Component({
   selector: 'app-orden-pedido-ingreso',
@@ -19,10 +20,13 @@ export class OrdenPedidoIngresoComponent implements OnInit {
   columns: any[];
   elementos: any[];
   selecteditems: any;
+  sector:any[] = [];
+  selectedSector:string = '';
   loading;
   fecha: Date;
   orden_pedido:OrdenPedido;
-  // tslint:disable-next-line: variable-name
+  cantidad_botella:number = 0;
+  cantidad_litros:number = 0;
   _fecha: string;
 
   constructor(private alertServiceService: AlertServiceService, 
@@ -31,8 +35,8 @@ export class OrdenPedidoIngresoComponent implements OnInit {
     this.cols = [
 
       { field: 'descripcion', header: 'Articulo',  width: '50%' },
-      { field: 'unidad_descripcion', header: 'Unidad',  width: '30%' },
-      { field: 'cantidad', header: 'Cantidad',  width: '20%' },
+      { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
+      { field: 'cantidad', header: 'Cantidad',  width: '30%' },
 
    ];
   }
@@ -41,7 +45,13 @@ export class OrdenPedidoIngresoComponent implements OnInit {
     this.es = calendarioIdioma;
     this.fecha = new Date();
    // this.alertServiceService.throwAlert('success','Articulo guardado','','201');
-    this.loadlist();
+    
+    this.getSector();
+  }
+
+
+  guardarSector(event){
+    console.log(event.value.nombre);
   }
 
   loadlist(){
@@ -113,10 +123,60 @@ nuevo(){
   }
 }
 
+
+
+getSector(){
+    try {
+
+      this.produccionService.getSector()
+      .subscribe(resp => {
+        console.log(resp);            
+        this.loading = false;
+        this.sector = resp;
+        console.log(this.sector);
+        this.loadlist();
+      },
+      error => { // error path
+          console.log(error.message);
+          console.log(error.status);
+          this.loading = false;
+       });  
+  } catch (error) {
+    this.alertServiceService.throwAlert('error','error','Error: '+error+'  Error al cargar los registros','500');
+  }  
+  
+}
+
+
 limpiarDatos(){
   this.selecteditems = [];
   this.orden_pedido = null;
   
 }
+
+
+calcularPallet(elemento){
+  
+  let data:any; 
+ data =  elemento;
+ console.log(elemento['id']);
+ console.log(this.elementos);
+  const ref = this.dialogService.open(PopupCalculdorPalletsComponent, {
+  data,
+   header: 'calculo de pallet', 
+   width: '50%',
+   height: '50%'
+  });
+  ref.onClose.subscribe((PopupCalculdorPalletsComponent:any) => {
+    
+    this.cantidad_botella =  PopupCalculdorPalletsComponent[0]['botellas'];
+    this.cantidad_litros =  PopupCalculdorPalletsComponent[1]['litros'];
+    let res = this.elementos.findIndex(x => x.id === elemento['id']);
+    this.elementos[res]['cantidad'] = this.cantidad_botella;
+    console.log(res);
+  });
 }
+
+}
+
 

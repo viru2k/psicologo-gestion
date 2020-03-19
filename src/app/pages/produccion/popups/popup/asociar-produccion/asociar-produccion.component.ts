@@ -79,9 +79,12 @@ calcularPallet(){
    height: '50%'
   });
   ref.onClose.subscribe((PopupCalculdorPalletsComponent:any) => {
-
+    
+    this.cantidad_botella =  PopupCalculdorPalletsComponent[0]['botellas'];
+    this.cantidad_litros =  PopupCalculdorPalletsComponent[1]['litros'];
   });
 }
 
 
 }
+

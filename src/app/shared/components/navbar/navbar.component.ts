@@ -362,8 +362,8 @@ menuList(){
             label: 'Producción',
             visible:!this.administracion_produccion,
             items: [
-              {label: 'Ingreso orden de pedido', routerLink: 'orden/pedido/ingreso'},
-              {label: 'Orden de pedido', routerLink: 'orden/pedido'},
+              {label: 'Alta orden de producción', routerLink: 'orden/produccion/ingreso'},
+              {label: 'Estado orden de producción', routerLink: 'orden/produccion/estado'},
             ]
         },
         {
@@ -371,6 +371,7 @@ menuList(){
           visible:!this.gestion_produccion,
           items: [
             {label: 'Cargar producción', routerLink: 'produccion/ingreso'},
+            {label: 'Asociar insumos a producción', routerLink: 'produccion/asociar/insumo'},
             {label: 'Movimientos de producción', routerLink: 'produccion/movimientos'},
             {label: 'Movimientos de insumos', routerLink: 'insumo/movimientos'},
           ]
@@ -410,8 +411,8 @@ menuList(){
             visible:! this.administracion_produccion,
             items: [
               {label: 'Articulo', routerLink: 'mantenimiento/articulo'},
+              {label: 'Insumo', routerLink: 'mantenimiento/insumo'},
               {label: 'Articulo confección', routerLink: 'mantenimiento/articulo/confeccion'},
-              {label: 'Insumo', routerLink: 'mantenimiento/insumo'},              
             ]
         },
         {
