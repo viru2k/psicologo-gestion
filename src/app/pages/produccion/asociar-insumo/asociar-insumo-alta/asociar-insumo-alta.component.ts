@@ -4,10 +4,14 @@ import { ArticuloService } from './../../../../services/articulo.service';
 import { MessageService, DialogService, DynamicDialogConfig } from 'primeng/api';
 import { calendarioIdioma } from './../../../../config/config';
 import { ProduccionService } from './../../../../services/produccion.service';
-import { OrdenPedido } from 'src/app/models/orden-pedido.model';
+import { OrdenProduccion } from 'src/app/models/orden-pedido.model';
 import { formatDate} from '@angular/common';
 import { PopupCalculdorPalletsComponent } from './../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 
+
+/* -------------------------------------------------------------------------- */
+/*                 ASOCIAR INSUMOS A UNA PRODUCCION REALIZADA                 */
+/* -------------------------------------------------------------------------- */
 
 @Component({
   selector: 'app-asociar-insumo-alta',
@@ -24,7 +28,7 @@ export class AsociarInsumoAltaComponent implements OnInit {
   selecteditems: any;
   loading;
   fecha: Date;
-  orden_pedido:OrdenPedido;
+  orden_pedido:OrdenProduccion;
   cantidad_botella:number = 1;
   cantidad_litros :number = 1;
   // tslint:disable-next-line: variable-name
@@ -35,12 +39,15 @@ export class AsociarInsumoAltaComponent implements OnInit {
               public dialogService: DialogService, private messageService: MessageService, public config: DynamicDialogConfig) {
     this.cols = [
 
-      { field: 'insumo_descripcion', header: 'Insumo',  width: '40%' },
-      { field: 'unidad', header: 'Unidad',  width: '20%' },
-      { field: 'cantidad', header: 'Cantidad',  width: '20%' },
-      { field: 'cantidad_calculada', header: 'Calculado',  width: '20%' },
+      { field: 'insumo_descripcion', header: 'Insumo',  width: '30%' }, 
+      { field: 'articulo_confeccion_cantidad', header: 'requerido',  width: '10%' },
+      { field: 'fecha_ingreso', header: 'Ingreso',  width: '10%' },
+      { field: 'cantidad', header: 'Ingresada',  width: '10%' },
+      { field: 'cantidad_usada', header: 'Usada',  width: '10%' },
+      { field: 'cantidad_existente', header: 'Existente',  width: '10%' },      
+      { field: 'cantidad_calculada', header: 'Calculado',  width: '10%' },
       
-      { field: 'cantidad_carga', header: 'Agregar',  width: '20%' },
+      { field: 'cantidad_carga', header: 'Agregar',  width: '15%' },
 
    ];
   }
@@ -72,7 +79,7 @@ calcularPallet(){
     this.cantidad_botella =  PopupCalculdorPalletsComponent[0]['botellas'];
     this.cantidad_litros =  PopupCalculdorPalletsComponent[1]['litros'];
     this.elementos.forEach(element => {      
-      this.elementos[i]['cantidad_calculada'] = this.cantidad_botella *   Number(this.elementos[i]['cantidad']);
+      this.elementos[i]['cantidad_calculada'] = this.cantidad_botella *   Number(this.elementos[i]['articulo_confeccion_cantidad']);
       i++;
     });
   });
@@ -127,9 +134,9 @@ nuevo(){
      
       let userData = JSON.parse(localStorage.getItem('userData'));
       this._fecha = formatDate(this.fecha, 'yyyy-MM-dd HH:mm', 'en');
-      this.orden_pedido = new OrdenPedido('',this._fecha,userData['id'], this.selecteditems);
+      this.orden_pedido = new OrdenProduccion('',this._fecha,userData['id'], this.selecteditems);
       console.log(this.orden_pedido);
-      this.produccionService.setOrdenPedido(this.orden_pedido)
+      this.produccionService.setOrdenProduccion(this.orden_pedido)
       .subscribe(resp => {
         console.log(resp);    
         this.loadlist();

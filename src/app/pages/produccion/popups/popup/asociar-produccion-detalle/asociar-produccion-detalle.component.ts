@@ -33,7 +33,7 @@ export class AsociarProduccionDetalleComponent implements OnInit {
       { field: 'id', header: 'Nª',  width: '4%' },
       { field: 'fecha_pedido', header: 'Fecha',  width: '10%' },
       { field: 'descripcion', header: 'Descripción',  width: '30%' },
-      { field: 'cantidad', header: 'Pedido',  width: '10%' },
+      { field: 'cantidad', header: 'Producción',  width: '10%' },
       { field: 'fecha_produccion', header: 'Producido',  width: '10%' },
       { field: 'cantidad_botella', header: 'Botellas',  width: '10%' },
       { field: 'cantidad_litros', header: 'Litros',  width: '10%' },
@@ -57,7 +57,7 @@ verDetalle(){
   console.log(this.selectedElemento);
   this.loading = true;
   try {
-        this.produccionService.getProduccionByOrdenPedido(this.config.data['id'], this.config.data['articulo_id'])
+        this.produccionService.getProduccionByOrdenProduccion(this.config.data['id'], this.config.data['articulo_id'])
         .subscribe(resp => {
           console.log(resp);
           let i = 0;
@@ -92,7 +92,7 @@ verDetalle(){
     console.log(this.selectedElemento);
     this.loading = true;
     try {
-          this.produccionService.getProduccionByOrdenPedidoTodos(this.config.data['id'])
+          this.produccionService.getProduccionByOrdenProduccionTodos(this.config.data['id'])
           .subscribe(resp => {
             console.log(resp);
             let i = 0;

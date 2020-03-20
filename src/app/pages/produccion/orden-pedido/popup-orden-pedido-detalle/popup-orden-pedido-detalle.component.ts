@@ -41,7 +41,7 @@ verDetalle(){
   console.log(this.selectedElemento);
   this.loading = true;
   try {
-        this.produccionService.getOrdenPedidoDetalleById(this.selectedElemento['id'])
+        this.produccionService.getOrdenProduccionDetalleById(this.selectedElemento['id'])
         .subscribe(resp => {
          
          this.elementos_produccion = resp;

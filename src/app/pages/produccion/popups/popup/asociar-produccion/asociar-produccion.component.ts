@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdenPedido } from '../../../../../models/orden-pedido.model';
+import { OrdenProduccion } from '../../../../../models/orden-pedido.model';
 import { Produccion } from 'src/app/models/produccion.model';
 import { calendarioIdioma } from './../../../../../config/config';
 import { DynamicDialogConfig, DynamicDialogRef, DialogService, MessageService } from 'primeng/api';
@@ -7,6 +7,11 @@ import { AlertServiceService } from './../../../../../services/alert-service.ser
 import { formatDate} from '@angular/common';
 import { ProduccionService } from './../../../../../services/produccion.service';
 import { PopupCalculdorPalletsComponent } from './../../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
+
+
+/* -------------------------------------------------------------------------- */
+/*       POP UP  ASOCIA LA PRODUCCION REALIZADA A LA ORDEN DE PRODUCCION      */
+/* -------------------------------------------------------------------------- */
 
 @Component({
   selector: 'app-asociar-produccion',
@@ -18,7 +23,7 @@ export class AsociarProduccionComponent implements OnInit {
   es: any;
   fecha: Date;
   _fecha:string;
-  orden_pedido:OrdenPedido;
+  orden_pedido:OrdenProduccion;
   cantidad_botella:number = 1;
   cantidad_litros:number = 1;
   produccion: Produccion;
@@ -44,15 +49,16 @@ export class AsociarProduccionComponent implements OnInit {
    // console.log(this.selecteditems[0]['articulo_id']);
     const userData = JSON.parse(localStorage.getItem('userData'));
     this._fecha = formatDate(this.fecha, 'yyyy-MM-dd HH:mm', 'en');
-    this.produccion = new Produccion('0',this.config.data['orden_pedido_articulos_id'],this.config.data['articulo_id'],
+    this.produccion = new Produccion('0',this.config.data['orden_produccion_articulos_id'],this.config.data['articulo_id'],
     this._fecha,'1',this.cantidad_botella, this.cantidad_litros, '1',userData['id'],userData['id']);
     console.log(this.produccion);
     try {
-      this.produccionService.setProduccionOrdenPedido(this.produccion)
+      this.produccionService.setProduccionOrdenProduccion(this.produccion)
       .subscribe(resp => {
        this.loading = false;
        console.log(resp);
-       this.alertServiceService.throwAlert('success', 'Producción agregada a orden de pedido número '+this.config.data['id'], '', '200');
+       this.alertServiceService.throwAlert('success', 'Producción agregada a orden de Produccion número '+this.config.data['id'], '', '200');
+       this.ref.close();
       },
       error => { // error path
           console.log(error);
@@ -74,7 +80,7 @@ calcularPallet(){
  data =  this.config.data;
   const ref = this.dialogService.open(PopupCalculdorPalletsComponent, {
   data,
-   header: 'calculo de pallet', 
+   header: 'Calculo de pallet', 
    width: '50%',
    height: '50%'
   });

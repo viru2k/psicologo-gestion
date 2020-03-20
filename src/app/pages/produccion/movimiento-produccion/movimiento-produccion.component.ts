@@ -4,7 +4,7 @@ import { ArticuloService } from './../../../services/articulo.service';
 import { MessageService, DialogService } from 'primeng/api';
 import { calendarioIdioma } from './../../../config/config';
 import { ProduccionService } from './../../../services/produccion.service';
-import { OrdenPedido } from 'src/app/models/orden-pedido.model';
+import { OrdenProduccion } from 'src/app/models/orden-pedido.model';
 import { formatDate} from '@angular/common';
 import { OverlayPanel } from 'primeng/overlaypanel';
 
@@ -25,7 +25,7 @@ export class MovimientoProduccionComponent implements OnInit {
   selecteditems: any;
   loading;
   fecha: Date;
-  orden_pedido:OrdenPedido;
+  orden_pedido:OrdenProduccion;
 
   constructor(private alertServiceService: AlertServiceService, 
               private articuloService: ArticuloService,private produccionService: ProduccionService,
@@ -66,7 +66,7 @@ verDetalle(){
   console.log(this.selectedElemento);
   this.loading = true;
   try {
-        this.produccionService.getOrdenPedidoDetalleByEstado('ACTIVO')
+        this.produccionService.getOrdenProduccionDetalleByEstado('ACTIVO')
         .subscribe(resp => {
          
          this.elementos = resp;

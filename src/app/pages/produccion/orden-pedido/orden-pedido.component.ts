@@ -4,7 +4,7 @@ import { ArticuloService } from './../../../services/articulo.service';
 import { MessageService, DialogService } from 'primeng/api';
 import { calendarioIdioma } from './../../../config/config';
 import { ProduccionService } from './../../../services/produccion.service';
-import { OrdenPedido } from 'src/app/models/orden-pedido.model';
+import { OrdenProduccion } from 'src/app/models/orden-pedido.model';
 import { formatDate} from '@angular/common';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { PopupOrdenPedidoDetalleComponent } from './popup-orden-pedido-detalle/popup-orden-pedido-detalle.component';
@@ -26,7 +26,7 @@ export class OrdenPedidoComponent implements OnInit {
   selecteditems: any;
   loading;
   fecha: Date;
-  orden_pedido:OrdenPedido;
+  orden_pedido:OrdenProduccion;
   // tslint:disable-next-line: variable-name
   _fecha: string;
   pedido:any[];
@@ -81,7 +81,7 @@ export class OrdenPedidoComponent implements OnInit {
 
     this.loading = true;
     try {
-        this.produccionService.getOrdenPedidoEstado('ACTIVO')
+        this.produccionService.getOrdenProduccionEstado('ACTIVO')
         .subscribe(resp => {
           if (resp[0]) {
             let i = 0;
@@ -110,7 +110,7 @@ loadlistByEstado(){
   console.log(this.selected_pedido['label']);
   this.loading = true;
   try {
-      this.produccionService.getOrdenPedidoEstado(this.selected_pedido['label'])
+      this.produccionService.getOrdenProduccionEstado(this.selected_pedido['label'])
       .subscribe(resp => {
         if (resp[0]) {
           let i = 0;
@@ -161,7 +161,7 @@ modificarEstado(estado:string){
     console.log(this.selectedElemento);
     this.loading = true;
     try {
-      this.produccionService.updateOrdenPedido(this.selectedElemento['id'],estado)
+      this.produccionService.updateOrdenProduccion(this.selectedElemento['id'],estado)
       .subscribe(resp => {
        
         this.loadlist();

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS, PARAMS } from '../config/config';
-import { OrdenPedido } from '../models/orden-pedido.model';
+
+import { OrdenProduccion } from './../models/orden-pedido.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,41 +24,41 @@ export class ProduccionService {
       return this.http.post<any[]>(this.url+'articulo/confeccion', articulo);
       }  
     
-    setOrdenPedido(articulo: OrdenPedido){
-      return this.http.post<any[]>(this.url+'produccion/orden/pedido', articulo);
+    setOrdenProduccion(articulo: OrdenProduccion){
+      return this.http.post<any[]>(this.url+'produccion/orden/produccion', articulo);
       }  
   
 
-    updateOrdenPedido( articulo: string,estado: string){
-    return this.http.get<any[]>(this.url+'produccion/orden/pedido/estado/editar?id='+articulo+'&estado='+estado);
+    updateOrdenProduccion( articulo: string,estado: string){
+    return this.http.get<any[]>(this.url+'produccion/orden/produccion/estado/editar?id='+articulo+'&estado='+estado);
     }  
 
-    getOrdenPedidoDetalleById(id: string){
-      return this.http.get<any[]>(this.url+'produccion/orden/pedido/by/id?id='+id);
+    getOrdenProduccionDetalleById(id: string){
+      return this.http.get<any[]>(this.url+'produccion/orden/produccion/by/id?id='+id);
     }
     
-    getOrdenPedidoDetalleByEstado(estado: string){
-      return this.http.get<any[]>(this.url+'produccion/orden/pedido/by/estado?estado='+estado);
+    getOrdenProduccionDetalleByEstado(estado: string){
+      return this.http.get<any[]>(this.url+'produccion/orden/produccion/by/estado?estado='+estado);
     }
 
-      getOrdenPedidoEstado(estado: string){
-        return this.http.get<any[]>(this.url+'produccion/orden/pedido/estado?estado='+estado);
+      getOrdenProduccionEstado(estado: string){
+        return this.http.get<any[]>(this.url+'produccion/orden/produccion/estado?estado='+estado);
     }
 
     getUnidad(){
       return this.http.get<any[]>(this.url+'unidad');
       }
 
-      setProduccionOrdenPedido(produccion:any){
+      setProduccionOrdenProduccion(produccion:any){
         return this.http.post<any>(this.url+'produccion/crear', produccion);
         }
 
-    getProduccionByOrdenPedido(id: string, articulo_id:string){
-      return this.http.get<any[]>(this.url+'produccion/asociar/orden/pedido/articulo?id='+id+'&articulo_id='+articulo_id);
+    getProduccionByOrdenProduccion(id: string, articulo_id:string){
+      return this.http.get<any[]>(this.url+'produccion/asociar/orden/produccion/articulo?id='+id+'&articulo_id='+articulo_id);
     }
 
-    getProduccionByOrdenPedidoTodos(id: string){
-      return this.http.get<any[]>(this.url+'produccion/asociar/orden/pedido/articulo/todos?id='+id);
+    getProduccionByOrdenProduccionTodos(id: string){
+      return this.http.get<any[]>(this.url+'produccion/asociar/orden/produccion/articulo/todos?id='+id);
     }
 
     getInsumosByArticuloId(id: string){

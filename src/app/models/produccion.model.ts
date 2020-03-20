@@ -1,7 +1,7 @@
 export class Produccion {
 
     id:string;
-    orden_pedido_articulos_id:string;
+    orden_produccion_articulos_id:string;
     articulo_id:string;
     fecha_produccion:string;
     unidad_id:string;
@@ -14,7 +14,7 @@ export class Produccion {
 
     constructor( 
         id:string,
-        orden_pedido_articulos_id:string,
+        orden_produccion_articulos_id:string,
         articulo_id:string,
         fecha_produccion:string,
         unidad_id:string,
@@ -25,7 +25,7 @@ export class Produccion {
         usuario_modifica_id:String
     ){
         this.id = id;
-        this.orden_pedido_articulos_id = orden_pedido_articulos_id;
+        this.orden_produccion_articulos_id = orden_produccion_articulos_id;
         this.articulo_id = articulo_id;
         this.fecha_produccion = fecha_produccion;
         this.unidad_id = unidad_id;

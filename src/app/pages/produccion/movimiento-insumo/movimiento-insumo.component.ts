@@ -4,7 +4,7 @@ import { ArticuloService } from './../../../services/articulo.service';
 import { MessageService, DialogService } from 'primeng/api';
 
 import { ProduccionService } from './../../../services/produccion.service';
-import { OrdenPedido } from 'src/app/models/orden-pedido.model';
+import { OrdenProduccion } from 'src/app/models/orden-pedido.model';
 
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { Produccion } from 'src/app/models/produccion.model';
@@ -67,7 +67,7 @@ verDetalle(){
   console.log(this.selectedElemento);
   this.loading = true;
   try {
-        this.produccionService.getOrdenPedidoDetalleByEstado('ACTIVO')
+        this.produccionService.getOrdenProduccionDetalleByEstado('ACTIVO')
         .subscribe(resp => {
          
          this.elementos = resp;

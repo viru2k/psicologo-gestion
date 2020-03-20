@@ -4,7 +4,7 @@ import { ArticuloService } from './../../../services/articulo.service';
 import { MessageService, DialogService } from 'primeng/api';
 
 import { ProduccionService } from './../../../services/produccion.service';
-import { OrdenPedido } from 'src/app/models/orden-pedido.model';
+import { OrdenProduccion } from 'src/app/models/orden-pedido.model';
 
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { Produccion } from 'src/app/models/produccion.model';
@@ -13,6 +13,11 @@ import { AsociarInsumoDetalleComponent } from './../popups/popup/asociar-insumo-
 import { AsociarProduccionComponent } from './../popups/popup/asociar-produccion/asociar-produccion.component';
 import { AsociarProduccionDetalleComponent } from './../popups/popup/asociar-produccion-detalle/asociar-produccion-detalle.component';
 import { PopupCalculdorPalletsComponent } from '../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
+
+/* -------------------------------------------------------------------------- */
+/*         AGREGAR UNA PRODUCCION REALIZADA A UNA ORDEN DE PRODUCCION         */
+/* -------------------------------------------------------------------------- */
+
 
 @Component({
   selector: 'app-ingreso-produccion',
@@ -66,7 +71,7 @@ verDetalle(){
   console.log(this.selectedElemento);
   this.loading = true;
   try {
-        this.produccionService.getOrdenPedidoDetalleByEstado('ACTIVO')
+        this.produccionService.getOrdenProduccionDetalleByEstado('ACTIVO')
         .subscribe(resp => {
          
          this.elementos = resp;
@@ -84,36 +89,6 @@ verDetalle(){
     }
   }
 
-
-AsociarInsumo(){
-
-  let data:any; 
- data =  this.selectedElemento;
-  const ref = this.dialogService.open(AsociarInsumoComponent, {
-  data,
-   header: 'Asociar insumo a producción', 
-   width: '98%',
-   height: '90%'
-  });
-  ref.onClose.subscribe((AsociarInsumoComponent:any) => {
-
-  });
-}
-
-AsociarInsumoDetalle(){
-  
-  let data:any; 
- data =  this.selectedElemento;
-  const ref = this.dialogService.open(AsociarInsumoDetalleComponent, {
-  data,
-   header: 'Detalle de insumos asociados', 
-   width: '98%',
-   height: '90%'
-  });
-  ref.onClose.subscribe((AsociarInsumoDetalleComponent:any) => {
-
-  });
-}
 
 
 AsociarProduccion(){

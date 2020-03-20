@@ -1,8 +1,12 @@
 <div class="d-flex justify-content-center mt-3">
     <label>AGREGAR INSUMOS A LA PRODUCCION</label>
   </div>
+  <div class="row ml-3 mr-3">
+    <span class="pr-1 pt-1 pl-1 text-info"><h6>Articulo: {{this.config.data['descripcion']}}</h6></span><span class="pr-1 pt-1 pl-1"><h6>Botellas producidas: {{this.config.data.cantidad}} </h6></span> <span class="pr-1 pt-1 pl-1 text-success"><h6>packs: {{this.config.data.cantidad / this.config.data.botellas}}</h6></span> <span class="pr-1 pt-1 pl-1"><h6>pallets: {{((this.config.data.cantidad / this.config.data.botellas) / this.config.data.pack) / this.config.data.pisos}}</h6></span>
+  </div>
     <div  class="m-3">
       <div class="row ml-1 mr-1">
+      
         <span class="pr-1 pt-1"><h6>fecha de asociación:</h6></span>
         <p-calendar [inputStyle]="{'height':'29.1px'}"    class="mr-2 " [(ngModel)]="fecha"  (onSelect)="actualizarFecha($event)" tabindex="0"  [locale]="es" dateFormat="dd/mm/yy"   [readonlyInput]="true" showButtonBar="true"[monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2100">
           <ng-template pTemplate="date" let-date>
@@ -41,8 +45,12 @@
                           <tr>
                           <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'insumo_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'articulo_confeccion_cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_ingreso'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_usada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_existente'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_calculada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                                                            
                           </th>
                           <th></th>
                       </tr>
@@ -52,12 +60,15 @@
               <tr style="height:20px">
                      
   
-                      <td style="width: 40%">{{elementos.insumo_descripcion}}</td>
-                      <td style="width: 20%">{{elementos.unidad}}</td>
-                      <td style="width: 20%">{{elementos.cantidad}}</td>
-                      <td style="width: 20%">{{elementos.cantidad_calculada}}</td>                      
+                      <td style="width: 30%">{{elementos.insumo_descripcion}}</td>
+                      <td style="width: 10%">{{elementos.articulo_confeccion_cantidad}}</td>
+                      <td style="width: 10%">{{elementos.fecha_ingreso | date :'dd/MM/yyyy'}}</td>
+                      <td style="width: 10%">{{elementos.cantidad}}</td>
+                      <td style="width: 10%">{{elementos.cantidad_usada}}</td>
+                      <td style="width: 10%">{{elementos.cantidad_existente}}</td>
+                      <td style="width: 10%">{{elementos.cantidad_calculada}}</td>                      
                   <!--     <td style="width: 20%" pEditableColumn>{{elementos.cantidad}}</td>    -->
-                  <td  style="width: 20%" [pEditableColumn]="elementos" [pEditableColumnField]="'cantidad_carga'"  >
+                  <td  style="width: 15%" [pEditableColumn]="elementos" [pEditableColumnField]="'cantidad_carga'"  >
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input type="text" class="form-control" [(ngModel)]="elementos.cantidad_carga">

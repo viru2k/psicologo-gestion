@@ -4,7 +4,7 @@ import { ArticuloService } from './../../../services/articulo.service';
 import { MessageService, DialogService } from 'primeng/api';
 import { calendarioIdioma } from './../../../config/config';
 import { ProduccionService } from './../../../services/produccion.service';
-import { OrdenPedido } from 'src/app/models/orden-pedido.model';
+import { OrdenProduccion } from 'src/app/models/orden-pedido.model';
 import { formatDate} from '@angular/common';
 import { PopupCalculdorPalletsComponent } from './../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 
@@ -24,7 +24,7 @@ export class OrdenPedidoIngresoComponent implements OnInit {
   selectedSector:string = '';
   loading;
   fecha: Date;
-  orden_pedido:OrdenPedido;
+  orden_pedido:OrdenProduccion;
   cantidad_botella:number = 0;
   cantidad_litros:number = 0;
   _fecha: string;
@@ -102,9 +102,9 @@ nuevo(){
      
       let userData = JSON.parse(localStorage.getItem('userData'));
       this._fecha = formatDate(this.fecha, 'yyyy-MM-dd HH:mm', 'en');
-      this.orden_pedido = new OrdenPedido('',this._fecha,userData['id'], this.selecteditems);
+      this.orden_pedido = new OrdenProduccion('',this._fecha,userData['id'], this.selecteditems);
       console.log(this.orden_pedido);
-      this.produccionService.setOrdenPedido(this.orden_pedido)
+      this.produccionService.setOrdenProduccion(this.orden_pedido)
       .subscribe(resp => {
         console.log(resp);    
         this.loadlist();
