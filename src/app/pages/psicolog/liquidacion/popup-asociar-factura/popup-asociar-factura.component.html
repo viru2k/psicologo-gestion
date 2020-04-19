@@ -1,0 +1,22 @@
+<div class="header-inicio   cuadro-size pt-4 ">
+  <div class="row">
+     <div class="col-2 "></div>
+  <div class="col-8 ">
+    <div class="pt-5 d-flex justify-content-center"><label><p class="text-center txt-azul-oscuro-colegio pt-5 label-h3 ">AUTOGESTION DE LIQUIDACION </p></label></div>
+  <div>
+    <label>Desde aquí podra subir sus facturas para ser gestionadas por el colegio</label>
+  </div>  
+  <div>
+    <label> LIQUIDACION NRO :{{this.datos['id_liquidacion']}}</label>
+  </div>
+   
+    <p-fileUpload name="images[]" url=" {{url}}multiuploads/estudios/{{this.datos['mat_matricula']}}/{{this.datos['id_liquidacion_detalle']}}/{{this.datos['id_liquidacion']}}" (onUpload)="onUpload($event)" chooseLabel="Seleccionar Archivo"  uploadLabel = "Subir"  cancelLabel="Cancelar"
+    multiple="multiple"  >
+  
+  </p-fileUpload>
+  </div>
+  <div class="col-2 "></div>
+  </div>
+ 
+  </div>
+

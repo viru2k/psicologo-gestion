@@ -67,6 +67,8 @@ import { TesoreriaComponent } from './pages/psicolog/tesoreria/tesoreria.compone
 import { RevisoresComponent } from './pages/psicolog/revisores/revisores.component';
 import { AutogestionComponent } from './pages/psicolog/autogestion/autogestion.component';
 import { SecretariageneralComponent } from './pages/psicolog/secretariageneral/secretariageneral.component';
+import { PopupAsociarFacturaComponent } from './pages/psicolog/liquidacion/popup-asociar-factura/popup-asociar-factura.component';
+import { PopupFacturaDetalleComponent } from './pages/psicolog/liquidacion/popup-factura-detalle/popup-factura-detalle.component';
 
 
 registerLocaleData(localeEsAR, 'es-Ar');
@@ -91,7 +93,9 @@ registerLocaleData(localeEsAR, 'es-Ar');
     TesoreriaComponent,
     RevisoresComponent,
     AutogestionComponent,
-    SecretariageneralComponent
+    SecretariageneralComponent,
+    PopupAsociarFacturaComponent,
+    PopupFacturaDetalleComponent
   ],
   imports: [
     BrowserModule,
@@ -126,7 +130,8 @@ registerLocaleData(localeEsAR, 'es-Ar');
     RouterModule.forRoot( ROUTES, { useHash: true } ),
   ],
   entryComponents: [ 
-    PopupLiquidacionDetalleComponent],
+    PopupLiquidacionDetalleComponent,  PopupAsociarFacturaComponent,
+    PopupFacturaDetalleComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'es-Ar' },{
     provide: HTTP_INTERCEPTORS,
     useFactory: function(injector: Injector) {

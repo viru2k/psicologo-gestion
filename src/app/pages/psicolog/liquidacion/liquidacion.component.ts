@@ -6,6 +6,7 @@ import { DialogService, MessageService } from 'primeng/api';
 import { DatePipe, formatDate } from '@angular/common';
 import { PopupLiquidacionDetalleComponent } from './../../../shared/components/popup/popup-liquidacion-detalle/popup-liquidacion-detalle.component';
 import * as jsPDF from 'jspdf';
+import { PopupAsociarFacturaComponent } from './popup-asociar-factura/popup-asociar-factura.component';
 
 
 
@@ -23,7 +24,7 @@ export class LiquidacionComponent implements OnInit {
   elementos: any[] = [];
   matricula:string;
   psicologo:string;
-
+  usu:any;
   constructor(private miServico: PsicologoService, private messageService: MessageService ,public dialogService: DialogService) { 
 
     this.cols = [
@@ -41,16 +42,17 @@ export class LiquidacionComponent implements OnInit {
       { field: 'os_liq_neto', header: 'A cobrar' , width: '8%'},
       {field: 'boton', header: '', width: '8%' },
       {field: 'boton', header: '' , width: '8%'},
+      {field: 'boton', header: '' , width: '12%'},
    ];
 
   }
 
   ngOnInit() {
     
-     let usu = JSON.parse(localStorage.getItem('userData'));
-     console.log(usu);
-     this.psicologo =usu['nombreyapellido'];
-     this.matricula = usu['username'];
+    this.usu  = JSON.parse(localStorage.getItem('userData'));
+     console.log(this.usu);
+     this.psicologo = this.usu['nombreyapellido'];
+     this.matricula = this.usu['username'];
     this.loadList();
   }
 
@@ -83,6 +85,7 @@ export class LiquidacionComponent implements OnInit {
         error => { // error path
             console.log(error.message);
             console.log(error.status);
+            this.loading = false;
             this.throwAlert('error','Error: '+error.status+'  Error al cargar los registros',error.message, error.status);
          });    
     } catch (error) {
@@ -92,6 +95,25 @@ export class LiquidacionComponent implements OnInit {
 
 
 
+verFactura(event:any){
+ console.log(event);
+ let data:any; 
+ data = event;
+ const ref = this.dialogService.open(PopupAsociarFacturaComponent, {
+ data,
+  header: 'Facturas emitidas', 
+  width: '98%',
+  height: '75%'
+ 
+ });
+
+ ref.onClose.subscribe((PopupAsociarFacturaComponent:any) => {
+     if (PopupAsociarFacturaComponent) {
+   
+     }
+ });
+
+}
 
  verDetalle(event:any){
   console.log(event);
