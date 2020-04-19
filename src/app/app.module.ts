@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { MultiSelectModule } from 'primeng/multiselect';
 import {OrderListModule} from 'primeng/orderlist';
 import {CheckboxModule} from 'primeng/checkbox';
@@ -58,7 +58,7 @@ import { AutorizacionesComponent } from './pages/psicolog/autorizaciones/autoriz
 import { CursosComponent } from './pages/psicolog/cursos/cursos.component';
 import { LiquidacionComponent } from './pages/psicolog/liquidacion/liquidacion.component';
 import { MiCuentaComponent } from './pages/psicolog/mi-cuenta/mi-cuenta.component';
-import { PopupLiquidacionDetalleComponent } from './shared/components/popup/popup-liquidacion-detalle/popup-liquidacion-detalle.component';
+
 import localeEsAR from '@angular/common/locales/es-AR';
 import { InicioGestionComponent } from './pages/psicolog/inicio-gestion/inicio-gestion.component';
 import { AsuntosprofesionalesComponent } from './pages/psicolog/secretaria/asuntosprofesionales/asuntosprofesionales.component';
@@ -69,7 +69,9 @@ import { AutogestionComponent } from './pages/psicolog/autogestion/autogestion.c
 import { SecretariageneralComponent } from './pages/psicolog/secretariageneral/secretariageneral.component';
 import { PopupAsociarFacturaComponent } from './pages/psicolog/liquidacion/popup-asociar-factura/popup-asociar-factura.component';
 import { PopupFacturaDetalleComponent } from './pages/psicolog/liquidacion/popup-factura-detalle/popup-factura-detalle.component';
-
+import { PopupLiquidacionDetalleComponent } from './shared/components/popup/popup-liquidacion-detalle/popup-liquidacion-detalle.component';
+import { PopupLiquidacionGeneradaDetalleComponent } from './pages/psicolog/liquidacion/popup-liquidacion-generada-detalle/popup-liquidacion-generada-detalle.component';
+import { PopupMisFacturasComponent } from './pages/psicolog/liquidacion/popup-mis-facturas/popup-mis-facturas.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -86,7 +88,6 @@ registerLocaleData(localeEsAR, 'es-Ar');
     CursosComponent,
     LiquidacionComponent,
     MiCuentaComponent,
-    PopupLiquidacionDetalleComponent,
     InicioGestionComponent,
     AsuntosprofesionalesComponent,
     SocialComponent,
@@ -95,10 +96,17 @@ registerLocaleData(localeEsAR, 'es-Ar');
     AutogestionComponent,
     SecretariageneralComponent,
     PopupAsociarFacturaComponent,
-    PopupFacturaDetalleComponent
+    PopupFacturaDetalleComponent,
+    PopupLiquidacionGeneradaDetalleComponent,
+    PopupLiquidacionDetalleComponent,
+    PopupMisFacturasComponent
   ],
   imports: [
-    BrowserModule,
+  
+
+
+
+  BrowserModule,
     AppRoutingModule,
     FileUploadModule,
     BrowserModule,
@@ -125,14 +133,18 @@ registerLocaleData(localeEsAR, 'es-Ar');
     OrderListModule,
     InputTextareaModule,
     ScrollPanelModule,
+    ProgressSpinnerModule,
     NgxPopper,
     SweetAlert2Module.forRoot(),
     RouterModule.forRoot( ROUTES, { useHash: true } ),
   ],
   entryComponents: [ 
-    PopupLiquidacionDetalleComponent,  PopupAsociarFacturaComponent,
-    PopupFacturaDetalleComponent],
-  providers: [{ provide: LOCALE_ID, useValue: 'es-Ar' },{
+    PopupAsociarFacturaComponent,
+    PopupFacturaDetalleComponent,
+    PopupLiquidacionDetalleComponent,
+    PopupLiquidacionGeneradaDetalleComponent,
+    PopupMisFacturasComponent],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-Ar' }, {
     provide: HTTP_INTERCEPTORS,
     useFactory: function(injector: Injector) {
         return new JwtInterceptor(injector);

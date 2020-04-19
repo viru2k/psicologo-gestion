@@ -18,17 +18,17 @@ import { PsicologoService } from './../../../services/psicologo.service';
 })
 export class InicioGestionComponent implements OnInit {
 
-  
-  display: boolean = false;
+  urgente: any= null;
+  display;
   elementos:any[] = [];
-  elementos_videos:any[] = [];
-  elemento_detalle:any = null;
-  loading:boolean = false;
+  elementos_videos: any[] = [];
+  elemento_detalle: any = null;
+  loading;
   public safeURL: SafeResourceUrl;
-  errorvideo:boolean;
-  errornoticia:boolean;
+  errorvideo;
+  errornoticia;
 
-  constructor(private miServicio:PsicologoService, private _sanitizer: DomSanitizer) { }
+  constructor(private miServicio: PsicologoService, private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.loadListNoticias();
@@ -45,6 +45,7 @@ export class InicioGestionComponent implements OnInit {
            .subscribe(resp => {
              let i=0;
              let res = resp;
+             let ultimo;
                  resp.forEach(element => {
                    //enlaces
                    if(res[i]['tiene_enlace']==='SI'){
@@ -58,7 +59,13 @@ export class InicioGestionComponent implements OnInit {
                    if(res[i]['tiene_imagen']==='SI'){
                     res[i]['imagen'] = URL_ARCHIVO_IMAGEN+res[i]['imagen'];
                    }
-                            
+                   if(!ultimo){
+                     if(resp[i]['es_importante'] ==='SI'){
+                       this.urgente = resp[i];
+                       ultimo = true;
+                       console.log('noticia');
+                     }
+                   }
                 i++;
                 });
                this.elementos = resp;
@@ -76,6 +83,7 @@ export class InicioGestionComponent implements OnInit {
        }
    }
    
+
 
    
   

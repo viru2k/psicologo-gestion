@@ -7,7 +7,7 @@
 	<nav class=" navbar navbar-expand-lg navbar-default  container-fluid-nav fixed-top animated slideInDown " *ngIf="loggedIn">
     
 			
-			<a class="navbar-brand"  routerLink="inicio"><img src="assets/images/psicologos-logo.png" height="40" alt=""> </a>
+	<!-- 		<a class="navbar-brand"  routerLink="inicio"><img src="assets/images/psicologos-logo.png" height="40" alt=""> </a> -->
 			<button class="navbar-toggler my-hover  navbar-toggler-left  navbar-button" type="button" data-toggle="collapse" 
 			(click)="toggleNavbar()">
 			<i class="fa fa-navicon"></i>
@@ -27,22 +27,22 @@
 				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="tesoreria" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">TESORERIA</label></a>
 				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="revisores" (click)="toggleNavbar()"> <label class=" my-hover  label-h7 ">REVISORES</label></a>
 				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="autorizacion" (click)="toggleNavbar()" href="#"> <label class=" my-hover  label-h7 ">AUTORIZACION</label></a>
-				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="gestion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">AUTOGESTION</label></a>
+				<!-- <a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="gestion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">AUTOGESTION</label></a> -->
 				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="cuenta" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">MI CUENTA</label></a>
-				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="liquidacion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 "></label>MIS LIQUIDACIONES</a>
-				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none btn-menu-salir" routerLink="institucional" (click)="cerrarSesion()" href="#"><label class=" my-hover  label-h7 "></label>CERRAR SESION</a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="liquidacion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">MIS LIQUIDACIONES</label></a>
+				<a class="d-flex justify-content-center my-hover nav-link  hvr-shrink navbar-font-mobile navbar-background-mobile texto-monserrat d-md-none d-xl-none d-lg-none" routerLink="institucional" (click)="cerrarSesion()" href="#"><label class=" my-hover  label-h7 ">CERRAR SESION</label></a>
 				
 
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="inicio" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7">INICIO</label></a>
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="asuntosprofesionales" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">SEC. ASUNTOS PROFESIONALES</label></a>
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="curso" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">SEC. SOCIAL</label></a>
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="secgral" (click)="toggleNavbar()" ><label class=" my-hover  label-h7 ">SEC. GENERAL</label></a>
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="tesoreria" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">TESORERIA</label></a>
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="revisores" (click)="toggleNavbar()"> <label class=" my-hover  label-h7 ">REVISORES</label></a>
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="autorizacion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">AUTORIZACION</label></a>
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="gestion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">AUTOGESTION</label></a>
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="cuenta" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">MI CUENTA</label></a>
-				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="liquidacion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">MIS LIQUIDACIONES</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-item" routerLink="inicio" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7">INICIO</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-item" routerLink="asuntosprofesionales" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">SEC. ASUNTOS PROFESIONALES</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-item" routerLink="curso" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">SEC. SOCIAL</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-item" routerLink="secgral" (click)="toggleNavbar()" ><label class=" my-hover  label-h7 ">SEC. GENERAL</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-item" routerLink="tesoreria" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">TESORERIA</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-item" routerLink="revisores" (click)="toggleNavbar()"> <label class=" my-hover  label-h7 ">REVISORES</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-item" routerLink="autorizacion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">AUTORIZACION</label></a>
+				  <!-- <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block" routerLink="gestion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">AUTOGESTION</label></a> -->
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-item" routerLink="cuenta" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">MI CUENTA</label></a>
+				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-item" routerLink="liquidacion" (click)="toggleNavbar()" href="#"><label class=" my-hover  label-h7 ">MIS LIQUIDACIONES</label></a>
 				  <a class="my-hover nav-link navbar-font hvr-shrink texto-monserrat d-sm-none d-md-none d-md-block d-none d-md-block btn-menu-salir" routerLink="institucional" (click)="cerrarSesion()" href="#"><label class=" my-hover  label-h7 ">CERRAR SESION</label></a>
 			  </ul>
 			</div>

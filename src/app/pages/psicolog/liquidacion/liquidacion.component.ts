@@ -7,6 +7,9 @@ import { DatePipe, formatDate } from '@angular/common';
 import { PopupLiquidacionDetalleComponent } from './../../../shared/components/popup/popup-liquidacion-detalle/popup-liquidacion-detalle.component';
 import * as jsPDF from 'jspdf';
 import { PopupAsociarFacturaComponent } from './popup-asociar-factura/popup-asociar-factura.component';
+// tslint:disable-next-line: max-line-length
+import { PopupLiquidacionGeneradaDetalleComponent } from './popup-liquidacion-generada-detalle/popup-liquidacion-generada-detalle.component';
+import { PopupMisFacturasComponent } from './popup-mis-facturas/popup-mis-facturas.component';
 
 
 
@@ -14,27 +17,28 @@ import { PopupAsociarFacturaComponent } from './popup-asociar-factura/popup-asoc
   selector: 'app-liquidacion',
   templateUrl: './liquidacion.component.html',
   styleUrls: ['./liquidacion.component.scss'],
-  providers: [MessageService,DialogService]
+  providers: [MessageService, DialogService]
 })
 export class LiquidacionComponent implements OnInit {
 
-  
   cols: any[];
   loading: boolean;
   elementos: any[] = [];
-  matricula:string;
-  psicologo:string;
-  usu:any;
-  constructor(private miServico: PsicologoService, private messageService: MessageService ,public dialogService: DialogService) { 
+  matricula: string;
+  psicologo: string;
+  usu: any;
+  navbarOpen;
+
+  constructor(private miServico: PsicologoService, private messageService: MessageService , public dialogService: DialogService) {
 
     this.cols = [
-              
+
       { field: 'id_liquidacion', header: 'Liq. nº' , width: '6%'} ,
       { field: 'num_comprobante', header: 'Comprobante' , width: '8%'},
       { field: 'os_liq_bruto', header: 'Bruto' , width: '8%'},
       { field: 'os_desc_fondo_sol', header: 'F. sol',  width: '8%' },
       {field: 'os_desc_matricula', header: 'Matricula' , width: '8%' },
-      { field: 'os_descuentos', header: 'Otros',  width: '8%' },      
+      { field: 'os_descuentos', header: 'Otros',  width: '8%' },
       { field: 'os_gasto_admin', header: 'Gastos adm.',  width: '8%' },
       { field: 'os_imp_cheque', header: 'Imp. cheque',  width: '8%' },
       { field: 'os_ing_brutos', header: 'Ing. brutos' , width: '8%'},
@@ -48,7 +52,7 @@ export class LiquidacionComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.usu  = JSON.parse(localStorage.getItem('userData'));
      console.log(this.usu);
      this.psicologo = this.usu['nombreyapellido'];
@@ -56,24 +60,12 @@ export class LiquidacionComponent implements OnInit {
     this.loadList();
   }
 
-  navbarOpen = false;
-
-  toggleNavbar() {
-
-    
-    console.log(this.navbarOpen);
-    this.navbarOpen = !this.navbarOpen;
-  }
-  isCollapse = false;   // guardamos el valor
-  toggleState() { // manejador del evento
-      let foo = this.isCollapse;
-      this.isCollapse = foo === false ? true : false; 
-  }
 
 
-  
-  loadList(){
-    let userData = JSON.parse(localStorage.getItem('userData'));
+
+
+  loadList() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
     this.loading = true;
     try {
         this.miServico.getLiquidacionByPsicologo(userData['username'])
@@ -86,69 +78,98 @@ export class LiquidacionComponent implements OnInit {
             console.log(error.message);
             console.log(error.status);
             this.loading = false;
-            this.throwAlert('error','Error: '+error.status+'  Error al cargar los registros',error.message, error.status);
-         });    
+            this.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', error.message, error.status);
+         });
     } catch (error) {
-    this.throwAlert('error','Error al cargar los registros',error,error.status);
-    }  
+    this.throwAlert('error', 'Error al cargar los registros', error, error.status);
+    }
 }
 
 
 
-verFactura(event:any){
+verFactura(event: any) {
  console.log(event);
- let data:any; 
+ let data: any;
  data = event;
  const ref = this.dialogService.open(PopupAsociarFacturaComponent, {
  data,
-  header: 'Facturas emitidas', 
+  header: 'Facturas emitidas',
   width: '98%',
   height: '75%'
- 
  });
 
- ref.onClose.subscribe((PopupAsociarFacturaComponent:any) => {
+ // tslint:disable-next-line: no-shadowed-variable
+ ref.onClose.subscribe((PopupAsociarFacturaComponent: any) => {
      if (PopupAsociarFacturaComponent) {
-   
      }
  });
 
 }
 
- verDetalle(event:any){
+ verDetalle(event: any) {
   console.log(event);
-  let data:any; 
+  let data: any;
   data = event;
   const ref = this.dialogService.open(PopupLiquidacionDetalleComponent, {
   data,
-   header: 'Detalle de liquidacion', 
+   header: 'Detalle de liquidacion',
    width: '98%',
    height: '75%'
-  
   });
 
-  ref.onClose.subscribe((PopupLiquidacionDetalleComponent:any) => {
+  // tslint:disable-next-line: no-shadowed-variable
+  ref.onClose.subscribe((PopupLiquidacionDetalleComponent: any) => {
       if (PopupLiquidacionDetalleComponent) {
-    
       }
   });
- 
 }
 
- 
+
+verLiquidacion() {
+
+  const data: any = null;
+  const ref = this.dialogService.open(PopupLiquidacionGeneradaDetalleComponent, {
+  data,
+   header: 'Liquidaciones generadas',
+   width: '60%',
+   height: '75%'
+  });
+  // tslint:disable-next-line: no-shadowed-variable
+  ref.onClose.subscribe((PopupLiquidacionGeneradaDetalleComponent: any) => {
+      if (PopupLiquidacionGeneradaDetalleComponent) {
+
+      }
+  });
+}
+
+misFacturas() {
+
+  const data: any = null;
+
+  const ref = this.dialogService.open(PopupMisFacturasComponent, {
+  data,
+   header: 'Liquidaciones generadas',
+   width: '60%',
+   height: '75%'
+  });
+  // tslint:disable-next-line: no-shadowed-variable
+  ref.onClose.subscribe((PopupMisFacturasComponent: any) => {
+      if (PopupMisFacturasComponent) {
+
+      }
+  });
+
+}
 
 
 
- generarPdfRentas(event:any) {
+ generarPdfRentas(event: any) {
   console.log(event);
-  let _fechaEmision = formatDate(event.os_fecha, 'dd/MM/yyyy', 'en');
+  const _fechaEmision = formatDate(event.os_fecha, 'dd/MM/yyyy', 'en');
 
-  let userData = JSON.parse(localStorage.getItem('userData'));
+  const userData = JSON.parse(localStorage.getItem('userData'));
 
-  
-  
-
-  var doc = new jsPDF();  
+  const doc = new jsPDF();
   /** valores de la pagina**/
   const pageSize = doc.internal.pageSize;
   const pageWidth = pageSize.width ? pageSize.width : pageSize.getWidth();
@@ -170,76 +191,74 @@ verFactura(event:any){
   doc.text(event.mat_apellido, 10, 55 );
 
   doc.text('ACTIVIDAD: Psicologia', pageWidth - 80, 50 );
-  doc.text('C.U.I.T: '+event.mat_cuit, pageWidth - 80, 55 );
-  doc.text('Nº ing. brutos: '+event.mat_ning_bto, pageWidth - 80, 60 );
-  doc.text('Domicilio: '+event.mat_domicilio_partcular, pageWidth - 80, 65 );
-
+  doc.text('C.U.I.T: ' + event.mat_cuit, pageWidth - 80, 55 );
+  doc.text('Nº ing. brutos: ' + event.mat_ning_bto, pageWidth - 80, 60 );
+  doc.text('Domicilio: ' + event.mat_domicilio_partcular, pageWidth - 80, 65 );
   doc.line(10, 70, pageWidth - 10, 70);
-  let imp_retenido = Number(event.os_ing_brutos)+Number(event.os_lote_hogar);
-  doc.text('Monto imponible: '+event.os_liq_bruto, 10, 75 );
-  doc.text('Ing. brutos: '+event.os_ing_brutos, 60, 75 );
-  doc.text('Lote hogar: '+event.os_lote_hogar, 90, 75 );
-  doc.text('Importe retenido: '+imp_retenido, 130, 75 );
+  const imp_retenido = Number(event.os_ing_brutos) + Number(event.os_lote_hogar);
+  doc.text('Monto imponible: ' + event.os_liq_bruto, 10, 75 );
+  doc.text('Ing. brutos: ' + event.os_ing_brutos, 60, 75 );
+  doc.text('Lote hogar: ' + event.os_lote_hogar, 90, 75 );
+  doc.text('Importe retenido: ' + imp_retenido, 130, 75 );
   doc.line(10, 80, pageWidth - 10, 80);
-  doc.text('DUPLICADO', pageWidth/2, 85, null, null, 'center');
- window.open(doc.output('bloburl'));  
-  
+  doc.text('DUPLICADO', pageWidth / 2, 85, null, null, 'center');
+ window.open(doc.output('bloburl'));
+
 }
 
 
-throwAlert(estado:string, mensaje:string, motivo:string, errorNumero:string){
-  let tipoerror:string;
+throwAlert(estado: string, mensaje: string, motivo: string, errorNumero: string) {
 
-     if(estado== 'success'){
+     if (estado === 'success') {
           swal({
               type: 'success',
               title: 'Exito',
               text: mensaje
-            })
+            } );
       }
-      if(estado== 'error'){
-        if(errorNumero =='422'){
-            mensaje ='Los datos que esta tratando de guardar son iguales a los que ya poseia';
+      if (estado === 'error') {
+        if (errorNumero === '422') {
+            mensaje = 'Los datos que esta tratando de guardar son iguales a los que ya poseia';
         }
-        if(errorNumero =='400 '){
-            mensaje ='Bad Request ';
+        if (errorNumero === '400 ') {
+            mensaje = 'Bad Request ';
         }
-        if(errorNumero =='404'){
-            mensaje ='No encontrado ';
+        if (errorNumero === '404') {
+            mensaje = 'No encontrado ';
         }
-        if(errorNumero =='401'){
-            mensaje ='Sin autorización';
+        if (errorNumero === '401') {
+            mensaje = 'Sin autorización';
         }
-        if(errorNumero =='403'){
-            mensaje =' Prohibido : La consulta fue valida, pero el servidor rechazo la accion. El usuario puede no tener los permisos necesarios, o necesite una cuenta para operar ';
+        if (errorNumero === '403') {
+            mensaje = ' Prohibido : La consulta fue valida, pero el servidor rechazo la accion. El usuario puede no tener los permisos necesarios, o necesite una cuenta para operar ';
         }
-        if(errorNumero =='405'){
-            mensaje ='Método no permitido';
+        if (errorNumero === '405') {
+            mensaje = 'Método no permitido';
         }
-        if(errorNumero =='500'){
-            mensaje ='Error interno en el servidor';
+        if (errorNumero === '500') {
+            mensaje = 'Error interno en el servidor';
         }
-        if(errorNumero =='503'){
-            mensaje ='Servidor no disponible';
+        if (errorNumero === '503') {
+            mensaje = 'Servidor no disponible';
         }
-        if(errorNumero =='502'){
-            mensaje ='Bad gateway';
+        if (errorNumero === '502') {
+            mensaje = 'Bad gateway';
         }
 
-          swal({   
+          swal({
               type: 'error',
               title: 'Oops...',
               text: mensaje,
               footer: motivo
-            })
+            });
       }
-      if(estado== 'alerta'){
-        swal({   
+      if (estado === 'alerta') {
+        swal({
             type: 'warning',
             title: 'Cuidado!',
             text: mensaje,
             footer: motivo
-          })
+          });
     }
     }
 }

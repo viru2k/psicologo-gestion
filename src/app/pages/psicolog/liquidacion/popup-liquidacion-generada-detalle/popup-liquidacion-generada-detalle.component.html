@@ -21,13 +21,11 @@
     
               <ng-template pTemplate="body" let-elementos >
                 <tr style="height:20px" >
-                  <td style="width: 10%">{{elementos.id_liquidacion}}</td>
-                  <td style="width: 15%">{{elementos.mat_matricula}}</td>
-                  <td style="width: 50%">{{elementos.matricula_psicologo}}</td>
-                  <td style="width: 15%">{{elementos.fecha_subida | date :'dd/MM/yyyy hh:mm:ss'}}</td>
-                  <td style="width: 10%">
-                    <a class="my-hover " href="{{this.descarga}}{{elementos.url}}" target="_blank"><i class="far fa-file-pdf icon-user-colegio fa-2x"></i></a>
-                    
+                  <td style="width: 50%">{{elementos.id_liquidacion}}</td>
+                  <td style="width: 25%">{{elementos.os_fecha | date :'dd/MM/yyyy'}}</td>
+                
+                  <td style="width: 25%">
+                      <button   type="button" class="btn btn-outline-success btn-sm" (click)="verFacturas(elementos)"    >Ver facturas asociadas</button>
                   </td>
              
           </tr>

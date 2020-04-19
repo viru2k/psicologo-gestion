@@ -55,14 +55,14 @@ export class NavbarComponent implements OnInit {
      /*======== JQUERY DEL LOGUIN =========*/
     $(document).ready
     (function ($) {
-      "use strict";
+      'use strict';
   
   
       /*==================================================================
       [ Focus Contact2 ]*/
       $('.input100').each(function(){
           $(this).on('blur', function(){
-              if($(this).val().trim() != "") {
+              if($(this).val().trim() != '') {
                   $(this).addClass('has-val');
               }
               else {
@@ -144,7 +144,7 @@ if(currentUser['access_token'] != ''){
      this.asignarModulos(userData['access_list']);
      this.menuList();
 }else{
-  console.log("sin credenciales");
+  console.log('sin credenciales');
   this.throwAlert('error','Usuario o contraseña incorrectos',  'Verifique el usuario y contraseña, su sesion puede haber expirado','500');
 }
    
@@ -219,7 +219,7 @@ onSubmit() {
           data => {
             console.log(data);
             this.user = data;
-            let us = new User("","","","","",this.f.username.value,this.f.password.value,[]);
+            let us = new User('','','','','',this.f.username.value, this.f.password.value, []);
             localStorage.setItem('userData', JSON.stringify(us));
             localStorage.setItem('currentUser', JSON.stringify(this.user));
             //  this.router.navigate([this.returnUrl]);
@@ -245,13 +245,13 @@ try {
   this.miServico.getItemInfoAndMenu(this.f.username.value)
     .subscribe(resp => {
     this.elemento = resp;
-   // this.elementoModulo = this.elemento["access_list"]
+   // this.elementoModulo = this.elemento['access_list']
        let currentUser =  JSON.parse(localStorage.getItem('currentUser'));
        let userData = JSON.parse(localStorage.getItem('userData'));
        console.log(this.elemento);
        this.elementoModulo = <any>this.elemento;
       this.user = new User(this.elemento[0]['id'] , this.elemento[0]['email'], this.elemento[0]['nombreyapellido'],
-       this.elemento[0]['name'],'1',this.elemento[0]['email'], currentUser['access_token'],this.elementoModulo);
+       this.elemento[0]['name'], this.elemento[0]['admin'],this.elemento[0]['email'], currentUser['access_token'],this.elementoModulo);
        this.username = userData['username'];
        localStorage.removeItem('userData');
        localStorage.setItem('userData', JSON.stringify(this.user));

@@ -1,41 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService, MessageService, DynamicDialogConfig } from 'primeng/api';
+import { DialogService, MessageService } from 'primeng/api';
 import { PsicologoService } from '../../../../services/psicologo.service';
 import swal from 'sweetalert2';
-import { URL_ARCHIVO_FACTURA } from './../../../../config/config';
+import { PopupFacturaDetalleComponent } from './../popup-factura-detalle/popup-factura-detalle.component';
 
 @Component({
-  selector: 'app-popup-factura-detalle',
-  templateUrl: './popup-factura-detalle.component.html',
-  styleUrls: ['./popup-factura-detalle.component.scss']
+  selector: 'app-popup-liquidacion-generada-detalle',
+  templateUrl: './popup-liquidacion-generada-detalle.component.html',
+  styleUrls: ['./popup-liquidacion-generada-detalle.component.scss']
 })
-export class PopupFacturaDetalleComponent implements OnInit {
-  datos: any;
-  userData: any;
+export class PopupLiquidacionGeneradaDetalleComponent implements OnInit {
+  userData:any;
   cols: any;
   loading;
-  descarga: string;
   elementos: any[] = [];
-  constructor(private miServico: PsicologoService, private messageService: MessageService ,public dialogService: DialogService, private config:DynamicDialogConfig) {
+  constructor(private miServico: PsicologoService, private messageService: MessageService ,public dialogService: DialogService) {
 
     this.cols = [
 
-      { field: 'id_liquidacion', header: 'Liq. nº' , width: '10%'} ,
-      { field: 'mat_matricula', header: 'Matrícula' , width: '15%'},
-      { field: 'matricula_psicologo', header: 'Psicólogo' , width: '50%'},
-      { field: 'fecha_subida', header: 'Subido' , width: '15%'},
-      {field: 'boton', header: '' , width: '10%'},
+      { field: 'id_liquidacion', header: 'Liq. nº' , width: '50%'} ,
+      { field: 'num_comprobante', header: 'Fecha' , width: '25%'},
+      {field: 'boton', header: '' , width: '25%'},
    ];
 
    }
 
   ngOnInit() {
-    this.descarga = URL_ARCHIVO_FACTURA;
-    console.log(this.config.data);
-    this.datos = this.config.data;
-    //this.userData = JSON.parse(localStorage.getItem('userData'));
-    this.elementos = this.datos;
-   // this.loadList();
+     this.userData = JSON.parse(localStorage.getItem('userData'));
+    this.loadList();
   }
 
   loadList() {
@@ -43,7 +35,7 @@ export class PopupFacturaDetalleComponent implements OnInit {
     this.loading = true;
     console.log('llamando liquidacion');
     try {
-        this.miServico.getFacturaByLiquidacion(this.datos['id_liquidacion'])
+        this.miServico.getLiquidacion('1')
         .subscribe(resp => {
         this.elementos = resp;
             this.loading = false;
@@ -156,5 +148,4 @@ throwAlert(estado: string, mensaje: string, motivo: string, errorNumero: string)
  }
  }
 }
-
 

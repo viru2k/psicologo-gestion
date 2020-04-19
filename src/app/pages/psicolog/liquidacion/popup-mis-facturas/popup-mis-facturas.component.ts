@@ -5,11 +5,11 @@ import swal from 'sweetalert2';
 import { URL_ARCHIVO_FACTURA } from './../../../../config/config';
 
 @Component({
-  selector: 'app-popup-factura-detalle',
-  templateUrl: './popup-factura-detalle.component.html',
-  styleUrls: ['./popup-factura-detalle.component.scss']
+  selector: 'app-popup-mis-facturas',
+  templateUrl: './popup-mis-facturas.component.html',
+  styleUrls: ['./popup-mis-facturas.component.scss']
 })
-export class PopupFacturaDetalleComponent implements OnInit {
+export class PopupMisFacturasComponent implements OnInit {
   datos: any;
   userData: any;
   cols: any;
@@ -33,17 +33,15 @@ export class PopupFacturaDetalleComponent implements OnInit {
     this.descarga = URL_ARCHIVO_FACTURA;
     console.log(this.config.data);
     this.datos = this.config.data;
-    //this.userData = JSON.parse(localStorage.getItem('userData'));
-    this.elementos = this.datos;
-   // this.loadList();
+    this.userData = JSON.parse(localStorage.getItem('userData'));
+    this.loadList();
   }
 
   loadList() {
 
     this.loading = true;
-    console.log('llamando liquidacion');
     try {
-        this.miServico.getFacturaByLiquidacion(this.datos['id_liquidacion'])
+        this.miServico.getFacturaByMatricula(this.userData['name'])
         .subscribe(resp => {
         this.elementos = resp;
             this.loading = false;
@@ -60,44 +58,6 @@ export class PopupFacturaDetalleComponent implements OnInit {
     } catch (error) {
     this.throwAlert('error' , 'Error al cargar los registros' , error , error.status);
     }
-}
-
-verFacturas(event: any){
-  console.log(event);
-
-  this.loading = true;
-  try {
-      this.miServico.getFacturaByLiquidacion(event['id_liquidacion'])
-      .subscribe(resp => {
-//      this.elementos = resp;
-          this.loading = false;
-          console.log(resp);
-
-          let data:any; 
-          data = resp;
-          const ref = this.dialogService.open(PopupFacturaDetalleComponent, {
-          data,
-           header: 'Detalle de facturas',
-           width: '98%',
-           height: '75%'
-          
-          });
-        
-          ref.onClose.subscribe((PopupFacturaDetalleComponent:any) => {
-              if (PopupFacturaDetalleComponent) {
-            
-              }
-          });
-      },
-      error => { // error path
-          console.log(error.message);
-          console.log(error.status);
-          this.loading = false;
-          this.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', error.message, error.status);
-       });
-  } catch (error) {
-  this.throwAlert('error' , 'Error al cargar los registros' , error , error.status);
-  }
 }
 
 
@@ -156,5 +116,6 @@ throwAlert(estado: string, mensaje: string, motivo: string, errorNumero: string)
  }
  }
 }
+
 
 
