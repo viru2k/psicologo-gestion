@@ -9,7 +9,7 @@ export class ArticuloService {
   constructor(public http: HttpClient) { }
 
   getArticulo(){
-    return this.http.get<any[]>(this.url+'articulos');
+    return this.http.get<any[]>(this.url + 'articulos/descripcion');
     }
 
     getArticuloConfeccionByArticuloId(articulo_id: string){

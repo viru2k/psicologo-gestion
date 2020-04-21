@@ -89,14 +89,18 @@ import { UsuarioEditarComponent } from './pages/mantenimiento/usuario-editar/usu
 import { UnidadComponent } from './pages/mantenimiento/unidad/unidad.component';
 import { UnidadEditarComponent } from './pages/mantenimiento/unidad-editar/unidad-editar.component';
 import { CalidadControlComponent } from './pages/mantenimiento/calidad/calidad-control/calidad-control.component';
+// tslint:disable-next-line: max-line-length
 import { CalidadControlEditarComponent } from './pages/mantenimiento/calidad/calidad-control/calidad-control-editar/calidad-control-editar.component';
 import { CalidadDatoRelevadoComponent } from './pages/mantenimiento/calidad/calidad-dato-relevado/calidad-dato-relevado.component';
+// tslint:disable-next-line: max-line-length
 import { CalidadDatoRelevadoEditarComponent } from './pages/mantenimiento/calidad/calidad-dato-relevado/calidad-dato-relevado-editar/calidad-dato-relevado-editar.component';
 import { CalidadTipoControlComponent } from './pages/mantenimiento/calidad/calidad-tipo-control/calidad-tipo-control.component';
+// tslint:disable-next-line: max-line-length
 import { CalidadTipoControlEditarComponent } from './pages/mantenimiento/calidad/calidad-tipo-control/calidad-tipo-control-editar/calidad-tipo-control-editar.component';
 import { CustomPreloaderComponent } from './shared/components/custom-preloader/custom-preloader.component';
 import { PopupArticuloConsultaComponent } from './shared/components/popups/popup-articulo-consulta/popup-articulo-consulta.component';
 import { PopupInsumoConsultaComponent } from './shared/components/popups/popup-insumo-consulta/popup-insumo-consulta.component';
+// tslint:disable-next-line: max-line-length
 import { PopupArticuloDistribucionConsultaComponent } from './shared/components/popups/popup-articulo-distribucion-consulta/popup-articulo-distribucion-consulta.component';
 import { PopupUsuarioComponent } from './shared/components/popups/popup-usuario/popup-usuario.component';
 import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedido.component';
@@ -105,20 +109,23 @@ import { MovimientoProduccionComponent } from './pages/produccion/movimiento-pro
 import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/movimiento-insumo.component';
 import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
 import { AsociarProduccionComponent } from './pages/produccion/popups/popup/asociar-produccion/asociar-produccion.component';
+// tslint:disable-next-line: max-line-length
 import { AsociarProduccionDetalleComponent } from './pages/produccion/popups/popup/asociar-produccion-detalle/asociar-produccion-detalle.component';
 import { AsociarInsumoDetalleComponent } from './pages/produccion/popups/popup/asociar-insumo-detalle/asociar-insumo-detalle.component';
 import { AsociarInsumoComponent } from './pages/produccion/popups/popup/asociar-insumo/asociar-insumo.component';
 import { AsociarInsumoAltaComponent } from './pages/produccion/asociar-insumo/asociar-insumo-alta/asociar-insumo-alta.component';
 import { PopupCalculdorPalletsComponent } from './shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
+// tslint:disable-next-line: max-line-length
 import { PopupOrdenPedidoDetalleComponent } from './pages/produccion/orden-pedido/popup-orden-pedido-detalle/popup-orden-pedido-detalle.component';
+import { ParametrosComponent } from './pages/mantenimiento/produccion/parametros/parametros.component';
 
 @NgModule({
   declarations: [
-    AppComponent,   
-    DateFormatPipe, 
+    AppComponent,
+    DateFormatPipe,
     NavbarComponent,
     EmptyComponent,
-    NotFoundComponent,    
+    NotFoundComponent,
     ProduccionindicadoresComponent,
     CalidadindicadoresComponent,
     ArticuloComponent,
@@ -153,13 +160,12 @@ import { PopupOrdenPedidoDetalleComponent } from './pages/produccion/orden-pedid
     AsociarInsumoComponent,
     AsociarInsumoAltaComponent,
     PopupCalculdorPalletsComponent,
-    PopupOrdenPedidoDetalleComponent
+    PopupOrdenPedidoDetalleComponent,
+    ParametrosComponent
   ],
   imports: [
 
 
-  
-    
     BrowserModule,
     FormsModule,
     MultiSelectModule,
@@ -220,8 +226,8 @@ import { PopupOrdenPedidoDetalleComponent } from './pages/produccion/orden-pedid
     PopupUsuarioComponent,
     PopupCalculdorPalletsComponent 
     ],
-  providers: [CurrencyPipe,DecimalPipe,
-    PushNotificationService,ExcelService,{ provide: LOCALE_ID, useValue: 'es-Ar' },
+  providers: [CurrencyPipe, DecimalPipe,
+    PushNotificationService, ExcelService,{ provide: LOCALE_ID, useValue: 'es-Ar' },
  {
   provide: HTTP_INTERCEPTORS,
   useFactory: function(injector: Injector) {
@@ -235,5 +241,3 @@ import { PopupOrdenPedidoDetalleComponent } from './pages/produccion/orden-pedid
 })
 export class AppModule { }
 
-
-//08103330303

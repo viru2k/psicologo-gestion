@@ -1,23 +1,27 @@
 <div class="d-flex justify-content-center mt-3">
   <label>CONFIGURACION DE ARTICULOS</label>
 </div>
+<div class="card-rounded card-header">
+  <div class="ml-2">   <a  (click)="nuevo()" class="icon-hover  icon-color-success"> <i class="fas fa-plus fa-lg mr-2"></i>Articulo</a>    </div> 
+</div>
   <div  class="m-3">
     <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
     scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
    
     <ng-template pTemplate="caption">
-      <div class="row" >
-              <div class="col-md-12 row" style="text-align:left ">
-                <div>  <button    class="ml-2 btn  btn-primary btn-sm float-right "  (click)="nuevo()" >Nuevo artículo</button></div> 
-            </div>
-             
-
-               
-   </div>
-   <div class=" ml-2 ">  
-                        
-  </div>
-  </ng-template>
+      <div class=" row">
+          <div class="col-4" style="text-align: left" >
+         
+          </div>
+        
+        <div class="col-8 mt-2" style="text-align: right">     
+          
+          
+            <input   size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+      </div>
+      
+    </ng-template>
   
                <ng-template pTemplate="header" let-columns >
               
@@ -33,10 +37,10 @@
                         <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'botellas'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pisos'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pack'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'litros'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidades'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pallet_pisos'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pallet_pack'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'volumen'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                         </th>
                         <th></th>
                     </tr>
@@ -48,13 +52,13 @@
 
                     <td style="width: 40%">{{elementos.descripcion}}</td>
                     <td style="width: 20%">{{elementos.unidad_descripcion}}</td>
-                    <td style="width: 10%">{{elementos.botellas}}</td>
-                    <td style="width: 10%">{{elementos.pisos}}</td>
-                    <td style="width: 10%">{{elementos.pack}}</td>
-                    <td style="width: 10%">{{elementos.litros}}</td>
+                    <td style="width: 10%">{{elementos.unidades}}</td>
+                    <td style="width: 10%">{{elementos.pallet_pisos}}</td>
+                    <td style="width: 10%">{{elementos.pallet_pack}}</td>
+                    <td style="width: 10%">{{elementos.volumen}}</td>
                                 
-                    <td style="width: 15%">
-                        <button class="btn btn-success btn-sm" (click)="buscar(elementos)">Editar</button>
+                    <td style="width: 6%">
+                      <a  (click)="buscar(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
                         </td>
             </tr>
         </ng-template>

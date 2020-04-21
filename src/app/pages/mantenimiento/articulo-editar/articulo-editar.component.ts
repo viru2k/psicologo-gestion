@@ -10,120 +10,118 @@ import { AlertServiceService } from '../../../services/alert-service.service';
 })
 export class ArticuloEditarComponent implements OnInit {
   updateDataForm: FormGroup;
-  elementos:any;
-  unidades:any;
-  unidad:string;
+  elementos: any;
+  unidades: any;
+  unidad: string;
   es_nuevo;
   loading;
-  selectedItem:any;
-  selectedForma:any;
-  constructor(public config: DynamicDialogConfig, private articuloService:ArticuloService, private alertServiceService:AlertServiceService, public ref: DynamicDialogRef) { 
+  selectedItem: any;
+  selectedForma: any;
+  // tslint:disable-next-line: max-line-length
+  constructor(public config: DynamicDialogConfig, private articuloService: ArticuloService, private alertServiceService: AlertServiceService, public ref: DynamicDialogRef) {
     this.updateDataForm = new FormGroup({
-      'descripcion': new FormControl('', Validators.required),
+      'nombre': new FormControl('', Validators.required),
       'unidad_descripcion': new FormControl(''),
+      'descripcion': new FormControl(''),
       'unidad_id': new FormControl('1'),
-      'botellas': new FormControl('1'),
-      'pisos': new FormControl('1'),
-      'pack': new FormControl('1'),
-      'litros': new FormControl('1'),
-      'id': new FormControl('' ),
-     
+      'unidades': new FormControl('1'),
+      'pallet_pisos': new FormControl('1'),
+      'pallet_pack': new FormControl('1'),
+      'volumen': new FormControl('1'),
+      'id': new FormControl('')
   });
   }
 
   ngOnInit() {
     console.log(this.config.data);
-    if(this.config.data){
+    if (this.config.data) {
       console.log('es editable');
       this.es_nuevo = false;
-    
-
-    }else{
+      this.updateDataForm.patchValue(this.config.data);
+    } else {
       this.es_nuevo = true;
       console.log('es nuevo');
     }
-     this.loadUnidad();
+    this.loadUnidad();
   }
 
 
 
-  loadUnidad(){
+  loadUnidad() {
 
-    this.loading = true;  
+    this.loading = true;
     try {
-        this.articuloService.getUnidad()   
+        this.articuloService.getUnidad()
         .subscribe(resp => {
             this.unidades = resp;
-            console.log(this.unidades);              
+            console.log(this.unidades);
             this.loading = false;
             console.log(resp);
-            if(this.config.data){
+            if (this.config.data) {
             this.selectedForma =  this.unidades.find(x => x.id === this.config.data.unidad_id);
-            console.log(this.selectedForma.descripcion);  
             this.updateDataForm.patchValue(this.config.data);
+            console.log(this.selectedForma);
             this.updateDataForm.patchValue({unidad_id: this.selectedForma.id });
             this.updateDataForm.patchValue({unidad_descripcion: this.selectedForma.descripcion });
             console.log(this.updateDataForm.value);
             }
-            
-      
+
         },
         error => { // error path
             console.log(error);
-            
-            this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-         });    
+
+            this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+         });
     } catch (error) {
-      this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-    }  
+      this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+    }
 }
 
 
   guardarDatos(){
 
-    
-    
-    if(this.es_nuevo){
-      this.loading = true;  
+
+    if (this.es_nuevo) {
+      this.loading = true;
       try {
 
-        this.articuloService.setArticulo(this.updateDataForm.value)   
+        this.articuloService.setArticulo(this.updateDataForm.value)
         .subscribe(resp => {
-         
+
             this.loading = false;
             console.log(resp);
             this.ref.close();
         },
         error => { // error path
-            console.log(error);
-            
-            this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-         });    
-    } catch (error) {
-      this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-    }  
-    }else{
+          console.log(error);
+
+          this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+       });
+  } catch (error) {
+    this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+  }
+    } else {
 
       console.log(this.updateDataForm.value['id']);
       this.updateDataForm.patchValue({unidad_id: this.selectedForma.id });
       this.updateDataForm.patchValue({unidad_descripcion: this.selectedForma.descripcion });
       console.log(this.updateDataForm);
       try {
-        this.articuloService.updateArticulo(this.updateDataForm.value, this.updateDataForm.value['id'])   
+        this.articuloService.updateArticulo(this.updateDataForm.value, this.updateDataForm.value['id'])
         .subscribe(resp => {
-         
+
           this.loading = false;
           console.log(resp);
           this.ref.close();
         },
         error => { // error path
-            console.log(error);
-            
-            this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-         });    
-    } catch (error) {
-      this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-    }  
+          console.log(error);
+
+          this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+       });
+  } catch (error) {
+    this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+  }
     }
   }
 

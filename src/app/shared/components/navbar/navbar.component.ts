@@ -354,16 +354,16 @@ menuList(){
 
     {
 
-      label: 'Producción', 
-      visible:!this.gestion_produccion,
+      label: 'Producción',
+      visible: !this.gestion_produccion,
       items: [
-        {label: 'Indicadores de producción',visible:!this.gestion_produccion, routerLink: '/produccion/indicadores'},
+        {label: 'Orden de producción', visible: !this.gestion_produccion, routerLink: '/produccion/orden'},
         {
             label: 'Producción',
-            visible:!this.administracion_produccion,
+            visible: !this.administracion_produccion,
             items: [
-              {label: 'Alta orden de producción', routerLink: 'orden/produccion/ingreso'},
-              {label: 'Estado orden de producción', routerLink: 'orden/produccion/estado'},
+              {label: 'Proceso de producción', routerLink: 'orden/produccion/ingreso'},
+              {label: 'Estado orden de producción', routerLink: '/produccion/orden/estado'},
             ]
         },
         {
@@ -412,7 +412,9 @@ menuList(){
             items: [
               {label: 'Articulo', routerLink: 'mantenimiento/articulo'},
               {label: 'Insumo', routerLink: 'mantenimiento/insumo'},
-              {label: 'Articulo confección', routerLink: 'mantenimiento/articulo/confeccion'},
+              {label: 'Armado de producto', routerLink: 'mantenimiento/articulo/confeccion'},
+              {label: 'Unidad', routerLink: 'mantenimiento/unidad'},
+              {label: 'Sector', routerLink: 'mantenimiento/sector'},
             ]
         },
         {

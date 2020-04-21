@@ -1,6 +1,9 @@
 <div class="d-flex justify-content-center mt-3">
   <label>CONFIGURACION DE INSUMOS</label>
 </div>
+<div class="card-rounded card-header">
+  <div class="ml-2">   <a  (click)="nuevo()" class="icon-hover  icon-color-success"> <i class="fas fa-plus fa-lg mr-2"></i>Insumo</a>    </div> 
+</div>
   <div class="row m-3">
     <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"  [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
     scrollHeight="500px" [scrollable]="true"    >
@@ -8,12 +11,10 @@
     <ng-template pTemplate="caption">
       <div class=" row">
           <div class="col-4" style="text-align: left" >
-            <button class="btn btn-success"  (click)="nuevo()">Nuevo insumo</button>  
+        
           </div>
         
         <div class="col-8 mt-2" style="text-align: right">     
-          
-            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
             <input   size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
         </div>
       </div>
@@ -46,7 +47,7 @@
               <td style="width: 30%">{{elementos.unidad_descripcion}}</td>
                           
               <td style="width: 20%">
-                      <button class="btn btn-success btn-sm" (click)="buscar(elementos)">Editar</button>
+                <a  (click)="buscar(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>     
                         </td>
             </tr>
         </ng-template>

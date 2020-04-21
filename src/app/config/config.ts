@@ -18,7 +18,6 @@ export const URL_ARCHIVO = 'http://localhost/api-calidad/public/';
 //export const config: SocketIoConfig = { url: 'http://clinicaz.com.ar:4444', options: {} };
 //export const URL_ARCHIVO = 'http://clinicaz.com.ar/graziani/api-calidad/public/';
 
-export const VAPID_PUBLIC ='BNOJyTgwrEwK9lbetRcougxkRgLpPs1DX0YCfA5ZzXu4z9p_Et5EnvMja7MGfCqyFCY4FnFnJVICM4bMUcnrxWg'; // SIN USO
 
 
 //export const URL_SERVICIOS = 'http://192.168.1.7/api-vision/public/api/'

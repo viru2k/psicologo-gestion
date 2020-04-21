@@ -24,11 +24,11 @@ export class ArticuloComponent implements OnInit {
     
       { field: 'descripcion', header: 'Articulo',  width: '40%' },
       { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
-      { field: 'botellas', header: 'botellas',  width: '10%' },
-      { field: 'pisos', header: 'Pisos',  width: '10%' },
-      { field: 'pack', header: 'Pack',  width: '10%' },
-      { field: 'litros', header: 'Litros',  width: '10%' },
-      { field: '', header: 'Acción',  width: '15%' },
+      { field: 'unidades', header: 'Unidades',  width: '10%' },
+      { field: 'pallet_pisos', header: 'Pisos',  width: '10%' },
+      { field: 'pallet_pack', header: 'Pack',  width: '10%' },
+      { field: 'volumen', header: 'Volumen',  width: '10%' },
+      { field: '', header: '',  width: '6%' },
       
    ];     
   }
@@ -39,53 +39,49 @@ export class ArticuloComponent implements OnInit {
   }
 
 
-  
-  loadlist(){
+  loadlist() {
 
-    this.loading = true;  
+    this.loading = true;
     try {
-        this.articuloService.getArticulo()   
+        this.articuloService.getArticulo()
         .subscribe(resp => {
           if (resp[0]) {
             this.elementos = resp;
             console.log(this.elementos);
               }else{
-                this.elementos =null;
+                this.elementos = null;
               }
-            this.loading = false;
-            console.log(resp);
+          this.loading = false;
+          console.log(resp);
         },
         error => { // error path
             console.log(error);
-            
-            this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-         });    
+            this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+         });
     } catch (error) {
-      this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-    }  
+      this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+    }
 }
 
-buscar(elemento:any){
+buscar(elemento: any) {
   console.log(elemento);
-  let data:any; 
- data = elemento;
+  let data: any; 
+  data = elemento;
   const ref = this.dialogService.open(ArticuloEditarComponent, {
   data,
-   header: 'Editar artículo', 
+   header: 'Editar artículo',
    width: '98%',
    height: '90%'
   });
 
-  ref.onClose.subscribe((ArticuloEditarComponent:any) => {
- 
-        this.loadlist()        ;             
- 
+  ref.onClose.subscribe(() => {
+        this.loadlist();
   });
 
 }
 
 
-nuevo(){
+nuevo() {
   
   let data:any; 
  

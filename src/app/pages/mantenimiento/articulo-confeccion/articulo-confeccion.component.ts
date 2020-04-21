@@ -61,7 +61,7 @@ export class ArticuloConfeccionComponent implements OnInit {
           if (resp[0]) {
             this.elementos = resp;
             console.log(this.elementos);
-              }else{
+              } else {
                 this.elementos =null;
               }
           this.loading = false;
@@ -69,7 +69,7 @@ export class ArticuloConfeccionComponent implements OnInit {
         },
         error => { // error path
             console.log(error);
-            
+            this.loading =false;
             this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
          });    
     } catch (error) {
@@ -80,22 +80,21 @@ export class ArticuloConfeccionComponent implements OnInit {
 
 loadlistConfeccion(_elemento:any){
   this.elemento = _elemento;
-  this.loading = true;  
+  this.loading = true;
+  console.log(_elemento);
   try {
-      this.articuloService.getArticuloConfeccionByArticuloId(_elemento['id'])   
+      this.articuloService.getArticuloConfeccionByArticuloId(_elemento.id)
       .subscribe(resp => {
-       
           this.elementosConfeccion = resp;
           console.log(this.elementosConfeccion);
-         
           this.loading = false;
           console.log(resp);
       },
       error => { // error path
           console.log(error);
-          
+          this.loading =false;
           this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-       });    
+       });
   } catch (error) {
     this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
   }  
