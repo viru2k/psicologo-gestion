@@ -7,35 +7,38 @@ import { ArticuloEditarComponent } from './../articulo-editar/articulo-editar.co
 @Component({
   selector: 'app-articulo',
   templateUrl: './articulo.component.html',
-  styleUrls: ['./articulo.component.scss'], 
-  providers: [MessageService,DialogService]
+  styleUrls: ['./articulo.component.scss'],
+  providers: [MessageService, DialogService]
 })
 export class ArticuloComponent implements OnInit {
 
   cols: any[];
   columns: any[];
-  elementos:any[];
-  selecteditems:any;
+  elementos: any[];
+  selecteditems: any;
   loading;
+  userData: any;
 
-  constructor(private alertServiceService: AlertServiceService, private articuloService: ArticuloService, public dialogService: DialogService, private messageService: MessageService) { 
+  // tslint:disable-next-line: max-line-length
+  constructor(private alertServiceService: AlertServiceService, private articuloService: ArticuloService, public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [
-    
-      { field: 'descripcion', header: 'Articulo',  width: '40%' },
-      { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
-      { field: 'unidades', header: 'Unidades',  width: '10%' },
-      { field: 'pallet_pisos', header: 'Pisos',  width: '10%' },
-      { field: 'pallet_pack', header: 'Pack',  width: '10%' },
-      { field: 'volumen', header: 'Volumen',  width: '10%' },
+      { field: 'nombre', header: 'Articulo',  width: '30%' },
+      { field: 'descripcion', header: 'Descripción',  width: '35%' },
+      { field: 'unidad_descripcion', header: 'Unidad',  width: '25%' },
+      { field: 'unidades', header: 'Unidades',  width: '8%' },
+      { field: 'pallet_pisos', header: 'Pisos',  width: '8%' },
+      { field: 'pallet_pack', header: 'Pack',  width: '8%' },
+      { field: 'volumen', header: 'Volumen',  width: '8%' },
       { field: '', header: '',  width: '6%' },
-      
-   ];     
+
+   ];
   }
 
   ngOnInit() {
+   this.userData = JSON.parse(localStorage.getItem('userData'));
    // this.alertServiceService.throwAlert('success','Articulo guardado','','201');
-    this.loadlist();
+   this.loadlist();
   }
 
 
@@ -48,7 +51,7 @@ export class ArticuloComponent implements OnInit {
           if (resp[0]) {
             this.elementos = resp;
             console.log(this.elementos);
-              }else{
+              } else {
                 this.elementos = null;
               }
           this.loading = false;
@@ -65,7 +68,7 @@ export class ArticuloComponent implements OnInit {
 
 buscar(elemento: any) {
   console.log(elemento);
-  let data: any; 
+  let data: any;
   data = elemento;
   const ref = this.dialogService.open(ArticuloEditarComponent, {
   data,
@@ -82,23 +85,16 @@ buscar(elemento: any) {
 
 
 nuevo() {
-  
-  let data:any; 
- 
+  const data: any = null;
   const ref = this.dialogService.open(ArticuloEditarComponent, {
   data,
-   header: 'Editar artículo', 
+   header: 'Editar artículo',
    width: '98%',
    height: '90%'
   });
-
-  ref.onClose.subscribe((ArticuloEditarComponent:any) => {
-    
-     
-        this.loadlist()                     ;
-      
+  ref.onClose.subscribe(() => {
+        this.loadlist();
   });
-
 }
 
 }

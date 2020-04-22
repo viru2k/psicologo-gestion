@@ -11,22 +11,21 @@ import { InsumoService } from './../../../../services/insumo.service';
 })
 export class PopupInsumoConsultaComponent implements OnInit {
 
-  
+
   cols: any[];
   columns: any[];
-  elementos:any[];
-  selecteditems:any;
+  elementos: any[];
+  selecteditems: any;
   loading;
 
-  constructor(private alertServiceService: AlertServiceService, private insumoService: InsumoService, public ref: DynamicDialogRef) { 
+  constructor(private alertServiceService: AlertServiceService, private insumoService: InsumoService, public ref: DynamicDialogRef) {
 
     this.cols = [
-    
-      { field: 'descripcion', header: 'Insumo',  width: '50%' },
-      { field: 'unidad_descripcion', header: 'Unidad',  width: '30%' },
-      { field: '', header: 'Acción',  width: '20%' },
-      
-   ]; 
+      { field: 'nombre', header: 'Insumo',  width: '30%' },
+      { field: 'descripcion', header: 'Descripción',  width: '40%' },
+      { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
+      { field: '', header: '',  width: '10%' }
+   ];
   }
 
   ngOnInit() {
@@ -34,34 +33,32 @@ export class PopupInsumoConsultaComponent implements OnInit {
     this.loadlist();
   }
 
+  loadlist() {
 
-  
-  loadlist(){
-
-    this.loading = true;  
+    this.loading = true;
     try {
-        this.insumoService.getInsumo()   
+        this.insumoService.getInsumo()
         .subscribe(resp => {
           if (resp[0]) {
             this.elementos = resp;
             console.log(this.elementos);
-              }else{
-                this.elementos =null;
+              } else {
+                this.elementos = null;
               }
-            this.loading = false;
-            console.log(resp);
+          this.loading = false;
+          console.log(resp);
         },
         error => { // error path
-            console.log(error);
-            
-            this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-         });    
+          console.log(error);
+          this.loading = false;
+          this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+       });
     } catch (error) {
-      this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-    }  
+      this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+    }
 }
 
-guardar(elemento){
+guardar(elemento) {
   this.ref.close(elemento);
 }
 

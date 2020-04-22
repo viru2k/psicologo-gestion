@@ -17,6 +17,8 @@ export class ArticuloEditarComponent implements OnInit {
   loading;
   selectedItem: any;
   selectedForma: any;
+  userData: any;
+
   // tslint:disable-next-line: max-line-length
   constructor(public config: DynamicDialogConfig, private articuloService: ArticuloService, private alertServiceService: AlertServiceService, public ref: DynamicDialogRef) {
     this.updateDataForm = new FormGroup({
@@ -28,11 +30,13 @@ export class ArticuloEditarComponent implements OnInit {
       'pallet_pisos': new FormControl('1'),
       'pallet_pack': new FormControl('1'),
       'volumen': new FormControl('1'),
-      'id': new FormControl('')
+      'id': new FormControl(''),
+      'usuario_modifica_id': new FormControl('1')
   });
   }
 
   ngOnInit() {
+    this.userData = JSON.parse(localStorage.getItem('userData'));
     console.log(this.config.data);
     if (this.config.data) {
       console.log('es editable');
@@ -80,7 +84,7 @@ export class ArticuloEditarComponent implements OnInit {
 
   guardarDatos(){
 
-
+    this.updateDataForm.patchValue({usuario_modifica_id: this.userData.id});
     if (this.es_nuevo) {
       this.loading = true;
       try {

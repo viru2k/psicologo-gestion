@@ -8,25 +8,25 @@ import { InsumoEditarComponent } from './../insumo-editar/insumo-editar.componen
 @Component({
   selector: 'app-insumo',
   templateUrl: './insumo.component.html',
-  styleUrls: ['./insumo.component.scss'], 
-  providers: [MessageService,DialogService]
+  styleUrls: ['./insumo.component.scss'],
+  providers: [MessageService, DialogService]
 })
 export class InsumoComponent implements OnInit {
 
   cols: any[];
   columns: any[];
-  elementos:any[];
-  selecteditems:any;
+  elementos: any[];
+  selecteditems: any;
   loading;
 
-  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) { 
+  // tslint:disable-next-line: max-line-length
+  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [
-    
-      { field: 'descripcion', header: 'Insumo',  width: '50%' },
-      { field: 'unidad_descripcion', header: 'Unidad',  width: '30%' },
-      { field: '', header: 'Acción',  width: '20%' },
-      
+      { field: 'nombre', header: 'Insumo',  width: '30%' },
+      { field: 'descripcion', header: 'Descripción',  width: '40%' },
+      { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
+      { field: '', header: '',  width: '10%' }
    ];
   }
 
@@ -35,67 +35,61 @@ export class InsumoComponent implements OnInit {
     this.loadlist();
   }
 
-  loadlist(){
+  loadlist() {
 
-    this.loading = true;  
+    this.loading = true;
     try {
-        this.insumoService.getInsumo()   
+        this.insumoService.getInsumo()
         .subscribe(resp => {
           if (resp[0]) {
             this.elementos = resp;
             console.log(this.elementos);
-              }else{
-                this.elementos =null;
+              } else {
+                this.elementos = null;
               }
-            this.loading = false;
-            console.log(resp);
+          this.loading = false;
+          console.log(resp);
         },
         error => { // error path
-            console.log(error);
-            
-            this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-         });    
-    } catch (error) {
-      this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-    }  
+          console.log(error);
+          this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+       });
+  } catch (error) {
+    this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+  }
 }
 
-buscar(elemento:any){
+buscar(elemento: any) {
   console.log(elemento);
-  let data:any; 
- data = elemento;
+  let data: any;
+  data = elemento;
   const ref = this.dialogService.open(InsumoEditarComponent, {
   data,
-   header: 'Editar insumo', 
+   header: 'Editar insumo',
    width: '98%',
    height: '90%'
   });
 
-  ref.onClose.subscribe((ArticuloEditarComponent:any) => {
- 
+  ref.onClose.subscribe((ArticuloEditarComponent: any) => {
         this.loadlist();
- 
   });
 
 }
 
 
-nuevo(){
-  
-  let data:any; 
- 
+nuevo() {
+
+  const data: any = null;
   const ref = this.dialogService.open(InsumoEditarComponent, {
   data,
-   header: 'Editar insumo', 
+   header: 'Editar insumo',
    width: '98%',
    height: '90%'
   });
 
-  ref.onClose.subscribe((ArticuloEditarComponent:any) => {
-    
-     
-        this.loadlist()                     ;
-      
+  ref.onClose.subscribe((ArticuloEditarComponent: any) => {
+
+        this.loadlist();
   });
 
 }

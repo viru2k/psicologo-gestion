@@ -118,6 +118,10 @@ import { PopupCalculdorPalletsComponent } from './shared/components/popups/popup
 // tslint:disable-next-line: max-line-length
 import { PopupOrdenPedidoDetalleComponent } from './pages/produccion/orden-pedido/popup-orden-pedido-detalle/popup-orden-pedido-detalle.component';
 import { ParametrosComponent } from './pages/mantenimiento/produccion/parametros/parametros.component';
+import { OrdenProduccionComponent } from './pages/produccion/orden-produccion/orden-produccion.component';
+import { ProduccionProcesoComponent } from './pages/produccion/produccion-proceso/produccion-proceso.component';
+import { PopupArticuloConfeccionInsumoComponent } from './pages/mantenimiento/articulo-confeccion/popup-articulo-confeccion-insumo/popup-articulo-confeccion-insumo.component';
+import { PopupInsumoAsociarArticuloComponent } from './pages/mantenimiento/articulo-confeccion/popup-articulo-confeccion-insumo/popup-insumo-asociar-articulo/popup-insumo-asociar-articulo.component';
 
 @NgModule({
   declarations: [
@@ -161,7 +165,11 @@ import { ParametrosComponent } from './pages/mantenimiento/produccion/parametros
     AsociarInsumoAltaComponent,
     PopupCalculdorPalletsComponent,
     PopupOrdenPedidoDetalleComponent,
-    ParametrosComponent
+    ParametrosComponent,
+    OrdenProduccionComponent,
+    ProduccionProcesoComponent,
+    PopupArticuloConfeccionInsumoComponent,
+    PopupInsumoAsociarArticuloComponent
   ],
   imports: [
 
@@ -216,6 +224,8 @@ import { ParametrosComponent } from './pages/mantenimiento/produccion/parametros
      AsociarInsumoComponent,
      AsociarInsumoAltaComponent,
      PopupOrdenPedidoDetalleComponent,
+     PopupArticuloConfeccionInsumoComponent,
+     PopupInsumoAsociarArticuloComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             POPUPS COMPARTIDOS                             */

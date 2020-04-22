@@ -1,5 +1,6 @@
-<div class="d-flex justify-content-center mt-3">
-  <label>CONFIGURACION DE INSUMOS</label>
+
+<div class=" faq-title text-center pb-3 pt-2 ">
+  <h5>CONFIGURACION DE INSUMOS</h5>
 </div>
 <div class="card-rounded card-header">
   <div class="ml-2">   <a  (click)="nuevo()" class="icon-hover  icon-color-success"> <i class="fas fa-plus fa-lg mr-2"></i>Insumo</a>    </div> 
@@ -32,8 +33,9 @@
                         </tr> 
                         <tr>
                         <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                          
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                         </th>
                         <th></th>
                     </tr>
@@ -42,13 +44,12 @@
         <ng-template pTemplate="body" let-elementos  >
             <tr style="height:20px"  >
                    
-                   
-              <td style="width: 50%">{{elementos.descripcion}}</td>
-              <td style="width: 30%">{{elementos.unidad_descripcion}}</td>
-                          
-              <td style="width: 20%">
+              <td style="width: 30%">{{elementos.nombre}}</td>     
+              <td style="width: 40%">{{elementos.descripcion}}</td>
+              <td style="width: 20%">{{elementos.unidad_descripcion}}</td>
+              <td style="width: 10%">
                 <a  (click)="buscar(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>     
-                        </td>
+              </td>
             </tr>
         </ng-template>
        

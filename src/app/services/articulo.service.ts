@@ -5,7 +5,7 @@ import { URL_SERVICIOS, PARAMS } from '../config/config';
   providedIn: 'root'
 })
 export class ArticuloService {
-  private url:string  = URL_SERVICIOS;
+  private url: string  = URL_SERVICIOS;
   constructor(public http: HttpClient) { }
 
   getArticulo(){
@@ -13,28 +13,31 @@ export class ArticuloService {
     }
 
     getArticuloConfeccionByArticuloId(articulo_id: string){
-    return this.http.get<any[]>(this.url+'articulo/confeccion?articulo_id='+articulo_id);
+    return this.http.get<any[]>(this.url+'produccion/producto/confeccion?articulo_id=' + articulo_id);
     }
-    
+
     setArticuloConfeccion(articulo: any){
-      return this.http.post<any[]>(this.url+'articulo/confeccion', articulo);
-      }  
-    
-     setArticulo(articulo: any){
-      return this.http.post<any[]>(this.url+'articulos', articulo);
-      }  
-  
-
-  updateArticulo( articulo: any,id: string){
-    return this.http.put<any[]>(this.url+'articulos/'+id, articulo);
-    }  
-
-
-    getUnidad(){
-      return this.http.get<any[]>(this.url+'unidad');
+      return this.http.post<any[]>(this.url + 'produccion/producto/confeccion', articulo);
       }
 
-      delArticuloProduccion(id: string){        
-        return this.http.get<any>(this.url+'articulos/confeccion/borrar?id='+id);
-        }  
+      
+      updateStockArmadoProducto(articulo: any){
+      return this.http.put<any>(this.url + 'produccion/producto/confeccion/'+articulo.id, articulo);
+      }
+      
+     setArticulo(articulo: any){
+      return this.http.post<any[]>(this.url + 'articulos', articulo);
+      }
+
+  updateArticulo( articulo: any,id: string){
+    return this.http.put<any[]>(this.url + 'articulos/' + id, articulo);
+    }
+
+    getUnidad(){
+      return this.http.get<any[]>(this.url + 'unidad');
+      }
+
+      delArticuloProduccion(id: string){
+        return this.http.get<any>(this.url + 'produccion/confeccion/borrar?id=' + id);
+        }
 }
