@@ -4,7 +4,7 @@ import { ArticuloService } from './../../../services/articulo.service';
 import { MessageService, DialogService } from 'primeng/api';
 
 import { ProduccionService } from './../../../services/produccion.service';
-import { OrdenProduccion } from 'src/app/models/orden-pedido.model';
+
 
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { Produccion } from 'src/app/models/produccion.model';
@@ -13,6 +13,7 @@ import { AsociarInsumoDetalleComponent } from './../popups/popup/asociar-insumo-
 import { AsociarProduccionComponent } from './../popups/popup/asociar-produccion/asociar-produccion.component';
 import { AsociarProduccionDetalleComponent } from './../popups/popup/asociar-produccion-detalle/asociar-produccion-detalle.component';
 import { PopupCalculdorPalletsComponent } from '../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
+import { OrdenProduccion } from './../../../models/orden-produccion.model';
 
 
 @Component({

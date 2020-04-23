@@ -440,116 +440,7 @@ hr.rulerStyleShadow {
 } 
 
 /***************************ESTADO ATENCION ************************/ 
-.es-pendiente {
-    background-color: #FFF9C4!important;
-    color: #757575   !important;
-} 
 
-
-
-.es-llamando {
-    background-color: #F18829 !important;
-    color: #FFFFFF !important;
-}
-
-
-//ETIQUETAS DE AGENDA
-
-.es-atendido {
-    background-color: #D0E6A5  !important;
-    color: #616161 !important;
-}
-
-.es-ausente {
-    background-color: rgb(250, 250, 250) !important;
-    color: #FFFFFF !important;
-}
-
-.es-ingresado {
-    background-color: #01579B !important;
-    color: #FFFFFF !important;
-}
-
-.es-espera {
-    background-color: #CCABD8 !important;
-    color: #FFFFFF !important;
-}
-
-.es-presente {
-    background-color: #FFD54F !important;
-    color: #757575 !important;
-}
-
-.es-habilitado {
-    background-color: rgb(224, 245, 199) !important;
-    color: #37474F !important;
-}
-
-.es-cancelado {
-    background-color: rgb(131, 131, 131) !important;
-    color: #e7e7e7 !important;
-}
-
-.es-sobreturno {
-    background-color: #D01C20 !important;
-    color: #FFFFFF !important;
-}
-
-.es-turno {
-    background-color: #78AEB7 !important;
-    color: #FFFFFF !important;
-}
-
-.es-derivado {
-    background-color: #78AEB7 !important;
-    color: #FFFFFF !important;
-}
-
-.es-asesoramiento {
-    background-color: #5D6D7E !important;
-    color: #FFFFFF !important;
-}
-
-
-.texto-info {
-    color:  #01579B!important;
-}
-
-.texto-success {
-    color:  #43A047!important;
-}
-
-
-
-
-.es-deshabilitado {
-    background-color: rgb(250, 173, 173) !important;
-    color: #757575 !important;
-}
-
-.es-efectivo {
-    color: rgb(85, 139, 47) !important;
-    font-weight: bold !important;
-}
-
-.es-transferencia {
-    color: rgb(183, 28, 28) !important;
-}
-
-.es-tarjeta-debito {
-    color: rgb(245, 127, 23) !important;
-    font-weight: bold !important;
-}
-
-.es-tarjeta-credito {
-    color: rgb(245, 127, 23) !important;
-    font-weight: bold !important;
-}
-
-.es-sobreturno-texto{
-   color: #B71C1C !important;
-   font-weight: bold !important;
-}
 
 /************ CURSORES ***********************/
 
@@ -1165,3 +1056,41 @@ body {
     margin-bottom: 0.35rem;
   }
   
+
+
+/* -------------------------------------------------------------------------- */
+/*                       TAGS PARA RENGLONES DE GRILLAS   SEGUN ESTADO        */
+/* -------------------------------------------------------------------------- */
+
+
+.es-activo {
+    //border-style: solid;
+  // border-color: #81C784 !important;
+    background-color: #81C784 !important;
+    color: #FFFFFF !important;
+}
+
+.es-pausado {    
+   // border-color: #FFA000 !important;
+    background-color: #FFA000 !important;
+    //color: #616161 !important;
+    color: #FFFFFF !important;
+}
+
+.es-cancelado { 
+  //  border-color: #FF5733 !important;
+    background-color: #FF5733 !important;
+    color: #FFFFFF !important;
+    
+    
+}
+
+.es-finalizado {
+    background-color: #78AEB7 !important;
+    color: #FFFFFF !important;
+}
+
+
+
+
+//[ngClass]="colorEsSobreturno(agendaTurno.es_sobreturno,agendaTurno.estado)"

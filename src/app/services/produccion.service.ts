@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS, PARAMS } from '../config/config';
-
-import { OrdenProduccion } from './../models/orden-pedido.model';
+import { OrdenProduccion } from './../models/orden-produccion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -61,14 +60,16 @@ export class ProduccionService {
       return this.http.get<any[]>(this.url+'produccion/asociar/orden/produccion/articulo/todos?id='+id);
     }
 
-    getInsumosByArticuloId(id: string){
-      return this.http.get<any[]>(this.url+'produccion/articulo/insumo?articulo_id='+id);
+    getInsumosByArticuloId(id: string) {
+      return this.http.get<any[]>(this.url + 'produccion/articulo/insumo?articulo_id=' + id);
     }
 
     getSector(){
-      return this.http.get<any[]>(this.url+'produccion/sector/carga');
+      return this.http.get<any[]>(this.url + 'produccion/sector/carga');
     }
-  
-    
+    produccionDetalleByProduccionId(produccion_id: string) {
+      return this.http.get<any[]>(this.url + 'produccion/detalle/by/produccion/id?produccion_id=' + produccion_id);
+    }
+
 
 }

@@ -102,6 +102,7 @@ editarInsumo(res: any) {
    height: '90%'
   });
 
+  // tslint:disable-next-line: no-shadowed-variable
   ref.onClose.subscribe((PopupInsumoAsociarArticuloComponent: any) => {
     if (PopupInsumoAsociarArticuloComponent) {
     this.loadlistConfeccion(this.config.data);

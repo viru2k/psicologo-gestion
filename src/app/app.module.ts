@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector,LOCALE_ID, } from '@angular/core';
+import { NgModule, Injector, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData, LocationStrategy, HashLocationStrategy, CurrencyPipe, DecimalPipe } from '@angular/common';
-import { HTTP_INTERCEPTORS,HttpClientModule  } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule  } from '@angular/common/http';
 
 /* -------------------------------------------------------------------------- */
 /*                                  SERVICIOS                                 */
@@ -37,15 +37,16 @@ import {MenuModule} from 'primeng/menu';
 import {SpinnerModule} from 'primeng/spinner';
 import {ToastModule} from 'primeng/toast';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { DynamicDialogModule } from "primeng/dynamicdialog";
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import {ListboxModule} from 'primeng/listbox';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-import {MenuItem, MessageService,DialogService,SelectItem} from 'primeng/api';
+import {MenuItem, MessageService, DialogService, SelectItem} from 'primeng/api';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {PanelModule} from 'primeng/panel';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-registerLocaleData(localeEsAR, 'es-Ar');
+import {InputSwitchModule} from 'primeng/inputswitch';
+
 
 
 
@@ -56,7 +57,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
 /* -------------------------------------------------------------------------- */
 
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
-import { AutofocusModule } from 'angular-autofocus-fix'; 
+import { AutofocusModule } from 'angular-autofocus-fix';
 import localeEsAR from '@angular/common/locales/es-AR';
 import { PivotViewModule } from '@syncfusion/ej2-angular-pivotview';
 
@@ -120,8 +121,16 @@ import { PopupOrdenPedidoDetalleComponent } from './pages/produccion/orden-pedid
 import { ParametrosComponent } from './pages/mantenimiento/produccion/parametros/parametros.component';
 import { OrdenProduccionComponent } from './pages/produccion/orden-produccion/orden-produccion.component';
 import { ProduccionProcesoComponent } from './pages/produccion/produccion-proceso/produccion-proceso.component';
+// tslint:disable-next-line: max-line-length
 import { PopupArticuloConfeccionInsumoComponent } from './pages/mantenimiento/articulo-confeccion/popup-articulo-confeccion-insumo/popup-articulo-confeccion-insumo.component';
+// tslint:disable-next-line: max-line-length
 import { PopupInsumoAsociarArticuloComponent } from './pages/mantenimiento/articulo-confeccion/popup-articulo-confeccion-insumo/popup-insumo-asociar-articulo/popup-insumo-asociar-articulo.component';
+// tslint:disable-next-line: max-line-length
+import { PopOrdenProduccionEditarComponent } from './pages/produccion/orden-produccion/pop-orden-produccion-editar/pop-orden-produccion-editar.component';
+// tslint:disable-next-line: max-line-length
+import { PopUpOrdenProduccionDetalleEditarComponent } from './pages/produccion/orden-produccion/pop-up-orden-produccion-detalle-editar/pop-up-orden-produccion-detalle-editar.component';
+
+registerLocaleData(localeEsAR, 'es-Ar');
 
 @NgModule({
   declarations: [
@@ -169,7 +178,9 @@ import { PopupInsumoAsociarArticuloComponent } from './pages/mantenimiento/artic
     OrdenProduccionComponent,
     ProduccionProcesoComponent,
     PopupArticuloConfeccionInsumoComponent,
-    PopupInsumoAsociarArticuloComponent
+    PopupInsumoAsociarArticuloComponent,
+    PopOrdenProduccionEditarComponent,
+    PopUpOrdenProduccionDetalleEditarComponent
   ],
   imports: [
 
@@ -198,6 +209,7 @@ import { PopupInsumoAsociarArticuloComponent } from './pages/mantenimiento/artic
     InputTextareaModule,
     ScrollPanelModule,
     ProgressSpinnerModule,
+    InputSwitchModule,
     PanelModule,
     AutoCompleteModule,
     PivotViewModule ,
@@ -205,7 +217,7 @@ import { PopupInsumoAsociarArticuloComponent } from './pages/mantenimiento/artic
     AutofocusModule,
     NgxPopper,
     AppRoutingModule
-    
+
   ],
   entryComponents: [ArticuloEditarComponent,
      ArticuloConfeccionEditarComponent,
@@ -226,6 +238,8 @@ import { PopupInsumoAsociarArticuloComponent } from './pages/mantenimiento/artic
      PopupOrdenPedidoDetalleComponent,
      PopupArticuloConfeccionInsumoComponent,
      PopupInsumoAsociarArticuloComponent,
+     PopOrdenProduccionEditarComponent,
+     PopUpOrdenProduccionDetalleEditarComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             POPUPS COMPARTIDOS                             */
@@ -234,10 +248,10 @@ import { PopupInsumoAsociarArticuloComponent } from './pages/mantenimiento/artic
     PopupInsumoConsultaComponent,
     PopupArticuloDistribucionConsultaComponent,
     PopupUsuarioComponent,
-    PopupCalculdorPalletsComponent 
+    PopupCalculdorPalletsComponent
     ],
   providers: [CurrencyPipe, DecimalPipe,
-    PushNotificationService, ExcelService,{ provide: LOCALE_ID, useValue: 'es-Ar' },
+    PushNotificationService, ExcelService, { provide: LOCALE_ID, useValue: 'es-Ar' },
  {
   provide: HTTP_INTERCEPTORS,
   useFactory: function(injector: Injector) {

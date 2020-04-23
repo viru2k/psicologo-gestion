@@ -4,10 +4,10 @@ import { ArticuloService } from './../../../services/articulo.service';
 import { MessageService, DialogService } from 'primeng/api';
 import { calendarioIdioma } from './../../../config/config';
 import { ProduccionService } from './../../../services/produccion.service';
-import { OrdenProduccion } from 'src/app/models/orden-pedido.model';
 import { formatDate} from '@angular/common';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { PopupOrdenPedidoDetalleComponent } from './popup-orden-pedido-detalle/popup-orden-pedido-detalle.component';
+import { OrdenProduccion } from './../../../models/orden-produccion.model';
 
 @Component({
   selector: 'app-orden-pedido',

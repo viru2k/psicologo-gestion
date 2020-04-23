@@ -4,9 +4,9 @@ import { ArticuloService } from './../../../services/articulo.service';
 import { MessageService, DialogService } from 'primeng/api';
 import { calendarioIdioma } from './../../../config/config';
 import { ProduccionService } from './../../../services/produccion.service';
-import { OrdenProduccion } from 'src/app/models/orden-pedido.model';
 import { formatDate} from '@angular/common';
 import { PopupCalculdorPalletsComponent } from './../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
+import { OrdenProduccion } from './../../../models/orden-produccion.model';
 
 @Component({
   selector: 'app-orden-pedido-ingreso',
@@ -102,7 +102,7 @@ nuevo(){
      
       let userData = JSON.parse(localStorage.getItem('userData'));
       this._fecha = formatDate(this.fecha, 'yyyy-MM-dd HH:mm', 'en');
-      this.orden_pedido = new OrdenProduccion('',this._fecha,userData['id'], this.selecteditems);
+      this.orden_pedido = new OrdenProduccion('','','1','','', [],'','');
       console.log(this.orden_pedido);
       this.produccionService.setOrdenProduccion(this.orden_pedido)
       .subscribe(resp => {

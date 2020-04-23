@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdenProduccion } from '../../../../../models/orden-pedido.model';
+
 import { Produccion } from 'src/app/models/produccion.model';
 import { calendarioIdioma } from './../../../../../config/config';
 import { DynamicDialogConfig, DynamicDialogRef, DialogService, MessageService } from 'primeng/api';
@@ -7,6 +7,7 @@ import { AlertServiceService } from './../../../../../services/alert-service.ser
 import { formatDate} from '@angular/common';
 import { ProduccionService } from './../../../../../services/produccion.service';
 import { PopupCalculdorPalletsComponent } from './../../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
+import { OrdenProduccion } from './../../../../../models/orden-produccion.model';
 
 
 /* -------------------------------------------------------------------------- */

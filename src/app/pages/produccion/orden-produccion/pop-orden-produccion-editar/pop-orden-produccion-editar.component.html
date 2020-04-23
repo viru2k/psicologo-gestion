@@ -1,0 +1,105 @@
+<div class=" faq-title text-center pb-3 pt-2 ">
+    <h5>ASOCIAR PRODUCTOS A PRODUCCION</h5>
+  </div>
+  <div class="card-rounded card-header">
+    <div class="ml-2 row d-flex justify-content-between">  
+        <div class="d-flex justify-content-start">
+            <a  (click)="nuevo()" *ngIf = "!editar" class="icon-hover  icon-color-success mt-1 text-md"> <i class="fas fa-check fa-lg mr-2 mt-1"></i>CREAR PRODUCCION</a>
+        </div>
+        <div class="d-flex justify-content-center">
+            <label class="mt-2 ml-1 mr-1">Producción</label>
+            <p-calendar [(ngModel)]="fecha_creacion"  (onSelect)="actualizarFecha($event)" [disabled] = "editar" tabindex="0"  [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true">              
+            </p-calendar> 
+        </div>
+    
+        <div class="d-flex justify-content-end">
+            <label class="mt-2 ml-1 mr-1">Periodo Desde</label>
+            <p-calendar [(ngModel)]="fecha_desde"  (onSelect)="actualizarFecha($event)" [disabled] = "editar" tabindex="0"  [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true">              
+            </p-calendar>
+            <label class="mt-2 ml-1 mr-1">hasta</label>
+            <p-calendar [(ngModel)]="fecha_hasta"  (onSelect)="actualizarFecha($event)" [disabled] = "editar" tabindex="0"  [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true" class="ml-2">              
+            </p-calendar>
+        </div>
+     </div>
+  </div>
+  <div class="card-rounded card-header">
+    <div class="ml-2 row d-flex justify-content-between">  
+        <div class="d-flex justify-content-start">                   
+            <label class="mt-1 ml-1 mr-1">Descripción</label> <input type="text" [disabled] = "editar"  class="form-control-sm col-12" [(ngModel)]="descripcion">
+        </div>
+        <div class="d-flex justify-content-center">
+            <label class="mt-1 ml-1 mr-1 ">Observación</label> <input type="text" [disabled] = "editar" class="form-control-sm col-12" [(ngModel)]="obesrvacion">
+        </div>
+        
+         <div class="d-flex justify-content-end">
+            
+           
+         </div>
+
+       
+    </div> 
+
+  </div>
+    <div  class="m-3">
+      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+      scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
+     
+      <ng-template pTemplate="caption">
+        <div class=" row">
+            <div class="col-4" style="text-align: left"  >
+                <a  (click)="buscarArticulo()" *ngIf="!editar" class="icon-hover  icon-color-info mt-2 ml-2"> <i class="fa fa-plus fa-lg mr-2"></i>Agregar producto</a>
+            </div>
+          
+          <div class="col-8 mt-2" style="text-align: right">     
+            
+            <input type="text" pInputText size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">            
+          </div>
+        </div>
+        
+      </ng-template>
+    
+                 <ng-template pTemplate="header" let-columns >
+                
+                            <tr >
+                                 
+                              <th  *ngFor="let col of columns" [pSortableColumn]="col.field"  [ngStyle]="{'width': col.width}">
+                                  {{col.header}}
+                                  <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                              </th> 
+                              
+                          </tr> 
+                          <tr>
+                          <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
+                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">  
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pallet_pack'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pallet_pisos'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidades'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'estado'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                          </th>
+                          <th></th>
+                      </tr>
+                  </ng-template>
+                
+          <ng-template pTemplate="body" let-elementos  >
+              <tr style="height:20px"  [ngClass]="colorRow(elementos.estado)">                         
+                      <td style="width: 15%">{{elementos.fecha_produccion | date:'dd/MM/yyyy'}}</td>
+                      <td style="width: 25%">{{elementos.nombre}}</td>
+                      <td style="width: 30%">{{elementos.descripcion}}</td>
+                      <td style="width: 10%">{{elementos.pallet_pack}}</td>
+                      <td style="width: 10%">{{elementos.pallet_pisos}}</td>
+                      <td style="width: 10%">{{elementos.unidades}}</td>
+                      <td style="width: 12%">{{elementos.cantidad_solicitada}}</td>                      
+                      <td style="width: 15%">{{elementos.estado}}</td>
+                                  
+                      <td style="width: 6%">
+                        <a  (click)="detalle(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
+                          </td>
+              </tr>
+          </ng-template>
+     
+    
+      </p-table>
+    </div>

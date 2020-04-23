@@ -341,14 +341,14 @@ try {
         localStorage.setItem('error', JSON.stringify(error));
         this.loading_mensaje = '';
     //    this.throwAlert('error','Error: '+error.status+'  Error al cargar los registros',error.message);
-     });    
+     });
 } catch (error) {
 //  this.throwAlert('error','Error al cargar los registros',error);
-}  
+}
 }
 
 
-menuList(){
+menuList() {
 
   this.general = [
 
@@ -357,7 +357,7 @@ menuList(){
       label: 'Producción',
       visible: !this.gestion_produccion,
       items: [
-        {label: 'Orden de producción', visible: !this.gestion_produccion, routerLink: '/produccion/orden'},
+        {label: 'Orden de producción', visible: !this.gestion_produccion, routerLink: 'orden/produccion'},
         {
             label: 'Producción',
             visible: !this.administracion_produccion,
@@ -381,7 +381,7 @@ menuList(){
   },
   {
     label: 'Auditoria',
-    visible:!this.gestion_auditoria,
+    visible: !this.gestion_auditoria,
     items: [
       {label: 'Control de producción', routerLink: 'gestion/agenda'},
       {label: 'Control de maquina', routerLink: 'recepcion/turnos'},

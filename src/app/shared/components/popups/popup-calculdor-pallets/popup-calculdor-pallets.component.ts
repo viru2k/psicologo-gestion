@@ -36,21 +36,22 @@ export class PopupCalculdorPalletsComponent implements OnInit {
   ngOnInit() {
     console.log(this.config.data);
     
-    this._pallet_calculo = this.config.data['pack'] * this.config.data['pisos'] * this.config.data['botellas'];
-    this._piso = this.config.data['pack'] *  this.config.data['botellas'];    
-    this._pack =  this.config.data['botellas'];    
+    this._pallet_calculo = this.config.data['pallet_pack'] * this.config.data['pallet_pisos'] * this.config.data['unidades'];
+    this._piso = this.config.data.pallet_pack *  this.config.data.unidades;
+    this._pack =  this.config.data['unidades'];
     this._botella = 1;
+    console.log(this._piso);
     
   }
 
   calcular(){
     this.pallet_calculo = (this.pallet * this._pallet_calculo) + (this.piso * this._piso) + (this.pack * this._pack) + (this.botella * this._botella);
-    this.litros_calculo = this.pallet_calculo * Number(this.config.data['litros']);
+    this.litros_calculo = this.pallet_calculo * Number(this.config.data['volumen']);
   }
 
   guardarCalculo(){
     if (this.pallet_calculo> 0){
-      this.calculos.push({'botellas' : this.pallet_calculo},{'litros' : this.litros_calculo});
+      this.calculos.push({'unidades' : this.pallet_calculo},{'volumen' : this.litros_calculo});
       console.log(this.calculos);
       this.ref.close(this.calculos);
     }

@@ -19,6 +19,7 @@ import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedi
 import { MovimientoProduccionComponent } from './pages/produccion/movimiento-produccion/movimiento-produccion.component';
 import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/movimiento-insumo.component';
 import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
+import { OrdenProduccionComponent } from './pages/produccion/orden-produccion/orden-produccion.component';
 
 const routes: Routes = [
   
@@ -50,7 +51,7 @@ const routes: Routes = [
 /* -------------------------------------------------------------------------- */
 
 { path: 'produccion/indicadores', component: ProduccionindicadoresComponent },
-{ path: 'orden/produccion/ingreso', component: OrdenPedidoIngresoComponent },
+{ path: 'orden/produccion', component: OrdenProduccionComponent },
 { path: 'orden/produccion/estado', component: OrdenPedidoComponent },
 { path: 'produccion/ingreso', component: IngresoProduccionComponent },
 { path: 'produccion/movimientos', component: MovimientoProduccionComponent },
@@ -66,6 +67,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
+
 
 
 
