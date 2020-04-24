@@ -14,6 +14,8 @@ import { AsociarProduccionComponent } from './../popups/popup/asociar-produccion
 import { AsociarProduccionDetalleComponent } from './../popups/popup/asociar-produccion-detalle/asociar-produccion-detalle.component';
 import { PopupCalculdorPalletsComponent } from '../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 import { OrdenProduccion } from './../../../models/orden-produccion.model';
+import { PopOrdenProduccionEditarComponent } from './../orden-produccion/pop-orden-produccion-editar/pop-orden-produccion-editar.component';
+import { PopupOrdenProduccionDetalleConsultaComponent } from './popup-orden-produccion-detalle-consulta/popup-orden-produccion-detalle-consulta.component';
 
 /* -------------------------------------------------------------------------- */
 /*         AGREGAR UNA PRODUCCION REALIZADA A UNA ORDEN DE PRODUCCION         */
@@ -33,10 +35,10 @@ export class IngresoProduccionComponent implements OnInit {
   columns: any[];
   elementos: any[];
   elementos_produccion: any[];
-  selectedElemento:any;
+  selectedElemento: any;
   selecteditems: any;
   loading;
-
+  userData: any;
 
   constructor(private alertServiceService: AlertServiceService, 
               private articuloService: ArticuloService,private produccionService: ProduccionService,
@@ -53,10 +55,35 @@ export class IngresoProduccionComponent implements OnInit {
                }
 
   ngOnInit() {
-    
-    this.verDetalle();
+    this.userData = JSON.parse(localStorage.getItem('userData'));
+    this.loadlist();
   }
 
+
+
+  loadlist() {
+
+    this.loading = true;
+    try {
+        this.produccionService.getOrdenProduccionEstado('ACTIVO')
+        .subscribe(resp => {
+          if (resp[0]) {
+            this.elementos = resp;
+            console.log(this.elementos);
+              } else {
+                this.elementos = null;
+              }
+          this.loading = false;
+          console.log(resp);
+        },
+        error => { // error path
+            console.log(error);
+            this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+         });
+    } catch (error) {
+      this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+    }
+}
 
   accion(event:any,overlaypanel: OverlayPanel,elementos:any){
     if(elementos){
@@ -67,28 +94,6 @@ export class IngresoProduccionComponent implements OnInit {
     }
 
   
-verDetalle(){
- 
-  console.log(this.selectedElemento);
-  this.loading = true;
-  try {
-        this.produccionService.getOrdenProduccionDetalleByEstado('ACTIVO')
-        .subscribe(resp => {
-         
-         this.elementos = resp;
-         this.loading = false;
-         console.log(resp);
-        },
-        error => { // error path
-            console.log(error);
-            this.loading = false;
-            this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-         });
-    } catch (error) {
-      this.loading = false;
-      this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-    }
-  }
 
 
 
@@ -124,5 +129,58 @@ AsociarProduccionDetalle(){
   });
 }
 
+buscar(elemento: any) {
+  console.log(elemento);
+  let data: any;
+  data = elemento;
+  const ref = this.dialogService.open(PopupOrdenProduccionDetalleConsultaComponent, {
+  data,
+   header: 'Detalle de orden producción',
+   width: '98%',
+   height: '90%'
+  });
+
+  ref.onClose.subscribe(() => {
+        this.loadlist();
+  });
+
+}
+
+estadistica(elemento: any) {
+
+}
+
+
+colorRow(estado: string) {
+
+  if (estado === 'ACTIVO') {
+    return {'border-es-activo'  : 'null' };
+  }
+  if (estado === 'PAUSADO') {
+    return {'border-es-pausado'  : 'null' };
+  }
+  if (estado === 'CANCELADO') {
+    return {'border-es-cancelado'  : 'null' };
+  }
+  if (estado === 'FINALIZADO') {
+    return {'border-es-finalizado'  : 'null' };
+  }
+}
+
+backRow(estado: string) {
+
+  if (estado === 'ACTIVO') {
+    return {'back-es-activo'  : 'null' };
+  }
+  if (estado === 'PAUSADO') {
+    return {'back-es-pausado'  : 'null' };
+  }
+  if (estado === 'CANCELADO') {
+    return {'back-es-cancelado'  : 'null' };
+  }
+  if (estado === 'FINALIZADO') {
+    return {'back-es-finalizado'  : 'null' };
+  }
+}
 
 }

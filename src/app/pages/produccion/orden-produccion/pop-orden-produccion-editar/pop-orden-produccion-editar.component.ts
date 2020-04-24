@@ -34,22 +34,33 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
   selecteditems: any;
   loading;
   userData: any;
+  estado: any[] = [];
+  selectedEstado: string = 'PAUSADO' ;
 
    // tslint:disable-next-line: max-line-length
    constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig) {
 
     this.cols = [
-      { field: 'fecha_produccion', header: 'Producir',  width: '15%' },
+      { field: 'fecha_produccion', header: 'Generado',  width: '15%' },
       { field: 'nombre', header: 'Producto',  width: '25%' },
       { field: 'descripcion', header: 'Descripción',  width: '30%' },
-      { field: 'pallet_pack', header: 'Pack',  width: '10%' },
-      { field: 'pallet_pisos', header: 'Pisos',  width: '10%' },
+      { field: 'pallet_pack', header: 'Pack',  width: '8%' },
+      { field: 'pallet_pisos', header: 'Pisos',  width: '8%' },
       { field: 'unidades', header: 'Unidades',  width: '10%' },
-      { field: 'cantidad', header: 'Cantidad',  width: '12%' },
+      { field: 'cantidad_solicitada', header: 'A producir',  width: '12%' },
+      { field: 'cantidad_usada', header: 'Producido',  width: '12%' },
+      { field: 'cantidad_existente', header: 'Restante',  width: '12%' },
       { field: 'estado', header: 'Estado',  width: '15%' },
       { field: '', header: '',  width: '6%' },
-
    ];
+
+
+    this.estado = [
+    {name: 'ACTIVO',      value: 'ACTIVO'},
+    {name: 'PAUSADO',     value: 'PAUSADO'},
+    {name: 'FINALIZADO',  value: 'FINALIZADO'},
+    {name: 'CANCELADO',   value: 'CANCELADO'}
+];
    }
 
 
@@ -67,7 +78,11 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
       this.fecha_creacion = new Date(this.config.data.fecha_creacion);
       this.fecha_desde =  new Date(this.config.data.fecha_desde);
       this.fecha_hasta =  new Date(this.config.data.fecha_hasta);
-   
+      console.log(this.config.data.estado);
+      this.selectedEstado =  'PAUSADO';
+      this.estado['name'] =  'PAUSADO';
+     // this.selectedEstado
+      
       this.loadlist(this.config.data['id']);
     }
 

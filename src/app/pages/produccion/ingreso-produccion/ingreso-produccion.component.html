@@ -1,8 +1,75 @@
-<div class="d-flex justify-content-center mt-3">
-    <label>AGREGAR PRODUCCION A ORDEN DE PRODUCCION</label>
-  </div>
+<div class=" faq-title text-center pb-3 pt-2 ">
+  <h5>LISTADO DE ORDEN DE PRODUCCION</h5>
+</div>
+
     <div  class="m-3">
   
+
+
+
+      <div class="container" id="tourpackages-carousel" >
+        <div class="row">          
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" *ngFor="let elem of elementos" >
+            <div class="thumbnail" [ngClass]="colorRow(elem.estado)">
+                <div class="caption">
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-start">                     
+                      <b><label class="ml-2  mr-2 text-info" >Produccion : {{elem.id}} </label></b>
+                    </div>
+                    <div class="d-flex justify-content-center">   
+                     <small> <label class="ml-3  mr-2 mt-1 text-warning">{{elem.fecha_creacion | date: 'dd/MM/yyyy'}} </label>                   </small>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      <label class="ml-2  mr-2  text-info">{{elem.estado}} </label>
+                    </div>
+                  </div>  
+                
+
+                  <div class='col-lg-12 well well-add-card'>
+                    
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex justify-content-start">
+                        <label class="ml-3 mt-2 mr-2">{{elem.descripcion}}</label>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <a  (click)="buscar(elem)" class="icon-hover pb-1  mt-2"> <i class="fas fa-list-ul fa-lg text-primary"></i></a>  
+                      </div>
+                    </div>
+              
+                   
+                     
+                  </div>
+                  <p class="text-muted ml-3 mr-3 mb-3 ">{{elem.observacion}}</p>
+                  <div class='col-lg-12'>
+                  
+                               
+                    
+                      
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex justify-content-start">
+                        <small><label class="text-info mr-2 ">Inicio : {{elem.fecha_desde | date: 'dd/MM/yyyy'}} </label> </small>
+                        
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <small><label  class="text-danger"> Fin : {{elem.fecha_hasta | date: 'dd/MM/yyyy'}}</label></small> 
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <a *ngIf="userData['admin']=== 2" (click)="estadistica(elem)" class="icon-hover pb-1"> <i class="fas fa-chart-pie fa-lg text-info"></i></a>  
+                      </div>
+                    </div>          
+                  </div>
+               
+                  
+              </div>
+            </div>
+          </div>
+        
+  
+        
+          
+        </div><!-- End row -->
+      </div>
+
     
       <p-overlayPanel #op [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" >                          
  
@@ -12,60 +79,7 @@
         
       
       </p-overlayPanel>  
-      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
-      scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
-     
-      <ng-template pTemplate="caption">
-        <div class="row">
-                <div class="col-md-3" style="text-align:left">
-                  
-                            </div>
-                <div class="col-md-4" style="text-align:left"></div>
-        <div class="col-md-5" style="text-align:right">                                
-            <input  class="form-control col-md-12 form-control-sm" type="text"  placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')"  >
-        </div>
-     </div>
-    </ng-template>
-    
-                 <ng-template pTemplate="header" let-columns >
-                
-                            <tr >
-                                 
-                              <th  *ngFor="let col of columns" [pSortableColumn]="col.field"  [ngStyle]="{'width': col.width}">
-                                  {{col.header}}
-                                  <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
-                              </th> 
-                           
-                          </tr> 
-                          <tr>
-                          <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                          </th>
-                          <th></th>
-                      </tr>
-                  </ng-template>
-                
-          <ng-template pTemplate="body" let-elementos  >
-              <tr style="height:20px">
-                     
-                <td style="width: 6%" >                   
-                  <a     (click)="accion($event,op,elementos)"    ><i class="far fa-edit fa-2x icon-color-purple my-hover"></i></a>
-               
-              </td>
-                <td style="width: 6%">{{elementos.id}}</td>
-                      <td style="width: 10%">{{elementos.fecha_pedido | date: 'dd/MM/yyyy'}}</td>
-                      <td style="width: 40%">{{elementos.descripcion}}</td>
-                       <td style="width: 10%" >{{elementos.cantidad}}</td>
-                       <td style="width: 40%" >{{elementos.nombreyapellido}}</td>
-                      
-              </tr>
-          </ng-template>
-    
-         
-      </p-table>
-
+   
   
     </div>
  

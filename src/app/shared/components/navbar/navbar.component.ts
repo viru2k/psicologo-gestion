@@ -279,7 +279,7 @@ onSubmit() {
           data => {
             console.log(data);
             this.user = data;
-            let us = new User("","","","","",this.f.username.value,this.f.password.value,[],this.f.puesto.value);
+            let us = new User('','','','','',this.f.username.value, this.f.password.value, []);
             localStorage.setItem('userData', JSON.stringify(us));
             localStorage.setItem('currentUser', JSON.stringify(this.user));
             //  this.router.navigate([this.returnUrl]);
@@ -321,7 +321,7 @@ try {
     console.log(this.elemento);
     this.elementoModulo = <any>this.elemento;
     this.user = new User(this.elemento[0]['id'] , this.elemento[0]['email'], this.elemento[0]['nombreyapellido'],
-       this.elemento[0]['name'],'1',this.elemento[0]['email'], currentUser['access_token'],this.elementoModulo, this.f.puesto.value);
+    this.elemento[0]['name'], this.elemento[0]['admin'],this.elemento[0]['email'], currentUser['access_token'],this.elementoModulo);
     this.username = userData['username'];
     this.puesto = userData['puesto'];
     localStorage.removeItem('userData');
@@ -362,7 +362,7 @@ menuList() {
             label: 'Producción',
             visible: !this.administracion_produccion,
             items: [
-              {label: 'Proceso de producción', routerLink: 'orden/produccion/ingreso'},
+              {label: 'Proceso de producción', routerLink: '/produccion/ingreso'},
               {label: 'Estado orden de producción', routerLink: '/produccion/orden/estado'},
             ]
         },

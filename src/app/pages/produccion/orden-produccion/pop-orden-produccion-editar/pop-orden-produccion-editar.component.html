@@ -32,7 +32,14 @@
         </div>
         
          <div class="d-flex justify-content-end">
-            
+          <label class="mt-1 ml-1 mr-1 ">Estado</label>
+          <p-dropdown [options]="estado" [(ngModel)]="selectedEstado" optionLabel="name">
+            <ng-template let-item pTemplate="selectedEstado">
+                <span style="vertical-align:middle; margin-left: .5em">{{item.label}}</span>
+            </ng-template>
+        
+        </p-dropdown>
+          <p-dropdown [options]="estado" [(ngModel)]="selectedEstado"  optionLabel="name" [showClear]="false"></p-dropdown>
            
          </div>
 
@@ -76,7 +83,9 @@
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pallet_pack'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pallet_pisos'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidades'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_solicitada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_usada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_existente'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'estado'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                           </th>
                           <th></th>
@@ -88,10 +97,12 @@
                       <td style="width: 15%">{{elementos.fecha_produccion | date:'dd/MM/yyyy'}}</td>
                       <td style="width: 25%">{{elementos.nombre}}</td>
                       <td style="width: 30%">{{elementos.descripcion}}</td>
-                      <td style="width: 10%">{{elementos.pallet_pack}}</td>
-                      <td style="width: 10%">{{elementos.pallet_pisos}}</td>
+                      <td style="width: 8%">{{elementos.pallet_pack}}</td>
+                      <td style="width: 8%">{{elementos.pallet_pisos}}</td>
                       <td style="width: 10%">{{elementos.unidades}}</td>
-                      <td style="width: 12%">{{elementos.cantidad_solicitada}}</td>                      
+                      <td style="width: 12%"><b>{{elementos.cantidad_solicitada}}</b></td>                      
+                      <td style="width: 12%"><b>{{elementos.cantidad_usada}}</b></td>   
+                      <td style="width: 12%"><b>{{elementos.cantidad_existente}}</b></td>   
                       <td style="width: 15%">{{elementos.estado}}</td>
                                   
                       <td style="width: 6%">

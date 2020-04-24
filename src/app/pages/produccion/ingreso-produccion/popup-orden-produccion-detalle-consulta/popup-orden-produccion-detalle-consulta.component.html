@@ -1,0 +1,86 @@
+<div class=" faq-title text-center pb-3 pt-2 ">
+    <h5>AGREGAR PRODUCCION A ORDEN DE PRODUCCION</h5>
+  </div>
+  
+      <div  class="m-3">
+    
+  
+  
+  
+        <div class="container" id="tourpackages-carousel" >
+          <div class="row">          
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" *ngFor="let elem of elementos" >
+              <div class="thumbnail" [ngClass]="colorRow(elem.estado)">
+                  <div class="caption">
+                    <div class="d-flex justify-content-between mt-2">
+                      <div class="d-flex justify-content-start">                     
+                        <b><label class="ml-2  mr-2 text-info" >Produccion : {{elem.fecha_produccion | date: 'dd/MM/yyyy'}}  </label></b>
+                      </div>
+                      <div class="d-flex justify-content-center">   
+                       <small> <label class="ml-3  mr-2 mt-1 text-warning"></label>                   </small>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <label class="ml-2  mr-2  text-info">{{elem.estado}} </label>
+                      </div>
+                    </div>  
+                  
+  
+                    <div class='col-lg-12 well well-add-card'>
+                      
+                      <div class="d-flex justify-content-between">
+                       
+                        <div class="d-flex justify-content-start">
+                          <a  (click)="agregarProduccion(elem)" class="icon-hover pb-1  mt-2"> <i class="fas fa-plus fa-lg text-success"></i></a>  
+                        </div>
+                        <div class="d-flex justify-content-center">
+                          <label class="ml-3 mt-2 mr-2">{{elem.nombre}}</label>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                        
+                          <a  (click)="buscar(elem)" class="icon-hover pb-1  mt-2"> <i class="fas fa-list-ul fa-lg text-primary"></i></a>  
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class='col-lg-12'>
+                      <div class="d-flex flex-row">
+                        <div >
+                           <div class="d-flex justify-content-between">
+                             <div class="d-flex justify-content-start">  <label class="ml-3 mt-2 mr-2 text-muted">Solicitado : </label></div>
+                             <div class="d-flex justify-content-center">   <label class="ml-3 mt-2 mr-2 text-info"> {{elem.cantidad_solicitada}}</label></div>  
+                            </div>
+                         
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex justify-content-start">  <label class="ml-3 mt-2 mr-2 text-muted">Producido : </label></div>
+                                <div class="d-flex justify-content-center">   <label class="ml-3 mt-2 mr-2 text-success"> {{elem.cantidad_usada}}</label></div>  
+                            </div>
+                           <hr>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex justify-content-start">  <b><label class="ml-3  mr-2 text-muted">A producir : </label></b></div>
+                                <div class="d-flex justify-content-center">   <b><label class="ml-3   mr-2 text-danger"> {{elem.cantidad_existente}}</label></b></div>                                  
+                            </div>
+                        </div>                            
+                      </div>          
+                    </div>
+                    <div class='col-lg-12 well well-add-card'>
+                      
+                      <div class="d-flex justify-content-between mt-1">
+                        <div class="d-flex justify-content-start"> <b><label class="ml-3 text-success"> Producido :</label></b></div>
+                        <div class="d-flex justify-content-center"> <b><label class="  text-info"> Pallets : {{((elem.cantidad_existente / elem.pallet_pisos) / elem.pallet_pack)/ elem.unidades}}</label></b></div>
+                        <div class="d-flex justify-content-end">  <b><label class="mr-2 text-info">Packs : {{  elem.cantidad_existente / elem.unidades }}</label></b>   </div>                          
+                    </div>
+                    </div>
+                    
+                </div>
+              </div>
+            </div>
+          
+    
+          
+            
+          </div><!-- End row -->
+        </div>
+
+    
+      </div>
+   
