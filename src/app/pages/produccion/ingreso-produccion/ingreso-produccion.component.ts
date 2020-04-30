@@ -12,10 +12,14 @@ import { AsociarInsumoComponent } from '../popups/popup/asociar-insumo/asociar-i
 import { AsociarInsumoDetalleComponent } from './../popups/popup/asociar-insumo-detalle/asociar-insumo-detalle.component';
 import { AsociarProduccionComponent } from './../popups/popup/asociar-produccion/asociar-produccion.component';
 import { AsociarProduccionDetalleComponent } from './../popups/popup/asociar-produccion-detalle/asociar-produccion-detalle.component';
+// tslint:disable-next-line: max-line-length
 import { PopupCalculdorPalletsComponent } from '../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 import { OrdenProduccion } from './../../../models/orden-produccion.model';
 import { PopOrdenProduccionEditarComponent } from './../orden-produccion/pop-orden-produccion-editar/pop-orden-produccion-editar.component';
+// tslint:disable-next-line: max-line-length
 import { PopupOrdenProduccionDetalleConsultaComponent } from './popup-orden-produccion-detalle-consulta/popup-orden-produccion-detalle-consulta.component';
+import { calendarioIdioma } from './../../../config/config';
+import { formatDate } from '@angular/common';
 
 /* -------------------------------------------------------------------------- */
 /*         AGREGAR UNA PRODUCCION REALIZADA A UNA ORDEN DE PRODUCCION         */
@@ -29,7 +33,8 @@ import { PopupOrdenProduccionDetalleConsultaComponent } from './popup-orden-prod
 })
 export class IngresoProduccionComponent implements OnInit {
 
-
+  es: any;
+  checked ;
   cols: any[];
   cols_produccion: any[];
   columns: any[];
@@ -39,6 +44,10 @@ export class IngresoProduccionComponent implements OnInit {
   selecteditems: any;
   loading;
   userData: any;
+  fecha_desde: Date;
+  fecha_hasta: Date;
+  _fecha_desde: string;
+  _fecha_hasta: string;
 
   constructor(private alertServiceService: AlertServiceService, 
               private articuloService: ArticuloService,private produccionService: ProduccionService,
@@ -55,10 +64,23 @@ export class IngresoProduccionComponent implements OnInit {
                }
 
   ngOnInit() {
+    this.es = calendarioIdioma  ;
+    this.fecha_desde = new Date();
+    this.fecha_hasta = new Date();
     this.userData = JSON.parse(localStorage.getItem('userData'));
     this.loadlist();
   }
 
+
+  handleChange(e) {
+    this.checked = e.checked;
+    console.log(this.checked);
+    if (this.checked) {
+      this.loadlist();
+    } else {
+      this.loadlist();
+    }
+}
 
 
   loadlist() {
@@ -85,42 +107,44 @@ export class IngresoProduccionComponent implements OnInit {
     }
 }
 
-  accion(event:any,overlaypanel: OverlayPanel,elementos:any){
-    if(elementos){
+  accion(event: any, overlaypanel: OverlayPanel, elementos: any) {
+    if (elementos) {
       this.selectedElemento = elementos;
       console.log(elementos);
-    }     
+    }
     overlaypanel.toggle(event);
     }
 
-  
+    buscarProduccion(){
+      this._fecha_desde = formatDate(new Date(this.fecha_desde), 'yyyy-MM-dd', 'en');
+      this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd', 'en');
+    }
 
 
+AsociarProduccion() {
 
-AsociarProduccion(){
-  
-  let data:any; 
- data =  this.selectedElemento;
+  const data: any  =  this.selectedElemento;
+
   const ref = this.dialogService.open(AsociarProduccionComponent, {
   data,
-   header: 'Asociar producción a orden de pedido', 
+   header: 'Asociar producción a orden de pedido',
    width: '98%',
    height: '90%'
   });
-  ref.onClose.subscribe((AsociarProduccionComponent:any) => {
+  ref.onClose.subscribe((AsociarProduccionComponent: any) => {
 
   });
 }
 
 
 
-AsociarProduccionDetalle(){
-  
-  let data:any; 
- data = this.selectedElemento;
+AsociarProduccionDetalle() {
+
+  const data: any = this.selectedElemento;
+
   const ref = this.dialogService.open(AsociarProduccionDetalleComponent, {
   data,
-   header: 'Detalle producción a orden de pedido', 
+   header: 'Detalle producción a orden de pedido',
    width: '98%',
    height: '90%'
   });
@@ -137,7 +161,7 @@ buscar(elemento: any) {
   data,
    header: 'Detalle de orden producción',
    width: '98%',
-   height: '90%'
+   height: '80%'
   });
 
   ref.onClose.subscribe(() => {
@@ -167,19 +191,19 @@ colorRow(estado: string) {
   }
 }
 
-backRow(estado: string) {
+iconoColor(estado: string) {
 
   if (estado === 'ACTIVO') {
-    return {'back-es-activo'  : 'null' };
+    return {'icono-success'  : 'null' };
   }
   if (estado === 'PAUSADO') {
-    return {'back-es-pausado'  : 'null' };
+    return {'icono-warning'  : 'null' };
   }
   if (estado === 'CANCELADO') {
-    return {'back-es-cancelado'  : 'null' };
+    return {'icono-danger'  : 'null' };
   }
   if (estado === 'FINALIZADO') {
-    return {'back-es-finalizado'  : 'null' };
+    return {'icono-secondary'  : 'null' };
   }
 }
 

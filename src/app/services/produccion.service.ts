@@ -15,6 +15,14 @@ export class ProduccionService {
     return this.http.get<any[]>(this.url+'articulos');
     }
 
+  getMaquinas(){
+    return this.http.get<any[]>(this.url+'maquina');
+    }
+
+  getMaquinaById(id: string){
+    return this.http.get<any[]>(this.url+'maquina/id=' + id);
+    }
+
     getProduccionByFecha(articulo_id: string){
     return this.http.get<any[]>(this.url+'articulo/confeccion?articulo_id='+articulo_id);
     }
@@ -48,9 +56,9 @@ export class ProduccionService {
       return this.http.get<any[]>(this.url+'unidad');
       }
 
-      setProduccionOrdenProduccion(produccion:any){
-        return this.http.post<any>(this.url+'produccion/crear', produccion);
-        }
+    setProduccionOrdenProduccion(produccion:any){
+      return this.http.post<any>(this.url+'produccion/crear', produccion);
+      }
 
     getProduccionByOrdenProduccion(id: string, articulo_id:string){
       return this.http.get<any[]>(this.url+'produccion/asociar/orden/produccion/articulo?id='+id+'&articulo_id='+articulo_id);
@@ -70,6 +78,10 @@ export class ProduccionService {
     produccionDetalleByProduccionId(produccion_id: string) {
       return this.http.get<any[]>(this.url + 'produccion/detalle/by/produccion/id?produccion_id=' + produccion_id);
     }
+
+    setProduccionProceso(produccion: any){
+      return this.http.post<any>(this.url + 'produccion/proceso/crear', produccion);
+      }
 
 
 }

@@ -131,6 +131,7 @@ import { PopOrdenProduccionEditarComponent } from './pages/produccion/orden-prod
 import { PopUpOrdenProduccionDetalleEditarComponent } from './pages/produccion/orden-produccion/pop-up-orden-produccion-detalle-editar/pop-up-orden-produccion-detalle-editar.component';
 import { PopupOrdenProduccionDetalleConsultaComponent } from './pages/produccion/ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-orden-produccion-detalle-consulta.component';
 import { PopupAsociarProduccionComponent } from './pages/produccion/ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-asociar-produccion/popup-asociar-produccion.component';
+import { PopupAsociarProduccionDetalleComponent } from './pages/produccion/ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-asociar-produccion-detalle/popup-asociar-produccion-detalle.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -184,7 +185,8 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopOrdenProduccionEditarComponent,
     PopUpOrdenProduccionDetalleEditarComponent,
     PopupOrdenProduccionDetalleConsultaComponent,
-    PopupAsociarProduccionComponent
+    PopupAsociarProduccionComponent,
+    PopupAsociarProduccionDetalleComponent
   ],
   imports: [
 
@@ -246,6 +248,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
      PopUpOrdenProduccionDetalleEditarComponent,
      PopupOrdenProduccionDetalleConsultaComponent,
      PopupAsociarProduccionComponent,
+     PopupAsociarProduccionDetalleComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             POPUPS COMPARTIDOS                             */

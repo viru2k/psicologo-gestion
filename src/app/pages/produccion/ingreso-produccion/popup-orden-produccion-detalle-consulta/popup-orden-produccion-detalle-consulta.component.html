@@ -2,85 +2,99 @@
     <h5>AGREGAR PRODUCCION A ORDEN DE PRODUCCION</h5>
   </div>
   
-      <div  class="m-3">
+      <div  class="m-3 ">
+     
+         <p-scrollPanel  [style]="{width: '100%', height: '600px'}">
+        <div class="row cards" >
     
-  
-  
-  
-        <div class="container" id="tourpackages-carousel" >
-          <div class="row">          
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" *ngFor="let elem of elementos" >
-              <div class="thumbnail" [ngClass]="colorRow(elem.estado)">
-                  <div class="caption">
-                    <div class="d-flex justify-content-between mt-2">
-                      <div class="d-flex justify-content-start">                     
-                        <b><label class="ml-2  mr-2 text-info" >Produccion : {{elem.fecha_produccion | date: 'dd/MM/yyyy'}}  </label></b>
-                      </div>
-                      <div class="d-flex justify-content-center">   
-                       <small> <label class="ml-3  mr-2 mt-1 text-warning"></label>                   </small>
-                      </div>
-                      <div class="d-flex justify-content-end">
-                        <label class="ml-2  mr-2  text-info">{{elem.estado}} </label>
-                      </div>
-                    </div>  
-                  
-  
-                    <div class='col-lg-12 well well-add-card'>
-                      
-                      <div class="d-flex justify-content-between">
-                       
-                        <div class="d-flex justify-content-start">
-                          <a  (click)="agregarProduccion(elem)" class="icon-hover pb-1  mt-2"> <i class="fas fa-plus fa-lg text-success"></i></a>  
-                        </div>
-                        <div class="d-flex justify-content-center">
-                          <label class="ml-3 mt-2 mr-2">{{elem.nombre}}</label>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                        
-                          <a  (click)="buscar(elem)" class="icon-hover pb-1  mt-2"> <i class="fas fa-list-ul fa-lg text-primary"></i></a>  
-                        </div>
-                      </div>
-                    </div>
-                  
-                    <div class='col-lg-12'>
-                      <div class="d-flex flex-row">
-                        <div >
-                           <div class="d-flex justify-content-between">
-                             <div class="d-flex justify-content-start">  <label class="ml-3 mt-2 mr-2 text-muted">Solicitado : </label></div>
-                             <div class="d-flex justify-content-center">   <label class="ml-3 mt-2 mr-2 text-info"> {{elem.cantidad_solicitada}}</label></div>  
-                            </div>
-                         
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex justify-content-start">  <label class="ml-3 mt-2 mr-2 text-muted">Producido : </label></div>
-                                <div class="d-flex justify-content-center">   <label class="ml-3 mt-2 mr-2 text-success"> {{elem.cantidad_usada}}</label></div>  
-                            </div>
-                           <hr>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex justify-content-start">  <b><label class="ml-3  mr-2 text-muted">A producir : </label></b></div>
-                                <div class="d-flex justify-content-center">   <b><label class="ml-3   mr-2 text-danger"> {{elem.cantidad_existente}}</label></b></div>                                  
-                            </div>
-                        </div>                            
-                      </div>          
-                    </div>
-                    <div class='col-lg-12 well well-add-card'>
-                      
-                      <div class="d-flex justify-content-between mt-1">
-                        <div class="d-flex justify-content-start"> <b><label class="ml-3 text-success"> Producido :</label></b></div>
-                        <div class="d-flex justify-content-center"> <b><label class="  text-info"> Pallets : {{((elem.cantidad_existente / elem.pallet_pisos) / elem.pallet_pack)/ elem.unidades}}</label></b></div>
-                        <div class="d-flex justify-content-end">  <b><label class="mr-2 text-info">Packs : {{  elem.cantidad_existente / elem.unidades }}</label></b>   </div>                          
-                    </div>
-                    </div>
-                    
-                </div>
-              </div>
-            </div>
-          
-    
-          
+          <div class="cards__item  column" *ngFor="let elem of elementos" >
             
-          </div><!-- End row -->
+            <div class="card">
+              <div class="">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-start ml-2">    
+                    <a (click)="estadistica(elem)" > <i class="fas fa-circle  " [ngClass]="iconoColor(elem.estado)"></i>
+                      <label class="ml-2  mr-2 ">{{elem.estado}} </label>
+                    </a>                   
+                  </div>
+                  <div class="d-flex justify-content-center">   
+                   
+                  </div>
+                  <div class="d-flex justify-content-end">
+                  <!--   <small> <label class="ml-3  mr-2 mt-1 text-warning">Dia {{elem.fecha_creacion | date: 'dd/MM/yyyy'}} </label>                   </small> -->
+                  </div>
+                </div>  
+              </div>
+
+              <div class=" ">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-start">                     
+                    <b><label class="ml-2  mr-2 card__text texto-info card__title" >Producción : {{elem.fecha_produccion | date: 'EEEE dd/MM/yyyy'}} </label></b>
+                  </div>
+               
+                </div>  
+              </div>
+        
+            
+              <div class="card__content">
+                    <div class="d-flex justify-content-center " >
+                      <label class=" texto-secondary"><b>{{elem.nombre}}</b></label>
+                </div>
+
+
+                <div class='col-lg-12 well'>
+                  <div class="d-flex flex-row">
+                    <div >
+                       <div class="d-flex justify-content-between">
+                         <div class="d-flex justify-content-start">  <label class="ml-3 mt-2 mr-2 texto-secondary-soft texto-bold">Solicitado : </label></div>
+                         <div class="d-flex justify-content-center">   <label class="ml-3 mt-2 mr-2 text-info texto-bold"> {{elem.cantidad_solicitada |  number : '1.0-2'}} Unidades</label>
+                          <a  (click)="calcular(elem, elem.cantidad_solicitada)" class="icon-hover mt-2"> <i class="fas fa-calculator text-info fa-lg"></i></a>   </div>                                    
+                        </div>
+                     
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-start">  <label class="ml-3 mt-2 mr-2 texto-secondary-soft texto-bold">Producido : </label></div>
+                            <div class="d-flex justify-content-center">   <label class="ml-3 mt-2 mr-2 text-success texto-bold"> {{elem.cantidad_usada |  number : '1.0-2'}} Unidades</label>
+                              <a  (click)="calcular(elem, elem.cantidad_usada)" class="icon-hover mt-2"> <i class="fas fa-calculator text-info fa-lg"></i></a>   </div>                                   
+                        </div>
+                       <hr>
+                        <div class="d-flex justify-content-between ">
+                            <div class="d-flex justify-content-start">  <b><label class="ml-3  mr-2 texto-danger-soft">Pendiente : </label></b></div>
+                            <div class="d-flex justify-content-center">   <b><label class="ml-3   mr-2 texto-danger-soft"> {{elem.cantidad_existente |  number : '1.0-2'}} Unidades</label></b>
+                              <a  (click)="calcular(elem, elem.cantidad_existente)" class="icon-hover"> <i class="fas fa-calculator text-info fa-lg"></i></a>   </div>                                  
+                        </div>
+                    </div>                            
+                  </div>          
+                </div>
+                
+                <div class="card__btn">
+                  <div class='col-lg-12'>
+                      
+                    <div class="d-flex justify-content-between pt-2 ">
+                      <div class="d-flex justify-content-start"><b> <label class="texto-terthiary"> <i class="fas fa-pallet fa-lg mr-1"></i>Pallets : {{((elem.cantidad_existente / elem.pallet_pisos) / elem.pallet_pack)/ elem.unidades |  number : '1.1-2'}}</label></b></div>
+                      
+                      <div class="d-flex justify-content-end">  <b><label class="texto-info"> <i class="fas fa-boxes fa-lg mr-1"></i>Packs : {{  elem.cantidad_existente / elem.unidades |  number : '1.0-2'}}</label></b>   </div>                          
+                  </div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <button class="btn-cuadrado-info btn--block texto-bold mr-1 " (click)="nuevaProduccion(elem)"  >Nueva producción</button>
+                    <button class="btn-cuadrado-success  btn--block " (click)="detalleProduccion(elem)"  >Detalle  producción</button>
+                  </div>
+                  
+                  
+                </div>
+            
+              </div>
+          
+            </div>
+      
+          </div>
+     
         </div>
+     </p-scrollPanel>
+  
+  
+     
 
     
       </div>
-   
+     

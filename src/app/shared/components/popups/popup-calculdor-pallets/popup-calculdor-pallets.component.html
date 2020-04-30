@@ -11,7 +11,7 @@
             <label class="mr-1">Cantidad de pisos :</label>
             <input type="number" class="mr-1 ml-1 form-control form-control-sm" [(ngModel)]="piso" (change)="calcular()">
             <label class="mr-1 ml-1">Calculo :</label>
-            <label class="mr-1 ml-1">{{piso_calculo}}</label>
+            <label class="mr-1 ml-1">{{piso_calculo }}</label>
         </div>
     
         <div class="row m-2">
@@ -23,19 +23,17 @@
     
         <div class="row m-2">
             <label class="mr-1">Cantidad de botellas :</label>
-            <input type="number" class="mr-1 ml-1 form-control form-control-sm  " [(ngModel)]="botella" (change)="calcular()">
+            <input type="number" class="mr-1 ml-1 form-control form-control-sm  " [(ngModel)]="unidad" (change)="calcular()">
             <label class="mr-1 ml-1">Calculo :</label>
             <label class="mr-1 ml-1">{{botella_calculo}}</label>
         </div>
     
-        <div class="row m-2">
-            <label class="mr-1">TOTAL EN BOTELLAS :</label>        
-            <label class="mr-1 ml-1">BOTELLAS :</label>
+        <div class="row m-2">            
+            <label class="mr-1 ml-1">TOTAL EN UNIDADES :</label>
             <label class="mr-1 ml-1">{{pallet_calculo}}</label>
         </div>
         <div class="row m-2">
-            <label class="mr-1">TOTAL EN LITROS :</label>        
-            <label class="mr-1 ml-1">LITROS :</label>
+            <label class="mr-1">TOTAL EN LITROS :</label>                    
             <label class="mr-1 ml-1">{{litros_calculo}}</label>
         </div>
     </div>

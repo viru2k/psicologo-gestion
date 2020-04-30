@@ -4,6 +4,8 @@ import { ProduccionService } from './../../../../services/produccion.service';
 import { AlertServiceService } from './../../../../services/alert-service.service';
 import { calendarioIdioma } from './../../../../config/config';
 import { OrdenProduccionDetalle } from './../../../../models/orden-produccion-detalle.model';
+import { PopupAsociarProduccionComponent } from './popup-asociar-produccion/popup-asociar-produccion.component';
+import { PopupCalculdorPalletsComponent } from './../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 
 
 @Component({
@@ -53,14 +55,79 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
      }
  }
 
- 
+
+
+ calcular(_elemento: any, calculo: string) {
+  _elemento.a_calcular = calculo;
+  const data: any = _elemento;
+  const ref1 = this.dialogService.open(PopupCalculdorPalletsComponent, {
+  data,
+   header: 'Calcular cantidad',
+   width: '60%',
+   height: '60%'
+  });
+
+  ref1.onClose.subscribe((PopupCalculdorPalletsComponent: any) => {
+
+        if (PopupCalculdorPalletsComponent) {
+          
+     //     console.log(PopupCalculdorPalletsComponent);
+     //     console.log(PopupCalculdorPalletsComponent[0]['unidades']);
+       // const resultado =  this.elementos.findIndex(x => x.id === _elemento.id);
+     //  this.elementos[resultado]['cantidad'] = PopupCalculdorPalletsComponent[0]['unidades'];
+       
+        }
+  });
+
+ }
+
  agregarProduccion(elemento: any) {
 
  }
 
- buscar(elemento: any) {
+ nuevaProduccion(elemento: any) {
+  console.log(elemento);
+  elemento.es_nuevo = true;
+  let data: any;
+  data = elemento;
+  const ref = this.dialogService.open(PopupAsociarProduccionComponent, {
+  data,
+   header: 'Gestionar produccion',
+   width: '70%',
+   height: '80%'
+  });
+
+  ref.onClose.subscribe((PopupAsociarProduccionComponent: any) => {
+
+    this.loadlist(this.config.data['id']);
+  });
 
  }
+/* 
+ 
+ detalleProduccion(elemento: any) {
+  console.log(elemento);
+  let data: any;
+  data = elemento;
+  const ref = this.dialogService.open(PopupAsociarProduccionDetalleComponent, {
+  data,
+   header: 'Detalle de producciones',
+   width: '98%',
+   height: '80%'
+  });
+
+  ref.onClose.subscribe((PopupAsociarProduccionDetalleComponent: any) => {
+        //this.loadlist();
+  });
+
+}
+ */
+
+
+ estadistica(elemento: any) {
+
+}
+
 colorRow(estado: string) {
 
   if (estado === 'ACTIVO') {
@@ -74,6 +141,23 @@ colorRow(estado: string) {
   }
   if (estado === 'FINALIZADO') {
     return {'border-es-finalizado'  : 'null' };
+  }
+}
+
+
+iconoColor(estado: string) {
+
+  if (estado === 'ACTIVO') {
+    return {'icono-success'  : 'null' };
+  }
+  if (estado === 'PAUSADO') {
+    return {'icono-warning'  : 'null' };
+  }
+  if (estado === 'CANCELADO') {
+    return {'icono-danger'  : 'null' };
+  }
+  if (estado === 'FINALIZADO') {
+    return {'icono-secondary'  : 'null' };
   }
 }
 

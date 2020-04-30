@@ -52,7 +52,6 @@ export class OrdenProduccionComponent implements OnInit {
   }
 
   handleChange(e) {
- 
     this.checked = e.checked;
     console.log(this.checked);
     if (this.checked) {
