@@ -1,54 +1,57 @@
-<app-custom-preloader  *ngIf="loading">
-
-</app-custom-preloader>
+<div class=" faq-title text-center pb-3 pt-2 ">
+  <h5>GESTION DE UNIDAD</h5>
+</div>
+<div class="card-rounded card-header">
+  <div class="ml-2">   <a  (click)="nuevo()" class="icon-hover  icon-color-success"> <i class="fas fa-plus fa-lg mr-2"></i>Unidad</a>    </div> 
+</div>
   <div class="row m-3">
     <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"    columnResizeMode="expand" [responsive]="true"
     scrollHeight="300px" [scrollable]="true"    >
    
+ 
     <ng-template pTemplate="caption">
       <div class=" row">
           <div class="col-4" style="text-align: left" >
-            <button class="btn btn-success">Nuevo artículo</button>  
+         
           </div>
         
-        <div class="col-8 mt-2" style="text-align: right">     
-          
-            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-            <input   size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        <div class="col-8 mt-2" style="text-align: right">               
+          <input type="text" pInputText size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">            
         </div>
       </div>
       
     </ng-template>
-               <ng-template pTemplate="header" let-columns >
+             
+    <ng-template pTemplate="header" let-columns >
               
-                          <tr >
-                               
-                            <th  *ngFor="let col of columns" [pSortableColumn]="col.field"  [ngStyle]="{'width': col.width}">
-                                {{col.header}}
-                                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
-                            </th> 
-                          
-                        </tr> 
-                        <tr>
-                        <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                          
-                        </th>
-                        <th></th>
-                    </tr>
-                </ng-template>
+      <tr >
+           
+        <th  *ngFor="let col of columns" [pSortableColumn]="col.field"  [ngStyle]="{'width': col.width}">
+            {{col.header}}
+            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+        </th> 
+        
+    </tr> 
+    <tr>
+    <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
+    
+        <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">                    
+    </th>
+    <th></th>
+</tr>
+</ng-template>
               
-        <ng-template pTemplate="body" let-elementos  >
-            <tr style="height:20px"  >
-                   
-                   
-                    <td style="width: 80%">{{elementos.descripcion}}</td>
-                                                
-                    <td style="width: 20%">
-                            <button class="btn btn-success">Editar</button>
-                        </td>
-            </tr>
-        </ng-template>
+                <ng-template pTemplate="body" let-elementos  >
+                  <tr style="height:20px">
+                         
+                          <td style="width: 80%">{{elementos.descripcion}}</td>
+                        
+                                      
+                          <td style="width: 20%">
+                            <a  (click)="buscar(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
+                              </td>
+                  </tr>
+              </ng-template>
        
     </p-table>
   </div>

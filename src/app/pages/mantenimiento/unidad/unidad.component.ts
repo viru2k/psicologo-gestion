@@ -3,6 +3,7 @@ import { InsumoService } from '../../../services/insumo.service';
 import { AlertServiceService } from '../../../services/alert-service.service';
 import { MessageService, DialogService } from 'primeng/api';
 import { InsumoEditarComponent } from './../insumo-editar/insumo-editar.component';
+import { UnidadEditarComponent } from './../unidad-editar/unidad-editar.component';
 
 
 @Component({
@@ -22,8 +23,7 @@ export class UnidadComponent implements OnInit {
 
     this.cols = [
     
-      { field: 'descripcion', header: 'Insumo',  width: '50%' },
-      { field: 'unidad_descripcion', header: 'Unidad',  width: '30%' },
+      { field: 'descripcion', header: 'Unidad',  width: '80%' },      
       { field: '', header: 'Acción',  width: '20%' },
       
    ];
@@ -36,9 +36,9 @@ export class UnidadComponent implements OnInit {
 
   loadlist(){
 
-    this.loading = true;  
+    this.loading = true;
     try {
-        this.insumoService.getInsumo()   
+        this.insumoService.getUnidad()
         .subscribe(resp => {
           if (resp[0]) {
             this.elementos = resp;
@@ -51,50 +51,50 @@ export class UnidadComponent implements OnInit {
         },
         error => { // error path
             console.log(error);
-            
+
             this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-         });    
+         });
     } catch (error) {
       this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
-    }  
+    }
 }
 
-buscar(elemento:any){
+buscar(elemento: any) {
   console.log(elemento);
-  let data:any; 
- data = elemento;
-  const ref = this.dialogService.open(InsumoEditarComponent, {
+  const data: any = elemento;
+
+  const ref = this.dialogService.open(UnidadEditarComponent, {
   data,
-   header: 'Editar insumo', 
-   width: '98%',
-   height: '90%'
+   header: 'Editar Unidad',
+   width: '60%',
+   height: '50%'
   });
 
-  ref.onClose.subscribe((ArticuloEditarComponent:any) => {
- 
-        this.loadlist();
- 
+  ref.onClose.subscribe((UnidadEditarComponent: any) => {
+
+      this.loadlist();
+
   });
 
 }
 
 
-nuevo(){
-  
-  let data:any; 
- 
-  const ref = this.dialogService.open(InsumoEditarComponent, {
+nuevo() {
+
+  const data: any = null;
+
+  const ref = this.dialogService.open(UnidadEditarComponent, {
   data,
-   header: 'Editar insumo', 
-   width: '98%',
-   height: '90%'
+   header: 'Crear Unidad',
+   width: '60%',
+   height: '50%'
   });
 
-  ref.onClose.subscribe((ArticuloEditarComponent:any) => {
-    
-     
-        this.loadlist()                     ;
-      
+  ref.onClose.subscribe((UnidadEditarComponent: any) => {
+
+    if (UnidadEditarComponent) {
+      this.loadlist();
+    }
   });
 
 }

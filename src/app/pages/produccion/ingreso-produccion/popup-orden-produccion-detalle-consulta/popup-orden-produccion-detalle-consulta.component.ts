@@ -6,6 +6,8 @@ import { calendarioIdioma } from './../../../../config/config';
 import { OrdenProduccionDetalle } from './../../../../models/orden-produccion-detalle.model';
 import { PopupAsociarProduccionComponent } from './popup-asociar-produccion/popup-asociar-produccion.component';
 import { PopupCalculdorPalletsComponent } from './../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
+import { OverlayPanel } from 'primeng/overlaypanel';
+import { PopupAsociarProduccionDetalleComponent } from './popup-asociar-produccion-detalle/popup-asociar-produccion-detalle.component';
 
 
 @Component({
@@ -18,8 +20,24 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
   elementos: any[];
   userData: any;
   loading;
+  selected: any;
+  cols:any;
 
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig) {
+
+    this.cols = [
+      { field: 'id', header: 'Prod Nª',  width: '7.5%' },
+      { field: 'estado', header: 'Estado',  width: '8%' },
+      { field: 'fecha_produccion', header: 'Creado',  width: '15%' },
+      { field: 'nombre', header: 'Descripción',  width: '30%' },
+      { field: 'cantidad_solicitada', header: 'Solicitado',  width: '12%' },
+      { field: 'cantidad_usada', header: 'Usada',  width: '12%' },
+      { field: 'cantidad_existente', header: 'Existente',  width: '12%' },
+      { field: '', header: 'Pallets',  width: '12%' },
+      { field: '', header: 'Pack',  width: '12%' },
+      { field: '', header: '',  width: '6%' },
+    ];
+   
   }
 
 
@@ -29,8 +47,14 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
     this.loadlist(this.config.data['id']);
   }
 
+  accion(evt: any, overlaypanel: OverlayPanel, event: any) {
+    if (event) {
+      this.selected = event;
+    }
+    console.log(event);
+    overlaypanel.toggle(evt);
+  }
 
-  
   loadlist(produccion: any) {
     console.log(produccion);
     this.loading = true;
@@ -103,7 +127,7 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
   });
 
  }
-/* 
+
  
  detalleProduccion(elemento: any) {
   console.log(elemento);
@@ -121,7 +145,7 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
   });
 
 }
- */
+ 
 
 
  estadistica(elemento: any) {

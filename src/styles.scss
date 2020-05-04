@@ -1094,21 +1094,26 @@ body {
 
 
 .border-es-activo {
-  border: 2px solid #81C784 !important; 
+  border-left: 10px solid #81C784 !important; 
+  //border-right: 5px solid #81C784 !important; 
 }
 
 .border-es-pausado {    
-    border: 2px solid #FFA000 !important;
+    border-left: 10px solid #FFA000 !important;
 }
 
 .border-es-cancelado { 
-    border: 2px solid #FF5733 !important;
+    border-left: 10px solid #FF5733 !important;
     
     
 }
 
 .border-es-finalizado {    
-    border: 2px solid #78AEB7 !important;
+    border-left: 10px solid #78AEB7 !important;
+}
+
+.border-es-neutral {    
+    border-left: 20px solid #546E7A !important;
 }
 
 

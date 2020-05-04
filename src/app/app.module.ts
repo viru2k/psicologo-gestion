@@ -46,7 +46,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {PanelModule} from 'primeng/panel';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputSwitchModule} from 'primeng/inputswitch';
-
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 
 
@@ -132,6 +132,10 @@ import { PopUpOrdenProduccionDetalleEditarComponent } from './pages/produccion/o
 import { PopupOrdenProduccionDetalleConsultaComponent } from './pages/produccion/ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-orden-produccion-detalle-consulta.component';
 import { PopupAsociarProduccionComponent } from './pages/produccion/ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-asociar-produccion/popup-asociar-produccion.component';
 import { PopupAsociarProduccionDetalleComponent } from './pages/produccion/ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-asociar-produccion-detalle/popup-asociar-produccion-detalle.component';
+import { GrupoTrabajoComponent } from './pages/mantenimiento/grupo-trabajo/grupo-trabajo.component';
+import { GrupoTrabajoEditarComponent } from './pages/mantenimiento/grupo-trabajo-editar/grupo-trabajo-editar.component';
+import { GrupoTrabajoAsociarComponent } from './pages/mantenimiento/grupo-trabajo-asociar/grupo-trabajo-asociar.component';
+import { GrupoTrabajoAsociarEditarComponent } from './pages/mantenimiento/grupo-trabajo-asociar-editar/grupo-trabajo-asociar-editar.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -186,7 +190,11 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopUpOrdenProduccionDetalleEditarComponent,
     PopupOrdenProduccionDetalleConsultaComponent,
     PopupAsociarProduccionComponent,
-    PopupAsociarProduccionDetalleComponent
+    PopupAsociarProduccionDetalleComponent,
+    GrupoTrabajoComponent,
+    GrupoTrabajoEditarComponent,
+    GrupoTrabajoAsociarComponent,
+    GrupoTrabajoAsociarEditarComponent
   ],
   imports: [
 
@@ -217,6 +225,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     ProgressSpinnerModule,
     InputSwitchModule,
     PanelModule,
+    ToggleButtonModule,
     AutoCompleteModule,
     PivotViewModule ,
     SweetAlert2Module.forRoot(),
@@ -257,7 +266,9 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopupInsumoConsultaComponent,
     PopupArticuloDistribucionConsultaComponent,
     PopupUsuarioComponent,
-    PopupCalculdorPalletsComponent
+    PopupCalculdorPalletsComponent,
+    GrupoTrabajoEditarComponent,
+    GrupoTrabajoAsociarComponent
     ],
   providers: [CurrencyPipe, DecimalPipe,
     PushNotificationService, ExcelService, { provide: LOCALE_ID, useValue: 'es-Ar' },

@@ -20,6 +20,10 @@ import { MovimientoProduccionComponent } from './pages/produccion/movimiento-pro
 import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/movimiento-insumo.component';
 import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
 import { OrdenProduccionComponent } from './pages/produccion/orden-produccion/orden-produccion.component';
+import { UnidadComponent } from './pages/mantenimiento/unidad/unidad.component';
+import { GrupoTrabajoComponent } from './pages/mantenimiento/grupo-trabajo/grupo-trabajo.component';
+import { GrupoTrabajoEditarComponent } from './pages/mantenimiento/grupo-trabajo-editar/grupo-trabajo-editar.component';
+import { GrupoTrabajoAsociarComponent } from './pages/mantenimiento/grupo-trabajo-asociar/grupo-trabajo-asociar.component';
 
 const routes: Routes = [
   
@@ -33,11 +37,13 @@ const routes: Routes = [
 
 { path: 'mantenimiento/articulo', component: ArticuloComponent },
 { path: 'mantenimiento/articulo/confeccion', component: ArticuloConfeccionComponent },
+{ path: 'mantenimiento/unidad', component: UnidadComponent },
 { path: 'mantenimiento/insumo', component: InsumoComponent },
 { path: 'calidad/encabezado', component: CalidadTipoControlComponent },
 { path: 'calidad/planilla', component: CalidadControlComponent },
 { path: 'calidad/columnas', component: CalidadDatoRelevadoComponent },
-
+{ path: 'mantenimiento/grupo', component: GrupoTrabajoComponent },
+{ path: 'mantenimiento/grupo/asociarr', component: GrupoTrabajoAsociarComponent },
 { path: 'usuario', component: UsuarioComponent },
 
 /* -------------------------------------------------------------------------- */

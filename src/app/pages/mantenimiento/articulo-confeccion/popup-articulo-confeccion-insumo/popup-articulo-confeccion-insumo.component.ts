@@ -154,9 +154,10 @@ nuevo() {
 
 borrar(elemento){
   console.log('borrando');
+  console.log(elemento);
   this.loading = true;
   try {
-      this.articuloService.delArticuloProduccion(elemento.id)
+      this.articuloService.delArticuloProduccion(elemento.stock_armado_producto_id)
       .subscribe(resp => {
           console.log(resp);
           this.loading = false;

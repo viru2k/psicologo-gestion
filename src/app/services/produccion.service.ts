@@ -55,8 +55,16 @@ export class ProduccionService {
     getUnidad(){
       return this.http.get<any[]>(this.url+'unidad');
       }
+    
+    setUnidad(unidad: any) {
+      return this.http.post<any>(this.url + 'unidad', unidad);
+    }
 
-    setProduccionOrdenProduccion(produccion:any){
+    updUnidad( id: string, unidad: any ){
+      return this.http.put<any>(this.url + 'unidad/' + id, unidad);
+    }
+
+    setProduccionOrdenProduccion(produccion: any){
       return this.http.post<any>(this.url+'produccion/crear', produccion);
       }
 
@@ -75,12 +83,18 @@ export class ProduccionService {
     getSector(){
       return this.http.get<any[]>(this.url + 'produccion/sector/carga');
     }
+
     produccionDetalleByProduccionId(produccion_id: string) {
       return this.http.get<any[]>(this.url + 'produccion/detalle/by/produccion/id?produccion_id=' + produccion_id);
     }
 
     setProduccionProceso(produccion: any){
       return this.http.post<any>(this.url + 'produccion/proceso/crear', produccion);
+      }
+
+
+      getProduccionProcesoByOrdenProduccionDetalleId(orden_produccion_detalle_id: string) {
+        return this.http.get<any[]>(this.url + 'produccion/proceso/by/detalle/id?orden_produccion_detalle_id=' + orden_produccion_detalle_id);
       }
 
 

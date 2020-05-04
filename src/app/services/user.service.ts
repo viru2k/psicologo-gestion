@@ -11,43 +11,63 @@ import { UsuarioModulo } from '../models/user-modulo.model';
 })
 export class UserService {
 
- 
-  private url:string  = URL_SERVICIOS + 'user';
+  private url: string  = URL_SERVICIOS + 'user';
 
   constructor(public http: HttpClient) { }
 
-getItem(id:number){
-  return this.http.get<User>(this.url+"/"+id);
+getItem(id: number) {
+  return this.http.get<User>(this.url + '/' + id);
   }
 
-getItemInfoAndMenu(email:string){
-    return this.http.get<User>(this.url+"/info/menu?email="+email);
+getItemInfoAndMenu(email: string) {
+    return this.http.get<User>(this.url + '/info/menu?email=' + email);
     }
 
 
-getItemUserAndMenu(email:string){
-    return this.http.get<UsuarioModulo[]>(this.url+"/info/menu?email="+email);
-}   
-getItemsMenu(){
-  return this.http.get<UsuarioModulo[]>(this.url+"/menu");
+getItemUserAndMenu(email: string) {
+    return this.http.get<UsuarioModulo[]>(this.url + '/info/menu?email=' + email);
+}
+
+getItemsMenu() {
+  return this.http.get<UsuarioModulo[]>(this.url + '/menu');
   }
 
-getItems(){
+getItems() {
   return this.http.get<User[]>(this.url);
   }
 
-putItem(val:User, id:string){
-//   console.log(this.url+"/"+id);
-  console.log(val); 
-  return this.http.put<User>(this.url+"/"+id,val);
-}
-
-postUserMenu(val:UsuarioModulo, user_id: string){
+putItem(val: User, id: string) {
+//   console.log(this.url + '/'+id);
   console.log(val);
-  return this.http.post<User>(this.url+"/menu/add/"+user_id, val);
+  return this.http.put<User>(this.url + '/' + id, val);
 }
 
-delModulo(id:string){
-  return this.http.delete<string>(this.url+"/menu/"+id);
+postUserMenu(val: UsuarioModulo, user_id: string) {
+  console.log(val);
+  return this.http.post<User>(this.url + '/menu/add/' + user_id, val);
+}
+
+delModulo(id: string) {
+  return this.http.delete<string>(this.url + '/menu/ ' + id);
   }
+
+  getUsers() {
+    return this.http.get<any>(this.url);
+  }
+
+  getUser(id: string) {
+    return this.http.get<any>(this.url + '/' + id);
+  }
+
+  updUser(id: string, usuario: any) {
+    return this.http.put<any>(this.url + '/editar/' + id, usuario);
+  }
+  EditarUsuarioPassword(id: string, usuario: any) {
+    return this.http.put<any>(this.url + '/editar/password/' + id, usuario);
+  }
+  
+  setUser(usuario: any) {
+    return this.http.post<any>(this.url + '/crear', usuario);
+  }
+
 }

@@ -53,13 +53,17 @@ export class IngresoProduccionComponent implements OnInit {
               private articuloService: ArticuloService,private produccionService: ProduccionService,
               public dialogService: DialogService, private messageService: MessageService) {
 
-                this.cols = [
-                  { field: 'accion', header: 'Accion' , width: '6%'} ,
-                  { field: 'id', header: 'Nª',  width: '6%' },
-                  { field: 'fecha_pedido', header: 'Fecha pedido',  width: '10%' },
-                  { field: 'descripcion', header: 'Descripcion',  width: '40%' },
-                  { field: 'cantidad', header: 'Cantidad solicitada',  width: '10%' },
-                  { field: 'nombreyapellido', header: 'Usuario',  width: '40%' }
+                this.cols = [                  
+                  { field: 'id', header: 'Prod Nª',  width: '7.5%' },
+                  { field: 'estado', header: 'Estado',  width: '8%' },
+                  { field: 'fecha_creacion', header: 'Creado',  width: '10%' },
+                  { field: 'descripcion', header: 'Descripción',  width: '30%' },
+                  { field: 'observacion', header: 'Observación',  width: '25%' },
+                  { field: 'fecha_desde', header: 'Inicio',  width: '12%' },
+                  { field: 'fecha_hasta', header: 'Fin',  width: '12%' },
+                  { field: 'nombreyapellido', header: 'Usuario',  width: '12%' },
+                  { field: '', header: '',  width: '4%' },
+                  { field: '', header: '',  width: '6%' },
                 ];
                }
 
@@ -188,6 +192,10 @@ colorRow(estado: string) {
   }
   if (estado === 'FINALIZADO') {
     return {'border-es-finalizado'  : 'null' };
+  }
+
+  if (estado === 'NEUTRAL') {
+    return {'border-es-neutral'  : 'null' };
   }
 }
 

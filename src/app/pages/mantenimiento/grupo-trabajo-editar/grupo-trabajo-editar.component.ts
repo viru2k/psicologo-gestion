@@ -3,15 +3,15 @@ import { ProduccionService } from '../../../services/produccion.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/api';
 import { AlertServiceService } from './../../../services/alert-service.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SectorService } from '../../../services/sector.service';
 
 @Component({
-  selector: 'app-unidad-editar',
-  templateUrl: './unidad-editar.component.html',
-  styleUrls: ['./unidad-editar.component.scss']
+  selector: 'app-grupo-trabajo-editar',
+  templateUrl: './grupo-trabajo-editar.component.html',
+  styleUrls: ['./grupo-trabajo-editar.component.scss']
 })
-export class UnidadEditarComponent implements OnInit {
+export class GrupoTrabajoEditarComponent implements OnInit {
 
-  
   updateDataForm: FormGroup;
   elementos: any;
   unidades: any;
@@ -22,12 +22,12 @@ export class UnidadEditarComponent implements OnInit {
   selectedForma: any;
   userData: any;
 
-  constructor(public config: DynamicDialogConfig, private produccionService: ProduccionService,
+  constructor(public config: DynamicDialogConfig, private sectorService: SectorService,
               private alertServiceService: AlertServiceService, public ref: DynamicDialogRef) {
 
     this.updateDataForm = new FormGroup({
       'id': new FormControl('', ),
-      'descripcion': new FormControl('', Validators.required)
+      'grupo_nombre': new FormControl('', Validators.required)
   });
   }
 
@@ -59,7 +59,7 @@ export class UnidadEditarComponent implements OnInit {
   nuevaUnidad() {
     this.loading = true;
     try {
-      this.produccionService.setUnidad(this.updateDataForm.value)
+      this.sectorService.setGrupo(this.updateDataForm.value)
       .subscribe(resp => {
           this.loading = false;
           console.log(resp);
@@ -78,7 +78,7 @@ export class UnidadEditarComponent implements OnInit {
 
     console.log(this.updateDataForm);
     try {
-      this.produccionService.updUnidad( this.updateDataForm.value.id, this.updateDataForm.value)
+      this.sectorService.updGrupo( this.updateDataForm.value.id, this.updateDataForm.value)
       .subscribe(resp => {
         this.loading = false;
         console.log(resp);

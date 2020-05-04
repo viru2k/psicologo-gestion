@@ -398,14 +398,9 @@ menuList() {
   },
 
 
-
-  
-
-  
   {
 
     label: 'Mantenimiento',
-    
     items: [{
             label: 'Parametros',
             visible:! this.administracion_produccion,
@@ -414,7 +409,10 @@ menuList() {
               {label: 'Insumo', routerLink: 'mantenimiento/insumo'},
               {label: 'Armado de producto', routerLink: 'mantenimiento/articulo/confeccion'},
               {label: 'Unidad', routerLink: 'mantenimiento/unidad'},
-              {label: 'Sector', routerLink: 'mantenimiento/sector'},
+              {label: 'Grupo de trabajo', items:[
+                {label: 'Grupos', routerLink: 'mantenimiento/grupo'},
+                {label: 'Asociar grupo', routerLink: 'mantenimiento/grupo/asociar'}
+              ]},
             ]
         },
         {
@@ -428,43 +426,40 @@ menuList() {
       },
       {
        label: 'Usuario',
-       visible:! this.mantenimiento,
+       visible: !this.mantenimiento,
       routerLink: 'usuario'},
- 
-
     ]
   }
-   
- 
+
 ];
 
 
 }
 
-throwAlert(estado:string, mensaje:string, motivo:string, errorNumero:string){
-  let tipoerror:string;
+throwAlert(estado: string, mensaje: string, motivo: string, errorNumero: string) {
+  let tipoerror: string;
 
-  if(estado== 'success'){
+  if (estado === 'success') {
       swal({
           type: 'success',
           title: 'Exito',
           text: mensaje
-        })
+        });
   }
 
-  if(errorNumero =='422'){
+  if (errorNumero === '422' ) {
     mensaje ='Los datos que esta tratando de guardar son iguales a los que ya poseia';
-    swal({   
+    swal({
         type: 'warning',
         title: 'Atención..',
         text: mensaje,
         footer: motivo
-      })
+      });
 }
 
-  if(errorNumero =='99'){
+  if (errorNumero === '99') {
   mensaje ='Debe seleccionar un paciente antes de cargar las prácticas';
-  swal({   
+  swal({
       type: 'warning',
       title: 'Atención..',
       text: mensaje,
@@ -472,42 +467,43 @@ throwAlert(estado:string, mensaje:string, motivo:string, errorNumero:string){
     })
 }
 
-  if(errorNumero =='100'){
-  mensaje ='El paciente posee una obra social que no esta habilitada';
-  swal({   
+  if (errorNumero === '100') {
+  mensaje = 'El paciente posee una obra social que no esta habilitada';
+  swal({
       type: 'warning',
       title: 'Atención..',
       text: mensaje,
       footer: motivo
-    })
+    });
 }
-  if(estado == 'warning'){
-    
-    swal({   
+  if (estado === 'warning') {
+
+    swal({
         type: 'warning',
         title: 'Atención..',
         text: mensaje,
         footer: motivo
-      })
+      });
   }
-  
-  if((estado== 'error')&&(errorNumero!='422')){
-    if(errorNumero =='422'){
-        mensaje ='Los datos que esta tratando de guardar son iguales a los que ya poseia';
+
+  if ((estado === 'error') && (errorNumero !== '422')) {
+    if (errorNumero === '422') {
+        mensaje = 'Los datos que esta tratando de guardar son iguales a los que ya poseia';
     }
-    if(errorNumero =='400 '){
-        mensaje ='Bad Request ';
+    if (errorNumero === '400 ') {
+        mensaje = 'Bad Request ';
     }
-    if(errorNumero =='404'){
-        mensaje ='No encontrado ';
+    if (errorNumero  === '404') {
+        mensaje = 'No encontrado ';
     }
-    if(errorNumero =='401'){
-        mensaje ='Sin autorización';
+    if (errorNumero === '401') {
+        mensaje = 'Sin autorización';
     }
-    if(errorNumero =='403'){
-        mensaje =' Prohibido : La consulta fue valida, pero el servidor rechazo la accion. El usuario puede no tener los permisos necesarios, o necesite una cuenta para operar ';
+    if (errorNumero === '403') {
+        // tslint:disable-next-line: max-line-length
+        mensaje = ` Prohibido : La consulta fue valida, pero el servidor rechazo la accion.El usuario puede no tener los permisos necesarios, o necesite una cuenta para operar `;
     }
-    if(errorNumero =='405'){
+    if(errorNumero === '405'){
         mensaje ='Método no permitido';
     }
     if(errorNumero =='500'){
@@ -525,7 +521,7 @@ throwAlert(estado:string, mensaje:string, motivo:string, errorNumero:string){
           title: 'Oops...',
           text: mensaje,
           footer: motivo
-        })
+        });
   }
 
 
