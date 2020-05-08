@@ -24,6 +24,7 @@ import { UnidadComponent } from './pages/mantenimiento/unidad/unidad.component';
 import { GrupoTrabajoComponent } from './pages/mantenimiento/grupo-trabajo/grupo-trabajo.component';
 import { GrupoTrabajoEditarComponent } from './pages/mantenimiento/grupo-trabajo-editar/grupo-trabajo-editar.component';
 import { GrupoTrabajoAsociarComponent } from './pages/mantenimiento/grupo-trabajo-asociar/grupo-trabajo-asociar.component';
+import { ProduccionProcesoComponent } from './pages/produccion/produccion-proceso/produccion-proceso.component';
 
 const routes: Routes = [
   
@@ -62,6 +63,7 @@ const routes: Routes = [
 { path: 'produccion/ingreso', component: IngresoProduccionComponent },
 { path: 'produccion/movimientos', component: MovimientoProduccionComponent },
 { path: 'produccion/asociar/insumo', component: MovimientoInsumoComponent },
+{ path: 'produccion/proceso', component: ProduccionProcesoComponent },
 
 /* -------------------------------------------------------------------------- */
 /*                              PAGINAS DEL SITIO                             */
@@ -73,6 +75,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
+
 
 
 

@@ -29,11 +29,11 @@ export class OrdenProduccionComponent implements OnInit {
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [
-      { field: 'id', header: 'Nº',  width: '6%' },
+      { field: 'id', header: 'Prod Nª',  width: '7.5%' },
+      { field: 'estado', header: 'Estado',  width: '8%' },
       { field: 'fecha_creacion', header: 'Creado',  width: '15%' },
       { field: 'descripcion', header: 'Descripción',  width: '30%' },
       { field: 'observacion', header: 'Observación',  width: '25%' },
-      { field: 'estado', header: 'Estado',  width: '10%' },
       { field: 'fecha_desde', header: 'Desde',  width: '12%' },
       { field: 'fecha_hasta', header: 'Hasta',  width: '12%' },
       { field: 'nombreyapellido', header: 'Usuario',  width: '20%' },
@@ -147,17 +147,37 @@ nuevo() {
 colorRow(estado: string) {
 
   if (estado === 'ACTIVO') {
-    return {'es-activo'  : 'null' };
+    return {'border-es-activo'  : 'null' };
   }
   if (estado === 'PAUSADO') {
-    return {'es-pausado'  : 'null' };
+    return {'border-es-pausado'  : 'null' };
   }
   if (estado === 'CANCELADO') {
-    return {'es-cancelado'  : 'null' };
+    return {'border-es-cancelado'  : 'null' };
   }
   if (estado === 'FINALIZADO') {
-    return {'es-finalizado'  : 'null' };
+    return {'border-es-finalizado'  : 'null' };
+  }
+
+  if (estado === 'NEUTRAL') {
+    return {'border-es-neutral'  : 'null' };
   }
 }
+
+iconoColor(estado: string) {
+
+  if (estado === 'ACTIVO') {
+    return {'icono-success'  : 'null' };
+  }
+  if (estado === 'PAUSADO') {
+    return {'icono-warning'  : 'null' };
+  }
+  if (estado === 'CANCELADO') {
+    return {'icono-danger'  : 'null' };
+  }
+  if (estado === 'FINALIZADO') {
+    return {'icono-secondary'  : 'null' };
+  }
 }
 
+}

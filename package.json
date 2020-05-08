@@ -28,6 +28,8 @@
     "animate.css": "^3.7.0",
     "bootstrap": "^4.0.0",
     "chart.js": "^2.7.2",
+    "compass": "^0.1.1",
+    "compass-mixins": "^0.12.10",
     "font-awesome": "~4.7.x",
     "fullcalendar": "^4.0.0-alpha",
     "hammerjs": "~2.0.8",

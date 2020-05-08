@@ -14,7 +14,8 @@ export class ProduccionProceso {
     private hora_fin: string;
     private estado: string;
     private orden_produccion_detalle_id:string;
-    
+    private lote: string;
+
     private ProduccionProceso: [];
 
 
@@ -31,7 +32,8 @@ export class ProduccionProceso {
         hora_inicio: string,
         hora_fin: string,
         estado: string,
-        orden_produccion_detalle_id: string
+        orden_produccion_detalle_id: string,
+        lote: string
         ){
             this.id = id;
             this.orden_produccion_id = orden_produccion_id;
@@ -46,6 +48,7 @@ export class ProduccionProceso {
             this.hora_fin = hora_fin;
             this.estado = estado;
             this.orden_produccion_detalle_id = orden_produccion_detalle_id;
+            this.lote = lote;
         }
 
 }

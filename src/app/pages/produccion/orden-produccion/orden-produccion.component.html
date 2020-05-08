@@ -4,7 +4,8 @@
   <div class="card-rounded card-header">
     <div class="ml-2 row d-flex justify-content-between">  
         <div class="d-flex justify-content-start">
-            <div class="ml-2">   <a  (click)="nuevo()" class="icon-hover  icon-color-success"> <i class="fas fa-plus fa-lg mr-2"></i>Orden producción</a>    </div> 
+          <button  class="btn-cuadrado-success btn--block mb-1" (click)="nuevo()"  > <i class="fas fa-plus fa-lg mr-2 mt-1"></i>ORDEN DE PRODUCCION</button>
+        
         </div>
         <div class="d-flex justify-content-end">
            <label class="mr-2 text-info">Ver Ordenes de producción finalizadas</label> <p-inputSwitch [(ngModel)]="checked" class="text-info" (onChange)="handleChange($event)"></p-inputSwitch>
@@ -56,12 +57,12 @@
                   </ng-template>
                 
           <ng-template pTemplate="body" let-elementos  >
-              <tr style="height:20px"  [ngClass]="colorRow(elementos.estado)">
-                      <td style="font-size: 14px;width: 6%; font-weight: bold;">{{elementos.id}}</td>      
+            <tr style="height:20px"  [ngClass]="colorRow(elementos.estado)">
+                      <td style="width: 7%; font-size: 14px;font-weight: bold;" [ngClass]="iconoColor(elementos.estado)">{{elementos.id}}</td> 
+                      <td style="width: 8%"  [ngClass]="iconoColor(elementos.estado)">{{elementos.estado}}</td> 
                       <td style="width: 15%">{{elementos.fecha_creacion | date:'dd/MM/yyyy'}}</td>
                       <td style="width: 30%">{{elementos.descripcion}}</td>
                       <td style="width: 25%">{{elementos.observacion}}</td>
-                      <td style="width: 10%">{{elementos.estado}}</td>
                       <td style="width: 12%">{{elementos.fecha_desde | date : 'dd/MM/yyyy hh:mm:ss'}}</td>
                       <td style="width: 12%">{{elementos.fecha_hasta | date : 'dd/MM/yyyy hh:mm:ss'}}</td>
                       <td style="width: 20%">{{elementos.nombreyapellido}}</td>

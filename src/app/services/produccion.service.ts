@@ -97,5 +97,13 @@ export class ProduccionService {
         return this.http.get<any[]>(this.url + 'produccion/proceso/by/detalle/id?orden_produccion_detalle_id=' + orden_produccion_detalle_id);
       }
 
+      getProduccionProcesoByEstado() {
+        return this.http.get<any[]>(this.url + 'produccion/proceso/by/estado');
+      }
+
+      getProduccionProcesoByDates(fecha_desde: string, fecha_hasta: string) {
+        return this.http.get<any[]>(this.url + 'produccion/proceso/by/detalle/id?fecha_desde=' + fecha_desde + '&fecha_hasta=' + fecha_hasta);
+      }
+
 
 }

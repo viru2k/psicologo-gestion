@@ -16,7 +16,7 @@ import { PopupAsociarProduccionDetalleComponent } from './popup-asociar-producci
   styleUrls: ['./popup-orden-produccion-detalle-consulta.component.scss']
 })
 export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
-
+  elemento:any;
   elementos: any[];
   userData: any;
   loading;
@@ -28,13 +28,12 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
     this.cols = [
       { field: 'id', header: 'Prod Nª',  width: '7.5%' },
       { field: 'estado', header: 'Estado',  width: '8%' },
-      { field: 'fecha_produccion', header: 'Creado',  width: '15%' },
-      { field: 'nombre', header: 'Descripción',  width: '30%' },
-      { field: 'cantidad_solicitada', header: 'Solicitado',  width: '12%' },
-      { field: 'cantidad_usada', header: 'Usada',  width: '12%' },
-      { field: 'cantidad_existente', header: 'Existente',  width: '12%' },
-      { field: '', header: 'Pallets',  width: '12%' },
-      { field: '', header: 'Pack',  width: '12%' },
+      { field: 'fecha_produccion', header: 'A producir',  width: '15%' },
+      { field: 'nombre', header: 'Producto',  width: '20%' },
+      { field: '', header: 'Distribución',  width: '15%' },
+      { field: 'cantidad_solicitada', header: 'Solicitado',  width: '11%' },
+      { field: 'cantidad_usada', header: 'Confeccionado',  width: '11%' },
+      { field: 'cantidad_existente', header: 'Pendiente',  width: '11%' },
       { field: '', header: '',  width: '6%' },
     ];
    
@@ -52,6 +51,7 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
       this.selected = event;
     }
     console.log(event);
+    this.elemento = event;
     overlaypanel.toggle(evt);
   }
 
@@ -109,11 +109,11 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
 
  }
 
- nuevaProduccion(elemento: any) {
-  console.log(elemento);
-  elemento.es_nuevo = true;
+ nuevaProduccion(_elemento: any) {
+  console.log(this.elemento);
+  _elemento.es_nuevo = true;
   let data: any;
-  data = elemento;
+  data = this.elemento;
   const ref = this.dialogService.open(PopupAsociarProduccionComponent, {
   data,
    header: 'Gestionar produccion',

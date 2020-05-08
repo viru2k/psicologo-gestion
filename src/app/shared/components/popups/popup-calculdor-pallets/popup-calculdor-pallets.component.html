@@ -1,6 +1,11 @@
-<div class="row">
+<div class="row d-flex justify-content-center">
 
-    <div class="col-8">
+    <div class="col-8 ">
+        <div class="row m-2">
+            <h5 class="mr-2 texto-bold">ARTICULO: </h5>
+            <h5 class="mr-1 texto-bold" *ngIf="this.config.data">{{this.config.data.nombre}}</h5>
+            <hr>
+        </div>
         <div class="row m-2">
             <label class="mr-1">Cantidad de pallets :</label>
             <input type="number" class="mr-1 ml-1 form-control form-control-sm" [(ngModel)]="pallet" (change)="calcular()">
@@ -25,16 +30,22 @@
             <label class="mr-1">Cantidad de botellas :</label>
             <input type="number" class="mr-1 ml-1 form-control form-control-sm  " [(ngModel)]="unidad" (change)="calcular()">
             <label class="mr-1 ml-1">Calculo :</label>
-            <label class="mr-1 ml-1">{{botella_calculo}}</label>
+            <label class="mr-1 ml-1">{{unidad}}</label>
         </div>
     
         <div class="row m-2">            
-            <label class="mr-1 ml-1">TOTAL EN UNIDADES :</label>
-            <label class="mr-1 ml-1">{{pallet_calculo}}</label>
+            <label class="mr-1 ml-1 texto-bold texto-info">TOTAL EN PACK :</label>
+            <label class="mr-1 ml-1 texto-bold texto-info">{{TOTAL_PACK}}</label>
+            <hr>
+        </div>
+        <div class="row m-2">            
+            <label class="mr-1 ml-1 texto-bold texto-success">TOTAL EN UNIDADES :</label>
+            <label class="mr-1 ml-1 texto-bold texto-success">{{TOTAL_CALCULO}}</label>
+            <hr>
         </div>
         <div class="row m-2">
-            <label class="mr-1">TOTAL EN LITROS :</label>                    
-            <label class="mr-1 ml-1">{{litros_calculo}}</label>
+            <label class="mr-1 ml-1 texto-bold texto-secondary">TOTAL EN LITROS :</label>                    
+            <label class="mr-1 ml-1 texto-bold texto-secondary">{{litros_calculo}}</label>
         </div>
     </div>
   

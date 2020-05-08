@@ -35,7 +35,7 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
   loading;
   userData: any;
   estado: any[] = [];
-  selectedEstado: string = 'PAUSADO' ;
+  selectedEstado: string = 'ACTIVO' ;
 
    // tslint:disable-next-line: max-line-length
    constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig) {
@@ -79,11 +79,8 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
       this.fecha_desde =  new Date(this.config.data.fecha_desde);
       this.fecha_hasta =  new Date(this.config.data.fecha_hasta);
       console.log(this.config.data.estado);
-      this.selectedEstado =  'PAUSADO';
-      this.estado['name'] =  'PAUSADO';
-     // this.selectedEstado
-      
-      this.loadlist(this.config.data['id']);
+      this.selectedEstado =  this.config.data.estado;
+      this.loadlist(this.config.data.id);
     }
 
     this.userData = JSON.parse(localStorage.getItem('userData'));
@@ -100,6 +97,9 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
     
   }
 
+  onChangeEstado(e) {
+    console.log(e.target.value);
+  }
 
    loadlist(produccion: any) {
     console.log(produccion);

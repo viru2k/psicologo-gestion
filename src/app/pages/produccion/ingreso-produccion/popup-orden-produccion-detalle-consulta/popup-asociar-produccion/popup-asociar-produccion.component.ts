@@ -27,6 +27,7 @@ export class PopupAsociarProduccionComponent implements OnInit {
   _fecha_hasta: string;
   produccionProceso: ProduccionProceso;
   producir = 0;
+  lote = '';
   selectedMaquina:any;
   maquinas: any[];
 
@@ -81,19 +82,20 @@ export class PopupAsociarProduccionComponent implements OnInit {
 
     const _cantidad_usada: number =  Number(this.config.data.cantidad_usada) + Number(this.producir);
     const _cantidad_existente: number = Number(this.config.data.cantidad_solicitada  ) - Number(_cantidad_usada);
-    
-    console.log('usada '+ _cantidad_usada+' existente '+ _cantidad_existente);
+
+    this._fecha_desde = formatDate(new Date(this.fecha_desde), 'yyyy-MM-dd HH:mm:ss', 'en');
+    console.log('usada ' + _cantidad_usada+' existente ' + _cantidad_existente);
 /* ----------------- SI LA CANTIDAD ES NEGATIVA NO SE GUARDA ---------------- */
 
     if (_cantidad_existente >= 0) {
       if (this.checked) {
-            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, '', 'ACTIVO', this.config.data.orden_produccion_detalle_id )
+            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, '', 'ACTIVO', this.config.data.orden_produccion_detalle_id, this.lote )
             this.setProduccion(this.produccionProceso);
         } else {
           this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd HH:mm:ss', 'en');
           console.log(this._fecha_hasta);
           if (this.producir > 0) {
-            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, this._fecha_hasta, 'FINALIZADO', this.config.data.orden_produccion_detalle_id )        
+            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, this._fecha_hasta, 'FINALIZADO', this.config.data.orden_produccion_detalle_id, this.lote )        
             this.setProduccion(this.produccionProceso);
           } else {
             // tslint:disable-next-line: max-line-length
@@ -160,7 +162,7 @@ actualizar() {
 
  calcular(_elemento: any, calculo: string) {
   _elemento.a_calcular = calculo;
-  const data: any = _elemento;
+  const data: any = this.config.data;
   const ref1 = this.dialogService.open(PopupCalculdorPalletsComponent, {
   data,
    header: 'Calcular cantidad',

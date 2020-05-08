@@ -8,6 +8,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/api';
 })
 export class PopupCalculdorPalletsComponent implements OnInit {
 
+  TOTAL_CALCULO: number = 0;
+  TOTAL_PACK: number = 0;
   pallet:number  = 0;
   pallet_calculo:number = 0;
   pack:number = 0;
@@ -37,17 +39,16 @@ export class PopupCalculdorPalletsComponent implements OnInit {
     console.log(this.config.data);
     if (this.config.data) {
       if (this.config.data.a_calcular) {
-     
-        this._pallet_calculo = Number(this.config.data.a_calcular);
+/*      
+        this.unidad = Number(this.config.data.a_calcular);
         console.log(this._pallet_calculo );
         console.log(this.config.data.pallet_pisos);
-        // tslint:disable-next-line: max-line-length
+        
         this._pallet = (((this._pallet_calculo / this.config.data.pallet_pisos) / this.config.data.pallet_pack) / this.config.data.unidades) ;
-        this._pack = (this._pallet_calculo / this.config.data.pallet_pack  );
-      //  this._piso =   this.config.data.pallet_pisos / this._pallet;
+        this._pack = (this._pallet_calculo / this.config.data.pallet_pack  );      
         this.pallet = this._pallet;
         this.pack = this._pack;
-        this.pallet_calculo = this.config.data.a_calcular;
+        this.pallet_calculo = this.config.data.a_calcular; */
       }else{
         this._pallet_calculo = this.config.data['pallet_pack'] * this.config.data['pallet_pisos'] * this.config.data['unidades'];
         this._piso = this.config.data.pallet_pack *  this.config.data.unidades;
@@ -55,19 +56,30 @@ export class PopupCalculdorPalletsComponent implements OnInit {
       }
 
     }
-    
+
 
   }
 
   calcular(){
-    this._pallet_calculo = this.config.data['pallet_pack'] * this.config.data['pallet_pisos'] * this.config.data['unidades'];
-    this.pallet_calculo =  (this.pallet * this._pallet_calculo) * (this.piso * this.config.data.pallet_pisos) + (this.pack * this.config.data.pallet_pack) + (this.unidad * this.config.data.unidades);
-    this.litros_calculo = this.pallet_calculo * Number(this.config.data['volumen']);
+
+
+/* --------------------------- CALCULO DEL PALLET --------------------------- */
+    this.pallet_calculo = this.pallet  * this.config.data.pallet_pisos * this.config.data.pallet_pack * this.config.data.unidades ;
+
+/* ---------------------------- CALCULO DEL PISO ---------------------------- */
+
+    this.piso_calculo  = this.piso *  this.config.data.pallet_pack * this.config.data.unidades;
+
+/* ----------------------------- CALCULO DE PACK ---------------------------- */
+    this.pack_calculo = this.pack * this.config.data.unidades;
+    this.TOTAL_CALCULO = this.pallet_calculo + this.piso_calculo + this.pack_calculo + this.unidad;
+    this.TOTAL_PACK =  this.TOTAL_CALCULO / this.config.data.unidades;
+    this.litros_calculo = this.TOTAL_CALCULO * Number(this.config.data.volumen);
   }
 
   guardarCalculo(){
-    if (this.pallet_calculo> 0){
-      this.calculos.push({'unidades' : this.pallet_calculo},{'volumen' : this.litros_calculo});
+    if (this.TOTAL_CALCULO > 0){
+      this.calculos.push({'unidades' : this.TOTAL_CALCULO},{'volumen' : this.litros_calculo});
       console.log(this.calculos);
       this.ref.close(this.calculos);
     }

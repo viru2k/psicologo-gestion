@@ -1,21 +1,56 @@
 <div class=" faq-title text-center pb-3 pt-2 ">
+    <!-- ------------------------ INFORMACION DE CARGA ------------------------- -->  
+
+    <i class="far fa-question-circle icono-info mr-2 mt-2" (mouseenter)="op2.show($event)"  style="font-size:24px"></i>
+    <p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="false" appendTo="body">
+      <p class="texto-info texto-bold">Desde aquí se selecciona el producto asociando sus parametos de :</p>
+      <p> - Dia en que se va a producir</p>
+      <p> - Las horas que va a durar la produccion</p>
+      <p> - El sector que va a producir</p>
+      <p> - El grupo de empleados que trabajara</p>
+      <p class="texto-secondary">----------------------------------------</p>
+      <p class="texto-info">Para seleccionar la cantidad a producir, se debe seleccionar el icono calculadora en el renglon  que corresponda.</p>
+      <p>Calcular el total de botellas y luego darle a icono confirmar</p>
+      <p><b class="texto-warning"> Recordar que  se debe repetir el proceso para cada producto para completar la producción planificada</b></p>
+    </p-overlayPanel>  
     <h5>ASOCIAR PRODUCTOS A PRODUCCION</h5>
   </div>
-  <div class="card-rounded card-header">
-    <div class="ml-2 row d-flex justify-content-between">  
-        <div class="d-flex justify-content-start">
-            <label class="mt-2 ml-1 mr-1">Producción dia :</label>
-            <p-calendar [(ngModel)]="fecha_produccion"  (onSelect)="actualizarFecha($event)" tabindex="0"  [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true">              
-            </p-calendar> 
-            
+
+  <p-dialog header="Parametrizar producción" [(visible)]="display" position="top"  appendTo="body" positionTop="100">
+  
+    <div class="card-rounded card-header">
+      <div class="ml-2 row d-flex justify-content-between">  
+          <div class="d-flex justify-content-start"> 
+              <label class="mt-2 ml-1 mr-1">Producción para el dia :</label>
+              <p-calendar [(ngModel)]="fecha_produccion"  (onSelect)="actualizarFecha($event)" tabindex="0"  [locale]="es" dateFormat="DD dd/mm/yy "   [readonlyInput]="true">              
+              </p-calendar> 
+          </div>
+          <div class="d-flex justify-content-center">
+            <label class="mt-2 ml-1 mr-1">Horas de producción:</label>
+            <p-calendar [(ngModel)]="hora_produccion" [timeOnly]="true"></p-calendar>               
         </div>
-       
-        <div class="d-flex justify-content-end">                   
-           
-        </div>
-  </div>
- 
-</div> 
+
+    </div>
+
+    <div class="ml-2 mt-2 row d-flex justify-content-between">  
+      <div class="d-flex justify-content-start"> 
+        
+      </div>
+      <div class="d-flex justify-content-start">
+        <label class="mt-2 ml-1 mr-1">Grupo:</label>
+        <select [(ngModel)]="selected" class="form-control" (change)="onChangeGrupo()">                      
+        <option *ngFor="let grupo of grupos" [ngValue]="grupo" class="text-sm"  > <label>{{grupo.grupo_nombre}}</label> </option>            
+    </select>              
+    </div>
+      <div class="d-flex justify-content-end">                   
+     <label *ngIf="selectedRow" class="mt-1" >Packs: {{cantidad / selectedRow.unidades }}</label>
+     <label *ngIf="selectedRow" class="mt-1 ml-2 mr-2" > Unidades: {{cantidad}}</label>
+      <a  (click)="calcular(elementos)" class="icon-hover"> <i class="fas fa-calculator icon-color-warning fa-2x"></i></a>    
+      </div>
+</div>
+  </div> 
+</p-dialog>
+
 
 
     <div  class="m-3">
@@ -23,14 +58,12 @@
         scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
        
         <ng-template pTemplate="caption">
-          <div class=" row">
-              <div class="col-4" style="text-align: left" >
-             
-              </div>
-            
-            <div class="col-8 mt-2" style="text-align: right">     
-              
-              <input type="text" pInputText size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">            
+          <div class="ml-2 row d-flex justify-content-between">  
+            <div class="d-flex justify-content-start">
+              <button  class="btn-cuadrado-success btn--block  mb-1" (click)="showDialog('top')" > <i class="fas fa-check fa-lg mr-2 mt-1"  ></i>Agregar productos</button>
+            </div>
+            <div class="d-flex justify-content-end"> 
+              <input type="text" pInputText size="50" class="form-control form-control-sm" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">            
             </div>
           </div>
           
@@ -70,11 +103,11 @@
                         <td style="width: 8%">{{elementos.pallet_pack}}</td>                
                                           
                         <td style="width: 6%">
-                            <a  (click)="calcular(elementos)" class="icon-hover"> <i class="fas fa-calculator icon-color-warning fa-lg"></i></a>                        
+                                           
                           </td>      
                           <td style="width: 8%">{{elementos.cantidad}}</td>     
                         <td style="width: 6%">
-                          <a  (click)="guardar(elementos)" class="icon-hover"> <i class="fas fa-check icon-color-info fa-lg"></i></a>                        
+                          <a  (click)="editarProduccion(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
                         </td>
                 </tr>
             </ng-template>
