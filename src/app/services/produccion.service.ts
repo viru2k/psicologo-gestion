@@ -8,79 +8,83 @@ import { OrdenProduccion } from './../models/orden-produccion.model';
 })
 export class ProduccionService {
 
-  private url:string  = URL_SERVICIOS;
+  private url: string  = URL_SERVICIOS;
   constructor(public http: HttpClient) { }
 
-  getProduccion(){
-    return this.http.get<any[]>(this.url+'articulos');
+  getProduccion() {
+    return this.http.get<any[]>(this.url + 'articulos');
     }
 
-  getMaquinas(){
-    return this.http.get<any[]>(this.url+'maquina');
+  getMaquinas() {
+    return this.http.get<any[]>(this.url + 'maquina');
     }
 
-  getMaquinaById(id: string){
-    return this.http.get<any[]>(this.url+'maquina/id=' + id);
+  getMaquinaById(id: string) {
+    return this.http.get<any[]>(this.url + 'maquina/id=' + id);
     }
 
-    getProduccionByFecha(articulo_id: string){
-    return this.http.get<any[]>(this.url+'articulo/confeccion?articulo_id='+articulo_id);
-    }
-    
-    setProduccion(articulo: any){
-      return this.http.post<any[]>(this.url+'articulo/confeccion', articulo);
-      }  
-    
-    setOrdenProduccion(articulo: OrdenProduccion){
-      return this.http.post<any[]>(this.url+'produccion/orden/produccion', articulo);
-      }  
-  
-
-    updateOrdenProduccion( articulo: string,estado: string){
-    return this.http.get<any[]>(this.url+'produccion/orden/produccion/estado/editar?id='+articulo+'&estado='+estado);
-    }  
-
-    getOrdenProduccionDetalleById(id: string){
-      return this.http.get<any[]>(this.url+'produccion/orden/produccion/by/id?id='+id);
-    }
-    
-    getOrdenProduccionDetalleByEstado(estado: string){
-      return this.http.get<any[]>(this.url+'produccion/orden/produccion/by/estado?estado='+estado);
+    getProduccionByFecha(articulo_id: string) {
+    return this.http.get<any[]>(this.url + 'articulo/confeccion?articulo_id=' + articulo_id);
     }
 
-      getOrdenProduccionEstado(estado: string){
-        return this.http.get<any[]>(this.url+'produccion/orden/produccion/estado?estado='+estado);
-    }
-
-    getUnidad(){
-      return this.http.get<any[]>(this.url+'unidad');
+    setProduccion(articulo: any) {
+      return this.http.post<any[]>(this.url + 'articulo/confeccion', articulo);
       }
-    
+
+    setOrdenProduccion(articulo: OrdenProduccion) {
+      return this.http.post<any[]>(this.url + 'produccion/orden/produccion', articulo);
+      }
+
+
+    updateOrdenProduccion( articulo: string,estado: string) {
+    return this.http.get<any[]>(this.url + 'produccion/orden/produccion/estado/editar?id=' + articulo + '&estado=' + estado);
+    }
+
+    getOrdenProduccionDetalleById(id: string) {
+      return this.http.get<any[]>(this.url + 'produccion/orden/produccion/by/id?id=' + id);
+    }
+
+    getOrdenProduccionDetalleByEstado(estado: string) {
+      return this.http.get<any[]>(this.url + 'produccion/orden/produccion/by/estado?estado=' + estado);
+    }
+
+      getOrdenProduccionEstado(estado: string) {
+        return this.http.get<any[]>(this.url + 'produccion/orden/produccion/estado?estado=' + estado);
+    }
+
+    getUnidad() {
+      return this.http.get<any[]>(this.url + 'unidad');
+      }
+
     setUnidad(unidad: any) {
       return this.http.post<any>(this.url + 'unidad', unidad);
     }
 
-    updUnidad( id: string, unidad: any ){
+    updUnidad( id: string, unidad: any ) {
       return this.http.put<any>(this.url + 'unidad/' + id, unidad);
     }
 
-    setProduccionOrdenProduccion(produccion: any){
-      return this.http.post<any>(this.url+'produccion/crear', produccion);
+    setProduccionOrdenProduccion(produccion: any) {
+      return this.http.post<any>(this.url + 'produccion/crear', produccion);
       }
 
-    getProduccionByOrdenProduccion(id: string, articulo_id:string){
-      return this.http.get<any[]>(this.url+'produccion/asociar/orden/produccion/articulo?id='+id+'&articulo_id='+articulo_id);
+      updProduccionEstado(produccion: any, id: string) {
+      return this.http.put<any>(this.url + 'produccion/estado/' + id, produccion);
+      }
+
+    getProduccionByOrdenProduccion(id: string, articulo_id: string) {
+      return this.http.get<any[]>(this.url + 'produccion/asociar/orden/produccion/articulo?id=' + id + '&articulo_id=' + articulo_id);
     }
 
-    getProduccionByOrdenProduccionTodos(id: string){
-      return this.http.get<any[]>(this.url+'produccion/asociar/orden/produccion/articulo/todos?id='+id);
+    getProduccionByOrdenProduccionTodos(id: string) {
+      return this.http.get<any[]>(this.url + 'produccion/asociar/orden/produccion/articulo/todos?id=' + id);
     }
 
     getInsumosByArticuloId(id: string) {
       return this.http.get<any[]>(this.url + 'produccion/articulo/insumo?articulo_id=' + id);
     }
 
-    getSector(){
+    getSector() {
       return this.http.get<any[]>(this.url + 'produccion/sector/carga');
     }
 
@@ -88,12 +92,13 @@ export class ProduccionService {
       return this.http.get<any[]>(this.url + 'produccion/detalle/by/produccion/id?produccion_id=' + produccion_id);
     }
 
-    setProduccionProceso(produccion: any){
+    setProduccionProceso(produccion: any) {
       return this.http.post<any>(this.url + 'produccion/proceso/crear', produccion);
       }
 
 
       getProduccionProcesoByOrdenProduccionDetalleId(orden_produccion_detalle_id: string) {
+        // tslint:disable-next-line: max-line-length
         return this.http.get<any[]>(this.url + 'produccion/proceso/by/detalle/id?orden_produccion_detalle_id=' + orden_produccion_detalle_id);
       }
 
@@ -102,6 +107,7 @@ export class ProduccionService {
       }
 
       getProduccionProcesoByDates(fecha_desde: string, fecha_hasta: string) {
+        // tslint:disable-next-line: max-line-length
         return this.http.get<any[]>(this.url + 'produccion/proceso/by/detalle/id?fecha_desde=' + fecha_desde + '&fecha_hasta=' + fecha_hasta);
       }
 

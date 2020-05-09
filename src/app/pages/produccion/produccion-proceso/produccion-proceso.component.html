@@ -1,11 +1,11 @@
 <div class=" faq-title text-center pb-3 pt-2 ">
-    <h5>ASOCIAR PRODUCTOS A PRODUCCION</h5>
+  <i class="far fa-question-circle icono-info ml-2 mt-2 mr-1" (mouseenter)="op2.show($event)"  style="font-size:24px"></i>
+    <h5>PRODUCCIONES ACTIVAS</h5>
   </div>
-  <div class="card-rounded card-header">
+ <!--  <div class="card-rounded card-header">
     <div class="ml-2 row d-flex justify-content-between">  
         <div class="d-flex justify-content-start">
-          <button *ngIf = "!editar" class="btn-cuadrado-success btn--block  mb-1" (click)="nuevo()"  > <i class="fas fa-check fa-lg mr-2 mt-1"></i>CREAR PRODUCCION</button>
-         <!--   <a  (click)="nuevo()" *ngIf = "!editar" class="icon-hover  icon-color-success mt-1 text-md"> <i class="fas fa-check fa-lg mr-2 mt-1"></i>CREAR PRODUCCION</a>  -->
+          <button *ngIf = "!editar" class="btn-cuadrado-success btn--block  mb-1" (click)="nuevo()"  > <i class="fas fa-check fa-lg mr-2 mt-1"></i>CREAR PRODUCCION</button>         
         </div>
         <div class="d-flex justify-content-center">
             <label class="mt-2 ml-1 mr-1">Producción</label>
@@ -22,8 +22,8 @@
             </p-calendar>
         </div>
      </div>
-  </div>
-  <div class="card-rounded card-header">
+  </div> -->
+  <!-- <div class="card-rounded card-header">
     <div class="ml-2 row d-flex justify-content-between">  
         <div class="d-flex justify-content-start">         
             <span>
@@ -52,46 +52,33 @@
             <option *ngFor="let grupo of estado" class="text-sm texto-monserrat texto-secondary"    >
               <label >{{grupo.name}}</label>              
           </option>
-        </select>
-       <!--    <p-dropdown [options]="estado" [(ngModel)]="selectedEstado"  optionLabel="name" [showClear]="false"></p-dropdown> -->
-           
+        </select>    
          </div>
 
        
     </div> 
 
-  </div>
-    <div  class="m-3">
+  </div> -->
+   
+  <p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="false" appendTo="body">
+    <p class="texto-info texto-bold">Desde aquí se selecciona el producto asociando sus parametos de :</p>
+    <p> - Dia en que se planifica la producción</p>
+    <p> - El periodo que durara la producción</p>
+    <p> - Una descripción de la producción y observaciones sobre la producción</p>
+    <p> - El estado -- por defecto activo , y podra cambiarse segun se avance</p>
+    <p> - Agregar un producto a producir</p>
+    <p class="texto-secondary">----------------------------------------</p>
+    <p><b class="texto-warning"> Recordar que  se debe repetir el proceso para cada producto para completar la producción planificada</b></p>
+  </p-overlayPanel>
+  <div  class="m-3">
       <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
       scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
      
       <ng-template pTemplate="caption">
         <div class=" row">
-            <div class="col-4" style="text-align: left"  >
-        
+      
+    
 
-              <button *ngIf = "!editar" class="btn-cuadrado-info  texto-bold mb-1" (click)="buscarArticulo()"  > <i class="fa fa-plus fa-lg mr-2"></i>Agregar producto</button>
-                <!-- <a  (click)="buscarArticulo()" *ngIf="!editar" class="icon-hover  icon-color-info mt-2 ml-2"> <i class="fa fa-plus fa-lg mr-2"></i>Agregar producto</a> -->
-            </div>
-          
-          <div class="col-8 mt-2" style="text-align: right">     
-            
-            <input type="text" pInputText size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">   
-              <!-- ------------------------ INFORMACION DE CARGA ------------------------- -->  
-
-          <i class="far fa-question-circle icono-info ml-2 mt-2" (mouseenter)="op2.show($event)"  style="font-size:24px"></i>
-          <p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="false" appendTo="body">
-            <p class="texto-info texto-bold">Desde aquí se selecciona el producto asociando sus parametos de :</p>
-            <p> - Dia en que se planifica la producción</p>
-            <p> - El periodo que durara la producción</p>
-            <p> - Una descripción de la producción y observaciones sobre la producción</p>
-            <p> - El estado -- por defecto activo , y podra cambiarse segun se avance</p>
-            <p> - Agregar un producto a producir</p>
-            <p class="texto-secondary">----------------------------------------</p>
-            <p><b class="texto-warning"> Recordar que  se debe repetir el proceso para cada producto para completar la producción planificada</b></p>
-          </p-overlayPanel>
-               
-          </div>
         </div>
         
       </ng-template>
@@ -108,40 +95,47 @@
                           </tr> 
                           <tr>
                           <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
-                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">  
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pallet_pack'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pallet_pisos'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidades'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_solicitada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_usada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_existente'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'orden_produccion_detalle_id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">  
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'estado'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'maquina_nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_inicio'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_fin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_solicitada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_existente'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                              
                           </th>
                           <th></th>
                       </tr>
                   </ng-template>
                 
-          <ng-template pTemplate="body" let-elementos  >
-              <tr style="height:20px"  [ngClass]="colorRow(elementos.estado)">                         
-                      <td style="width: 15%">{{elementos.fecha_produccion | date:' EEEE dd/MM/yyyy'}}</td>
-                      <td style="width: 25%">{{elementos.nombre}}</td>
-                      <td style="width: 30%">{{elementos.descripcion}}</td>
-                      <td style="width: 8%">{{elementos.pallet_pack}}</td>
-                      <td style="width: 8%">{{elementos.pallet_pisos}}</td>
-                      <td style="width: 10%">{{elementos.unidades}}</td>
-                      <td style="width: 12%"><b>{{elementos.cantidad_solicitada}}</b></td>                      
-                      <td style="width: 12%"><b>{{elementos.cantidad_usada}}</b></td>   
-                      <td style="width: 12%"><b>{{elementos.cantidad_existente}}</b></td>   
-                      <td style="width: 15%">{{elementos.estado}}</td>
-                                  
-                      <td style="width: 6%">
-                        <a  (click)="detalle(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
-                          </td>
-              </tr>
-          </ng-template>
+                  <ng-template pTemplate="body" let-elementos  >
+                    <tr style="height:20px"  [ngClass]="colorRow(elementos.estado)">
+                            <td style="width: 7%; font-size: 14px;font-weight: bold;" [ngClass]="iconoColor(elementos.estado)">{{elementos.orden_produccion_detalle_id}}</td> 
+                            <td style="width: 12%"  [ngClass]="iconoColor(elementos.estado)">{{elementos.estado}}</td>     
+                            <td style="width: 18%">{{elementos.fecha_produccion | date:'EEEE dd/MM/yyyy'}}</td>
+                            <td style="width: 30%">{{elementos.nombre}}</td>
+                            <td style="width: 20%">{{elementos.maquina_nombre}}</td>
+                            <td style="width: 12%; font-weight: bold;font-size: 11px;" class="texto-success">{{elementos.hora_inicio | date : ' hh:mm'}}</td>
+                            <td style="width: 12%; font-weight: bold;font-size: 11px;" class="texto-danger-soft">{{elementos.hora_fin | date: 'hh:mm'}}</td>
+                            <td style="font-size: 10px;width: 10%" class="texto-secondary">{{elementos.cantidad_solicitada}}</td>  
+                            <td style="font-size: 10px;width: 10%" class="texto-secondary">{{elementos.cantidad_solicitada / elementos.unidades}}</td>                        
+                            <td style="width: 6%">
+                              <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-list-ul icon-color-info fa-lg"></i></a>                        
+                            </td>
+                    </tr>
+                </ng-template>
      
     
       </p-table>
+
+        
+  <p-overlayPanel #op appendTo="body"  [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" [showCloseIcon]="true" >                                                
+    <div class=" faq-title text-center pb-3 pt-2 ">
+      <h5>ACCION</h5>
+    </div>
+      <div><a  (click)="nuevaProduccion(elemento)" class="mb-2 icon-hover" > <i class="far fa-stop-circle fa-lg  texto-danger mr-2"></i><label class="texto-danger  texto-bold">Finalizar producción</label></a></div>
+      <div><a  (click)="nuevaProduccion(elemento)" class="mb-2 icon-hover" > <i class="far fa-calendar-check fa-lg  texto-success mr-2"></i><label class="texto-success  texto-bold">Auditar producción</label></a></div>
+      <div><a  (click)="nuevaProduccion(elemento)" class="mb-2 icon-hover" > <i class="fas fa-cubes fa-lg  texto-warning mr-2"></i><label class="texto-warning  texto-bold">Stock de producción</label></a></div>
+  </p-overlayPanel> 
     </div>

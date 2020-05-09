@@ -5,6 +5,7 @@ import { ArticuloService } from './../../../../services/articulo.service';
 import { AlertServiceService } from './../../../../services/alert-service.service';
 import { PopupCalculdorPalletsComponent } from './../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 import { SectorService } from '../../../../services/sector.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-pop-up-orden-produccion-detalle-editar',
@@ -28,23 +29,23 @@ export class PopUpOrdenProduccionDetalleEditarComponent implements OnInit {
   cantidad = 0;
   selected: any;
   display;
-  position: string;  
+  position: string;
   volumen: number;
+  index: number;
 
   // tslint:disable-next-line: max-line-length
   constructor(private alertServiceService: AlertServiceService, public dialogService: DialogService, private messageService: MessageService, private articuloService: ArticuloService, public sectorService: SectorService, public ref: DynamicDialogRef,  private config: DynamicDialogConfig) {
     this.cols = [
-      { field: 'fecha_produccion', header: 'Fecha producción',  width: '30%' },
+      { field: 'nombre', header: 'Articulo',  width: '30%' },    
+      { field: 'fecha_produccion', header: 'Fecha producción',  width: '12%' },
       { field: 'horas', header: 'Horas',  width: '10%' },
-      { field: 'grupo', header: 'Grupo',  width: '10%' },
-      { field: 'nombre', header: 'Articulo',  width: '30%' },
-      { field: 'unidad_descripcion', header: 'Unidad',  width: '25%' },
+      { field: 'grupo_nombre', header: 'Grupo',  width: '15%' },
       { field: 'unidades', header: 'Unidades',  width: '8%' },
       { field: 'pallet_pisos', header: 'Pisos',  width: '8%' },
-      { field: 'pallet_pack', header: 'Pack',  width: '8%' },
-      { field: '', header: '',  width: '6%' },
+      { field: 'pallet_pack', header: 'Pack',  width: '8%' },      
       { field: 'cantidad', header: 'Cantidad',  width: '8%' },
       { field: 'packs', header: 'Packs',  width: '8%' },
+      { field: '', header: '',  width: '6%' },
       { field: '', header: '',  width: '6%' },
 
    ];
@@ -145,7 +146,9 @@ calcular() {
      //     console.log(PopupCalculdorPalletsComponent);
      //     console.log(PopupCalculdorPalletsComponent[0]['unidades']);
         const resultado =  this.elementos.findIndex(x => x.id === this.selectedRow.id);
-        this.elementos[resultado]['cantidad'] = PopupCalculdorPalletsComponent[0]['unidades'];
+        console.log(resultado);
+        this.index = resultado;
+       // this.elementos[resultado]['cantidad'] = PopupCalculdorPalletsComponent[0]['unidades'];
         this.cantidad =   PopupCalculdorPalletsComponent[0]['unidades'];
         this.volumen = PopupCalculdorPalletsComponent[1]['volumen'];
 
@@ -154,12 +157,50 @@ calcular() {
 
  }
 
-detalle(){
-  
+ agregarProducto() {
+/* ---------------------------------- DATOS --------------------------------- */
+  if (this.cantidad > 0) {
+    const fecha = formatDate(new Date(this.fecha_produccion), 'yyyy-MM-dd', 'en');
+    const hora = formatDate(new Date(this.hora_produccion), 'HH:mm', 'en');
+    this.elementos[this.index]['fecha_produccion'] = fecha;
+    this.elementos[this.index]['horas'] = hora;
+    this.elementos[this.index]['cantidad'] = this.cantidad;
+    this.elementos[this.index]['packs'] = this.cantidad / this.elementos[this.index]['unidades'];
+    this.elementos[this.index]['grupo_nombre'] = this.selected.grupo_nombre;
+    this.elementos[this.index]['grupo_id'] = this.selected.id;
+    console.log(this.selected);
+    console.log(this.elementos[this.index]);
+    this.cantidad = 0;
+    this.volumen = 0;
+    // tslint:disable-next-line: max-line-length
+    this.hora_produccion = new Date(this.fecha_produccion.getFullYear(), this.fecha_produccion.getMonth(), this.fecha_produccion.getDate(), 8, 0, 0);
+    this.display = false;
+  } else {
+    this.alertServiceService.throwAlert('warning', 'La cantidad debe ser mayor a 0', '', '500');
+  }
+
+ }
+
+detalle() {
+  this.display = false;
 }
-  guardar(_elemento: any){
-   
-    if (_elemento.cantidad > 0) {
+  guardar() {
+      this.elementos.forEach(elemento => {
+          if (elemento.cantidad > 0) {
+
+              elemento.orden_produccion_id = 0;
+              elemento.cantidad_solicitada = elemento.cantidad;
+              elemento.cantidad_usada = 0;
+              elemento.cantidad_existente = elemento.cantidad;
+              elemento.fecha_produccion = this.fecha_produccion;
+              elemento.estado = 'ACTIVO';
+              elemento.usuario_modifica_id = this.userData['id'];
+              console.log(elemento);
+              this.ref.close(elemento);
+          }
+
+      });
+   /*  if (_elemento.cantidad > 0) {
       _elemento.orden_produccion_id = 0;
       _elemento.cantidad_solicitada = _elemento.cantidad;
       _elemento.cantidad_usada = 0;
@@ -171,7 +212,7 @@ detalle(){
       this.ref.close(_elemento);
     } else {
       this.alertServiceService.throwAlert('warning',  ' La cantidad a producir debe ser mayor a 0', '', '500');
-    }
+    } */
 
   }
 
@@ -180,6 +221,16 @@ detalle(){
     console.log(this.selectedRow);
     this.position = 'top';
     this.display = true;
+  }
+
+  removerProduccion(_elemento: any)  {
+    const index =  this.elementos.findIndex(x => x.id === _elemento.id);
+    this.elementos[index].cantidad =  '';
+    this.elementos[index].fecha_produccion = '';
+    this.elementos[index].grupo_nombre = '';
+    this.elementos[index].horas = '';
+    this.elementos[index].packs = '';
+    this.selectedRow = _elemento;
   }
 
 }

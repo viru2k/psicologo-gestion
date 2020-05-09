@@ -31,12 +31,12 @@ export class OrdenProduccionComponent implements OnInit {
     this.cols = [
       { field: 'id', header: 'Prod Nª',  width: '7.5%' },
       { field: 'estado', header: 'Estado',  width: '8%' },
-      { field: 'fecha_creacion', header: 'Creado',  width: '15%' },
+      { field: 'fecha_creacion', header: 'Creado',  width: '10%' },
       { field: 'descripcion', header: 'Descripción',  width: '30%' },
       { field: 'observacion', header: 'Observación',  width: '25%' },
-      { field: 'fecha_desde', header: 'Desde',  width: '12%' },
-      { field: 'fecha_hasta', header: 'Hasta',  width: '12%' },
-      { field: 'nombreyapellido', header: 'Usuario',  width: '20%' },
+      { field: 'fecha_desde', header: 'Inicio',  width: '12%' },
+      { field: 'fecha_hasta', header: 'Fin',  width: '12%' },
+      { field: 'nombreyapellido', header: 'Usuario',  width: '12%' },      
       { field: '', header: '',  width: '6%' },
 
    ];

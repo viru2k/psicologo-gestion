@@ -5,6 +5,7 @@ import { AlertServiceService } from './../../../services/alert-service.service';
 import { MessageService, DynamicDialogConfig } from 'primeng/api';
 import { ProduccionService } from './../../../services/produccion.service';
 import { calendarioIdioma } from './../../../config/config';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
 @Component({
   selector: 'app-produccion-proceso',
@@ -33,21 +34,23 @@ export class ProduccionProcesoComponent implements OnInit {
   userData: any;
   estado: any[] = [];
   selectedEstado: string = 'ACTIVO' ;
+  selectedItem: any;
 
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService) {
-    this.cols = [
-      { field: 'fecha_produccion', header: 'Generado',  width: '15%' },
-      { field: 'nombre', header: 'Producto',  width: '25%' },
-      { field: 'descripcion', header: 'Descripción',  width: '30%' },
-      { field: 'pallet_pack', header: 'Pack',  width: '8%' },
-      { field: 'pallet_pisos', header: 'Pisos',  width: '8%' },
-      { field: 'unidades', header: 'Unidades',  width: '10%' },
-      { field: 'cantidad_solicitada', header: 'A producir',  width: '12%' },
-      { field: 'cantidad_usada', header: 'Producido',  width: '12%' },
-      { field: 'cantidad_existente', header: 'Restante',  width: '12%' },
-      { field: 'estado', header: 'Estado',  width: '15%' },
+
+    this.cols = [                  
+      { field: 'orden_produccion_detalle_id', header: 'Prod Nª',  width: '7.5%' },
+      { field: 'estado', header: 'Estado',  width: '12%' },
+      { field: 'fecha_produccion', header: 'A producir en',  width: '18%' },
+      { field: 'nombre', header: 'Producto',  width: '30%' },
+      { field: 'maquina_nombre', header: 'Máquina',  width: '20%' },
+      { field: 'hora_inicio', header: 'Inicio',  width: '12%' },
+      { field: 'hora_fin', header: 'Fin',  width: '12%' },
+      { field: 'cantidad_solicitada', header: 'Solicitado',  width: '10%' },
+      { field: '', header: 'En packs',  width: '10%' },
       { field: '', header: '',  width: '6%' },
-   ];
+    ];
+   
 
 
     this.estado = [
@@ -65,6 +68,15 @@ export class ProduccionProcesoComponent implements OnInit {
     this.fecha_desde = new Date();
     this.fecha_hasta = new Date();
     this.loadlist();
+  }
+
+  accion(evt: any, overlaypanel: OverlayPanel, event: any) {
+    if (event) {
+      this.selectedItem = event;
+    }
+    console.log(event);
+    this.selectedItem = event;
+    overlaypanel.toggle(evt);
   }
 
   
@@ -102,16 +114,36 @@ export class ProduccionProcesoComponent implements OnInit {
  colorRow(estado: string) {
 
   if (estado === 'ACTIVO') {
-    return {'es-activo'  : 'null' };
+    return {'border-es-activo'  : 'null' };
   }
   if (estado === 'PAUSADO') {
-    return {'es-pausado'  : 'null' };
+    return {'border-es-pausado'  : 'null' };
   }
   if (estado === 'CANCELADO') {
-    return {'es-cancelado'  : 'null' };
+    return {'border-es-cancelado'  : 'null' };
   }
   if (estado === 'FINALIZADO') {
-    return {'es-finalizado'  : 'null' };
+    return {'border-es-finalizado'  : 'null' };
+  }
+
+  if (estado === 'NEUTRAL') {
+    return {'border-es-neutral'  : 'null' };
+  }
+}
+
+iconoColor(estado: string) {
+
+  if (estado === 'ACTIVO') {
+    return {'icono-success'  : 'null' };
+  }
+  if (estado === 'PAUSADO') {
+    return {'icono-warning'  : 'null' };
+  }
+  if (estado === 'CANCELADO') {
+    return {'icono-danger'  : 'null' };
+  }
+  if (estado === 'FINALIZADO') {
+    return {'icono-secondary'  : 'null' };
   }
 }
 }

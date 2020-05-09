@@ -5,6 +5,7 @@
     <div class="ml-2 row d-flex justify-content-between">  
         <div class="d-flex justify-content-start">
           <button *ngIf = "!editar" class="btn-cuadrado-success btn--block  mb-1" (click)="nuevo()"  > <i class="fas fa-check fa-lg mr-2 mt-1"></i>CREAR PRODUCCION</button>
+          <button *ngIf = "editar" class="btn-cuadrado-warning btn--block  mb-1" (click)="cambiarEstado()"  > <i class="fas fa-pen fa-lg mr-2 mt-1"></i>GUARDAR ESTADO</button>
          <!--   <a  (click)="nuevo()" *ngIf = "!editar" class="icon-hover  icon-color-success mt-1 text-md"> <i class="fas fa-check fa-lg mr-2 mt-1"></i>CREAR PRODUCCION</a>  -->
         </div>
         <div class="d-flex justify-content-center">
@@ -20,7 +21,7 @@
             <label class="mt-2 ml-1 mr-1">hasta</label>
             <p-calendar [(ngModel)]="fecha_hasta"  (onSelect)="actualizarFecha($event)" [disabled] = "editar" tabindex="0"  [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true" class="ml-2">              
             </p-calendar>
-        </div>
+        </div>  
      </div>
   </div>
   <div class="card-rounded card-header">
@@ -125,7 +126,10 @@
                                   
                       <td style="width: 6%">
                         <a  (click)="detalle(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
-                          </td>
+                      </td>
+                      <td style="width: 6%">                                          
+                        <a  (click)="removerProduccion(elementos)" class="icon-hover"> <i class="fas fa-ban icon-color-danger fa-lg"></i></a>         
+                      </td>
               </tr>
           </ng-template>
      

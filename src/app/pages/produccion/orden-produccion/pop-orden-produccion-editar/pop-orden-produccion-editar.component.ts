@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService, DialogService, DynamicDialogConfig } from 'primeng/api';
+import { MessageService, DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/api';
 import { ProduccionService } from './../../../../services/produccion.service';
 import { AlertServiceService } from './../../../../services/alert-service.service';
 import { calendarioIdioma } from './../../../../config/config';
@@ -29,7 +29,7 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
   es: any;
   cols: any[];
   columns: any[];
-  elementos: OrdenProduccionDetalle[] = [];
+  elementos: any[] = [];
   ordenProduccion: OrdenProduccion = null;
   selecteditems: any;
   loading;
@@ -38,7 +38,7 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
   selectedEstado: string = 'ACTIVO' ;
 
    // tslint:disable-next-line: max-line-length
-   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig) {
+   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private config: DynamicDialogConfig,  public ref: DynamicDialogRef) {
 
     this.cols = [
       { field: 'fecha_produccion', header: 'Generado',  width: '15%' },
@@ -51,6 +51,7 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
       { field: 'cantidad_usada', header: 'Producido',  width: '12%' },
       { field: 'cantidad_existente', header: 'Restante',  width: '12%' },
       { field: 'estado', header: 'Estado',  width: '15%' },
+      { field: '', header: '',  width: '6%' },
       { field: '', header: '',  width: '6%' },
    ];
 
@@ -148,7 +149,7 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
  }
 
  detalle(element:any) {
-
+  console.log(element);
  }
 
 
@@ -170,7 +171,74 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
   }
  }
 
+ removerProduccion(_elemento: any)  {
+   console.log(_elemento);
+   let index = 0;
+   if (_elemento.orden_produccion_detalle_id === 0) {
+    index =  this.elementos.findIndex(x => x.articulo_id === _elemento.articulo_id);
+   } else {
+    index =  this.elementos.findIndex(x => x.orden_produccion_detalle_id === _elemento.orden_produccion_detalle_id);
+   }
+
+  console.log(index);
+  this.elementos.splice(index, 1);
+}
+
+
+
  guardar(ordenProduccion: OrdenProduccion) {
+  try {
+    this.produccionService.setProduccionOrdenProduccion(ordenProduccion)
+    .subscribe(resp => {
+      if (resp) {
+        this.elementos = resp;
+        console.log(this.elementos);
+        this.alertServiceService.throwAlert('success', 'Orden de producción creada con el número: '+ resp, '', '200');
+        this.ref.close();
+          } else {
+            this.elementos = null;
+          }
+      this.loading = false;
+      console.log(resp);
+    },
+    error => { // error path
+        console.log(error);
+        this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+     });
+} catch (error) {
+  this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+}
+ }
+
+
+ cambiarEstado() {
+  try {
+    let produccion = this.config.data;
+    produccion.estado = this.selectedEstado;
+    this.produccionService.updProduccionEstado(produccion, produccion.id)
+    .subscribe(resp => {
+      if (resp) {
+        this.elementos = resp;
+        console.log(this.elementos);
+        this.alertServiceService.throwAlert('success', 'Estado de orden de producción modificado a  ' +  produccion.estado, '', '200');
+        this.ref.close();
+          } else {
+            this.elementos = null;
+          }
+      this.loading = false;
+      console.log(resp);
+    },
+    error => { // error path
+        console.log(error);
+        this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+     });
+} catch (error) {
+  this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+}
+ }
+
+ 
+ borarProduccion(ordenProduccion: OrdenProduccion) {
   try {
     this.produccionService.setProduccionOrdenProduccion(ordenProduccion)
     .subscribe(resp => {

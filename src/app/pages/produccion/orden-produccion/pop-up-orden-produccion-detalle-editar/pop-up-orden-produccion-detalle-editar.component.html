@@ -16,18 +16,22 @@
     <h5>ASOCIAR PRODUCTOS A PRODUCCION</h5>
   </div>
 
-  <p-dialog header="Parametrizar producción" [(visible)]="display" position="top"  appendTo="body" positionTop="100">
+<!-- ----------------------------------------------------------------------- -->
+<!--                           AGREGAR PRODUCCION                            -->
+<!-- ----------------------------------------------------------------------- -->
+
+  <p-dialog header="Parametrizar producción" [(visible)]="display" position="top"  appendTo="body" positionTop="100" styleClass="mydialog">
   
     <div class="card-rounded card-header">
       <div class="ml-2 row d-flex justify-content-between">  
           <div class="d-flex justify-content-start"> 
               <label class="mt-2 ml-1 mr-1">Producción para el dia :</label>
-              <p-calendar [(ngModel)]="fecha_produccion"  (onSelect)="actualizarFecha($event)" tabindex="0"  [locale]="es" dateFormat="DD dd/mm/yy "   [readonlyInput]="true">              
+              <p-calendar [(ngModel)]="fecha_produccion" appendTo="body" (onSelect)="actualizarFecha($event)" tabindex="0"  [locale]="es" dateFormat="DD dd/mm/yy "   [readonlyInput]="true">              
               </p-calendar> 
           </div>
           <div class="d-flex justify-content-center">
             <label class="mt-2 ml-1 mr-1">Horas de producción:</label>
-            <p-calendar [(ngModel)]="hora_produccion" [timeOnly]="true"></p-calendar>               
+            <p-calendar [(ngModel)]="hora_produccion" appendTo="body" [timeOnly]="true"></p-calendar>               
         </div>
 
     </div>
@@ -43,12 +47,15 @@
     </select>              
     </div>
       <div class="d-flex justify-content-end">                   
-     <label *ngIf="selectedRow" class="mt-1" >Packs: {{cantidad / selectedRow.unidades }}</label>
-     <label *ngIf="selectedRow" class="mt-1 ml-2 mr-2" > Unidades: {{cantidad}}</label>
-      <a  (click)="calcular(elementos)" class="icon-hover"> <i class="fas fa-calculator icon-color-warning fa-2x"></i></a>    
+        <label *ngIf="selectedRow" class="mt-1" ><b>Packs: {{cantidad / selectedRow.unidades }}</b></label>
+        <label *ngIf="selectedRow" class="mt-1 ml-2 mr-2" > Unidades: {{cantidad}}</label>
+        <a  (click)="calcular(elementos)" class="icon-hover"> <i class="fas fa-calculator icon-color-warning fa-2x"></i></a>    
       </div>
 </div>
   </div> 
+  <div>
+    <button  class="btn-cuadrado-info btn--block  mb-1" (click)="agregarProducto()" > <i class="far fa-plus-square fa-lg mr-2 mt-1"  ></i>Agregar producto</button>
+  </div>
 </p-dialog>
 
 
@@ -60,7 +67,7 @@
         <ng-template pTemplate="caption">
           <div class="ml-2 row d-flex justify-content-between">  
             <div class="d-flex justify-content-start">
-              <button  class="btn-cuadrado-success btn--block  mb-1" (click)="showDialog('top')" > <i class="fas fa-check fa-lg mr-2 mt-1"  ></i>Agregar productos</button>
+              <button  class="btn-cuadrado-success btn--block  mb-1" (click)="guardar()" > <i class="fas fa-check fa-lg mr-2 mt-1"  ></i>Agregar productos</button>
             </div>
             <div class="d-flex justify-content-end"> 
               <input type="text" pInputText size="50" class="form-control form-control-sm" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">            
@@ -96,18 +103,19 @@
             <ng-template pTemplate="body" let-elementos  >
                 <tr style="height:20px">
                         <td style="width: 30%">{{elementos.nombre}}</td>
-                        <td style="width: 35%">{{elementos.descripcion}}</td>
-                        <td style="width: 25%">{{elementos.unidad_descripcion}}</td>
+                        <td style="width: 12%">{{elementos.fecha_produccion | date:'EEEE dd/MM/yyyy'}}</td>
+                        <td style="width: 10%">{{elementos.horas }}</td>
+                        <td style="width: 15%">{{elementos.grupo_nombre}}</td>
                         <td style="width: 8%">{{elementos.unidades}}</td>
                         <td style="width: 8%">{{elementos.pallet_pisos}}</td>
                         <td style="width: 8%">{{elementos.pallet_pack}}</td>                
-                                          
+                        <td style="width: 8%">{{elementos.cantidad}}</td>      
+                        <td style="width: 8%">{{elementos.packs}}</td>                                 
                         <td style="width: 6%">
-                                           
-                          </td>      
-                          <td style="width: 8%">{{elementos.cantidad}}</td>     
-                        <td style="width: 6%">
-                          <a  (click)="editarProduccion(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
+                          <a  (click)="editarProduccion(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                                                  
+                        </td>
+                        <td style="width: 6%">                                          
+                          <a  (click)="removerProduccion(elementos)" class="icon-hover"> <i class="fas fa-ban icon-color-danger fa-lg"></i></a>         
                         </td>
                 </tr>
             </ng-template>
