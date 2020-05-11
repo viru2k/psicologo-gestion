@@ -29,20 +29,43 @@ export class PopupAsociarProduccionComponent implements OnInit {
   producir = 0;
   lote = '';
   selectedMaquina:any;
+  estado: any[] = [];
+  selectedEstado: string = 'ACTIVO' ;
   maquinas: any[];
 
   // tslint:disable-next-line: max-line-length
-  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig, public ref: DynamicDialogRef) {}
+  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig, public ref: DynamicDialogRef) {
+    this.estado = [
+      {name: 'ACTIVO',      value: 'ACTIVO'},
+      {name: 'PAUSADO',     value: 'PAUSADO'},
+      {name: 'FINALIZADO',  value: 'FINALIZADO'},
+      {name: 'CANCELADO',   value: 'CANCELADO'}
+  ];
+  }
 
   ngOnInit() {
-    if (this.config.data.chequed) {
-      this.checked = false;
+    console.log(this.config.data);
+
+    this.checked = this.config.data.checked;
+    this.checked_iniciado = this.config.data.checked_iniciado;
+    if (!this.checked_iniciado) {
+      this.fecha_desde = new Date(this.config.data.hora_inicio );
+      this.selectedEstado = 'FINALIZADO';
+    }else{
+      this.fecha_desde = new Date();
     }
     this.es = calendarioIdioma  ;
-    this.fecha_desde = new Date();
+  
     this.fecha_hasta = new Date();
     this.userData = JSON.parse(localStorage.getItem('userData'));
+    console.log(this.config.data);
+    console.log(this.checked);
     this.loadMaquina();
+  }
+
+  onChangeEstado(e) {
+    console.log(e.target.value);
+    this.selectedEstado = e.target.value;
   }
 
   loadMaquina() {
@@ -82,14 +105,14 @@ export class PopupAsociarProduccionComponent implements OnInit {
 
     const _cantidad_usada: number =  Number(this.config.data.cantidad_usada) + Number(this.producir);
     const _cantidad_existente: number = Number(this.config.data.cantidad_solicitada  ) - Number(_cantidad_usada);
-
+    
     this._fecha_desde = formatDate(new Date(this.fecha_desde), 'yyyy-MM-dd HH:mm:ss', 'en');
     console.log('usada ' + _cantidad_usada+' existente ' + _cantidad_existente);
 /* ----------------- SI LA CANTIDAD ES NEGATIVA NO SE GUARDA ---------------- */
 
     if (_cantidad_existente >= 0) {
-      if (this.checked) {
-            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, '', 'ACTIVO', this.config.data.orden_produccion_detalle_id, this.lote )
+      if (!this.checked) {
+            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, '', this.selectedEstado, this.config.data.orden_produccion_detalle_id, this.lote )
             this.setProduccion(this.produccionProceso);
         } else {
           this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd HH:mm:ss', 'en');
@@ -145,11 +168,43 @@ actualizar() {
 
   /* -------- SI ES PRODUCCION EN CURSO EL VALOR A PRODUCIR PUEDE SER 0 ------- */
 
-    if (this.checked) {
+    if (!this.checked) {
 
 
     } else {
       if (this.producir > 0) {
+        this._fecha_desde = formatDate(new Date(this.fecha_desde), 'yyyy-MM-dd HH:mm:ss', 'en');
+        this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd HH:mm:ss', 'en');
+        if ((this.config.data.cantidad_pendiente - this.producir) >= 0) {
+          this.loading = true;
+          try {
+  
+        this.produccionProceso = new ProduccionProceso(this.config.data.id, this.config.data.orden_produccion_detalle_id , this.config.data.articulo_id,
+           this.config.data.cantidad_solicitada, this.producir, (this.config.data.cantidad_pendiente - this.producir) , this.producir,  this.userData['id'], this.selectedMaquina['id'],
+            this._fecha_desde, this._fecha_hasta, this.selectedEstado, this.config.data.orden_produccion_detalle_id, this.lote );
+      //  this.setProduccion(this.produccionProceso);
+  
+        this.produccionService.updProduccionProceso(this.config.data.id, this.produccionProceso)
+          .subscribe(resp => {
+              console.log(resp);
+              this.loading = false;
+              console.log(resp);
+              this.alertServiceService.throwAlert('success', 'Proceso generado correctamente', '', '500');
+  
+              this.ref.close(resp);
+          },
+          error => { // error path
+              console.log(error);
+              this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+           });
+      } catch (error) {
+        this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+      }
+
+        } else{
+          this.alertServiceService.throwAlert('warning', 'La cantidad producida supera el valor solicitado ', '', '500');
+        }
+     
       } else {
         // tslint:disable-next-line: max-line-length
         this.alertServiceService.throwAlert('warning', 'La cantidad a producir debe ser mayor a 0 si es una producción completada', '', '500');

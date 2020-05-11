@@ -25,6 +25,7 @@ import { GrupoTrabajoComponent } from './pages/mantenimiento/grupo-trabajo/grupo
 import { GrupoTrabajoEditarComponent } from './pages/mantenimiento/grupo-trabajo-editar/grupo-trabajo-editar.component';
 import { GrupoTrabajoAsociarComponent } from './pages/mantenimiento/grupo-trabajo-asociar/grupo-trabajo-asociar.component';
 import { ProduccionProcesoComponent } from './pages/produccion/produccion-proceso/produccion-proceso.component';
+import { MaquinaComponent } from './pages/mantenimiento/maquina/maquina.component';
 
 const routes: Routes = [
   
@@ -44,8 +45,8 @@ const routes: Routes = [
 { path: 'calidad/planilla', component: CalidadControlComponent },
 { path: 'calidad/columnas', component: CalidadDatoRelevadoComponent },
 { path: 'mantenimiento/grupo', component: GrupoTrabajoComponent },
-{ path: 'mantenimiento/grupo/asociarr', component: GrupoTrabajoAsociarComponent },
 { path: 'usuario', component: UsuarioComponent },
+{ path: 'mantenimiento/maquina', component: MaquinaComponent },
 
 /* -------------------------------------------------------------------------- */
 /*                                   CALIDAD                                  */
@@ -75,6 +76,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
+
 
 
 

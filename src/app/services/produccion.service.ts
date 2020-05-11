@@ -19,6 +19,18 @@ export class ProduccionService {
     return this.http.get<any[]>(this.url + 'maquina');
     }
 
+    
+  setMaquinas(maquina: any) {
+    return this.http.post<any[]>(this.url + 'maquina', maquina);
+    }
+
+
+    
+  updMaquinas(id: string, maquina: any) {
+    return this.http.put<any[]>(this.url + 'maquina/' + id, maquina);
+    }
+
+
   getMaquinaById(id: string) {
     return this.http.get<any[]>(this.url + 'maquina/id=' + id);
     }
@@ -96,19 +108,23 @@ export class ProduccionService {
       return this.http.post<any>(this.url + 'produccion/proceso/crear', produccion);
       }
 
+    updProduccionProceso(id: string, produccion: any) {
+      return this.http.put<any>(this.url + 'produccion/proceso/finalizar/' + id, produccion);
+      }
+
 
       getProduccionProcesoByOrdenProduccionDetalleId(orden_produccion_detalle_id: string) {
         // tslint:disable-next-line: max-line-length
         return this.http.get<any[]>(this.url + 'produccion/proceso/by/detalle/id?orden_produccion_detalle_id=' + orden_produccion_detalle_id);
       }
 
-      getProduccionProcesoByEstado() {
-        return this.http.get<any[]>(this.url + 'produccion/proceso/by/estado');
+      getProduccionProcesoByEstado(estado: string) {
+        return this.http.get<any[]>(this.url + 'produccion/proceso/by/estado?estado=' + estado );
       }
 
       getProduccionProcesoByDates(fecha_desde: string, fecha_hasta: string) {
         // tslint:disable-next-line: max-line-length
-        return this.http.get<any[]>(this.url + 'produccion/proceso/by/detalle/id?fecha_desde=' + fecha_desde + '&fecha_hasta=' + fecha_hasta);
+        return this.http.get<any[]>(this.url + 'produccion/proceso/by/dates?fecha_desde=' + fecha_desde + '&fecha_hasta=' + fecha_hasta);
       }
 
 

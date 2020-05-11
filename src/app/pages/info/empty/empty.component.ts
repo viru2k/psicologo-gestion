@@ -30,7 +30,7 @@ procesosActivos: number;
     this.mensajeCarga = 'CARGANDO PROCESOS ACTIVOS';
     this.loading = true;
     try {
-        this.produccionService.getProduccionProcesoByEstado()
+        this.produccionService.getProduccionProcesoByEstado('ACTIVO')
         .subscribe(resp => {
             console.log(resp);
             this.loading = false;

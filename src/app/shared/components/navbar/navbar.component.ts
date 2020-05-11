@@ -77,7 +77,7 @@ export class NavbarComponent implements OnInit {
      [ Focus Contact2 ]*/
      $('.input100').each(function(){
          $(this).on('blur', function(){
-             if($(this).val().trim() != "") {
+             if($(this).val() !== "") {
                  $(this).addClass('has-val');
              }
              else {
@@ -95,10 +95,7 @@ export class NavbarComponent implements OnInit {
          var check = true;
  
          for(var i=0; i<input.length; i++) {
-             if(validate(input[i]) == false){
-                 showValidate(input[i]);
-                 check=false;
-             }
+          
          }
  
          return check;
@@ -111,18 +108,7 @@ export class NavbarComponent implements OnInit {
          });
      });
  
-     function validate (input) {
-         if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-             if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
-                 return false;
-             }
-         }
-         else {
-             if($(input).val().trim() == ''){
-                 return false;
-             }
-         }
-     }
+
  
      function showValidate(input) {
          var thisAlert = $(input).parent();
@@ -409,10 +395,8 @@ menuList() {
               {label: 'Insumo', routerLink: 'mantenimiento/insumo'},
               {label: 'Armado de producto', routerLink: 'mantenimiento/articulo/confeccion'},
               {label: 'Unidad', routerLink: 'mantenimiento/unidad'},
-              {label: 'Grupo de trabajo', items:[
-                {label: 'Grupos', routerLink: 'mantenimiento/grupo'},
-                {label: 'Asociar grupo', routerLink: 'mantenimiento/grupo/asociar'}
-              ]},
+              {label: 'Grupos', routerLink: 'mantenimiento/grupo'},
+              {label: 'Maquinas', routerLink: 'mantenimiento/maquina'}
             ]
         },
         {

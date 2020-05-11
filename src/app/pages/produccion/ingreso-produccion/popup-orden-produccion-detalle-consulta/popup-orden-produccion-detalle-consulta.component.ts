@@ -112,6 +112,8 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
  nuevaProduccion(_elemento: any) {
   console.log(this.elemento);
   _elemento.es_nuevo = true;
+  this.elemento.checked = true;
+  this.elemento.checked_iniciado = true;
   let data: any;
   data = this.elemento;
   const ref = this.dialogService.open(PopupAsociarProduccionComponent, {

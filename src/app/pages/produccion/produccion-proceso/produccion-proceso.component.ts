@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { OrdenProduccion } from './../../../models/orden-produccion.model';
 import { OrdenProduccionDetalle } from './../../../models/orden-produccion-detalle.model';
 import { AlertServiceService } from './../../../services/alert-service.service';
-import { MessageService, DynamicDialogConfig } from 'primeng/api';
+import { MessageService, DynamicDialogConfig, DialogService } from 'primeng/api';
 import { ProduccionService } from './../../../services/produccion.service';
 import { calendarioIdioma } from './../../../config/config';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { PopupAsociarProduccionComponent } from './../ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-asociar-produccion/popup-asociar-produccion.component';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-produccion-proceso',
@@ -36,17 +38,20 @@ export class ProduccionProcesoComponent implements OnInit {
   selectedEstado: string = 'ACTIVO' ;
   selectedItem: any;
 
-  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService) {
+  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [                  
       { field: 'orden_produccion_detalle_id', header: 'Prod Nª',  width: '7.5%' },
       { field: 'estado', header: 'Estado',  width: '12%' },
       { field: 'fecha_produccion', header: 'A producir en',  width: '18%' },
+      { field: 'lote', header: 'Lote',  width: '18%' },
       { field: 'nombre', header: 'Producto',  width: '30%' },
-      { field: 'maquina_nombre', header: 'Máquina',  width: '20%' },
-      { field: 'hora_inicio', header: 'Inicio',  width: '12%' },
-      { field: 'hora_fin', header: 'Fin',  width: '12%' },
+      { field: 'maquina_nombre', header: 'Máquina',  width: '18%' },
+      { field: 'hora_inicio', header: 'Inicio',  width: '8%' },
+      { field: 'hora_fin', header: 'Fin',  width: '8%' },
       { field: 'cantidad_solicitada', header: 'Solicitado',  width: '10%' },
+      { field: '', header: 'En packs',  width: '10%' },
+      { field: 'cantidad_producida', header: 'Realizado',  width: '10%' },
       { field: '', header: 'En packs',  width: '10%' },
       { field: '', header: '',  width: '6%' },
     ];
@@ -82,13 +87,15 @@ export class ProduccionProcesoComponent implements OnInit {
   
   onChangeEstado(e) {
     console.log(e.target.value);
+    this.selectedEstado = e.target.value;
+    this.loadlist();
   }
 
    loadlist() {
-    
+    console.log(this.selectedEstado);
     this.loading = true;
     try {
-         this.produccionService.getProduccionProcesoByEstado()
+         this.produccionService.getProduccionProcesoByEstado(this.selectedEstado)
          .subscribe(resp => {
            if (resp[0]) {
              this.elementos = resp;
@@ -107,7 +114,93 @@ export class ProduccionProcesoComponent implements OnInit {
        this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
      }
  }
- 
+
+
+ buscarByDates() {
+  console.log(this.selectedEstado);
+  this._fecha_desde = formatDate(new Date(this.fecha_desde), 'yyyy-MM-dd HH:mm', 'en');
+  this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd HH:mm', 'en');
+  this.loading = true;
+  try {
+       this.produccionService.getProduccionProcesoByDates(this._fecha_desde, this._fecha_hasta)
+       .subscribe(resp => {
+         if (resp[0]) {
+           this.elementos = resp;
+           console.log(this.elementos);
+             } else {
+               this.elementos = null;
+             }
+         this.loading = false;
+         console.log(resp);
+       },
+       error => { // error path
+           console.log(error);
+           this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+        });
+   } catch (error) {
+     this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+   }
+ }
+
+ finalizarProduccion(elemento: any) {
+  console.log(elemento);
+  this.selectedItem.checked = true;
+  this.selectedItem.checked_iniciado = false;
+  const data: any = this.selectedItem;
+  const ref = this.dialogService.open(PopupAsociarProduccionComponent, {
+  data,
+   header: 'Cambiar estado a una producción',
+   width: '80%',
+   height: '90%'
+  });
+
+  // tslint:disable-next-line: no-shadowed-variable
+  ref.onClose.subscribe((PopupAsociarProduccionComponent: any) => {
+      this.loadlist();
+  });
+}
+
+
+ auditarProduccion(elemento: any) {
+  console.log(elemento);
+  elemento['editaPassword'] = 'NO';
+  const data: any = elemento;
+ /*  const ref = this.dialogService.open(UsuarioEditarComponent, {
+  data,
+   header: 'Editar usuario',
+   width: '50%',
+   height: '90%'
+  });
+
+  
+  ref.onClose.subscribe((UsuarioEditarComponent: any) => {
+    if (UsuarioEditarComponent) {
+      this.loadlist();
+    }
+
+  }); */
+}
+
+
+stockProduccion(elemento: any) {
+  console.log(elemento);  
+  const data: any = elemento;
+  /* const ref = this.dialogService.open(UsuarioEditarComponent, {
+  data,
+   header: 'Editar usuario',
+   width: '50%',
+   height: '90%'
+  });
+
+  
+  ref.onClose.subscribe((UsuarioEditarComponent: any) => {
+    if (UsuarioEditarComponent) {
+      this.loadlist();
+    }
+
+  }); */
+}
+
 
 
 

@@ -26,8 +26,10 @@ export class UsuarioComponent implements OnInit {
     
       { field: 'nombreyapellido', header: 'Nombre y apellido',  width: '50%' },
       { field: 'email', header: 'Usuario',  width: '30%' },
-      { field: '', header: 'Contraseña',  width: '20%' },
-      { field: '', header: 'Acción',  width: '20%' },
+      { field: '', header: 'Permisos',  width: '10%' },
+      { field: '', header: 'Contraseña',  width: '10%' },
+      { field: '', header: 'Acción',  width: '10%' },
+      
       
    ];
   }

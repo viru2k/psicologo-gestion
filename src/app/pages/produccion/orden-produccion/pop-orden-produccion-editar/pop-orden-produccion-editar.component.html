@@ -119,9 +119,9 @@
                       <td style="width: 8%">{{elementos.pallet_pack}}</td>
                       <td style="width: 8%">{{elementos.pallet_pisos}}</td>
                       <td style="width: 10%">{{elementos.unidades}}</td>
-                      <td style="width: 12%"><b>{{elementos.cantidad_solicitada}}</b></td>                      
-                      <td style="width: 12%"><b>{{elementos.cantidad_usada}}</b></td>   
-                      <td style="width: 12%"><b>{{elementos.cantidad_existente}}</b></td>   
+                      <td style="width: 12%"><b>{{elementos.cantidad_solicitada |  number : '1.0-2'}}</b></td>                      
+                      <td style="width: 12%"><b>{{elementos.cantidad_usada |  number : '1.0-2'}}</b></td>   
+                      <td style="width: 12%"><b>{{elementos.cantidad_existente |  number : '1.0-2'}}</b></td>   
                       <td style="width: 15%">{{elementos.estado}}</td>
                                   
                       <td style="width: 6%">

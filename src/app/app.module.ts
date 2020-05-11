@@ -136,6 +136,9 @@ import { GrupoTrabajoComponent } from './pages/mantenimiento/grupo-trabajo/grupo
 import { GrupoTrabajoEditarComponent } from './pages/mantenimiento/grupo-trabajo-editar/grupo-trabajo-editar.component';
 import { GrupoTrabajoAsociarComponent } from './pages/mantenimiento/grupo-trabajo-asociar/grupo-trabajo-asociar.component';
 import { GrupoTrabajoAsociarEditarComponent } from './pages/mantenimiento/grupo-trabajo-asociar-editar/grupo-trabajo-asociar-editar.component';
+import { UsuarioModuloComponent } from './pages/mantenimiento/usuario-editar/usuario-modulo/usuario-modulo.component';
+import { MaquinaComponent } from './pages/mantenimiento/maquina/maquina.component';
+import { MaquinaEditarComponent } from './pages/mantenimiento/maquina-editar/maquina-editar.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -194,7 +197,10 @@ registerLocaleData(localeEsAR, 'es-Ar');
     GrupoTrabajoComponent,
     GrupoTrabajoEditarComponent,
     GrupoTrabajoAsociarComponent,
-    GrupoTrabajoAsociarEditarComponent
+    GrupoTrabajoAsociarEditarComponent,
+    UsuarioModuloComponent,
+    MaquinaComponent,
+    MaquinaEditarComponent
   ],
   imports: [
 
@@ -258,6 +264,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
      PopupOrdenProduccionDetalleConsultaComponent,
      PopupAsociarProduccionComponent,
      PopupAsociarProduccionDetalleComponent,
+     MaquinaEditarComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             POPUPS COMPARTIDOS                             */

@@ -45,11 +45,13 @@
                                     
                 <td style="width: 50%">{{elementos.nombreyapellido}}</td>
                 <td style="width: 30%">{{elementos.email}}</td>
-                <td style="width: 20%">
+                <td style="width: 10%">
+                  <a  (click)="editarPassword(elementos)" class="icon-hover "> <i class="far fa-list-alt icono-success fa-lg"></i></a>     
+                </td>
+                <td style="width: 10%">
                   <a  (click)="editarPassword(elementos)" class="icon-hover "> <i class="fas fa-unlock-alt icono-warning fa-lg"></i></a>     
-                          </td>
-              
-                <td style="width: 20%">
+                </td>
+                <td style="width: 10%">
                   <a  (click)="buscar(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>     
                 </td>
               </tr>
