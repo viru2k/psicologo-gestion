@@ -1,0 +1,87 @@
+
+<div class=" faq-title text-center pb-3 pt-2 ">
+    <h5>CONFIGURACION DE INSUMOS</h5>
+  </div>
+  <div class="card-rounded card-header">
+    <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-start">
+            <button    class="ml-2  btn-cuadrado-info"  (click)="nuevo()" > <i class="fas fa-plus fa-lg mr-2"></i> Ingresar insumo</button>
+          
+        </div>
+        <div class="d-flex justify-content-center">
+            <label class="mr-2 mt-1">Estado :</label>
+            <select [(ngModel)]="selectedEstado" class="form-control-sm text-sm texto-monserrat texto-secondary icon-hover" (change)="onChangeEstado($event)" >                        
+              <option  *ngFor="let grupo of estado" class="text-sm texto-monserrat texto-secondary icon-hover"    >
+                <label class="icon-hover"  >{{grupo.name}}</label>              
+            </option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-end align-items-center">
+           
+          <button class=" ml-2 mr-3 btn-sm btn-cuadrado-warning" (click)="buscarExistente()">Listar stock con existencia</button>
+        </div>
+      </div>
+    <div class="ml-2">
+    
+    </div> 
+  </div>
+    <div class="row m-3">
+      <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"  [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+      scrollHeight="500px" [scrollable]="true"    >
+     
+      <ng-template pTemplate="caption">
+        <div class=" row">
+            <div class="col-4" style="text-align: left" >
+          
+            </div>
+          
+          <div class="col-8 mt-2" style="text-align: right">     
+              <input   size="50" pInputText  placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+          </div>
+        </div>
+        
+      </ng-template>
+                 <ng-template pTemplate="header" let-columns >
+                
+                            <tr >
+                                 
+                              <th  *ngFor="let col of columns" [pSortableColumn]="col.field"  [ngStyle]="{'width': col.width}">
+                                  {{col.header}}
+                                  <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                              </th> 
+                            
+                          </tr> 
+                          <tr>
+                          <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_ingreso'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_movimiento'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_usada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_existente'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'importe_acumulado'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'importe_total'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                                                            
+                          </th>
+                          <th></th>
+                      </tr>
+                  </ng-template>
+                
+          <ng-template pTemplate="body" let-elementos  >
+              <tr style="height:20px" [ngClass]="colorRow(elementos.estado)" >
+
+                <td style="width: 30%" [ngClass]="iconoColor(elementos.estado)">{{elementos.nombre}}</td>     
+                <td style="width: 18%">{{elementos.fecha_ingreso | date: 'EEEE dd/MM/yyyy hh:mm'}}</td>
+                <td style="width: 18%">{{elementos.fecha_movimiento | date: 'EEEE dd/MM/yyyy hh:mm'}}</td>
+                <td style="width: 15%" class="texto-bold texto-info">{{elementos.cantidad |  number : '1.2-2'}}</td>            
+                <td style="width: 15%" class="texto-bold texto-success">{{elementos.cantidad_usada |  number : '1.2-2'}}</td>
+                <td style="width: 15%; font-size: 14px;" class="texto-bold texto-danger">{{elementos.cantidad_existente |  number : '1.2-2'}}</td>
+                <td style="width: 15%" class="texto-bold texto-terthiary-soft">{{elementos.importe_acumulado |  number : '1.2-2'}}</td>
+                <td style="width: 15%" class="texto-bold texto-terthiary">{{elementos.importe_total |  number : '1.2-2'}}</td>                              
+                <td style="width: 10%">
+                  <a  (click)="buscar(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>     
+                </td>
+              </tr>
+          </ng-template>
+         
+      </p-table>
+    </div>

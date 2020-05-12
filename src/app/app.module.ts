@@ -107,7 +107,6 @@ import { PopupUsuarioComponent } from './shared/components/popups/popup-usuario/
 import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedido.component';
 import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ingreso/orden-pedido-ingreso.component';
 import { MovimientoProduccionComponent } from './pages/produccion/movimiento-produccion/movimiento-produccion.component';
-import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/movimiento-insumo.component';
 import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
 import { AsociarProduccionComponent } from './pages/produccion/popups/popup/asociar-produccion/asociar-produccion.component';
 // tslint:disable-next-line: max-line-length
@@ -139,6 +138,8 @@ import { GrupoTrabajoAsociarEditarComponent } from './pages/mantenimiento/grupo-
 import { UsuarioModuloComponent } from './pages/mantenimiento/usuario-editar/usuario-modulo/usuario-modulo.component';
 import { MaquinaComponent } from './pages/mantenimiento/maquina/maquina.component';
 import { MaquinaEditarComponent } from './pages/mantenimiento/maquina-editar/maquina-editar.component';
+import { InsumoAltaComponent } from './pages/insumo/insumo-alta/insumo-alta.component';
+import { PopupInsumoAltaComponent } from './pages/insumo/insumo-alta/popup-insumo-alta/popup-insumo-alta.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -174,8 +175,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopupUsuarioComponent,
     OrdenPedidoComponent,
     OrdenPedidoIngresoComponent,
-    MovimientoProduccionComponent,
-    MovimientoInsumoComponent,
+    MovimientoProduccionComponent,    
     IngresoProduccionComponent,
     AsociarProduccionComponent,
     AsociarProduccionDetalleComponent,
@@ -200,7 +200,9 @@ registerLocaleData(localeEsAR, 'es-Ar');
     GrupoTrabajoAsociarEditarComponent,
     UsuarioModuloComponent,
     MaquinaComponent,
-    MaquinaEditarComponent
+    MaquinaEditarComponent,
+    InsumoAltaComponent,
+    PopupInsumoAltaComponent
   ],
   imports: [
 
@@ -265,6 +267,12 @@ registerLocaleData(localeEsAR, 'es-Ar');
      PopupAsociarProduccionComponent,
      PopupAsociarProduccionDetalleComponent,
      MaquinaEditarComponent,
+
+/* -------------------------------------------------------------------------- */
+/*                                   INSUMOS                                  */
+/* -------------------------------------------------------------------------- */
+
+PopupInsumoAltaComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             POPUPS COMPARTIDOS                             */

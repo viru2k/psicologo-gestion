@@ -3,7 +3,10 @@
   <h5>CONFIGURACION DE INSUMOS</h5>
 </div>
 <div class="card-rounded card-header">
-  <div class="ml-2">   <a  (click)="nuevo()" class="icon-hover  icon-color-success"> <i class="fas fa-plus fa-lg mr-2"></i>Insumo</a>    </div> 
+  
+  <div class="ml-2">
+    <button    class="ml-2  btn-cuadrado-info"  (click)="nuevo()" > <i class="fas fa-plus fa-lg mr-2"></i>Insumo</button>
+  </div> 
 </div>
   <div class="row m-3">
     <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"  [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
@@ -16,7 +19,7 @@
           </div>
         
         <div class="col-8 mt-2" style="text-align: right">     
-            <input   size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            <input   size="50" pInputText  placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
         </div>
       </div>
       
@@ -36,6 +39,13 @@
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_unitaria'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_empaque'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'precio_unitario'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'precio_empaque'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'stock_minimo'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'stock_promedio'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'stock_maximo'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                            
                         </th>
                         <th></th>
                     </tr>
@@ -44,9 +54,16 @@
         <ng-template pTemplate="body" let-elementos  >
             <tr style="height:20px"  >
                    
-              <td style="width: 30%">{{elementos.nombre}}</td>     
-              <td style="width: 40%">{{elementos.descripcion}}</td>
-              <td style="width: 20%">{{elementos.unidad_descripcion}}</td>
+              <td style="width: 25%">{{elementos.nombre}}</td>     
+              <td style="width: 30%">{{elementos.descripcion}}</td>
+              <td style="width: 15%">{{elementos.unidad_descripcion}}</td>
+              <td style="width: 15%" class="texto-bold texto-terthiary-soft">{{elementos.cantidad_unitaria}}</td>
+              <td style="width: 15%" class="texto-bold texto-terthiary">{{elementos.cantidad_empaque}}</td>
+              <td style="width: 15%" class="texto-bold texto-info">{{elementos.precio_unitario}}</td>
+              <td style="width: 15%" class="texto-bold texto-info">{{elementos.precio_empaque}}</td>
+              <td style="width: 15%" class="texto-bold texto-danger">{{elementos.stock_minimo}}</td>
+              <td style="width: 15%" class="texto-bold texto-info">{{elementos.stock_promedio}}</td>
+              <td style="width: 15%" class="texto-bold texto-success">{{elementos.stock_maximo}}</td>              
               <td style="width: 10%">
                 <a  (click)="buscar(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>     
               </td>

@@ -2,7 +2,7 @@
     <h5>GESTION DE MAQUINAS</h5>
   </div>
   <div class="card-rounded card-header">
-    <div class="ml-2">   <a  (click)="nuevo()" class="icon-hover  icon-color-success"> <i class="fas fa-plus fa-lg mr-2"></i>   Máquinas</a>    </div> 
+    <div class="ml-2">     <button    class="ml-2  btn-cuadrado-info"  (click)="nuevo()" > <i class="fas fa-plus fa-lg mr-2"></i>Máquina</button>  </div> 
   </div>
     <div class="row m-3">
       <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"    columnResizeMode="expand" [responsive]="true"

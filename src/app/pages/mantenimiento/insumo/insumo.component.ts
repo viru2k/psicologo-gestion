@@ -23,12 +23,21 @@ export class InsumoComponent implements OnInit {
   constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [
-      { field: 'nombre', header: 'Insumo',  width: '30%' },
-      { field: 'descripcion', header: 'Descripción',  width: '40%' },
-      { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
+      { field: 'nombre', header: 'Insumo',  width: '25%' },
+      { field: 'descripcion', header: 'Descripción',  width: '30%' },
+      { field: 'unidad_descripcion', header: 'Unidad',  width: '15%' },
+      { field: 'cantidad_unitaria', header: 'C. unitaria',  width: '15%' },
+      { field: 'cantidad_empaque', header: 'C. Empaque',  width: '15%' },
+      { field: 'precio_unitario', header: '$ Unitario',  width: '15%' },
+      { field: 'precio_empaque', header: '$ Empaque',  width: '15%' },
+      { field: 'stock_minimo', header: 'Stock Min',  width: '15%' },
+      { field: 'stock_promedio', header: 'Stock Med',  width: '15%' },
+      { field: 'stock_maximo', header: 'Stock Max',  width: '15%' },
       { field: '', header: '',  width: '10%' }
    ];
   }
+
+
 
   ngOnInit() {
     console.log('cargando insumo');

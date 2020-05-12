@@ -17,7 +17,6 @@ import { UsuarioComponent } from './pages/mantenimiento/usuario/usuario.componen
 import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ingreso/orden-pedido-ingreso.component';
 import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedido.component';
 import { MovimientoProduccionComponent } from './pages/produccion/movimiento-produccion/movimiento-produccion.component';
-import { MovimientoInsumoComponent } from './pages/produccion/movimiento-insumo/movimiento-insumo.component';
 import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
 import { OrdenProduccionComponent } from './pages/produccion/orden-produccion/orden-produccion.component';
 import { UnidadComponent } from './pages/mantenimiento/unidad/unidad.component';
@@ -26,6 +25,8 @@ import { GrupoTrabajoEditarComponent } from './pages/mantenimiento/grupo-trabajo
 import { GrupoTrabajoAsociarComponent } from './pages/mantenimiento/grupo-trabajo-asociar/grupo-trabajo-asociar.component';
 import { ProduccionProcesoComponent } from './pages/produccion/produccion-proceso/produccion-proceso.component';
 import { MaquinaComponent } from './pages/mantenimiento/maquina/maquina.component';
+import { AsociarInsumoAltaComponent } from './pages/produccion/asociar-insumo/asociar-insumo-alta/asociar-insumo-alta.component';
+import { InsumoAltaComponent } from './pages/insumo/insumo-alta/insumo-alta.component';
 
 const routes: Routes = [
   
@@ -63,8 +64,15 @@ const routes: Routes = [
 { path: 'orden/produccion/estado', component: OrdenPedidoComponent },
 { path: 'produccion/ingreso', component: IngresoProduccionComponent },
 { path: 'produccion/movimientos', component: MovimientoProduccionComponent },
-{ path: 'produccion/asociar/insumo', component: MovimientoInsumoComponent },
+{ path: 'produccion/asociar/insumo', component: AsociarInsumoAltaComponent },
 { path: 'produccion/proceso', component: ProduccionProcesoComponent },
+
+
+/* -------------------------------------------------------------------------- */
+/*                                   INSUMOS                                  */
+/* -------------------------------------------------------------------------- */
+{ path: 'insumo/stock/ingreso', component: InsumoAltaComponent },
+
 
 /* -------------------------------------------------------------------------- */
 /*                              PAGINAS DEL SITIO                             */
@@ -76,6 +84,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
+
+
 
 
 

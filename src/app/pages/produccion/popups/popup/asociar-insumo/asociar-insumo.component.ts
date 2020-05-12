@@ -4,6 +4,7 @@ import { ProduccionService } from './../../../../../services/produccion.service'
 import { DynamicDialogRef, DynamicDialogConfig, MessageService, DialogService } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { AsociarInsumoAltaComponent } from '../../../asociar-insumo/asociar-insumo-alta/asociar-insumo-alta.component';
+import { InsumoService } from 'src/app/services/insumo.service';
 
 @Component({
   selector: 'app-asociar-insumo',
@@ -29,7 +30,7 @@ export class AsociarInsumoComponent implements OnInit {
   cantidad_salida:number=0;
   existencia:number=0;
 
-  constructor(private produccionService: ProduccionService, private alertServiceService: AlertServiceService,
+  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,
               public ref: DynamicDialogRef, public config: DynamicDialogConfig, public dialogService: DialogService, private messageService: MessageService) { 
     this.cols = [
       { field: '', header: '',  width: '6%' },
@@ -85,19 +86,19 @@ verDetalle(){
   console.log(this.selectedElemento);
   this.loading = true;
   try {
-        this.produccionService.getProduccionByOrdenProduccion(this.config.data['id'], this.config.data['articulo_id'])
+        this.insumoService.getInsumoByArticulo(this.config.data.articulo_id)
         .subscribe(resp => {
           console.log(resp);
           let i = 0;
           this.elementos = resp;
           console.log(this.elementos);
           resp.forEach(element => {
-          this.cantidad = this.elementos[i]['cantidad'];
+      /*     this.cantidad = this.elementos[i]['cantidad'];
           this.cantidad_botella = Number(this.cantidad_botella)+ Number(this.elementos[i]['cantidad_botella']);
           this.cantidad_litros =  Number(this.cantidad_litros)+ Number(this.elementos[i]['cantidad_litros']);
           this.cantidad_original = this.elementos[i]['cantidad_original'];
           this.cantidad_salida =Number(this.cantidad_salida)+ Number(this.elementos[i]['cantidad_salida']);
-          this.existencia = Number(this.existencia)+ Number(this.elementos[i]['existencia']);
+          this.existencia = Number(this.existencia)+ Number(this.elementos[i]['existencia']); */
           i++;
         });
           this.loading = false;
@@ -120,7 +121,7 @@ verDetalle(){
     console.log(this.selectedElemento);
     this.loading = true;
     try {
-          this.produccionService.getProduccionByOrdenProduccionTodos(this.config.data['id'])
+          this.insumoService.getInsumoByArticulo(this.config.data['id'])
           .subscribe(resp => {
             console.log(resp);
             let i = 0;

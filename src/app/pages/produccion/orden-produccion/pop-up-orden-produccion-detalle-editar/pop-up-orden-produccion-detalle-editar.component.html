@@ -43,8 +43,8 @@
       <div class="d-flex justify-content-start">
         <label class="mt-2 ml-1 mr-1">Grupo:</label>
         <select [(ngModel)]="selected" class="form-control" (change)="onChangeGrupo()">                      
-        <option *ngFor="let grupo of grupos" [ngValue]="grupo" class="text-sm"  > <label>{{grupo.grupo_nombre}}</label> </option>            
-    </select>              
+           <option *ngFor="let grupo of grupos" [ngValue]="grupo" class="text-sm"  > <label>{{grupo.grupo_nombre}}</label> </option>            
+        </select>              
     </div>
       <div class="d-flex justify-content-end">                   
         <label *ngIf="selectedRow" class="mt-1" ><b>Packs: {{cantidad / selectedRow.unidades }}</b></label>

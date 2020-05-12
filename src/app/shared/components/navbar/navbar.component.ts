@@ -14,6 +14,7 @@ import * as $ from 'jquery';
 
 import { DialogService } from 'primeng/components/common/api';
 import { DatePipe } from '@angular/common';
+import { AlertServiceService } from './../../../services/alert-service.service';
 
 
 //'@types/chart.js': '^2.7.40',
@@ -52,6 +53,7 @@ export class NavbarComponent implements OnInit {
   chats:boolean;
 
   constructor(
+    private alertServiceService: AlertServiceService,
     public dialogService: DialogService, 
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
@@ -154,8 +156,9 @@ export class NavbarComponent implements OnInit {
   this.menuList();
 }else{
   console.log("sin credenciales");
-  this.throwAlert('error','Usuario o contraseña incorrectos',  'Verifique el usuario y contraseña, su sesion puede haber expirado','500');
+  this.alertServiceService.throwAlert('error','Usuario o contraseña incorrectos',  'Verifique el usuario y contraseña, su sesion puede haber expirado','500');
 }
+ 
    
 }
 
@@ -343,11 +346,20 @@ menuList() {
       label: 'Producción',
       visible: !this.gestion_produccion,
       items: [
-        {label: 'Orden de producción', visible: !this.gestion_produccion, routerLink: 'orden/produccion'},
+        {
+          label: 'Stock',
+          visible: !this.administracion_produccion,
+          items: [
+            {label: 'Ingresar insumos', visible: !this.gestion_produccion, routerLink: '/insumo/stock/ingreso'},
+            {label: 'Stock de insumos', routerLink: '/insumo/stock'},
+            {label: 'Indicadores de stock', routerLink: '/insumo/indicadores'},
+          ]
+      },
         {
             label: 'Producción',
             visible: !this.administracion_produccion,
             items: [
+              {label: 'Orden de producción', visible: !this.gestion_produccion, routerLink: 'orden/produccion'},
               {label: 'Detalle de ordenes de producción', routerLink: '/produccion/ingreso'},
               {label: 'Proceso de producción', routerLink: '/produccion/proceso'},
             ]
@@ -420,95 +432,8 @@ menuList() {
 
 }
 
-throwAlert(estado: string, mensaje: string, motivo: string, errorNumero: string) {
-  let tipoerror: string;
-
-  if (estado === 'success') {
-      swal({
-          type: 'success',
-          title: 'Exito',
-          text: mensaje
-        });
-  }
-
-  if (errorNumero === '422' ) {
-    mensaje ='Los datos que esta tratando de guardar son iguales a los que ya poseia';
-    swal({
-        type: 'warning',
-        title: 'Atención..',
-        text: mensaje,
-        footer: motivo
-      });
-}
-
-  if (errorNumero === '99') {
-  mensaje ='Debe seleccionar un paciente antes de cargar las prácticas';
-  swal({
-      type: 'warning',
-      title: 'Atención..',
-      text: mensaje,
-      footer: motivo
-    })
-}
-
-  if (errorNumero === '100') {
-  mensaje = 'El paciente posee una obra social que no esta habilitada';
-  swal({
-      type: 'warning',
-      title: 'Atención..',
-      text: mensaje,
-      footer: motivo
-    });
-}
-  if (estado === 'warning') {
-
-    swal({
-        type: 'warning',
-        title: 'Atención..',
-        text: mensaje,
-        footer: motivo
-      });
-  }
-
-  if ((estado === 'error') && (errorNumero !== '422')) {
-    if (errorNumero === '422') {
-        mensaje = 'Los datos que esta tratando de guardar son iguales a los que ya poseia';
-    }
-    if (errorNumero === '400 ') {
-        mensaje = 'Bad Request ';
-    }
-    if (errorNumero  === '404') {
-        mensaje = 'No encontrado ';
-    }
-    if (errorNumero === '401') {
-        mensaje = 'Sin autorización';
-    }
-    if (errorNumero === '403') {
-        // tslint:disable-next-line: max-line-length
-        mensaje = ` Prohibido : La consulta fue valida, pero el servidor rechazo la accion.El usuario puede no tener los permisos necesarios, o necesite una cuenta para operar `;
-    }
-    if(errorNumero === '405'){
-        mensaje ='Método no permitido';
-    }
-    if(errorNumero =='500'){
-        mensaje ='Error interno en el servidor';
-    }
-    if(errorNumero =='503'){
-        mensaje ='Servidor no disponible';
-    }
-    if(errorNumero =='502'){
-        mensaje ='Bad gateway';
-    }
-    
-    swal({   
-          type: 'error',
-          title: 'Oops...',
-          text: mensaje,
-          footer: motivo
-        });
-  }
-
-
+configurarUsuario( ) {
+  
 }
 
 }

@@ -17,6 +17,7 @@ export class InsumoEditarComponent implements OnInit {
   unidad: string;
   es_nuevo;
   loading;
+  selected:any;
   selectedItem: any;
   selectedForma: any;
   userData: any;
@@ -30,7 +31,15 @@ export class InsumoEditarComponent implements OnInit {
       'descripcion': new FormControl('', Validators.required),
       'unidad_descripcion': new FormControl(''),
       'unidad_id': new FormControl('1'),
-      'usuario_modifica_id': new FormControl('', )
+      'usuario_modifica_id': new FormControl(''),
+      'cantidad_unitaria': new FormControl('0'),
+      'cantidad_empaque': new FormControl('0'),
+      'precio_unitario': new FormControl('0'),
+      'precio_empaque': new FormControl('0'),
+      'stock_minimo': new FormControl('0'),
+      'stock_promedio': new FormControl('0'),
+      'stock_maximo': new FormControl('0'),
+      'selected' : new FormControl(null)
 
   });
   }
@@ -41,6 +50,7 @@ export class InsumoEditarComponent implements OnInit {
     if (this.config.data) {
       console.log('es editable');
       this.es_nuevo = false;
+      this.updateDataForm.patchValue( this.config.data);
     }else{
       this.es_nuevo = true;
       console.log('es nuevo');
@@ -60,15 +70,15 @@ export class InsumoEditarComponent implements OnInit {
             console.log(this.unidades);
             this.loading = false;
             console.log(resp);
+            
             if (this.config.data) {
-            this.selectedForma =  this.unidades.find(x => x.id === this.config.data.unidad_id);
-            console.log(this.selectedForma.descripcion);
-            this.updateDataForm.patchValue(this.config.data);
-            this.updateDataForm.patchValue({unidad_id: this.selectedForma.id });
-            this.updateDataForm.patchValue({unidad_descripcion: this.selectedForma.descripcion });
-            this.updateDataForm.patchValue({usuario_modifica_id: this.userData.id});
-            console.log(this.updateDataForm.value);
-            }
+           //   this.selected =  this.unidades.find(x => x.id === this.config.data.unidad_id);
+              this.updateDataForm.patchValue({selected: this.unidades.find(x => x.id === this.config.data.unidad_id)});
+              console.log(this.selected);
+              } else {
+                this.updateDataForm.patchValue({selected: this.unidades.find(x => x.id === 1)}); // PARA QUE TOME EL VALOR DE LA PRIMERA UNIDAD EN ESTE CASO INSUMOS
+                console.log(this.selected);
+              }
         },
         error => { // error path
             console.log(error);
@@ -79,6 +89,10 @@ export class InsumoEditarComponent implements OnInit {
     }
 }
 
+onChangeGrupo() {
+  //console.log(e.target.value);
+  console.log(this.updateDataForm.value.selected);
+}
 
   guardarDatos() {
 
@@ -101,10 +115,10 @@ export class InsumoEditarComponent implements OnInit {
   }
     } else {
 
-      console.log(this.updateDataForm.value['id']);
-      this.updateDataForm.patchValue({unidad_id: this.selectedForma.id });
-      this.updateDataForm.patchValue({unidad_descripcion: this.selectedForma.descripcion });
+      
       this.updateDataForm.patchValue({usuario_modifica_id: this.userData['id']});
+      this.updateDataForm.patchValue({unidad_id: this.updateDataForm.value.selected.id});
+      console.log(this.updateDataForm.value);
       console.log(this.updateDataForm);
       try {
         this.insumoService.updateInsumo(this.updateDataForm.value, this.updateDataForm.value['id'])

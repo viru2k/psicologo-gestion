@@ -63,7 +63,7 @@ export class ProduccionProcesoComponent implements OnInit {
     {name: 'PAUSADO',     value: 'PAUSADO'},
     {name: 'FINALIZADO',  value: 'FINALIZADO'},
     {name: 'CANCELADO',   value: 'CANCELADO'}
-];
+    ];
    }
 
   ngOnInit() {
