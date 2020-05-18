@@ -89,15 +89,6 @@ import { UsuarioComponent } from './pages/mantenimiento/usuario/usuario.componen
 import { UsuarioEditarComponent } from './pages/mantenimiento/usuario-editar/usuario-editar.component';
 import { UnidadComponent } from './pages/mantenimiento/unidad/unidad.component';
 import { UnidadEditarComponent } from './pages/mantenimiento/unidad-editar/unidad-editar.component';
-import { CalidadControlComponent } from './pages/mantenimiento/calidad/calidad-control/calidad-control.component';
-// tslint:disable-next-line: max-line-length
-import { CalidadControlEditarComponent } from './pages/mantenimiento/calidad/calidad-control/calidad-control-editar/calidad-control-editar.component';
-import { CalidadDatoRelevadoComponent } from './pages/mantenimiento/calidad/calidad-dato-relevado/calidad-dato-relevado.component';
-// tslint:disable-next-line: max-line-length
-import { CalidadDatoRelevadoEditarComponent } from './pages/mantenimiento/calidad/calidad-dato-relevado/calidad-dato-relevado-editar/calidad-dato-relevado-editar.component';
-import { CalidadTipoControlComponent } from './pages/mantenimiento/calidad/calidad-tipo-control/calidad-tipo-control.component';
-// tslint:disable-next-line: max-line-length
-import { CalidadTipoControlEditarComponent } from './pages/mantenimiento/calidad/calidad-tipo-control/calidad-tipo-control-editar/calidad-tipo-control-editar.component';
 import { CustomPreloaderComponent } from './shared/components/custom-preloader/custom-preloader.component';
 import { PopupArticuloConsultaComponent } from './shared/components/popups/popup-articulo-consulta/popup-articulo-consulta.component';
 import { PopupInsumoConsultaComponent } from './shared/components/popups/popup-insumo-consulta/popup-insumo-consulta.component';
@@ -130,7 +121,7 @@ import { PopOrdenProduccionEditarComponent } from './pages/produccion/orden-prod
 import { PopUpOrdenProduccionDetalleEditarComponent } from './pages/produccion/orden-produccion/pop-up-orden-produccion-detalle-editar/pop-up-orden-produccion-detalle-editar.component';
 import { PopupOrdenProduccionDetalleConsultaComponent } from './pages/produccion/ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-orden-produccion-detalle-consulta.component';
 import { PopupAsociarProduccionComponent } from './pages/produccion/ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-asociar-produccion/popup-asociar-produccion.component';
-import { PopupAsociarProduccionDetalleComponent } from './pages/produccion/ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-asociar-produccion-detalle/popup-asociar-produccion-detalle.component';
+
 import { GrupoTrabajoComponent } from './pages/mantenimiento/grupo-trabajo/grupo-trabajo.component';
 import { GrupoTrabajoEditarComponent } from './pages/mantenimiento/grupo-trabajo-editar/grupo-trabajo-editar.component';
 import { GrupoTrabajoAsociarComponent } from './pages/mantenimiento/grupo-trabajo-asociar/grupo-trabajo-asociar.component';
@@ -140,6 +131,15 @@ import { MaquinaComponent } from './pages/mantenimiento/maquina/maquina.componen
 import { MaquinaEditarComponent } from './pages/mantenimiento/maquina-editar/maquina-editar.component';
 import { InsumoAltaComponent } from './pages/insumo/insumo-alta/insumo-alta.component';
 import { PopupInsumoAltaComponent } from './pages/insumo/insumo-alta/popup-insumo-alta/popup-insumo-alta.component';
+import { CalidadControlEncabezadoComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado/calidad-control-encabezado.component';
+import { CalidadControlParametroComponent } from './pages/mantenimiento/calidad/calidad-control-parametro/calidad-control-parametro.component';
+import { CalidadControlEncabezadoParametroComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado-parametro/calidad-control-encabezado-parametro.component';
+import { PopupCalidadControlEncabezadoParametroComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado-parametro/popup-calidad-control-encabezado-parametro/popup-calidad-control-encabezado-parametro.component';
+import { PopupControlParametroComponent } from './pages/mantenimiento/calidad/calidad-control-parametro/popup-control-parametro/popup-control-parametro.component';
+import { PopupControlEncabezadoComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado/popup-control-encabezado/popup-control-encabezado.component';
+import { PopupFindCalidadParametroComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado-parametro/popup-find-calidad-parametro/popup-find-calidad-parametro.component';
+import { CalidadConsultaProduccionComponent } from './pages/calidad/calidad-consulta-produccion/calidad-consulta-produccion.component';
+import { PopupCalidadParametroProduccionIngresoComponent } from './pages/calidad/popup-calidad-parametro-produccion-ingreso/popup-calidad-parametro-produccion-ingreso.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -162,12 +162,6 @@ registerLocaleData(localeEsAR, 'es-Ar');
     UsuarioEditarComponent,
     UnidadComponent,
     UnidadEditarComponent,
-    CalidadControlComponent,
-    CalidadControlEditarComponent,
-    CalidadDatoRelevadoComponent,
-    CalidadDatoRelevadoEditarComponent,
-    CalidadTipoControlComponent,
-    CalidadTipoControlEditarComponent,
     CustomPreloaderComponent,
     PopupArticuloConsultaComponent,
     PopupInsumoConsultaComponent,
@@ -175,7 +169,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopupUsuarioComponent,
     OrdenPedidoComponent,
     OrdenPedidoIngresoComponent,
-    MovimientoProduccionComponent,    
+    MovimientoProduccionComponent,
     IngresoProduccionComponent,
     AsociarProduccionComponent,
     AsociarProduccionDetalleComponent,
@@ -192,8 +186,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopOrdenProduccionEditarComponent,
     PopUpOrdenProduccionDetalleEditarComponent,
     PopupOrdenProduccionDetalleConsultaComponent,
-    PopupAsociarProduccionComponent,
-    PopupAsociarProduccionDetalleComponent,
+    PopupAsociarProduccionComponent,    
     GrupoTrabajoComponent,
     GrupoTrabajoEditarComponent,
     GrupoTrabajoAsociarComponent,
@@ -202,7 +195,16 @@ registerLocaleData(localeEsAR, 'es-Ar');
     MaquinaComponent,
     MaquinaEditarComponent,
     InsumoAltaComponent,
-    PopupInsumoAltaComponent
+    PopupInsumoAltaComponent,
+    CalidadControlEncabezadoComponent,
+    CalidadControlParametroComponent,
+    CalidadControlEncabezadoParametroComponent,
+    PopupCalidadControlEncabezadoParametroComponent,
+    PopupControlParametroComponent,
+    PopupControlEncabezadoComponent,
+    PopupFindCalidadParametroComponent,
+    CalidadConsultaProduccionComponent,
+    PopupCalidadParametroProduccionIngresoComponent
   ],
   imports: [
 
@@ -244,7 +246,6 @@ registerLocaleData(localeEsAR, 'es-Ar');
   ],
   entryComponents: [ArticuloEditarComponent,
      ArticuloConfeccionEditarComponent,
-     CalidadTipoControlEditarComponent,
      InsumoEditarComponent,
      UsuarioEditarComponent,
      UnidadEditarComponent,
@@ -265,8 +266,17 @@ registerLocaleData(localeEsAR, 'es-Ar');
      PopUpOrdenProduccionDetalleEditarComponent,
      PopupOrdenProduccionDetalleConsultaComponent,
      PopupAsociarProduccionComponent,
-     PopupAsociarProduccionDetalleComponent,
      MaquinaEditarComponent,
+
+/* -------------------------------------------------------------------------- */
+/*                             CONTROL DE CALIDAD                             */
+/* -------------------------------------------------------------------------- */
+
+PopupCalidadControlEncabezadoParametroComponent,
+PopupControlParametroComponent,
+PopupControlEncabezadoComponent,
+PopupFindCalidadParametroComponent,
+PopupCalidadParametroProduccionIngresoComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                                   INSUMOS                                  */

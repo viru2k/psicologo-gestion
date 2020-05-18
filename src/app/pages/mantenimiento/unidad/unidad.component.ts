@@ -15,17 +15,18 @@ export class UnidadComponent implements OnInit {
 
   cols: any[];
   columns: any[];
-  elementos:any[];
-  selecteditems:any;
+  elementos: any[];
+  selecteditems: any;
   loading;
 
+  // tslint:disable-next-line: max-line-length
   constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) { 
 
     this.cols = [
-    
-      { field: 'descripcion', header: 'Unidad',  width: '80%' },      
-      { field: '', header: 'Acción',  width: '20%' },
-      
+
+      { field: 'descripcion', header: 'Unidad',  width: '80%' },
+      { field: '', header: 'Acción',  width: '20%' }
+
    ];
   }
 
@@ -52,10 +53,10 @@ export class UnidadComponent implements OnInit {
         error => { // error path
             console.log(error);
 
-            this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
+            this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
          });
     } catch (error) {
-      this.alertServiceService.throwAlert('error','Error: '+error.status+'  Error al cargar los registros','', '500');
+      this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
     }
 }
 

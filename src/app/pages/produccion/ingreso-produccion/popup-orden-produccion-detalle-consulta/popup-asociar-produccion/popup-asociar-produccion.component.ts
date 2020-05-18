@@ -32,7 +32,7 @@ export class PopupAsociarProduccionComponent implements OnInit {
   estado: any[] = [];
   selectedEstado: string = 'ACTIVO' ;
   maquinas: any[];
-
+  data: any;
   // tslint:disable-next-line: max-line-length
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig, public ref: DynamicDialogRef) {
     this.estado = [
@@ -45,7 +45,7 @@ export class PopupAsociarProduccionComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.config.data);
-
+  this.data = this.config.data;
     this.checked = this.config.data.checked;
     this.checked_iniciado = this.config.data.checked_iniciado;
     if (!this.checked_iniciado) {
@@ -215,7 +215,7 @@ actualizar() {
 
   
 
- calcular(_elemento: any, calculo: string) {
+ calcular(_elemento: any, calculo: number) {
   _elemento.a_calcular = calculo;
   const data: any = this.config.data;
   const ref1 = this.dialogService.open(PopupCalculdorPalletsComponent, {

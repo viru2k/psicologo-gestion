@@ -415,9 +415,9 @@ menuList() {
             label: 'Calidad',
             visible:! this.administarcion_auditoria,
             items: [
-              {label: 'Encabezado de planilla', routerLink: 'calidad/encabezado'},
-              {label: 'Datos de planilla', routerLink: 'calidad/planilla'},
-              {label: 'Datos de columnas', routerLink: 'calidad/columnas'}
+              {label: 'Encabezado', routerLink: 'mantenimiento/calidad/encabezado'},
+              {label: 'Parametros', routerLink: 'mantenimiento/calidad/parametro'},
+              {label: 'Confección de planilla', routerLink: 'mantenimiento/calidad/encabezado/parametro'}
           ]
       },
       {

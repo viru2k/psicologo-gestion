@@ -8,19 +8,7 @@
       <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"    columnResizeMode="expand" [responsive]="true"
       scrollHeight="300px" [scrollable]="true"   [loading]="loading"  >
      
-      <ng-template pTemplate="caption">
-        <div class=" row">
-            <div class="col-4" style="text-align: left" >
-            </div>
-          
-          <div class="col-8 mt-2" style="text-align: right">     
-            
-              <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-              <input   size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-          </div>
-        </div>
-        
-      </ng-template>
+ 
                  <ng-template pTemplate="header" let-columns >
                 
                             <tr >
@@ -31,13 +19,7 @@
                               </th> 
                             
                           </tr> 
-                          <tr>
-                          <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'grupo_nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            
-                          </th>
-                          <th></th>
-                      </tr>
+                     
                   </ng-template>
                 
           <ng-template pTemplate="body" let-elementos  >

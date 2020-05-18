@@ -8,6 +8,7 @@ import { calendarioIdioma } from './../../../config/config';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { PopupAsociarProduccionComponent } from './../ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-asociar-produccion/popup-asociar-produccion.component';
 import { formatDate } from '@angular/common';
+import { PopupCalidadParametroProduccionIngresoComponent } from './../../calidad/popup-calidad-parametro-produccion-ingreso/popup-calidad-parametro-produccion-ingreso.component';
 
 @Component({
   selector: 'app-produccion-proceso',
@@ -162,23 +163,23 @@ export class ProduccionProcesoComponent implements OnInit {
 
 
  auditarProduccion(elemento: any) {
-  console.log(elemento);
-  elemento['editaPassword'] = 'NO';
+  console.log(elemento);  
   const data: any = elemento;
- /*  const ref = this.dialogService.open(UsuarioEditarComponent, {
+  const ref = this.dialogService.open(PopupCalidadParametroProduccionIngresoComponent, {
   data,
-   header: 'Editar usuario',
-   width: '50%',
+   header: 'Cargar controles a producción',
+   width: '98%',
    height: '90%'
   });
 
-  
-  ref.onClose.subscribe((UsuarioEditarComponent: any) => {
-    if (UsuarioEditarComponent) {
+
+  // tslint:disable-next-line: no-shadowed-variable
+  ref.onClose.subscribe((PopupCalidadParametroProduccionIngresoComponent: any) => {
+    if (PopupCalidadParametroProduccionIngresoComponent) {
       this.loadlist();
     }
 
-  }); */
+  });
 }
 
 

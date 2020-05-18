@@ -7,7 +7,7 @@ import { OrdenProduccionDetalle } from './../../../../models/orden-produccion-de
 import { PopupAsociarProduccionComponent } from './popup-asociar-produccion/popup-asociar-produccion.component';
 import { PopupCalculdorPalletsComponent } from './../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { PopupAsociarProduccionDetalleComponent } from './popup-asociar-produccion-detalle/popup-asociar-produccion-detalle.component';
+
 
 
 @Component({
@@ -130,23 +130,6 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
 
  }
 
- 
- detalleProduccion(elemento: any) {
-  console.log(elemento);
-  let data: any;
-  data = elemento;
-  const ref = this.dialogService.open(PopupAsociarProduccionDetalleComponent, {
-  data,
-   header: 'Detalle de producciones',
-   width: '98%',
-   height: '80%'
-  });
-
-  ref.onClose.subscribe((PopupAsociarProduccionDetalleComponent: any) => {
-        //this.loadlist();
-  });
-
-}
  
 
 

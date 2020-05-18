@@ -7,7 +7,7 @@ import { URL_SERVICIOS, PARAMS } from '../config/config';
 })
 export class CalidadService {
 
-  private url:string  = URL_SERVICIOS;
+  private url: string  = URL_SERVICIOS;
   constructor(public http: HttpClient) { }
 
 
@@ -15,28 +15,62 @@ export class CalidadService {
 /*                   ENCABEZADO DE LAS PLANILLAS DE CALIDAD                   */
 /* -------------------------------------------------------------------------- */
 
-  getCalidadTipoControl(){
-    return this.http.get<any[]>(this.url+'calidad');
-    }
+  getCalidadControlEncabezado() {
+      return this.http.get<any[]>(this.url + 'calidad/control/encabezado');
+  }
 
-    getCalidadTipoControlConfeccionByCalidadTipoControlId(articulo_id: string){
-    return this.http.get<any[]>(this.url+'calidad/confeccion?articulo_id='+articulo_id);
-    }
+  setCalidadControlEncabezado(articulo: any) {
+    return this.http.post<any[]>(this.url + 'calidad/control/encabezado', articulo);
+  }
 
-     setCalidadTipoControl(articulo: any){
-      return this.http.post<any[]>(this.url+'calidad/tipocontrol', articulo);
-      }  
-  
-
-  updateCalidadTipoControl( articulo: any,id: string){
-    return this.http.put<any[]>(this.url+'calidad/'+id, articulo);
-    }  
+  putCalidadControlEncabezado( articulo: any, id: string) {
+    return this.http.put<any[]>(this.url + 'calidad/control/encabezado/' + id, articulo);
+  }
 
 
-    getUnidad(){
-      return this.http.get<any[]>(this.url+'unidad');
-      }
 
+
+getCalidadControlParametros() {
+    return this.http.get<any[]>(this.url + 'calidad/control/parametros');
+}
+
+setCalidadControlParametros(articulo: any) {
+  return this.http.post<any[]>(this.url + 'calidad/control/parametros', articulo);
+}
+
+putCalidadControlParametros( articulo: any, id: string) {
+  return this.http.put<any[]>(this.url + 'calidad/control/parametros/' + id, articulo);
+
+}
+
+
+
+getCalidadControlParametroControl(id: string) {
+  return this.http.get<any[]>(this.url + 'calidad/control/parametros/control/by/id?control_calidad_id=' + id);
+}
+
+setCalidadControlParametroControl(articulo: any) {
+return this.http.post<any[]>(this.url + 'calidad/control/parametros/control/by/id', articulo);
+}
+
+putCalidadControlParametroControl( articulo: any, id: string) {
+return this.http.put<any[]>(this.url + 'calidad/control/parametros/control/by/id/' + id, articulo);
+
+}
+
+
+
+getControlByProcesoId(id: string) {
+  return this.http.get<any[]>(this.url + 'calidad/control/by/proceso/id?id=' + id);
+}
+
+getControlByProcesoByDates(fechaDesde: string, fechaHasta: string) {
+  return this.http.get<any[]>(this.url + 'calidad/control/by/dates?fecha_desde=' + fechaDesde + '&fecha_hasta=' + fechaHasta);
+}
+
+delControlParametro(id: string) {
+  return this.http.delete<any>(this.url + 'calidad/control/proceso?id=' + id);
+}
 
 
 }

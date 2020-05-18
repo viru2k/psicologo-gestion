@@ -10,9 +10,6 @@ import { CalidadindicadoresComponent } from './pages/calidad/calidadindicadores/
 import { ArticuloComponent } from './pages/mantenimiento/articulo/articulo.component';
 import { ArticuloConfeccionComponent } from './pages/mantenimiento/articulo-confeccion/articulo-confeccion.component';
 import { InsumoComponent } from './pages/mantenimiento/insumo/insumo.component';
-import { CalidadControlComponent } from './pages/mantenimiento/calidad/calidad-control/calidad-control.component';
-import { CalidadTipoControlComponent } from './pages/mantenimiento/calidad/calidad-tipo-control/calidad-tipo-control.component';
-import { CalidadDatoRelevadoComponent } from './pages/mantenimiento/calidad/calidad-dato-relevado/calidad-dato-relevado.component';
 import { UsuarioComponent } from './pages/mantenimiento/usuario/usuario.component';
 import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ingreso/orden-pedido-ingreso.component';
 import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedido.component';
@@ -28,8 +25,12 @@ import { MaquinaComponent } from './pages/mantenimiento/maquina/maquina.componen
 import { AsociarInsumoAltaComponent } from './pages/produccion/asociar-insumo/asociar-insumo-alta/asociar-insumo-alta.component';
 import { InsumoAltaComponent } from './pages/insumo/insumo-alta/insumo-alta.component';
 
+import { CalidadControlEncabezadoComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado/calidad-control-encabezado.component';
+import { CalidadControlParametroComponent } from './pages/mantenimiento/calidad/calidad-control-parametro/calidad-control-parametro.component';
+import { CalidadControlEncabezadoParametroComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado-parametro/calidad-control-encabezado-parametro.component';
+
 const routes: Routes = [
-  
+
 { path: 'inicio', component: EmptyComponent },
 
 
@@ -42,12 +43,13 @@ const routes: Routes = [
 { path: 'mantenimiento/articulo/confeccion', component: ArticuloConfeccionComponent },
 { path: 'mantenimiento/unidad', component: UnidadComponent },
 { path: 'mantenimiento/insumo', component: InsumoComponent },
-{ path: 'calidad/encabezado', component: CalidadTipoControlComponent },
-{ path: 'calidad/planilla', component: CalidadControlComponent },
-{ path: 'calidad/columnas', component: CalidadDatoRelevadoComponent },
 { path: 'mantenimiento/grupo', component: GrupoTrabajoComponent },
 { path: 'usuario', component: UsuarioComponent },
 { path: 'mantenimiento/maquina', component: MaquinaComponent },
+
+{ path: 'mantenimiento/calidad/encabezado', component: CalidadControlEncabezadoComponent },
+{ path: 'mantenimiento/calidad/parametro', component: CalidadControlParametroComponent },
+{ path: 'mantenimiento/calidad/encabezado/parametro', component: CalidadControlEncabezadoParametroComponent },
 
 /* -------------------------------------------------------------------------- */
 /*                                   CALIDAD                                  */
@@ -84,6 +86,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
+
 
 
 

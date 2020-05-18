@@ -82,9 +82,9 @@ buscar(elemento: any) {
 }
 
 
-nuevo(elemento) {
+nuevo() {
 
-  const data: any = elemento;
+  const data: any = null;
 
   const ref = this.dialogService.open(GrupoTrabajoEditarComponent, {
   data,

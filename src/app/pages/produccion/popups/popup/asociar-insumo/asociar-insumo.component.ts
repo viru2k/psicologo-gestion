@@ -72,7 +72,7 @@ export class AsociarInsumoComponent implements OnInit {
      data =  this.selectedElemento;
       const ref = this.dialogService.open(AsociarInsumoAltaComponent, {
       data,
-       header: 'Carga de insumo a producción', 
+       header: 'Carga de insumo a producción',
        width: '98%',
        height: '90%'
       });

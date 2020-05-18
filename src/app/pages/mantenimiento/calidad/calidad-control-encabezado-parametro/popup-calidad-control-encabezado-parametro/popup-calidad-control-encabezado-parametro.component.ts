@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { PopupUsuarioComponent } from './../../../shared/components/popups/popup-usuario/popup-usuario.component';
-import { SectorService } from './../../../services/sector.service';
-import { AlertServiceService } from './../../../services/alert-service.service';
+import { PopupFindCalidadParametroComponent } from './../popup-find-calidad-parametro/popup-find-calidad-parametro.component';
+import { AlertServiceService } from './../../../../../services/alert-service.service';
+import { CalidadService } from './../../../../../services/calidad.service';
 import { MessageService, DialogService, DynamicDialogConfig } from 'primeng/api';
-import { config } from '../../../config/config';
 
 @Component({
-  selector: 'app-grupo-trabajo-asociar',
-  templateUrl: './grupo-trabajo-asociar.component.html',
-  styleUrls: ['./grupo-trabajo-asociar.component.scss']
+  selector: 'app-popup-calidad-control-encabezado-parametro',
+  templateUrl: './popup-calidad-control-encabezado-parametro.component.html',
+  styleUrls: ['./popup-calidad-control-encabezado-parametro.component.scss']
 })
-export class GrupoTrabajoAsociarComponent implements OnInit {
+export class PopupCalidadControlEncabezadoParametroComponent implements OnInit {
 
 
   cols: any[];
@@ -18,38 +17,40 @@ export class GrupoTrabajoAsociarComponent implements OnInit {
   elementos: any[];
   selecteditems: any;
   loading;
+  id: string;
 
-  // tslint:disable-next-line: max-line-length
-  constructor(public config: DynamicDialogConfig ,private sectorService: SectorService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) { 
+  constructor(private calidadService: CalidadService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService, public config: DynamicDialogConfig) { 
 
     this.cols = [
 
-      { field: 'email', header: 'Usuario',  width: '40%' },
-      { field: 'nombreyapellido', header: 'Nombre y apellido',  width: '40%' },
+      { field: 'parametro', header: 'Parámetro',  width: '60%' },
+      { field: 'estado', header: 'Estado',  width: '20%' },
       { field: '', header: 'Acción',  width: '20%' },
 
    ];
   }
 
   ngOnInit() {
+    console.log(this.config.data);
+    this.id = this.config.data.id;
     console.log('cargando insumo');
     this.loadlist();
   }
 
   loadlist() {
-    console.log(this.config.data.id);
+
     this.loading = true;
     try {
-        this.sectorService.getGrupoByIdGrupo(this.config.data.id)
+        this.calidadService.getCalidadControlParametroControl(this.id)
         .subscribe(resp => {
           if (resp[0]) {
             this.elementos = resp;
             console.log(this.elementos);
-              } else {
+              }else{
                 this.elementos = null;
               }
-          this.loading = false;
-          console.log(resp);
+            this.loading = false;
+            console.log(resp);
         },
         error => { // error path
             console.log(error);
@@ -61,71 +62,75 @@ export class GrupoTrabajoAsociarComponent implements OnInit {
     }
 }
 
+borrar(elemento: any) {
+  console.log(elemento);
+
+  this.loading = true;
+  try {
+      this.calidadService.delControlParametro(elemento.id)
+      .subscribe(resp => {
+        if (resp[0]) {
+          this.elementos = resp;
+          console.log(this.elementos);
+            }else{
+              this.elementos = null;
+            }
+          this.loading = false;
+          this.loadlist();
+      },
+      error => { // error path
+          console.log(error);
+
+          this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+       });
+  } catch (error) {
+    this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+  }
+
+}
+
+
+
+
 
 nuevo() {
 
   const data: any = null;
 
-  const ref = this.dialogService.open(PopupUsuarioComponent, {
+  const ref = this.dialogService.open(PopupFindCalidadParametroComponent, {
   data,
-   header: 'Agregar usuario a grupo',
-   width: '80%',
-   height: '70%'
+   header: 'Buscar parámetros',
+   width: '60%',
+   height: '50%'
   });
 
-  ref.onClose.subscribe((PopupUsuarioComponent: any) => {
-    console.log(PopupUsuarioComponent);
-    if (PopupUsuarioComponent) {
-      this.asociarUsuario(PopupUsuarioComponent);
+  ref.onClose.subscribe((PopupFindCalidadParametroComponent: any) => {
+    if (PopupFindCalidadParametroComponent) {
+    //  this.loadlist();
+    console.log(PopupFindCalidadParametroComponent);
+    this.guardar(PopupFindCalidadParametroComponent);
     }
   });
 
 }
 
 
-
-asociarUsuario(usuario: any) {
-  usuario.usuario_id = usuario.id;
-  usuario.grupo_id = this.config.data.id;
-  console.log(this.config.data.id);
+guardar(elemento: any) {
+  console.log(elemento);
+  elemento.control_calidad_id = this.id;
+  elemento.parametro_id = elemento.id;
   this.loading = true;
   try {
-      this.sectorService.setGrupoTrabajo(usuario)
+      this.calidadService.setCalidadControlParametroControl(elemento)
       .subscribe(resp => {
         if (resp[0]) {
           this.elementos = resp;
           console.log(this.elementos);
-            } else {
+            }else{
               this.elementos = null;
             }
-        this.loading = false;
-        console.log(resp);
-        this.loadlist();
-      },
-      error => { // error path
-          console.log(error);
-
-          this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-       });
-  } catch (error) {
-    this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-  }
-}
-
-eliminar(elemento) {
-  this.loading = true;
-  try {
-      this.sectorService.delGrupoUsuario(elemento.grupo_trabajo_id)
-      .subscribe(resp => {
-        if (resp[0]) {
-          this.elementos = resp;
-          console.log(this.elementos);
-            } else {
-              this.elementos = null;
-            }
-        this.loading = false;
-        console.log(resp);
-        this.loadlist();
+          this.loading = false;
+          this.loadlist();
       },
       error => { // error path
           console.log(error);
@@ -139,3 +144,4 @@ eliminar(elemento) {
 }
 
 }
+
