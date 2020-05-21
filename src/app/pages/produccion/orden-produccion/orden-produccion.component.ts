@@ -25,6 +25,8 @@ export class OrdenProduccionComponent implements OnInit {
   userData: any;
   es: any;
   checked;
+
+  items: any[];
   // tslint:disable-next-line: max-line-length
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService) {
 
@@ -43,6 +45,12 @@ export class OrdenProduccionComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.items = [
+      {label: 'Step 1'},
+      {label: 'Step 2'},
+      {label: 'Step 3'}
+  ];
    this.userData = JSON.parse(localStorage.getItem('userData'));
    // this.alertServiceService.throwAlert('success','Articulo guardado','','201');
    this.es = calendarioIdioma;

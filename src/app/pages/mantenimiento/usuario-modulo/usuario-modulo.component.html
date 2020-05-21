@@ -1,0 +1,24 @@
+
+<div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-start">
+    <p-listbox [options]="elementos" [(ngModel)]="selectedElemento" [multiple]="false" [filter]="true" optionLabel="titulo" [style]="{'width':'250px'}">
+      <p-header>
+        Modulos del usuario
+      </p-header>
+      <ng-template let-elemento pTemplate="item" >    
+        <div class="ui-helper-clearfix row">
+          <span> {{elemento.label}}</span>
+          <a  (click)="borrar(elemento)" class="icon-hover"> <i class="fas fa-trash icon-color-danger fa-lg"></i></a>             
+        </div>
+      </ng-template>
+    </p-listbox>
+
+  </div>
+  <div class="d-flex justify-content-center">
+  <p-listbox [options]="elementos" [(ngModel)]="selectedElemento" [multiple]="true" [checkbox]="true" [filter]="true" optionLabel="titulo" [style]="{'width':'250px'}">
+      <p-header>
+        Modulos 
+      </p-header>
+    </p-listbox>
+  </div>
+</div>

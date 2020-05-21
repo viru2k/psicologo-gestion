@@ -5,6 +5,8 @@ import { MessageService, DialogService } from 'primeng/api';
 import { InsumoEditarComponent } from './../insumo-editar/insumo-editar.component';
 import { UserService } from './../../../services/user.service';
 import { UsuarioEditarComponent } from './../usuario-editar/usuario-editar.component';
+import { UsuarioModulo } from '../../../models/user-modulo.model';
+import { UsuarioModuloComponent } from './../usuario-modulo/usuario-modulo.component';
 
 @Component({
   selector: 'app-usuario',
@@ -16,8 +18,8 @@ export class UsuarioComponent implements OnInit {
   
   cols: any[];
   columns: any[];
-  elementos:any[];
-  selecteditems:any;
+  elementos: any[];
+  selecteditems: any;
   loading;
 
   constructor(private userService: UserService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) { 
@@ -103,6 +105,25 @@ editarPassword(elemento: any) {
 
 }
 
+editarPermiso(elemento: any) {
+  console.log(elemento);  
+  const data: any = elemento;
+  const ref = this.dialogService.open(UsuarioModuloComponent, {
+  data,
+   header: 'Editar módulo usuario',
+   width: '60%',
+   height: '90%'
+  });
+
+  // tslint:disable-next-line: no-shadowed-variable
+  ref.onClose.subscribe((UsuarioModulo: any) => {
+    if (UsuarioModulo) {
+      this.loadlist();
+    }
+
+  });
+
+}
 
 nuevo() {
 

@@ -1,16 +1,27 @@
-<p>popup-calidad-parametro-produccion-ingreso works!</p>
+
 <div class=" faq-title text-center pb-3 pt-2 ">
     <h5>CARGAR PARAMETROS DE CONTROL DE CALIDAD</h5>
   </div>
   
-  <div class="d-flex justify-content-center m-2">
-    <label class="mr-2 mt-1">Controles :</label>
-    <select [(ngModel)]="selected" class="form-control-sm text-sm texto-monserrat texto-secondary icon-hover" (change)="onChangeControl($event)" >             
-             
-      <option  *ngFor="let grupo of elementosControl" class="text-sm texto-monserrat texto-secondary icon-hover" [ngValue]="grupo"   >
-        <label class="icon-hover"  >{{grupo.calidad_titulo}}</label>              
-    </option>
-  </select>
+  <div class="d-flex justify-content-between m-2">
+    <div class="d-flex justify-content-start ">
+      <label class="mr-2 mt-1">Controles :</label>
+      <select [(ngModel)]="selected" class="form-control-sm text-sm texto-monserrat texto-secondary icon-hover" (change)="onChangeControl($event)" >             
+               
+        <option  *ngFor="let grupo of elementosControl" class="text-sm texto-monserrat texto-secondary icon-hover" [ngValue]="grupo"   >
+          <label class="icon-hover"  >{{grupo.calidad_titulo}}</label>              
+      </option>
+      </select>
+    </div>
+    <div class="d-flex justify-content-center ">
+      <label class="mr-2 mt-1">Fecha de carga :</label>
+      <p-calendar [(ngModel)]="fecha"   tabindex="0"  [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true">   </p-calendar>    
+      <label class="mr-2 mt-1">Hora de carga :</label>
+      <p-calendar [(ngModel)]="hora" [timeOnly]="true"></p-calendar>
+    </div>
+    <div class="d-flex justify-content-end ">
+      <button class="btn btn-info btn-block" (click)="guardarControl()" >Guardar control</button>
+    </div>
 </div>
 
 <div class="d-flex justify-content-center m-2" *ngIf="selected">
@@ -38,7 +49,7 @@
                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'parametro'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">  
                           <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'calidad_valor'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                           <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'es_no_conformidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                          <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'tiene_accion_correctiva'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">7                        
+                          <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'tiene_accion_correctiva'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">                      
                       </th>
                       <th></th>
                   </tr>
@@ -49,17 +60,17 @@
 
                   <td style="width: 35%" >{{elementos.parametro}}</td>                                         
     
-                  <td style="width: 20%;" class="text-info texto-bold">
+                  <td style="width: 12%;" class="text-info texto-bold">
                        <label> {{elementos.calidad_valor |  number : '1.2-2'}}</label>                                     
                   </td>                           
-                  <td style="width: 20%"  [ngClass]="iconoColor(elementos.estado)">
-                    {{elementos.es_no_conformidad }}
+                  <td style="width: 30%"  [ngClass]="iconoColor('CANCELADO')">
+                    {{elementos.es_no_conformidad_descripcion }}
                 </td>                   
-                  <td style="width: 20%"  [ngClass]="iconoColor(elementos.estado)">
-                    {{elementos.tiene_accion_correctiva }}
+                  <td style="width: 30%"  [ngClass]="iconoColor('PAUSADO')">
+                    {{elementos.tiene_accion_correctiva_descripcion }}
                 </td>                   
                   <td style="width: 8%">
-                    <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
+                    <a  (click)="accion($event,elementos)"  class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
                   </td>
           </tr>
 
@@ -73,13 +84,27 @@
   </p-table>
 
   
-  
-  <p-overlayPanel #op appendTo="body"  [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" [showCloseIcon]="true" >                                                
-    <div class=" faq-title text-center pb-3 pt-2 ">
-      <h5>ACCION</h5>
+  <p-dialog header="Carga de valores" [(visible)]="display" [style]="{width: '80%'}" [baseZIndex]="10000">
+    <div class="d-flex justify-content-start m-2">
+      <label class="mr-2">Valor obtenido</label>
+      <input type="number" class="form-control form-control-sm" [(ngModel)]="valorObtenido" [autofocus]>
     </div>
-    <!--   <button class="btn-cuadrado-info btn--block texto-bold mb-1" (click)="nuevaProduccion(elemento)"  >Nueva producción</button>
-      <button class="btn-cuadrado-success  btn--block " (click)="detalleProduccion(elemento)"  >Detalle  producción</button>    -->   
-  </p-overlayPanel> 
+  
+      <div class="d-flex justify-content-start m-2">
+        <label class="mr-2">No conformidad</label>
+        <input [disabled] ="!estadoNoConformidad" class="form-control form-control-sm mr-2" type="text" [(ngModel)]="noConformidad" >
+        <p-checkbox name="groupname" value="estadoNoConformidad" [(ngModel)]="estadoNoConformidad" binary="true" (onChange)="changeNoConformidad($event)"></p-checkbox>      
+    </div>
 
-10
+    <div class="d-flex justify-content-start m-2">
+ 
+        <label class="mr-2">Acción correctiva</label>
+        <input [disabled] ="!estadoAccionCorrectiva" class="form-control form-control-sm mr-2 " type="text" [(ngModel)]="accionCorrectiva" >
+        <p-checkbox name="groupname" value="estadoAccionCorrectiva" [(ngModel)]="estadoAccionCorrectiva" binary="true" (onChange)="changeAccionCorrectiva($event)"></p-checkbox>   
+      </div>          
+    <div>
+      <button class="btn btn-info btn-block" (click)="confirmarParametro()">Confirmar</button>
+    </div>
+  <p-dialog>
+
+

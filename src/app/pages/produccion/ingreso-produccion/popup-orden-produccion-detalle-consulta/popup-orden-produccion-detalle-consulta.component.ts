@@ -109,6 +109,7 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
 
  }
 
+ 
  nuevaProduccion(_elemento: any) {
   console.log(this.elemento);
   _elemento.es_nuevo = true;
@@ -129,6 +130,29 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
   });
 
  }
+
+
+
+detalleProduccion(_elemento: any) {
+ console.log(this.elemento);
+ _elemento.es_nuevo = true;
+ this.elemento.checked = true;
+ this.elemento.checked_iniciado = true;
+ let data: any;
+ data = this.elemento;
+ const ref = this.dialogService.open(PopupOrdenProduccionDetalleConsultaComponent, {
+ data,
+  header: 'Gestionar produccion',
+  width: '70%',
+  height: '80%'
+ });
+
+ ref.onClose.subscribe((PopupAsociarProduccionComponent: any) => {
+
+   this.loadlist(this.config.data['id']);
+ });
+
+}
 
  
 

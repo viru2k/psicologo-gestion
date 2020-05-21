@@ -9,6 +9,7 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { PopupAsociarProduccionComponent } from './../ingreso-produccion/popup-orden-produccion-detalle-consulta/popup-asociar-produccion/popup-asociar-produccion.component';
 import { formatDate } from '@angular/common';
 import { PopupCalidadParametroProduccionIngresoComponent } from './../../calidad/popup-calidad-parametro-produccion-ingreso/popup-calidad-parametro-produccion-ingreso.component';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-produccion-proceso',
@@ -17,6 +18,7 @@ import { PopupCalidadParametroProduccionIngresoComponent } from './../../calidad
 })
 export class ProduccionProcesoComponent implements OnInit {
 
+  
   editar;
   fecha_creacion: Date;
   _fecha_creacion: string;
@@ -68,7 +70,7 @@ export class ProduccionProcesoComponent implements OnInit {
    }
 
   ngOnInit() {
-
+    
     this.es = calendarioIdioma  ;
     this.fecha_creacion = new Date();
     this.fecha_desde = new Date();
@@ -143,8 +145,8 @@ export class ProduccionProcesoComponent implements OnInit {
    }
  }
 
- finalizarProduccion(elemento: any) {
-  console.log(elemento);
+ finalizarProduccion() {
+
   this.selectedItem.checked = true;
   this.selectedItem.checked_iniciado = false;
   const data: any = this.selectedItem;
@@ -162,9 +164,8 @@ export class ProduccionProcesoComponent implements OnInit {
 }
 
 
- auditarProduccion(elemento: any) {
-  console.log(elemento);  
-  const data: any = elemento;
+ auditarProduccion() {
+  const data: any = this.selectedItem;
   const ref = this.dialogService.open(PopupCalidadParametroProduccionIngresoComponent, {
   data,
    header: 'Cargar controles a producción',
@@ -183,9 +184,9 @@ export class ProduccionProcesoComponent implements OnInit {
 }
 
 
-stockProduccion(elemento: any) {
-  console.log(elemento);  
-  const data: any = elemento;
+stockProduccion() {
+    
+  const data: any = this.selectedItem;
   /* const ref = this.dialogService.open(UsuarioEditarComponent, {
   data,
    header: 'Editar usuario',

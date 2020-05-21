@@ -47,6 +47,7 @@ import {PanelModule} from 'primeng/panel';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {ToggleButtonModule} from 'primeng/togglebutton';
+import {StepsModule} from 'primeng/steps';
 
 
 
@@ -126,7 +127,7 @@ import { GrupoTrabajoComponent } from './pages/mantenimiento/grupo-trabajo/grupo
 import { GrupoTrabajoEditarComponent } from './pages/mantenimiento/grupo-trabajo-editar/grupo-trabajo-editar.component';
 import { GrupoTrabajoAsociarComponent } from './pages/mantenimiento/grupo-trabajo-asociar/grupo-trabajo-asociar.component';
 import { GrupoTrabajoAsociarEditarComponent } from './pages/mantenimiento/grupo-trabajo-asociar-editar/grupo-trabajo-asociar-editar.component';
-import { UsuarioModuloComponent } from './pages/mantenimiento/usuario-editar/usuario-modulo/usuario-modulo.component';
+import { UsuarioModuloComponent } from './pages/mantenimiento/usuario-modulo/usuario-modulo.component';
 import { MaquinaComponent } from './pages/mantenimiento/maquina/maquina.component';
 import { MaquinaEditarComponent } from './pages/mantenimiento/maquina-editar/maquina-editar.component';
 import { InsumoAltaComponent } from './pages/insumo/insumo-alta/insumo-alta.component';
@@ -235,6 +236,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     ProgressSpinnerModule,
     InputSwitchModule,
     PanelModule,
+    StepsModule,
     ToggleButtonModule,
     AutoCompleteModule,
     PivotViewModule ,
@@ -267,6 +269,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
      PopupOrdenProduccionDetalleConsultaComponent,
      PopupAsociarProduccionComponent,
      MaquinaEditarComponent,
+     UsuarioModuloComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             CONTROL DE CALIDAD                             */
