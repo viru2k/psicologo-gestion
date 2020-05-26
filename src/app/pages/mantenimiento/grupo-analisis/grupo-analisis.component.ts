@@ -2,29 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { InsumoService } from '../../../services/insumo.service';
 import { AlertServiceService } from '../../../services/alert-service.service';
 import { MessageService, DialogService } from 'primeng/api';
-import { MaquinaEditarComponent } from './../maquina-editar/maquina-editar.component';
-import { ProduccionService } from './../../../services/produccion.service';
+import { GrupoAnalisisEditarComponent } from '../grupo-analisis-editar/grupo-analisis-editar.component';
 
 @Component({
-  selector: 'app-maquina',
-  templateUrl: './maquina.component.html',
-  styleUrls: ['./maquina.component.scss']
+  selector: 'app-grupo-analisis',
+  templateUrl: './grupo-analisis.component.html',
+  styleUrls: ['./grupo-analisis.component.scss']
 })
-export class MaquinaComponent implements OnInit {
+export class GrupoAnalisisComponent implements OnInit {
 
+  
   cols: any[];
   columns: any[];
-  elementos:any[];
-  selecteditems:any;
+  elementos: any[];
+  selecteditems: any;
   loading;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private produccionService: ProduccionService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) { 
+  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [
 
-      { field: 'maquina_nombre', header: 'Linea',  width: '80%' },
-      { field: '', header: 'Acción',  width: '20%' },
+      { field: 'grupo_nombre', header: 'Grupo',  width: '60%' },
+      { field: 'color', header: 'Color',  width: '20%' },
+      { field: '', header: 'Acción',  width: '20%' }
 
    ];
   }
@@ -38,7 +39,7 @@ export class MaquinaComponent implements OnInit {
 
     this.loading = true;
     try {
-        this.produccionService.getMaquinas()
+        this.insumoService.getGrupoAnalisis()
         .subscribe(resp => {
           if (resp[0]) {
             this.elementos = resp;
@@ -63,14 +64,14 @@ buscar(elemento: any) {
   console.log(elemento);
   const data: any = elemento;
 
-  const ref = this.dialogService.open(MaquinaEditarComponent, {
+  const ref = this.dialogService.open(GrupoAnalisisEditarComponent, {
   data,
-   header: 'Editar Linea',
+   header: 'Editar Grupo',
    width: '60%',
    height: '50%'
   });
 
-  ref.onClose.subscribe((MaquinaEditarComponent: any) => {
+  ref.onClose.subscribe((GrupoAnalisisEditarComponent: any) => {
 
       this.loadlist();
 
@@ -83,16 +84,16 @@ nuevo() {
 
   const data: any = null;
 
-  const ref = this.dialogService.open(MaquinaEditarComponent, {
+  const ref = this.dialogService.open(GrupoAnalisisEditarComponent, {
   data,
-   header: 'Crear Linea',
+   header: 'Crear Grupo',
    width: '60%',
    height: '50%'
   });
 
-  ref.onClose.subscribe((MaquinaEditarComponent: any) => {
+  ref.onClose.subscribe((GrupoAnalisisEditarComponent: any) => {
 
-    if (MaquinaEditarComponent) {
+    if (GrupoAnalisisEditarComponent) {
       this.loadlist();
     }
   });

@@ -111,8 +111,8 @@ editarPermiso(elemento: any) {
   const ref = this.dialogService.open(UsuarioModuloComponent, {
   data,
    header: 'Editar módulo usuario',
-   width: '60%',
-   height: '90%'
+   width: '50%',
+   height: '60%'
   });
 
   // tslint:disable-next-line: no-shadowed-variable

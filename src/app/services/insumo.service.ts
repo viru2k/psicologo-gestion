@@ -24,9 +24,21 @@ export class InsumoService {
   }
 
 
-    getUnidad() {
-      return this.http.get<any[]>(this.url + 'unidad');
-    }
+  getUnidad() {
+    return this.http.get<any[]>(this.url + 'unidad');
+  }
+
+  setGrupoAnalisis(articulo: any) {
+    return this.http.post<any[]>(this.url + 'grupoanalisis', articulo);
+  }
+
+  putGrupoAnalisis(  id: string, articulo: any) {
+    return this.http.put<any[]>(this.url + 'grupoanalisis/' + id, articulo);
+  }
+
+  getGrupoAnalisis() {
+    return this.http.get<any[]>(this.url + 'grupoanalisis');
+  }
 
   getInsumoByArticulo(articulo_id: string) {
     return this.http.get<any[]>(this.url + 'insumos/by/articulo?articulo_id=' + articulo_id);

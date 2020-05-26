@@ -57,6 +57,7 @@
               <td style="width: 25%">{{elementos.nombre}}</td>     
               <td style="width: 30%">{{elementos.descripcion}}</td>
               <td style="width: 15%">{{elementos.unidad_descripcion}}</td>
+              <td style="width: 15%;  " [ngClass]="setColorColumn(elementos.color)">{{elementos.grupo_nombre}}</td>
               <td style="width: 15%" class="texto-bold texto-terthiary-soft">{{elementos.cantidad_unitaria}}</td>
               <td style="width: 15%" class="texto-bold texto-terthiary">{{elementos.cantidad_empaque}}</td>
               <td style="width: 15%" class="texto-bold texto-info">{{elementos.precio_unitario}}</td>

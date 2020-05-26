@@ -14,10 +14,12 @@ export class InsumoEditarComponent implements OnInit {
   updateDataForm: FormGroup;
   elementos: any;
   unidades: any;
+  gruposAnalisis: any;
   unidad: string;
   es_nuevo;
   loading;
-  selected:any;
+  selected: any;
+  selectedGrupo: any;
   selectedItem: any;
   selectedForma: any;
   userData: any;
@@ -31,6 +33,7 @@ export class InsumoEditarComponent implements OnInit {
       'descripcion': new FormControl('', Validators.required),
       'unidad_descripcion': new FormControl(''),
       'unidad_id': new FormControl('1'),
+      'grupo_analisis_id': new FormControl('1'),
       'usuario_modifica_id': new FormControl(''),
       'cantidad_unitaria': new FormControl('0'),
       'cantidad_empaque': new FormControl('0'),
@@ -39,7 +42,8 @@ export class InsumoEditarComponent implements OnInit {
       'stock_minimo': new FormControl('0'),
       'stock_promedio': new FormControl('0'),
       'stock_maximo': new FormControl('0'),
-      'selected' : new FormControl(null)
+      'selected' : new FormControl(null),
+      'selectedGrupo' : new FormControl(null),
 
   });
   }
@@ -56,6 +60,7 @@ export class InsumoEditarComponent implements OnInit {
       console.log('es nuevo');
     }
      this.loadUnidad();
+     this.loadGrupoAnalisis();
   }
 
 
@@ -89,10 +94,46 @@ export class InsumoEditarComponent implements OnInit {
     }
 }
 
+
+
+loadGrupoAnalisis() {
+
+  this.loading = true;
+  try {
+      this.insumoService.getGrupoAnalisis()
+      .subscribe(resp => {
+          this.gruposAnalisis = resp;
+          console.log(this.gruposAnalisis);
+          this.loading = false;
+          console.log(resp);
+          
+          if (this.config.data) {         
+            this.updateDataForm.patchValue({selectedGrupo: this.gruposAnalisis.find(x => x.id === this.config.data.grupo_analisis_id)});
+            console.log(this.selectedGrupo);
+            } else {
+              this.updateDataForm.patchValue({selectedGrupo: this.gruposAnalisis.find(x => x.id === 1)}); // PARA QUE TOME EL VALOR DE LA PRIMERA UNIDAD EN ESTE CASO INSUMOS
+              console.log(this.selectedGrupo);
+            }
+      },
+      error => { // error path
+          console.log(error);
+          this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+       });
+  } catch (error) {
+    this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+  }
+}
+
 onChangeGrupo() {
   //console.log(e.target.value);
   console.log(this.updateDataForm.value.selected);
 }
+
+onChangeGrupoAnalisis() {
+  //console.log(e.target.value);
+  console.log(this.updateDataForm.value.selectedGrupo);
+}
+
 
   guardarDatos() {
 
@@ -118,6 +159,7 @@ onChangeGrupo() {
       
       this.updateDataForm.patchValue({usuario_modifica_id: this.userData['id']});
       this.updateDataForm.patchValue({unidad_id: this.updateDataForm.value.selected.id});
+      this.updateDataForm.patchValue({grupo_analisis_id: this.updateDataForm.value.selectedGrupo.id});
       console.log(this.updateDataForm.value);
       console.log(this.updateDataForm);
       try {

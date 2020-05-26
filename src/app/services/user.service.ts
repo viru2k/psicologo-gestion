@@ -42,7 +42,7 @@ putItem(val: User, id: string) {
   return this.http.put<User>(this.url + '/' + id, val);
 }
 
-postUserMenu(val: UsuarioModulo, user_id: string) {
+postUserMenu(val: any[], user_id: string) {
   console.log(val);
   return this.http.post<User>(this.url + '/menu/add/' + user_id, val);
 }

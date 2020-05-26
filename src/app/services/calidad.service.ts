@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS, PARAMS } from '../config/config';
+import { ControCalidadParametroValor } from '../models/control-calidad-parametro-valor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +73,9 @@ delControlParametro(id: string) {
   return this.http.delete<any>(this.url + 'calidad/control/proceso?id=' + id);
 }
 
+
+setCalidadControlParametrosValor(articulo: ControCalidadParametroValor[]) {
+  return this.http.post<any>(this.url + 'calidad/control/parametros/valor', articulo);
+}
 
 }

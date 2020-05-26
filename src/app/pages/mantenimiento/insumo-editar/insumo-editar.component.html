@@ -23,6 +23,13 @@
                                         <option *ngFor="let grupo of unidades" [ngValue]="grupo" class="text-sm"  > <label>{{grupo.descripcion}}</label> </option>            
                                      </select>  
                         </div>   
+
+                        <div class="form-group ">
+                                <label  >Grupo de análisis</label>
+                                <select formControlName="selectedGrupo" class="form-control form-control-sm" (change)="onChangeGrupoAnalisis()">                      
+                                        <option *ngFor="let grupo of gruposAnalisis" [ngValue]="grupo" class="text-sm"  > <label>{{grupo.grupo_nombre}}</label> </option>            
+                                     </select>  
+                        </div>  
                         <div class="form-group ">
                                 <label  >Cantidad Unitaria</label>
                                 <input type="number" class="form-control col-md-12 form-control-sm" formControlName="cantidad_unitaria"    />

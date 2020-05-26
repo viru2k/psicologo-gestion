@@ -23,7 +23,7 @@ export class ArticuloComponent implements OnInit {
   constructor(private alertServiceService: AlertServiceService, private articuloService: ArticuloService, public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [
-      { field: 'nombre', header: 'Articulo',  width: '30%' },
+      { field: 'nombre', header: 'Producto',  width: '30%' },
       { field: 'descripcion', header: 'Descripción',  width: '35%' },
       { field: 'unidad_descripcion', header: 'Unidad',  width: '25%' },
       { field: 'unidades', header: 'Unidades',  width: '8%' },

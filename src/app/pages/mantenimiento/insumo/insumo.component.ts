@@ -3,6 +3,7 @@ import { InsumoService } from '../../../services/insumo.service';
 import { AlertServiceService } from '../../../services/alert-service.service';
 import { MessageService, DialogService } from 'primeng/api';
 import { InsumoEditarComponent } from './../insumo-editar/insumo-editar.component';
+import { createHash } from 'crypto';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class InsumoComponent implements OnInit {
       { field: 'nombre', header: 'Insumo',  width: '25%' },
       { field: 'descripcion', header: 'Descripción',  width: '30%' },
       { field: 'unidad_descripcion', header: 'Unidad',  width: '15%' },
+      { field: 'grupo_nombre', header: 'Grupo',  width: '15%' },
       { field: 'cantidad_unitaria', header: 'C. unitaria',  width: '15%' },
       { field: 'cantidad_empaque', header: 'C. Empaque',  width: '15%' },
       { field: 'precio_unitario', header: '$ Unitario',  width: '15%' },
@@ -102,4 +104,25 @@ nuevo() {
   });
 
 }
+
+
+
+setColorColumn(color: string) {
+  
+//  console.log('color: ' + color + '!important;');
+  //return {color: #CCCA3F!important; : 'null' };
+  document.documentElement.style.setProperty('--custom-primary-color', color);
+// return document.documentElement.style.setProperty('--custom-grid-color', color);
+  return {'change-grid-color'  : 'null' };
+  
+//  color: #9E9E9E!important;
+
+
+  // return  'color: ' + color + '!important;';
+}
+
+ parseTrueHexa(str) {
+  return str.match(/^ *[a-f0-9]+ *$/i) ? parseInt(str, 16) : NaN;
+}
+
 }

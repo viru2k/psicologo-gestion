@@ -1,12 +1,12 @@
 
-export const URL_SERVICIOS = 'http://localhost/api-calidad/public/api/';
-export const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
-export const URL_ARCHIVO = 'http://localhost/api-calidad/public/';
+//export const URL_SERVICIOS = 'http://localhost/api-calidad/public/api/';
+//export const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
+//export const URL_ARCHIVO = 'http://localhost/api-calidad/public/';
 
 
-//export const URL_SERVICIOS = 'http://productosgraziani.com.ar/api-calidad/public/api/';
-//export const config: SocketIoConfig = { url: 'http://productosgraziani.com.ar:4444', options: {} };
-//export const URL_ARCHIVO = 'http://productosgraziani.com.ar/api-calidad/public/';
+export const URL_SERVICIOS = 'http://productosgraziani.com.ar/api-calidad/public/api/';
+export const config: SocketIoConfig = { url: 'http://productosgraziani.com.ar:4444', options: {} };
+export const URL_ARCHIVO = 'http://productosgraziani.com.ar/api-calidad/public/';
 
 /***********SERVER DE PRUEBAS ********************** */
  

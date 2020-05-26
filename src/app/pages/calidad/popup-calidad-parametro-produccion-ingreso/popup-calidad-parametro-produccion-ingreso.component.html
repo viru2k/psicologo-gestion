@@ -2,7 +2,13 @@
 <div class=" faq-title text-center pb-3 pt-2 ">
     <h5>CARGAR PARAMETROS DE CONTROL DE CALIDAD</h5>
   </div>
-  
+  <div *ngIf="data" class="d-flex justify-content-center align-items-center">
+    <div class="row">
+      <h5 >PRODUCTO : {{data.nombre}}</h5> 
+      <h6 class="mr-2 ml-4 texto-secondary">A PRODUCIR EL : {{data.fecha_produccion | date: 'EEEE dd/MM/yyyyy'}}</h6>
+      <h6 class="mr-2 ml-2 texto-success">SOLICITADO : {{data.orden_produccion_detalle_cantidad_solicitada}} UNIDADES - EN PACKS : {{data.orden_produccion_detalle_cantidad_solicitada / data.unidades}}</h6> 
+    </div>
+  </div>
   <div class="d-flex justify-content-between m-2">
     <div class="d-flex justify-content-start ">
       <label class="mr-2 mt-1">Controles :</label>
@@ -16,11 +22,11 @@
     <div class="d-flex justify-content-center ">
       <label class="mr-2 mt-1">Fecha de carga :</label>
       <p-calendar [(ngModel)]="fecha"   tabindex="0"  [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true">   </p-calendar>    
-      <label class="mr-2 mt-1">Hora de carga :</label>
+      <label class="mr-2 ml-2 mt-1">Hora de carga :</label>
       <p-calendar [(ngModel)]="hora" [timeOnly]="true"></p-calendar>
     </div>
     <div class="d-flex justify-content-end ">
-      <button class="btn btn-info btn-block" (click)="guardarControl()" >Guardar control</button>
+
     </div>
 </div>
 
@@ -83,6 +89,9 @@
 
   </p-table>
 
+  <div class="mt-2">
+    <button class="btn btn-lg btn-info btn-block" (click)="guardarControl()" >GUARDAR CONTROL</button>
+  </div>
   
   <p-dialog header="Carga de valores" [(visible)]="display" [style]="{width: '80%'}" [baseZIndex]="10000">
     <div class="d-flex justify-content-start m-2">

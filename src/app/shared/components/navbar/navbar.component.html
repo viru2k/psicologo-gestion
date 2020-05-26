@@ -23,51 +23,35 @@
 
         
 
-    <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar">
-          
-          
-             
-           
-                    <p-menubar  [model]="general" *ngIf="loggedIn" autoZIndex="false"  [autoDisplay]="false"   >
-            
-                        <div class="  mr-2 mt-1" >     
-                                <div class="row d-flex align-items-center" >
-                                        <a  (click)="configurarUsuario()"  class=" mr-3  btn-link  btn-lg texto-monserrat icon-color-user-setting my-hover"  >
-                                            <h6 class="pb-2">   <i class="fas fa-user-circle fa-lg m-1"></i>{{username}}</h6>
-                                        </a>   
-                                        
-                                        <a  (click)="cerrarSesion()"  class=" mr-3  btn-link  btn-lg texto-monserrat icon-color-user-setting my-hover "  >
-                                            <h5 class="pb-2">   Cerrar sesión <i class="fas fa-power-off my-hover icon-color-quit nav-links  m-1"></i></h5>
-                                        </a>
-                        </div>
+        <div id="main-wrapper">
+                <!-- ============================================================== -->
+                <!-- Topbar header - style you can find in pages.scss -->
+                <!-- ============================================================== -->
+                <header class="topbar">
+                        <p-menubar  [model]="general" *ngIf="loggedIn" autoZIndex="false"  [autoDisplay]="false"   >
                 
-                
-             <!--            <p-overlayPanel #op   [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" [showCloseIcon]="true"  >   
-                                <li class="texto-monserrat"  (click)="cerrarSesion()">
-                                       <div>
-                                        <i  class="fas fa-power-off my-hover icon-color-quit nav-links fa-2x m-2"></i>
+                                <div class="  mr-2 mt-1" >     
+                                        <div class="row d-flex align-items-center" >
+                                                <a  (click)="configurarUsuario()"  class=" mr-3  btn-link  btn-lg texto-monserrat icon-color-user-setting my-hover"  >
+                                                <h6 class="pb-2">   <i class="fas fa-user-circle fa-lg m-1"></i>{{username}}</h6>
+                                                </a>   
+                                                
+                                                <a  (click)="cerrarSesion()"  class=" mr-3  btn-link  btn-lg texto-monserrat icon-color-user-setting my-hover "  >
+                                                <h5 class="pb-2">   Cerrar sesión <i class="fas fa-power-off my-hover icon-color-quit nav-links  m-1"></i></h5>
+                                                </a>
+                                </div>
+                        
+                        
+                                                                                
+                                                </div>
                                         
-                                       </div> 
-                                </li>
-                   
-                                       
-                                  </p-overlayPanel>   -->                                                                        
-                                        </div>
-                                
-                </p-menubar> 
-               
-     
-        </header>
-   
-            </div>
+                        </p-menubar> 
+                </header>
+        </div>
    
                                      
 
-                                       <div class="page-wrapper">
+                                       <div class="mt-5">
 
                                         <!-- ============================================================== -->
                                         <!-- Container fluid  -->

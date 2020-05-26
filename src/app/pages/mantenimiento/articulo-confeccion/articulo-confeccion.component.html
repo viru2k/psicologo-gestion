@@ -33,7 +33,7 @@
                         </tr> 
                         <tr>  
       <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
-        <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+        <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" autofocus>
         <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
         <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidades'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
         <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'pallet_pisos'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
@@ -48,7 +48,7 @@
 <tr style="height:20px">
 
 
-<td style="width: 40%">{{elementos.descripcion}}</td>
+<td style="width: 40%">{{elementos.nombre}}</td>
 <td style="width: 20%">{{elementos.unidad_descripcion}}</td>
 <td style="width: 10%">{{elementos.unidades}}</td>
 <td style="width: 10%">{{elementos.pallet_pisos}}</td>

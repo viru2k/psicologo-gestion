@@ -28,8 +28,15 @@
 @import '../node_modules/@syncfusion/ej2-angular-pivotview/styles/material.css';
 
 
+/* ---------- MODIFICA LA ESTETICA DE UNA COLUMNA DE FORMA DINAMICA --------- */
 
+$custom-grid: var(--custom-primary-color);
 
+.change-grid-color {
+    color: $custom-grid!important;
+    font-weight: bold;
+    font-family: 'Oxygen', sans-serif;
+  }
 
 h6{
     font-family: 'Montserrat', sans-serif !important ;

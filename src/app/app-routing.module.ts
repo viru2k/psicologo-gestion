@@ -28,6 +28,7 @@ import { InsumoAltaComponent } from './pages/insumo/insumo-alta/insumo-alta.comp
 import { CalidadControlEncabezadoComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado/calidad-control-encabezado.component';
 import { CalidadControlParametroComponent } from './pages/mantenimiento/calidad/calidad-control-parametro/calidad-control-parametro.component';
 import { CalidadControlEncabezadoParametroComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado-parametro/calidad-control-encabezado-parametro.component';
+import { GrupoAnalisisComponent } from './pages/mantenimiento/grupo-analisis/grupo-analisis.component';
 
 const routes: Routes = [
 
@@ -42,10 +43,11 @@ const routes: Routes = [
 { path: 'mantenimiento/articulo', component: ArticuloComponent },
 { path: 'mantenimiento/articulo/confeccion', component: ArticuloConfeccionComponent },
 { path: 'mantenimiento/unidad', component: UnidadComponent },
+{ path: 'mantenimiento/grupo/analisis', component: GrupoAnalisisComponent },
 { path: 'mantenimiento/insumo', component: InsumoComponent },
 { path: 'mantenimiento/grupo', component: GrupoTrabajoComponent },
 { path: 'usuario', component: UsuarioComponent },
-{ path: 'mantenimiento/maquina', component: MaquinaComponent },
+{ path: 'mantenimiento/lineas/produccion', component: MaquinaComponent },
 
 { path: 'mantenimiento/calidad/encabezado', component: CalidadControlEncabezadoComponent },
 { path: 'mantenimiento/calidad/parametro', component: CalidadControlParametroComponent },

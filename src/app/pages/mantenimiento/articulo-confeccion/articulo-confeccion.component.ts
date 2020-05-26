@@ -25,7 +25,7 @@ export class ArticuloConfeccionComponent implements OnInit {
   constructor(private alertServiceService: AlertServiceService, private articuloService: ArticuloService, public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [
-      { field: 'descripcion', header: 'Articulo',  width: '40%' },
+      { field: 'descripcion', header: 'Producto',  width: '40%' },
       { field: 'unidad_descripcion', header: 'Unidad',  width: '20%' },
       { field: 'unidades', header: 'Unidades',  width: '10%' },
       { field: 'pallet_pisos', header: 'Pisos',  width: '10%' },

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertServiceService } from './../../../services/alert-service.service';
-import { DialogService, MessageService, DynamicDialogConfig } from 'primeng/api';
+import { DialogService, MessageService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/api';
 import { ProduccionService } from '../../../services/produccion.service';
 import { CalidadService } from '../../../services/calidad.service';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { calendarioIdioma } from '../../../config/config';
 import { formatDate } from '@angular/common';
+import { ControCalidadParametroValor } from '../../../models/control-calidad-parametro-valor.model';
 
 @Component({
   selector: 'app-popup-calidad-parametro-produccion-ingreso',
@@ -15,9 +16,9 @@ import { formatDate } from '@angular/common';
 export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
 
   procesoProduccionId: string;
-  elemento: any;
-  elementos: any[];
-  elementosControl: any[];
+  elemento: any = null;
+  elementos: ControCalidadParametroValor[];
+  elementosControl: ControCalidadParametroValor[];
   userData: any;
   loading;
   selected: any;
@@ -32,9 +33,12 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
   hora: Date;
   fecha: Date;
   es: any;
-  elementoFinal: any[] = [];
+  elementoFinal: ControCalidadParametroValor[] = [];
+  data: any;
 
-  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService,  private calidadService: CalidadService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig) {
+  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, 
+     private calidadService: CalidadService, public dialogService: DialogService,
+      private messageService: MessageService, private config: DynamicDialogConfig, public ref: DynamicDialogRef) {
 
     this.cols = [
       { field: 'parametro', header: 'Parámetro',  width: '35%' },
@@ -48,6 +52,7 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
 
 
   ngOnInit() {
+    this.data = this.config.data;
     this.procesoProduccionId = this.config.data.id;
     this.es = calendarioIdioma;
     this.hora = new Date();
@@ -65,7 +70,7 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
   }
 
   confirmarParametro() {
-    this.display = false;
+    this.display = false;    
     this.elemento.calidad_valor = this.valorObtenido;
     this.elemento.tiene_accion_correctiva_descripcion = this.accionCorrectiva;
     this.elemento.es_no_conformidad_descripcion =  this.noConformidad;
@@ -73,12 +78,14 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
       this.elemento.no_conformidad =  'SI';
     } else {
       this.elemento.no_conformidad =  'NO';
+      this.elemento.es_no_conformidad_descripcion = '';
     }
 
     if (this.estadoAccionCorrectiva) { 
       this.elemento.es_accion_correctiva = 'SI';
     } else {
       this.elemento.es_accion_correctiva = 'NO';
+      this.elemento.tiene_accion_correctiva_descripcion = '';
     }
     this.estadoAccionCorrectiva = false;
     this.accionCorrectiva = '';
@@ -90,20 +97,39 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
 
   guardarControl() {
     let i = 0;
-    this.elementos.forEach(elemento => {
-
-      if (elemento.calidad_valor) {
-        const fecha = formatDate(new Date(this.fecha), 'yyyy-MM-dd', 'en') + ' ' +  formatDate(new Date(this.hora), 'HH:mm', 'en') ;
-        elemento.fecha = fecha;
-        elemento.produccion_proceso_id  = this.procesoProduccionId;
-        this.elementoFinal[i] = elemento;
+    console.log(this.elementos);
+    this.elementos.forEach(ele => {
+      console.log(ele);
+      if (this.elementos[i]['calidad_valor']) {
+        const fecha = formatDate(new Date(this.fecha), 'yyyy-MM-dd', 'en') + ' ' +  formatDate(new Date(this.hora), 'HH:mm:ss', 'en') ;
+        this.elementos[i]['fecha'] = fecha;
+        this.elementos[i]['produccion_proceso_id']  = this.procesoProduccionId;
+        this.elementos[i]['usuario_modifica_id'] = this.config.data.id;
+        this.elementoFinal.push (this.elementos[i]);
         i++;
      //   console.log(fecha);
       }
     }
 
       );
-      console.log(this.elementoFinal);
+    console.log(this.elementoFinal);
+    this.loading = true;
+    try {
+           this.calidadService.setCalidadControlParametrosValor(this.elementoFinal)
+           .subscribe(resp => {
+            
+             this.loading = false;
+             console.log(resp);
+             this.alertServiceService.throwAlert('success',  'Control generado correctamente', '', '200');
+             this.ref.close(resp);
+           },
+           error => { // error path
+               console.log(error);
+               this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+            });
+       } catch (error) {
+         this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+       }
 
   }
 

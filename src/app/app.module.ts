@@ -48,6 +48,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {StepsModule} from 'primeng/steps';
+import {ColorPickerModule} from 'primeng/colorpicker';
 
 
 
@@ -141,6 +142,8 @@ import { PopupControlEncabezadoComponent } from './pages/mantenimiento/calidad/c
 import { PopupFindCalidadParametroComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado-parametro/popup-find-calidad-parametro/popup-find-calidad-parametro.component';
 import { CalidadConsultaProduccionComponent } from './pages/calidad/calidad-consulta-produccion/calidad-consulta-produccion.component';
 import { PopupCalidadParametroProduccionIngresoComponent } from './pages/calidad/popup-calidad-parametro-produccion-ingreso/popup-calidad-parametro-produccion-ingreso.component';
+import { GrupoAnalisisComponent } from './pages/mantenimiento/grupo-analisis/grupo-analisis.component';
+import { GrupoAnalisisEditarComponent } from './pages/mantenimiento/grupo-analisis-editar/grupo-analisis-editar.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -187,7 +190,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopOrdenProduccionEditarComponent,
     PopUpOrdenProduccionDetalleEditarComponent,
     PopupOrdenProduccionDetalleConsultaComponent,
-    PopupAsociarProduccionComponent,    
+    PopupAsociarProduccionComponent,
     GrupoTrabajoComponent,
     GrupoTrabajoEditarComponent,
     GrupoTrabajoAsociarComponent,
@@ -205,7 +208,9 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopupControlEncabezadoComponent,
     PopupFindCalidadParametroComponent,
     CalidadConsultaProduccionComponent,
-    PopupCalidadParametroProduccionIngresoComponent
+    PopupCalidadParametroProduccionIngresoComponent,
+    GrupoAnalisisComponent,
+    GrupoAnalisisEditarComponent
   ],
   imports: [
 
@@ -236,7 +241,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     ProgressSpinnerModule,
     InputSwitchModule,
     PanelModule,
-    StepsModule,
+    ColorPickerModule,
     ToggleButtonModule,
     AutoCompleteModule,
     PivotViewModule ,
@@ -270,6 +275,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
      PopupAsociarProduccionComponent,
      MaquinaEditarComponent,
      UsuarioModuloComponent,
+     GrupoAnalisisEditarComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                             CONTROL DE CALIDAD                             */

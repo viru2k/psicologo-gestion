@@ -403,12 +403,13 @@ menuList() {
             label: 'Parametros',
             visible:! this.administracion_produccion,
             items: [
-              {label: 'Articulo', routerLink: 'mantenimiento/articulo'},
+              {label: 'Producto', routerLink: 'mantenimiento/articulo'},
               {label: 'Insumo', routerLink: 'mantenimiento/insumo'},
               {label: 'Armado de producto', routerLink: 'mantenimiento/articulo/confeccion'},
               {label: 'Unidad', routerLink: 'mantenimiento/unidad'},
+              {label: 'Grupo de insumos', routerLink: 'mantenimiento/grupo/analisis'},
               {label: 'Grupos', routerLink: 'mantenimiento/grupo'},
-              {label: 'Maquinas', routerLink: 'mantenimiento/maquina'}
+              {label: 'Lineas de producción', routerLink: 'mantenimiento/lineas/produccion'}
             ]
         },
         {

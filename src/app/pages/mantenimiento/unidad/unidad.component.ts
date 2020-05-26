@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { InsumoService } from '../../../services/insumo.service';
 import { AlertServiceService } from '../../../services/alert-service.service';
 import { MessageService, DialogService } from 'primeng/api';
-import { InsumoEditarComponent } from './../insumo-editar/insumo-editar.component';
 import { UnidadEditarComponent } from './../unidad-editar/unidad-editar.component';
 
 
