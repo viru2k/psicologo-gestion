@@ -16,6 +16,7 @@
    
     <div class="row d-flex justify-content-between ml-2 mr-2">
         <div class="d-flex justify-content-start">
+            <button class="btn btn-danger btn-md mr-5" *ngIf="this.usu['admin'] === 2" (click)= "verNoticias()">Gestión de noticias </button> 
             <button class="btn btn-info btn-md" *ngIf="this.usu['admin'] === 2" (click)= "verLiquidacion()">Facturas de psicologos </button> 
         </div>
         <div class="d-flex justify-content-end ml-5">

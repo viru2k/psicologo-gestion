@@ -1,0 +1,138 @@
+     
+            <form class="col-12"  [formGroup]="updateDataForm">
+                <div class="row">
+                 
+                  <div class="col-6">
+
+                        <div class="form-group ">
+                                <label  >Mostar en parte :</label>
+                                <div class="row">
+                                        <div class="p-col-6 mr-3"><p-radioButton name="group2" value="PUBLICA" label="PUBLICA" formControlName="busqueda" inputId="preopt1"></p-radioButton></div>
+                                        <div class="p-col-6"><p-radioButton name="group2" value="PRIVADA" label="PRIVADA" formControlName="busqueda" inputId="preopt2"></p-radioButton></div>
+                                </div>
+                           
+                        </div> 
+
+
+                        <div class="form-group ">
+                                <label  >Titulo</label>
+                                <input class="form-control col-md-12 form-control-sm" formControlName="titulo"  autofocus  />
+                                <div *ngIf="updateDataForm.controls['titulo'].errors?.required && updateDataForm.controls['titulo'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div> 
+
+                        <div class="form-group ">
+                                <label  >Descripción</label>
+                                <input class="form-control col-md-12 form-control-sm" formControlName="descripcion"    />
+                                <div *ngIf="updateDataForm.controls['descripcion'].errors?.required && updateDataForm.controls['descripcion'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div> 
+
+                        <div class="form-group ">
+                                <label  >Página</label>
+                                <input class="form-control col-md-12 form-control-sm" formControlName="descripcion"    />
+                                <div *ngIf="updateDataForm.controls['descripcion'].errors?.required && updateDataForm.controls['descripcion'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div> 
+
+                        <div class="form-group ">
+                                <label class="mr-1"  >Creado el</label>
+                                <p-calendar formControlName="fecha_creacion" [showTime]="true"   tabindex="0"  [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true">              
+                                </p-calendar>
+                        </div> 
+                        
+                        <div class="form-group ">
+                                <label class="mr-1"  >Tiene archivo adjunto</label>
+                                <p-toggleButton formControlName="boolean_tiene_enlace" onLabel="Si" offLabel="No" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width':'100px'}"></p-toggleButton>
+                              
+                        </div> 
+
+                        <div class="form-group ">
+                                <label class="mr-1" >Nombre del archivo</label>
+                                <input class="form-control col-md-12 form-control-sm" formControlName="enlace"    />
+                                <div *ngIf="updateDataForm.controls['enlace'].errors?.required && updateDataForm.controls['enlace'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div>
+
+                        <div class="form-group ">
+                                <label class="mr-1"  >Es un curso</label>
+                                <p-toggleButton formControlName="boolean_es_curso" onLabel="Si" offLabel="No" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width':'100px'}"></p-toggleButton>                              
+                        </div>
+                     
+                  </div>
+
+                  <div class="col-6">
+                  
+
+                        <div class="form-group ">
+                                <label class="mr-1"  >Tiene imagen</label>
+                                <p-toggleButton formControlName="boolean_tiene_imagen" onLabel="Si" offLabel="No" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width':'100px'}"></p-toggleButton>
+                               
+                        </div> 
+
+                        <div class="form-group ">
+                                <label class="mr-1" >Nombre de la imagen</label>
+                                <input class="form-control col-md-12 form-control-sm"  formControlName="imagen"    />
+                                <div *ngIf="updateDataForm.controls['imagen'].errors?.required && updateDataForm.controls['imagen'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div>
+
+                        <div class="form-group ">
+                                <label class="mr-1"  >Es video de youtube </label>
+                                <p-toggleButton formControlName="boolean_es_youtube" onLabel="Si" offLabel="No" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width':'100px'}"></p-toggleButton>
+                              
+                        </div>
+
+                        <div class="form-group ">
+                                <label class="mr-1" >Nombre del video de youtube</label>
+                                <input class="form-control col-md-12 form-control-sm" formControlName="enlace_video_youtube"    />
+                                <div *ngIf="updateDataForm.controls['enlace_video_youtube'].errors?.required && updateDataForm.controls['enlace_video_youtube'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div>
+
+                        
+                        <div class="form-group ">
+                                <label class="mr-1" >Es video</label>
+                                <p-toggleButton class="text-toggle" formControlName="boolean_es_video" onLabel="Si" offLabel="No" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width':'100px'}"></p-toggleButton>
+                                
+                        </div> 
+                        <div class="form-group ">
+                                <label class="mr-1" >Nombre del video</label>
+                                <input class="form-control col-md-12 form-control-sm" formControlName="enlace_video"    />
+                                <div *ngIf="updateDataForm.controls['enlace_video'].errors?.required && updateDataForm.controls['enlace_video'].touched" class="alert alert-warning">
+                                        * Este campo es requerido
+                                </div>
+                        </div>
+                        <div class="form-group ">
+                                <label  class="mr-1" >Es importante</label>
+                                <p-toggleButton formControlName="boolean_es_importante" onLabel="Si" offLabel="No" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width':'100px'}"></p-toggleButton>                                
+                        </div> 
+                        <div class="form-group ">
+                             <!--    <label from>{{updateDataForm.value.estado}}</label> -->
+                                <select formControlName="estado" class="form-control-sm text-sm texto-monserrat texto-secondary" (change)="onChangeEstado($event)" >                        
+                                        <option *ngFor="let grupo of estadoArray" class="text-sm texto-monserrat texto-secondary" [ngValue]="grupo.value"    >
+                                          <label >{{grupo.name}}</label>              
+                                      </option>
+                                    </select>                             
+                        </div> 
+
+                      
+                  </div>
+                 </div>
+           
+          </form>
+
+      
+          <p-footer>
+                  <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                          <button  [disabled]="!updateDataForm.valid" class="btn btn-info texto-roboto btn-block" type="submit" (click)="guardarDatos()" >Guardar</button>
+                          
+                  </div>
+              </p-footer>
+     

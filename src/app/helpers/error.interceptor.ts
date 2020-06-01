@@ -14,9 +14,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
             try {
-                
+
             } catch (error) {
-                
+
             }
             console.log(String(err.status));
             let reserr= String(err.status);
@@ -32,25 +32,21 @@ export class ErrorInterceptor implements HttpInterceptor {
                         this.authenticationService.logout();
                         this.router.navigateByUrl('/incio');
                         window.location.reload();
-                    
                     },
                     backdrop: `
                     rgba(26, 188, 156,0.7)
                     no-repeat `
                   });
-                    if(this.router.url === '/inicio'){}else{
+                    if (this.router.url === '/inicio') {} else {
              this.authenticationService.logout();
               this.router.navigateByUrl('/inicio');
               window.location.reload();
                     }
                console.log("error en la autenticacion");
             }
-            
             const error = err.error.message || err.statusText;
-          
             return throwError(error);
-           
-        }))
+        }));
     }
 
       }

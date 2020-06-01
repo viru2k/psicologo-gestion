@@ -72,6 +72,9 @@ import { PopupFacturaDetalleComponent } from './pages/psicolog/liquidacion/popup
 import { PopupLiquidacionDetalleComponent } from './shared/components/popup/popup-liquidacion-detalle/popup-liquidacion-detalle.component';
 import { PopupLiquidacionGeneradaDetalleComponent } from './pages/psicolog/liquidacion/popup-liquidacion-generada-detalle/popup-liquidacion-generada-detalle.component';
 import { PopupMisFacturasComponent } from './pages/psicolog/liquidacion/popup-mis-facturas/popup-mis-facturas.component';
+import { PopupNoticiasComponent } from './pages/psicolog/liquidacion/popup-noticias/popup-noticias.component';
+import { PopupNoticiasNuevoComponent } from './pages/psicolog/liquidacion/popup-noticias-nuevo/popup-noticias-nuevo.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -99,7 +102,9 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopupFacturaDetalleComponent,
     PopupLiquidacionGeneradaDetalleComponent,
     PopupLiquidacionDetalleComponent,
-    PopupMisFacturasComponent
+    PopupMisFacturasComponent,
+    PopupNoticiasComponent,
+    PopupNoticiasNuevoComponent
   ],
   imports: [
   
@@ -131,6 +136,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     OverlayPanelModule,
     DynamicDialogModule,
     OrderListModule,
+    ToggleButtonModule,
     InputTextareaModule,
     ScrollPanelModule,
     ProgressSpinnerModule,
@@ -143,7 +149,9 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopupFacturaDetalleComponent,
     PopupLiquidacionDetalleComponent,
     PopupLiquidacionGeneradaDetalleComponent,
-    PopupMisFacturasComponent],
+    PopupMisFacturasComponent,
+    PopupNoticiasComponent,
+    PopupNoticiasNuevoComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'es-Ar' }, {
     provide: HTTP_INTERCEPTORS,
     useFactory: function(injector: Injector) {

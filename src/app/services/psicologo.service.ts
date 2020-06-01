@@ -25,7 +25,7 @@ export class PsicologoService {
     getLiquidacionDetalleObraSocialPagoByPsicologo(data: any) {
     console.log(data);
       return this.http.post<any[]>(URL_SERVICIOS + 'liquidacion/detalle', data);
-      }
+    }
 
     actualizarEmail(mat_matricula: string, mat_email: string) {
       return this.http.get<any[]>(this.url + '/correo?mat_matricula=' + mat_matricula + '&mat_email=' + mat_email);
@@ -35,17 +35,17 @@ export class PsicologoService {
       return this.http.get<any[]>(this.url + '/obra_social');
       }
 
-      getLiquidacionByPsicologo(id: string) {
-        return this.http.get<any[]>(URL_SERVICIOS + 'liquidacion/by/psicologo?mat_matricula=' + id);
-        }
+    getLiquidacionByPsicologo(id: string) {
+    return this.http.get<any[]>(URL_SERVICIOS + 'liquidacion/by/psicologo?mat_matricula=' + id);
+    }
 
-       getinformacionPrivado() {
-        return this.http.get<any[]>(URL_SERVICIOS + 'informacion/privada');
-        }
+   getinformacionPrivado() {
+    return this.http.get<any[]>(URL_SERVICIOS + 'informacion/privada');
+    }
 
-        getinformacionPublico() {
-      return this.http.get<any[]>(URL_SERVICIOS + 'informacion/publica');
-      }
+    getinformacionPublico() {
+    return this.http.get<any[]>(URL_SERVICIOS + 'informacion/publica');
+    }
 
 
       actualizarPassword(token_autorizacion: string, password: string) {
@@ -55,14 +55,32 @@ export class PsicologoService {
         getFacturaByMatricula(mat_matricula: string) {
           return this.http.get<any[]>(URL_SERVICIOS + 'informacion/privada/facturacion/by/matricula?mat_matricula=' + mat_matricula);
           }
+      getFacturaByLiquidacion(id_liquidacion: string) {
+        return this.http.get<any[]>(URL_SERVICIOS + 'informacion/privada/facturacion/by/idliquidacion?id_liquidacion=' + id_liquidacion);
+        }
 
-        getFacturaByLiquidacion(id_liquidacion: string) {
-          return this.http.get<any[]>(URL_SERVICIOS + 'informacion/privada/facturacion/by/idliquidacion?id_liquidacion=' + id_liquidacion);
+      getLiquidacion(id_liquidacion: string) {
+        console.log('llamando');
+        return this.http.get<any[]>(URL_SERVICIOS + 'liquidacion/liquidacion/generada');
+        }
+
+        postNoticiaPublica(data: any) {
+          console.log(data);
+            return this.http.post<any[]>(URL_SERVICIOS + 'noticia/publica', data);
           }
 
-          getLiquidacion(id_liquidacion: string) {
-            console.log('llamando');
-            return this.http.get<any[]>(URL_SERVICIOS + 'liquidacion/liquidacion/generada');
-            }
+        postNoticiaPrivada(data: any) {
+          console.log(data);
+            return this.http.post<any[]>(URL_SERVICIOS + 'noticia/privada', data);
+          }
 
+          putNoticiaPublica(data: any, id: string) {
+          console.log(data);
+            return this.http.put<any>(URL_SERVICIOS + 'noticia/publica/' + id, data);
+          }
+
+          putNoticiaPrivada(data: any, id: string) {
+          console.log(data);
+            return this.http.put<any>(URL_SERVICIOS + 'noticia/privada/' + id, data);
+          }
 }

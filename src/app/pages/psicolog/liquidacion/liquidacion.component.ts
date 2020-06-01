@@ -10,6 +10,7 @@ import { PopupAsociarFacturaComponent } from './popup-asociar-factura/popup-asoc
 // tslint:disable-next-line: max-line-length
 import { PopupLiquidacionGeneradaDetalleComponent } from './popup-liquidacion-generada-detalle/popup-liquidacion-generada-detalle.component';
 import { PopupMisFacturasComponent } from './popup-mis-facturas/popup-mis-facturas.component';
+import { PopupNoticiasComponent } from './popup-noticias/popup-noticias.component';
 
 
 
@@ -139,6 +140,21 @@ verLiquidacion() {
       if (PopupLiquidacionGeneradaDetalleComponent) {
 
       }
+  });
+}
+
+verNoticias() {
+
+  const data: any = null;
+  const ref = this.dialogService.open(PopupNoticiasComponent, {
+  data,
+   header: 'Gestión de noticias',
+   width: '90%',
+   height: '80%'
+  });
+  // tslint:disable-next-line: no-shadowed-variable
+  ref.onClose.subscribe((PopupNoticiasComponent: any) => {
+     
   });
 }
 

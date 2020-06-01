@@ -22,12 +22,12 @@ import { DatePipe } from '@angular/common';
   providers: [MessageService,DialogService,DatePipe]
 })
 export class NavbarComponent implements OnInit {
-  
-  user:User;
-  loggedIn:boolean = false;
-  general: MenuItem[];
-  control_total:boolean =true;
  
+  user: User;
+  loggedIn = false;
+  general: MenuItem[];
+  control_total = true;
+
 
   public username:string;
   elemento:User = null;
@@ -37,16 +37,16 @@ export class NavbarComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
-  notificaciones:boolean;
-  chats:boolean;
+  notificaciones: boolean;
+  chats: boolean;
   navbarOpen = false;
   constructor(
-    private messageService: MessageService ,public dialogService: DialogService, 
+    private messageService: MessageService , public dialogService: DialogService,
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private miServico:UserService) { 
+    private miServico: UserService) {
 
   }
 
@@ -70,32 +70,25 @@ export class NavbarComponent implements OnInit {
               }
           })    
       })
-    
-    
+
       /*==================================================================
       [ Validate ]*/
       var input = $('.validate-input .input100');
-  
       $('.validate-form').on('submit',function(){
           var check = true;
-  
           for(var i=0; i<input.length; i++) {
               if(validate(input[i]) == false){
                   showValidate(input[i]);
                   check=false;
               }
           }
-  
           return check;
       });
-  
-  
       $('.validate-form .input100').each(function(){
           $(this).focus(function(){
              hideValidate(this);
           });
       });
-  
       function validate (input) {
           if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
               if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
@@ -132,10 +125,10 @@ export class NavbarComponent implements OnInit {
   });
 
   console.log(this.f.username.value);
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
    
 if(currentUser['access_token'] != ''){
-  let userData = JSON.parse(localStorage.getItem('userData'));
+  const userData = JSON.parse(localStorage.getItem('userData'));
   console.log(userData);
   console.log('usuario logueado');
   this.loggedIn = true;
@@ -213,13 +206,14 @@ onSubmit() {
   }
 
   this.loading = true;
+
   this.authenticationService.login(this.f.username.value, this.f.password.value)
      // .pipe(first())
       .subscribe(
           data => {
             console.log(data);
             this.user = data;
-            let us = new User('','','','','',this.f.username.value, this.f.password.value, []);
+            const us = new User('', '', '', '', '', this.f.username.value, this.f.password.value, []);
             localStorage.setItem('userData', JSON.stringify(us));
             localStorage.setItem('currentUser', JSON.stringify(this.user));
             //  this.router.navigate([this.returnUrl]);
@@ -234,7 +228,7 @@ onSubmit() {
 }
 
 ver(){
-let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 console.log(currentUser['access_token']);
 }
 
@@ -242,25 +236,27 @@ loadUser(){
 
 this.loading = true;
 try {
+
   this.miServico.getItemInfoAndMenu(this.f.username.value)
     .subscribe(resp => {
     this.elemento = resp;
    // this.elementoModulo = this.elemento['access_list']
-       let currentUser =  JSON.parse(localStorage.getItem('currentUser'));
-       let userData = JSON.parse(localStorage.getItem('userData'));
-       console.log(this.elemento);
-       this.elementoModulo = <any>this.elemento;
-      this.user = new User(this.elemento[0]['id'] , this.elemento[0]['email'], this.elemento[0]['nombreyapellido'],
-       this.elemento[0]['name'], this.elemento[0]['admin'],this.elemento[0]['email'], currentUser['access_token'],this.elementoModulo);
-       this.username = userData['username'];
-       localStorage.removeItem('userData');
-       localStorage.setItem('userData', JSON.stringify(this.user));
-       this.asignarModulos(this.elementoModulo);
-     // console.log(this.user);
-        this.loading = false;
-        console.log('logueado');
-        this.loggedIn = true;
-      this.menuList();
+    const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    console.log(this.elemento);
+    this.elementoModulo = <any>this.elemento;
+    this.user = new User(this.elemento[0]['id'] , this.elemento[0]['email'], this.elemento[0]['nombreyapellido'],
+    this.elemento[0]['name'], this.elemento[0]['admin'],this.elemento[0]['email'], currentUser['access_token'],this.elementoModulo);
+    this.username = userData['username'];
+    localStorage.removeItem('userData');
+    localStorage.setItem('userData', JSON.stringify(this.user));
+    this.asignarModulos(this.elementoModulo);
+    // console.log(this.user);
+    this.loading = false;
+
+    console.log('logueado');
+    this.loggedIn = true;
+    this.menuList();
     },
     error => { // error path
         console.log(error.message);
