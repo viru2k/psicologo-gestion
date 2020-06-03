@@ -9,10 +9,10 @@
   <div>
     <label> LIQUIDACION NRO :{{this.datos['id_liquidacion']}}</label>
   </div>
-   
-    <p-fileUpload name="images[]" url=" {{url}}multiuploads/estudios/{{this.datos['mat_matricula']}}/{{this.datos['id_liquidacion_detalle']}}/{{this.datos['id_liquidacion']}}" (onUpload)="onUpload($event)" chooseLabel="Seleccionar Archivo"  uploadLabel = "Subir"  cancelLabel="Cancelar"
-    multiple="multiple"  >
-  
+  <!-- url=" {{url}}multiuploads/estudios/{{this.datos['mat_matricula']}}/{{this.datos['id_liquidacion_detalle']}}/{{this.datos['id_liquidacion']}}" -->
+    <p-fileUpload name="images[]" 
+     (onUpload)="onUpload($event)" chooseLabel="Seleccionar Archivo"  uploadLabel = "Subir"  cancelLabel="Cancelar"
+    multiple="false"  >
   </p-fileUpload>
   </div>
   <div class="col-2 "></div>

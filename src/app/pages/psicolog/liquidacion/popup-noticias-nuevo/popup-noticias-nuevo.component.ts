@@ -56,6 +56,7 @@ export class PopupNoticiasNuevoComponent implements OnInit {
       'selectedEstado': new FormControl(''),
       'boolean_es_curso': new FormControl(''),
       'busqueda': new FormControl(''),
+      'files': new FormControl(''),
       
   });
 
@@ -80,15 +81,15 @@ export class PopupNoticiasNuevoComponent implements OnInit {
       this.updateDataForm.patchValue({estado: this.config.data.estado})  ;
       this.updateDataForm.patchValue({selectedEstado: this.config.data.estado})  ;
       this.updateDataForm.patchValue({fecha_creacion: new Date(this.config.data.created_at)})  ;
-     
+
       this.updateDataForm.patchValue({boolean_tiene_enlace: this.validarEstadoTextoToBoolean(this.config.data.tiene_enlace)  });
       this.updateDataForm.patchValue({boolean_tiene_imagen: this.validarEstadoTextoToBoolean(this.config.data.tiene_imagen)  });
       this.updateDataForm.patchValue({boolean_es_youtube: this.validarEstadoTextoToBoolean(this.config.data.es_youtube)  });
       this.updateDataForm.patchValue({boolean_es_video: this.validarEstadoTextoToBoolean(this.config.data.es_video)  });
       this.updateDataForm.patchValue({boolean_es_importante: this.validarEstadoTextoToBoolean(this.config.data.es_importante)  });
-      this.updateDataForm.patchValue({boolean_es_curso: this.validarEstadoTextoToBoolean(this.config.data.es_curso)  });      
+      this.updateDataForm.patchValue({boolean_es_curso: this.validarEstadoTextoToBoolean(this.config.data.es_curso)  });
       console.log(this.updateDataForm.value);
-      
+
     }else{
       this.updateDataForm.patchValue({busqueda: 'PRIVADA'})  ;
       this.updateDataForm.patchValue({fecha_creacion: this.fecha})  ;
@@ -118,6 +119,41 @@ export class PopupNoticiasNuevoComponent implements OnInit {
   }
 
 
+    
+  onUpload(event) { 
+    /*  let  selectedEstudio_ =this.selectedEstudio['name'];  
+       this._fechaHoy = formatDate(new Date(this.fechaHoy), 'yyyy-MM-dd HH:mm', 'en');
+       console.log(event.files);
+     //  let selectedReceta = this.listarecetas[0]['label'];
+       for(let file of event.files) {
+         this.estudio = new Estudios('',this.formPaciente.value.selectedEstudio['name'],this.formPaciente.value.paciente_id,this.formPaciente.value.medico_id,this._fechaHoy,this.userData['id'],file.name, URL_ARCHIVO,file.type, this.formPaciente.value.dni,this.formPaciente.value.SINTOMAS_SIGNOS);
+         console.log(file.name);
+         console.log(this.estudio);
+         //  this.uploadedFiles.push(file);
+         this.estudios.push(this.estudio);
+       }
+      
+       
+       
+       console.log(this.estudios);
+       this.uploadEstudioDatos(this.estudios); */
+       console.log('subido');
+       swal({
+         type: 'success',
+         title: 'Exito',
+         text: 'Archiv subido con éxito'
+       })
+   }
+
+  myUploader(event) {
+    //event.files == files to upload
+    console.log(event);
+    console.log(event.file);
+    this.updateDataForm.patchValue({files: event  });
+    console.log(this.updateDataForm.value);
+    this.editarNoticia();
+}
+
   guardarDatos() {
     this.updateDataForm.patchValue({tiene_enlace: this.validarEstadoBooleanToTexto(this.updateDataForm.value.boolean_tiene_enlace)  });
     this.updateDataForm.patchValue({tiene_imagen: this.validarEstadoBooleanToTexto(this.updateDataForm.value.boolean_tiene_imagen)  });
@@ -127,9 +163,9 @@ export class PopupNoticiasNuevoComponent implements OnInit {
     this.updateDataForm.patchValue({es_curso: this.validarEstadoBooleanToTexto( this.updateDataForm.value.boolean_es_curso)  });
     console.log(this.updateDataForm.value);
      if (this.es_nuevo) {
-      this.nuevaNoticia();
+   //   this.nuevaNoticia();
     } else {
-      this.editarNoticia();
+     // this.editarNoticia();
     } 
   }
 
