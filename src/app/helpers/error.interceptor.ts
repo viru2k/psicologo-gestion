@@ -14,44 +14,44 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
             try {
-                
+
             } catch (error) {
-                
+
             }
             console.log(String(err.status));
-            let reserr= String(err.status);
+            const reserr = String(err.status);
             if (reserr === '401') {
                 console.log('error');
-               /* swal({
+         /*        swal({
                     text: 'Su sesión expirado',
-                    imageUrl: './assets/icons/invalid-user-profile.png',
-                    imageHeight: 300,
-                    imageWidth: 300,
                     title: 'Sesión vencida o invalida',
+                    // tslint:disable-next-line: max-line-length
                     footer: 'No realizó acciones durante un largo periodo de tiempo, y su sesion a expirado. sera reenviado al menu de inicio',
                     showConfirmButton: false,
                     timer: 3000,
+                    imageUrl: 'https://img.icons8.com/clouds/100/000000/imac-exit.png',
                     onClose: () => {
+                        this.authenticationService.logout();
+                        this.router.navigateByUrl('/incio');
                         window.location.reload();
-                    
                     },
                     backdrop: `
                     rgba(26, 188, 156,0.7)
                     no-repeat `
-                  });*/
-                    if(this.router.url === '/inicio'){}else{
-          //     this.authenticationService.logout();
-           //   this.router.navigateByUrl('/login');
-           //    window.location.reload();
+                  }); */
+                  console.log('intentando cerrar sesion');
+                  this.authenticationService.logout();
+                  this.router.navigateByUrl('/inicio');
+                  window.location.reload();
+                if (this.router.url === '/inicio') {
+                    
+                } else {
+                 
                     }
-               console.log("error en la autenticacion");
+                console.log('error en la autenticacion');
             }
-            
             const error = err.error.message || err.statusText;
-          
             return throwError(error);
-           
-        }))
+        }));
     }
-
       }

@@ -178,7 +178,7 @@ asociarInsumos(elemento: any) {
 
   const ref = this.dialogService.open(AsociarInsumoComponent, {
   data,
-   header: 'Asociar insumo a producción', 
+   header: 'Asociar insumo a producción',
    width: '98%',
    height: '90%'
   });

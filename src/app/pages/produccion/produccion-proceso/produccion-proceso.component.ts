@@ -229,7 +229,8 @@ stockProduccion() {
 iconoColor(estado: string) {
 
   if (estado === 'ACTIVO') {
-    return {'icono-success'  : 'null' };
+
+    
   }
   if (estado === 'PAUSADO') {
     return {'icono-warning'  : 'null' };

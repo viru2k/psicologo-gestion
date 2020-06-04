@@ -28,12 +28,12 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
     this.cols = [
       { field: 'id', header: 'Prod Nª',  width: '7.5%' },
       { field: 'estado', header: 'Estado',  width: '8%' },
-      { field: 'fecha_produccion', header: 'A producir',  width: '15%' },
+      { field: 'fecha_produccion', header: 'A producir',  width: '13%' },
       { field: 'nombre', header: 'Producto',  width: '20%' },
-      { field: '', header: 'Distribución',  width: '15%' },
-      { field: 'cantidad_solicitada', header: 'Solicitado',  width: '11%' },
-      { field: 'cantidad_usada', header: 'Confeccionado',  width: '11%' },
-      { field: 'cantidad_existente', header: 'Pendiente',  width: '11%' },
+      { field: '', header: 'Distribución',  width: '17%' },
+      { field: 'cantidad_solicitada', header: 'Solicitado',  width: '14%' },
+      { field: 'cantidad_usada', header: 'Confeccionado',  width: '14%' },
+      { field: 'cantidad_existente', header: 'Pendiente',  width: '14%' },
       { field: '', header: '',  width: '6%' },
     ];
    
@@ -134,7 +134,7 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
 
 
 detalleProduccion(_elemento: any) {
- console.log(this.elemento);
+/*  console.log(this.elemento);
  _elemento.es_nuevo = true;
  this.elemento.checked = true;
  this.elemento.checked_iniciado = true;
@@ -151,7 +151,7 @@ detalleProduccion(_elemento: any) {
 
    this.loadlist(this.config.data['id']);
  });
-
+ */
 }
 
  

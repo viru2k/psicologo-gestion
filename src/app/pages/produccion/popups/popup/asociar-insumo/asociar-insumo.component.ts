@@ -28,25 +28,19 @@ export class AsociarInsumoComponent implements OnInit {
   cantidad_litros:number=0;
   cantidad_original:number=0;
   cantidad_salida:number=0;
-  existencia:number=0;
+  existencia =0;
+  cantidad_ingresada = 0;
 
   constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,
               public ref: DynamicDialogRef, public config: DynamicDialogConfig, public dialogService: DialogService, private messageService: MessageService) { 
     this.cols = [
-      { field: '', header: '',  width: '6%' },
-      { field: 'id', header: 'Nª',  width: '4%' },
-      { field: 'fecha_pedido', header: 'Fecha',  width: '10%' },
-      { field: 'descripcion', header: 'Descripción',  width: '30%' },
-      { field: 'cantidad', header: 'Producción',  width: '10%' },
-      { field: 'fecha_produccion', header: 'Producido',  width: '10%' },
-      { field: 'cantidad_botella', header: 'Botellas',  width: '10%' },
-      { field: 'cantidad_litros', header: 'Litros',  width: '10%' },
-      { field: 'fecha_ingreso', header: 'Ingreso',  width: '10%' },
-      { field: 'fecha_egreso', header: 'Egreso',  width: '10%' },
-      { field: 'cantidad_original', header: 'Original',  width: '10%' },
-      { field: 'cantidad_salida', header: 'Salida',  width: '10%' },
-      { field: 'existencia', header: 'Existencia',  width: '10%' },
-      { field: 'nombreyapellido', header: 'Usuario',  width: '15%' }
+          
+      { field: 'nombre', header: 'Insumo',  width: '30%' },      
+      { field: 'cantidad_unitaria', header: 'Cant. unitaria',  width: '18%' },
+      { field: 'cantidad_empaque', header: 'Cant. Empaque',  width: '18%' },
+      { field: 'cantidad', header: 'Cant. Requerida',  width: '18%' },
+      { field: 'cantidad_afectada', header: 'Usado',  width: '18%' },
+      { field: '', header: '',  width: '6%' }
     ];
    }
 
@@ -56,30 +50,15 @@ export class AsociarInsumoComponent implements OnInit {
   }
 
 
-  accion(event:any,overlaypanel: OverlayPanel,elementos:any){
-    if(elementos){
-      this.selectedElemento = elementos;
-      console.log(elementos);
-    }     
+  accion(event: any, overlaypanel: OverlayPanel, elementos: any) {
+
     overlaypanel.toggle(event);
     }
 
-  
-
-    asociarInsumo(){
-      console.log('asociar');
-      let data:any; 
-     data =  this.selectedElemento;
-      const ref = this.dialogService.open(AsociarInsumoAltaComponent, {
-      data,
-       header: 'Carga de insumo a producción',
-       width: '98%',
-       height: '90%'
-      });
-      ref.onClose.subscribe((AsociarInsumoAltaComponent:any) => {
-    
-      });
+    cerrarVentanta()  {
+      this.cantidad_ingresada = 0;
     }
+
 
 verDetalle(){
  
@@ -92,7 +71,7 @@ verDetalle(){
           let i = 0;
           this.elementos = resp;
           console.log(this.elementos);
-          resp.forEach(element => {
+          resp.forEach(element => { 
       /*     this.cantidad = this.elementos[i]['cantidad'];
           this.cantidad_botella = Number(this.cantidad_botella)+ Number(this.elementos[i]['cantidad_botella']);
           this.cantidad_litros =  Number(this.cantidad_litros)+ Number(this.elementos[i]['cantidad_litros']);

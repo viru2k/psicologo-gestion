@@ -69,6 +69,12 @@ getControlByProcesoByDates(fechaDesde: string, fechaHasta: string) {
   return this.http.get<any[]>(this.url + 'calidad/control/by/dates?fecha_desde=' + fechaDesde + '&fecha_hasta=' + fechaHasta);
 }
 
+getDesviacionesParametroCalidadByProcesoByDates(fechaDesde: string, fechaHasta: string) {
+  // tslint:disable-next-line: max-line-length
+  return this.http.get<any[]>(this.url + 'calidad/control/desviacion/parametro/proceso/by/dates?fecha_desde=' + fechaDesde + '&fecha_hasta=' + fechaHasta);
+}
+
+
 delControlParametro(id: string) {
   return this.http.delete<any>(this.url + 'calidad/control/proceso?id=' + id);
 }

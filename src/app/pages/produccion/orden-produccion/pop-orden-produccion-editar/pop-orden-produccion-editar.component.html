@@ -1,3 +1,4 @@
+<!-- SE AGREGAN LOS ARTICULOS Y ATRIBUTOS DE PRODUCCION-->
 <div class=" faq-title text-center pb-3 pt-2 ">
     <h5>ASOCIAR PRODUCTOS A PRODUCCION</h5>
   </div>
@@ -35,7 +36,6 @@
         
          <div class="d-flex justify-content-end">
           <label class="mt-1 ml-1 mr-1 ">Estado :</label>         
-
           <select [(ngModel)]="selectedEstado" class="form-control-sm text-sm texto-monserrat texto-secondary" (change)="onChangeEstado($event)" >                        
             <option *ngFor="let grupo of estado" class="text-sm texto-monserrat texto-secondary"    >
               <label >{{grupo.name}}</label>              
@@ -123,16 +123,22 @@
                       <td style="width: 12%"><b>{{elementos.cantidad_usada |  number : '1.0-2'}}</b></td>   
                       <td style="width: 12%"><b>{{elementos.cantidad_existente |  number : '1.0-2'}}</b></td>   
                       <td style="width: 15%">{{elementos.estado}}</td>
-                                  
                       <td style="width: 6%">
-                        <a  (click)="detalle(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                        
-                      </td>
-                      <td style="width: 6%">                                          
-                        <a  (click)="removerProduccion(elementos)" class="icon-hover"> <i class="fas fa-ban icon-color-danger fa-lg"></i></a>         
+                        <a  (click)="editarProduccion($event,op3,elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                                                  
                       </td>
               </tr>
           </ng-template>
      
     
       </p-table>
+      <p-overlayPanel #op3 [showCloseIcon]="true" [dismissable]="false" appendTo="body">
+        <div class="d-flex justify-content-center"> 
+          <label class="mt-1 ml-1 mr-1 ">Estado :</label>         
+          <select [(ngModel)]="selectedEstadoRenglon" class="form-control-sm text-sm texto-monserrat texto-secondary" (change)="onChangeEstadoRenglon($event)" >                        
+            <option *ngFor="let grupo of estado" class="text-sm texto-monserrat texto-secondary"    >
+              <label >{{grupo.name}}</label>              
+          </option>
+        </select>
+        </div>
+      </p-overlayPanel>
     </div>

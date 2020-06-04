@@ -23,10 +23,12 @@ export class PopupCalidadControlEncabezadoParametroComponent implements OnInit {
 
     this.cols = [
 
-      { field: 'parametro', header: 'Parámetro',  width: '60%' },
-      { field: 'estado', header: 'Estado',  width: '20%' },
-      { field: '', header: 'Acción',  width: '20%' },
-
+      { field: 'parametro', header: 'Parámetro',  width: '50%' },
+      { field: 'parametro_minimo', header: 'Mínimo',  width: '16%' },
+      { field: 'parametro_maximo', header: 'Máximo',  width: '16%' },
+      { field: 'estado', header: 'Estado',  width: '16%' },
+      { field: '', header: 'Acción',  width: '16%' },
+      
    ];
   }
 
@@ -100,7 +102,7 @@ nuevo() {
   const ref = this.dialogService.open(PopupFindCalidadParametroComponent, {
   data,
    header: 'Buscar parámetros',
-   width: '60%',
+   width: '80%',
    height: '50%'
   });
 

@@ -6,6 +6,7 @@ import { AlertServiceService } from './../../../../services/alert-service.servic
 import { PopupCalculdorPalletsComponent } from './../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 import { SectorService } from '../../../../services/sector.service';
 import { formatDate } from '@angular/common';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
 @Component({
   selector: 'app-pop-up-orden-produccion-detalle-editar',
@@ -29,6 +30,7 @@ export class PopUpOrdenProduccionDetalleEditarComponent implements OnInit {
   cantidad = 0;
   selected: any;
   display;
+  displayEstado;
   position: string;
   volumen: number;
   index: number;
@@ -45,8 +47,7 @@ export class PopUpOrdenProduccionDetalleEditarComponent implements OnInit {
       { field: 'pallet_pack', header: 'Pack',  width: '8%' },      
       { field: 'cantidad', header: 'Cantidad',  width: '8%' },
       { field: 'packs', header: 'Packs',  width: '8%' },
-      { field: '', header: '',  width: '6%' },
-      { field: '', header: '',  width: '6%' },
+      { field: '', header: '',  width: '6%' }
 
    ];
   }
@@ -216,11 +217,12 @@ detalle() {
 
   }
 
-  editarProduccion( _elemento: any) {
-    this.selectedRow = _elemento;
+  editarProduccion(elem: any) {
+
+    this.selectedRow = elem;
     console.log(this.selectedRow);
     this.position = 'top';
-    this.display = true;
+    this.display = true;  
   }
 
   removerProduccion(_elemento: any)  {

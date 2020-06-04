@@ -15,7 +15,7 @@
       <select [(ngModel)]="selected" class="form-control-sm text-sm texto-monserrat texto-secondary icon-hover" (change)="onChangeControl($event)" >             
                
         <option  *ngFor="let grupo of elementosControl" class="text-sm texto-monserrat texto-secondary icon-hover" [ngValue]="grupo"   >
-          <label class="icon-hover"  >{{grupo.calidad_titulo}}</label>              
+          <label class="icon-hover texto-secondary"  >{{grupo.calidad_titulo}}</label>              
       </option>
       </select>
     </div>

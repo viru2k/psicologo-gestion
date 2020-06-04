@@ -1,14 +1,8 @@
 
-  <div class="m-1">
-    <button class="btn btn-info btn-md btn-block" (click)="verDetalleTodos()"> Listar toda la producción de la orden de pedido aaaaaaa</button>
-</div>
+
 
 <div  class="m-3">
-    <p-overlayPanel #op [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" >                          
-
-        <span>   <a class="nav-link azul text-info  my-hover" (click)="asociarInsumo()">Asociar insumo</a></span>
-        <span>   <a class="nav-link azul text-success  my-hover" (click)="moverAdeposito()">Mover a otro depósito</a></span>
-      </p-overlayPanel> 
+   
      
       
     <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
@@ -38,19 +32,11 @@
                         </tr> 
                         <tr>
                         <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_pedido'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_unitaria'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_empaque'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_botella'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_litros'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_ingreso'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_egreso'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_original'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_salida'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'existencia'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombreyapellido'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            
                         </th>
                         <th></th>
                     </tr>
@@ -58,29 +44,34 @@
               
         <ng-template pTemplate="body" let-elementos  >
             <tr style="height:20px">
-                <td style="width: 6%" >                   
-                    <a     (click)="accion($event,op,elementos)"    ><i class="far fa-edit fa-2x icon-color-purple my-hover"></i></a>
-                 
-                </td>
-                    <td style="width: 4%">{{elementos.id}}</td>
-                    <td style="width: 10%">{{elementos.fecha_pedido | date: 'dd/MM/yyyy'}}</td>
-                    <td style="width: 30%">{{elementos.descripcion}}</td>
-                    <td style="width: 10%" >{{elementos.cantidad}}</td>
-                    <td style="width: 10%" >{{elementos.fecha_produccion | date: 'dd/MM/yyyy'}}</td>
-                    <td style="width: 10%">{{elementos.cantidad_botella}}</td>
-                    <td style="width: 10%" >{{elementos.cantidad_litros}}</td>
-                    <td style="width: 10%" >{{elementos.fecha_ingreso | date: 'dd/MM/yyyy'}}</td>
-                    <td style="width: 10%">{{elementos.fecha_egreso | date: 'dd/MM/yyyy'}}</td>
-                    <td style="width: 10%" >{{elementos.cantidad_original}}</td>
-                    <td style="width: 10%" >{{elementos.cantidad_salida}}</td>
-                    <td style="width: 10%">{{elementos.existencia}}</td>                      
-                    <td style="width: 15%" >{{elementos.nombreyapellido}}</td>
-                    
+                
+                    <td style="width: 30%">{{elementos.nombre}}</td>                 
+                    <td style="width: 18%" >{{elementos.cantidad_unitaria}}</td>
+                    <td style="width: 18%" >{{elementos.cantidad_empaque}}</td>
+                    <td style="width: 18%">{{elementos.cantidad}}</td>                      
+                    <td style="width: 18%" >{{elementos.cantidad_afectada}}</td>
+                    <td style="width: 6%" >                   
+                        <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>               
+                    </td>
             </tr>
         </ng-template>
-     
+        <p-overlayPanel  #op appendTo="body"  [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" [showCloseIcon]="true" (onHide)="cerrarVentanta()" >                          
+
+            <!-- <span>   <a class="nav-link azul text-info  my-hover" (click)="asociarInsumo()">Asociar insumo</a></span> -->
+            <div class=" d-flex justify-content-center">
+                <div class="row m-2">
+                    <label class="texto-bold"> Cantidad</label>
+                    <input type="number" [(ngModel)]="cantidad_ingresada" class="form-control  form-control-sm" autofocus>
+                    <button class="btn btn-info btn-block mt-2" (click)="agregarValor()"><i class="fas fa-check mr-1"></i> Guardar</button>
+                </div>
+              
+            </div>
+            
+          </p-overlayPanel> 
        
     </p-table>
 
-
   </div>
+  <div class="m-1">
+    <button class="btn btn-info btn-md btn-block" (click)="verDetalleTodos()">Asociar insumos</button>
+</div>

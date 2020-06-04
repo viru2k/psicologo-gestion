@@ -30,6 +30,7 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage to log user out
+        console.log('cerrando sesion');
         localStorage.removeItem('currentUser');
         localStorage.removeItem('userData');
         localStorage.removeItem('error');

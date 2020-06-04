@@ -112,6 +112,10 @@ export class ProduccionService {
       return this.http.put<any>(this.url + 'produccion/proceso/finalizar/' + id, produccion);
       }
 
+    updProduccionDetalleEstado(produccion: any, id: string ) {
+      return this.http.put<any>(this.url + 'produccion/detalle/estado/' + id, produccion);
+      }
+      
 
       getProduccionProcesoByOrdenProduccionDetalleId(orden_produccion_detalle_id: string) {
         // tslint:disable-next-line: max-line-length

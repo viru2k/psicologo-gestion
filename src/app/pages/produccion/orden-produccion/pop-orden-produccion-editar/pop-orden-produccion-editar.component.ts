@@ -7,6 +7,7 @@ import { PopUpOrdenProduccionDetalleEditarComponent } from './../pop-up-orden-pr
 import { OrdenProduccionDetalle } from './../../../../models/orden-produccion-detalle.model';
 import { OrdenProduccion } from './../../../../models/orden-produccion.model';
 import { formatDate } from '@angular/common';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
 
 @Component({
@@ -36,6 +37,9 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
   userData: any;
   estado: any[] = [];
   selectedEstado: string = 'ACTIVO' ;
+  selectedEstadoRenglon : string = 'ACTIVO' ;
+  selectedRow:any;
+  position: string;
 
    // tslint:disable-next-line: max-line-length
    constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private config: DynamicDialogConfig,  public ref: DynamicDialogRef) {
@@ -91,6 +95,16 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
    }
 
 
+   
+  editarProduccion(event: any,  overlaypanel: OverlayPanel,  elem: any) {
+
+    this.selectedRow = elem;
+    console.log(this.selectedRow);
+    this.position = 'top';
+    //this.displayEstado = true;
+    overlaypanel.toggle(event);
+  }
+
   actualizarFecha(event) {
     console.log(event);
     this.fecha_creacion = event;
@@ -100,6 +114,13 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
 
   onChangeEstado(e) {
     console.log(e.target.value);
+  }
+
+  
+  onChangeEstadoRenglon(e) {
+    console.log(e.target.value);
+    console.log(e.target);
+    this.cambiarEstadoRenglon();
   }
 
    loadlist(produccion: any) {
@@ -237,17 +258,14 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
 }
  }
 
- 
- borarProduccion(ordenProduccion: OrdenProduccion) {
+
+ cambiarEstadoRenglon() {
   try {
-    this.produccionService.setProduccionOrdenProduccion(ordenProduccion)
+    
+    this.selectedRow.estado = this.selectedEstadoRenglon;
+    this.produccionService.updProduccionDetalleEstado(this.selectedRow, this.selectedRow.orden_produccion_detalle_id)
     .subscribe(resp => {
-      if (resp[0]) {
-        this.elementos = resp;
-        console.log(this.elementos);
-          } else {
-            this.elementos = null;
-          }
+      this.loadlist(this.config.data.id);
       this.loading = false;
       console.log(resp);
     },

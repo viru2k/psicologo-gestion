@@ -29,6 +29,7 @@ import { CalidadControlEncabezadoComponent } from './pages/mantenimiento/calidad
 import { CalidadControlParametroComponent } from './pages/mantenimiento/calidad/calidad-control-parametro/calidad-control-parametro.component';
 import { CalidadControlEncabezadoParametroComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado-parametro/calidad-control-encabezado-parametro.component';
 import { GrupoAnalisisComponent } from './pages/mantenimiento/grupo-analisis/grupo-analisis.component';
+import { CalidadConsultaProduccionComponent } from './pages/calidad/calidad-consulta-produccion/calidad-consulta-produccion.component';
 
 const routes: Routes = [
 
@@ -58,6 +59,7 @@ const routes: Routes = [
 /* -------------------------------------------------------------------------- */
 
 { path: 'calidad/indicadores', component: CalidadindicadoresComponent },
+{ path: 'control/calidad', component: CalidadConsultaProduccionComponent },
 
 /* -------------------------------------------------------------------------- */
 /*                                 PRODUCCION                                 */

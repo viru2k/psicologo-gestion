@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService, DialogService, DynamicDialogRef } from 'primeng/api';
 import { AlertServiceService } from './../../../../../services/alert-service.service';
 import { CalidadService } from './../../../../../services/calidad.service';
-
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -17,8 +17,11 @@ export class PopupFindCalidadParametroComponent implements OnInit {
   elementos: any[];
   selecteditems: any;
   loading;
+  parametroMaximo = 0;
+  parametroMinimo = 0;
 
-  constructor(private calidadService: CalidadService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService, public ref: DynamicDialogRef) { 
+  constructor(private calidadService: CalidadService, private alertServiceService: AlertServiceService,
+              public dialogService: DialogService, private messageService: MessageService, public ref: DynamicDialogRef) {
 
     this.cols = [
 
@@ -45,8 +48,8 @@ export class PopupFindCalidadParametroComponent implements OnInit {
               }else{
                 this.elementos = null;
               }
-            this.loading = false;
-            console.log(resp);
+          this.loading = false;
+          console.log(resp);
         },
         error => { // error path
             console.log(error);
@@ -60,7 +63,35 @@ export class PopupFindCalidadParametroComponent implements OnInit {
 
 guardar(elemento: any) {
   console.log(elemento);
- this.ref.close(elemento);
+  if ((this.parametroMaximo === 0) || (this.parametroMinimo === 0)) {
+    swal({
+      title: 'Parametros incompletos',
+      text: '¿Desea continuar?',
+      showCancelButton: true,
+      confirmButtonColor: '#E53935',
+      cancelButtonColor: '#66BB6A',
+      cancelButtonText: 'Continuar',
+      confirmButtonText: 'Corregir',
+      imageUrl: './assets/icons/alert-icons/icon-wrong.png',
+      imageHeight: 64,
+      imageWidth: 64,
+    }).then((result) => {
+      console.log(result);
+      if (result.value) {
+        // SI CORRIGO DEVUELVE TRUE
+      }else{
+        elemento.parametro_maximo = this.parametroMaximo;
+        elemento.parametro_minimo = this.parametroMinimo;
+        this.ref.close(elemento);
+      }
+    });
+  } else{
+    elemento.parametro_maximo = this.parametroMaximo;
+    elemento.parametro_minimo = this.parametroMinimo;
+    this.ref.close(elemento);
+  }
+ 
+
 
 }
 

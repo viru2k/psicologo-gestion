@@ -3,8 +3,6 @@ import { AuthenticationService } from './../../../services/authentication.servic
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Observable } from 'rxjs/Rx';
-import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from './../../../models/user.model';
@@ -16,50 +14,49 @@ import { DialogService } from 'primeng/components/common/api';
 import { DatePipe } from '@angular/common';
 import { AlertServiceService } from './../../../services/alert-service.service';
 
-
-//'@types/chart.js': '^2.7.40',
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  providers: [MessageService,DialogService,DatePipe]
+  providers: [MessageService, DialogService, DatePipe]
 })
 export class NavbarComponent implements OnInit {
-  
-  user:User;
-  loggedIn:boolean = false;
-  general: MenuItem[];
-  mantenimiento:boolean =true;
-  gestion_auditoria:boolean =true;
-  administarcion_auditoria:boolean =true;
-  gestion_produccion:boolean =true;
-  administracion_produccion:boolean =true;
-  gestion_stock:boolean =true;
-  administracion_stock:boolean =true;
-  
 
-  public username:string;
-  public puesto:string;
-  elemento:User = null;
+  user: User;
+  loggedIn = false;
+  general: MenuItem[];
+  mantenimiento = true;
+  gestion_auditoria  = true;
+  administarcion_auditoria  = true;
+  gestion_produccion = true;
+  administracion_produccion = true;
+  gestion_stock = true;
+  administracion_stock = true;
+  gerencia = true;
+
+
+  public username: string;
+  public puesto: string;
+  elemento: User = null;
   elementoModulo:[] = null;
   loginForm: FormGroup;
   loading = false;
-  loading_mensaje:string;
-  loading_error:boolean;
+  loading_mensaje: string;
+  loading_error;
   submitted = false;
   returnUrl: string;
   error = '';
-  notificaciones:number= 0;
-  chats:boolean;
+  notificaciones = 0;
+  chats;
 
   constructor(
     private alertServiceService: AlertServiceService,
-    public dialogService: DialogService, 
+    public dialogService: DialogService,
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private miServico:UserService) { 
+    private miServico: UserService) {
 
   }
  navbarOpen = false;
@@ -77,9 +74,9 @@ export class NavbarComponent implements OnInit {
  
      /*==================================================================
      [ Focus Contact2 ]*/
-     $('.input100').each(function(){
-         $(this).on('blur', function(){
-             if($(this).val() !== "") {
+     $('.input100').each(function() {
+         $(this).on('blur', function() {
+             if ($(this).val() !== "") {
                  $(this).addClass('has-val');
              }
              else {
@@ -93,7 +90,7 @@ export class NavbarComponent implements OnInit {
      [ Validate ]*/
      var input = $('.validate-input .input100');
  
-     $('.validate-form').on('submit',function(){
+     $('.validate-form').on('submit',function() {
          var check = true;
  
          for(var i=0; i<input.length; i++) {
@@ -104,8 +101,8 @@ export class NavbarComponent implements OnInit {
      });
  
  
-     $('.validate-form .input100').each(function(){
-         $(this).focus(function(){
+     $('.validate-form .input100').each(function() {
+         $(this).focus(function() {
             hideValidate(this);
          });
      });
@@ -126,136 +123,117 @@ export class NavbarComponent implements OnInit {
      
  
  });
- 
-     /*======== FIN JQUERY DEL LOGUIN =========*/
+
+      /*======== FIN JQUERY DEL LOGUIN =========*/
 
    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      puesto: ['0']
-  });
+        username: ['', Validators.required],
+        password: ['', Validators.required]
+    });
 
-   let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-   
-   if(currentUser['access_token'] != ''){
-  let userData = JSON.parse(localStorage.getItem('userData'));
-  console.log(userData);
-  console.log('usuario logueado');
-  this.loggedIn = true;
-  this.username = userData['username'];
-  this.puesto = userData['puesto'];
-  console.log(userData['access_list']);
-  this.asignarModulos(userData['access_list']);
-   //  this.getNotificacionesByUsuario();
-     /*** busco notificaciones si esta logueado*/
-    /* let timer = Observable.timer(180000,180000);//180000 -- 3 minutos inicia y en 3 minutos vuelve a llamar
-     timer.subscribe(t=> {
-       console.log('listando notificaciones');
-       this.getNotificacionesByUsuario();
-   });*/
-  this.menuList();
-}else{
-  console.log("sin credenciales");
-  this.alertServiceService.throwAlert('error','Usuario o contraseña incorrectos',  'Verifique el usuario y contraseña, su sesion puede haber expirado','500');
-}
- 
-   
-}
+   console.log(this.f.username.value);
+   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-accion(evt:any,overlaypanel:OverlayPanel){
-  if(event){
-    
+   if (currentUser.access_token !== '') {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    console.log(userData);
+    console.log('usuario logueado');
+    this.loggedIn = true;
+    this.username = userData.username;
+    console.log(userData.access_list);
+    this.asignarModulos(userData.access_list);
+    this.menuList();
+   } else {
+    console.log('sin credenciales');
+    // tslint:disable-next-line: max-line-length
+    this.alertServiceService.throwAlert('error', 'Usuario o contraseña incorrectos',  'Verifique el usuario y contraseña, su sesion puede haber expirado', '500');
   }
-  console.log(event);
+  }
 
+accion(evt: any, overlaypanel: OverlayPanel) {
+
+  console.log(evt);
   overlaypanel.toggle(evt);
 }
 
-ajustes(){
+ajustes() {
   console.log('ajustes');
 }
 
-asignarModulos(modulos: any){
+asignarModulos(modulos: any) {
   modulos.forEach(element => {
    // console.log(element['modulo_nombre']);
-    if(element['modulo_nombre'] === 'mantenimiento'){
+    if (element.modulo_nombre === 'mantenimiento') {
       this.mantenimiento = false;
     }
-    if(element['modulo_nombre'] === 'gestion_auditoria'){
+    if (element.modulo_nombre === 'gestion_auditoria') {
       this.gestion_auditoria = false;
     }
-    if(element['modulo_nombre'] === 'administarcion_auditoria'){
+    if (element.modulo_nombre === 'administarcion_auditoria') {
       this.administarcion_auditoria = false;
-      console.log( element['modulo_nombre']);
+      console.log( element.modulo_nombre);
     }
-    if(element['modulo_nombre'] === 'gestion_produccion'){
+    if (element.modulo_nombre === 'gestion_produccion') {
       this.gestion_produccion = false;
     }
-    if(element['modulo_nombre'] === 'administracion_produccion'){
+    if (element.modulo_nombre === 'administracion_produccion') {
       this.administracion_produccion = false;
     }
-    if(element['modulo_nombre'] === 'gestion_stock'){
+    if (element.modulo_nombre === 'gestion_stock') {
       this.gestion_stock = false;
     }
-    if(element['modulo_nombre'] === 'administracion_stock'){
+    if (element.modulo_nombre === 'administracion_stock') {
       this.administracion_stock = false;
     }
-    
-  });
+    if (element.modulo_nombre === 'gerencia') {
+      this.gerencia = false;
+    }
 
+  });
 
   /** DESPUES DE ASIGNAR MODULOS VERIFICO LAS NOTIFICACIONES */
 
- 
 }
 
-cerrarSesion(){
+cerrarSesion() {
 
   swal({
   title: 'Cerrando sesión',
   text: '¿Desea finalizar la sesión actual?',
   showCancelButton: true,
-  confirmButtonColor: '#AD1457',
-  cancelButtonColor: '#0277BD',
+  confirmButtonColor: '#E53935',
+  cancelButtonColor: '#42A5F5',
   cancelButtonText: 'Permanecer',
   confirmButtonText: 'Cerrar sesión',
-  imageUrl: '../../../../../assets/icons/logout1.png',
+  imageUrl: 'https://img.icons8.com/clouds/100/000000/imac-exit.png',
   imageHeight: 128,
   imageWidth: 128,
 }).then((result) => {
   if (result.value) {
-   
+
   console.log('sesion terminada');
   this.authenticationService.logout();
-  this.loggedIn =false;
-this.mantenimiento = true;
-this.gestion_auditoria = true;
-this.administarcion_auditoria = true;
-this.gestion_produccion = true;
-this.administracion_produccion = true;
-this.gestion_stock = true;
-this.administracion_stock = true;
- 
+  this.loggedIn = false;
+  this.mantenimiento = true;
+  this.gestion_auditoria = true;
+  this.administarcion_auditoria = true;
+  this.gestion_produccion = true;
+  this.administracion_produccion = true;
+  this.gestion_stock = true;
+  this.administracion_stock = true;
   this.user = null;
   this.elemento = null;
   this.elementoModulo = [];
   window.location.reload();
   }
 });
-
-
-
-    //this.router.navigateByUrl('/');
 }
 
 
 get f() { return this.loginForm.controls; }
 
 onSubmit() {
-   
   this.submitted = true;
-
-  // stop here if form is invalid
   if (this.loginForm.invalid) {
       return;
   }
@@ -268,35 +246,32 @@ onSubmit() {
           data => {
             console.log(data);
             this.user = data;
-            let us = new User('','','','','',this.f.username.value, this.f.password.value, []);
+            const us = new User('', '', '', '', '', this.f.username.value, this.f.password.value, []);
             localStorage.setItem('userData', JSON.stringify(us));
             localStorage.setItem('currentUser', JSON.stringify(this.user));
             //  this.router.navigate([this.returnUrl]);
             this.loadUser();
           },
           error => {
-            
             console.log(error);
-            
-            if(error === 'The user credentials were incorrect.'){
-              this.loading_error = true; 
+            if (error === 'Las credenciales del usuario son incorrectas') {
+              this.loading_error = true;
               this.loading = false;
               this.loading_mensaje = '';
-            }else{
+             } else {
               this.loading = false;
               this.loading_mensaje = '';
             }
             this.error = error;
-              
           });
 }
 
-ver(){
-let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-console.log(currentUser['access_token']);
+ver() {
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+console.log(currentUser.access_token);
 }
 
-loadUser(){
+loadUser() {
 
 this.loading = true;
 try {
@@ -304,35 +279,31 @@ try {
   this.miServico.getItemInfoAndMenu(this.f.username.value)
     .subscribe(resp => {
     this.elemento = resp;
-   // this.elementoModulo = this.elemento["access_list"]
-    let currentUser =  JSON.parse(localStorage.getItem('currentUser'));
-    let userData = JSON.parse(localStorage.getItem('userData'));
+    const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
+    const userData = JSON.parse(localStorage.getItem('userData'));
     console.log(this.elemento);
     this.elementoModulo = <any>this.elemento;
-    this.user = new User(this.elemento[0]['id'] , this.elemento[0]['email'], this.elemento[0]['nombreyapellido'],
-    this.elemento[0]['name'], this.elemento[0]['admin'],this.elemento[0]['email'], currentUser['access_token'],this.elementoModulo);
+    this.user = new User(this.elemento[0].id , this.elemento[0].email, this.elemento[0].nombreyapellido,
+    this.elemento[0].name, this.elemento[0].admin, this.elemento[0].email, currentUser.access_token, this.elementoModulo);
     this.username = userData['username'];
-    this.puesto = userData['puesto'];
     localStorage.removeItem('userData');
     localStorage.setItem('userData', JSON.stringify(this.user));
     this.asignarModulos(this.elementoModulo);
-     // console.log(this.user);
     this.loading = false;
     this.loading_mensaje = '';
     console.log('logueado');
     this.loggedIn = true;
     this.menuList();
     },
-    error => { // error path
+    error => {
         console.log(error.message);
         console.log(error.status);
         localStorage.removeItem('error');
         localStorage.setItem('error', JSON.stringify(error));
         this.loading_mensaje = '';
-    //    this.throwAlert('error','Error: '+error.status+'  Error al cargar los registros',error.message);
+
      });
 } catch (error) {
-//  this.throwAlert('error','Error al cargar los registros',error);
 }
 }
 
@@ -366,7 +337,7 @@ menuList() {
         },
         {
           label: 'Gestión de producción',
-          visible:!this.gestion_produccion,
+          visible: !this.gestion_produccion,
           items: [
             {label: 'Cargar producción', routerLink: 'produccion/ingreso'},
             {label: 'Asociar insumos a producción', routerLink: 'produccion/asociar/insumo'},
@@ -378,30 +349,38 @@ menuList() {
       ]
   },
   {
+    label: 'Gerencia',
+    visible: !this.gerencia,
+    items: [
+      {label: 'Producción', routerLink: 'orden/produccion'},
+      {label: 'Procesos de producción', routerLink: '/produccion/proceso'},
+      {label: 'Control de calidad', routerLink: 'control/calidad'},
+      {label: 'Insumos', routerLink: 'gerencia/insumo'},
+    ]
+  },
+
+  {
     label: 'Auditoria',
     visible: !this.gestion_auditoria,
     items: [
-      {label: 'Control de producción', routerLink: 'gestion/agenda'},
-      {label: 'Control de maquina', routerLink: 'recepcion/turnos'},
-
+      {label: 'Control de producción', routerLink: '/produccion/proceso'},
       {
             label: 'Indicadores',
             items: [
-              {label: 'Indicadores de producción',visible:!this.gestion_auditoria, routerLink: 'asesoramiento/operacioncobro'},
-              {label: 'Indicadores de máquina',visible:!this.gestion_auditoria, routerLink: 'asesoramiento/facturacion/rendicion'},
+              {label: 'Indicadores de producción', visible: !this.gestion_auditoria, routerLink: 'asesoramiento/operacioncobro'},
+              {label: 'Indicadores de máquina', visible: !this.gestion_auditoria, routerLink: 'asesoramiento/facturacion/rendicion'},
 
             ]
         }
     ]
   },
 
-
   {
 
     label: 'Mantenimiento',
     items: [{
             label: 'Parametros',
-            visible:! this.administracion_produccion,
+            visible: !this.administracion_produccion,
             items: [
               {label: 'Producto', routerLink: 'mantenimiento/articulo'},
               {label: 'Insumo', routerLink: 'mantenimiento/insumo'},
@@ -414,7 +393,7 @@ menuList() {
         },
         {
             label: 'Calidad',
-            visible:! this.administarcion_auditoria,
+            visible: !this.administarcion_auditoria,
             items: [
               {label: 'Encabezado', routerLink: 'mantenimiento/calidad/encabezado'},
               {label: 'Parametros', routerLink: 'mantenimiento/calidad/parametro'},
@@ -434,7 +413,6 @@ menuList() {
 }
 
 configurarUsuario( ) {
-  
 }
 
 }

@@ -70,22 +70,28 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
   }
 
   confirmarParametro() {
-    this.display = false;    
+    this.display = false;
     this.elemento.calidad_valor = this.valorObtenido;
     this.elemento.tiene_accion_correctiva_descripcion = this.accionCorrectiva;
     this.elemento.es_no_conformidad_descripcion =  this.noConformidad;
-    if (this.estadoNoConformidad) { 
+    if (this.estadoNoConformidad) {
       this.elemento.no_conformidad =  'SI';
     } else {
       this.elemento.no_conformidad =  'NO';
       this.elemento.es_no_conformidad_descripcion = '';
     }
 
-    if (this.estadoAccionCorrectiva) { 
+    if (this.estadoAccionCorrectiva) {
       this.elemento.es_accion_correctiva = 'SI';
     } else {
       this.elemento.es_accion_correctiva = 'NO';
       this.elemento.tiene_accion_correctiva_descripcion = '';
+    }
+    // VALIDO SI ESTA ENTRE LOS PARAMETROS, SI NO ESTA LE COLOCO UNO PARA PODER SUMAR Y CUANTIFICAR LUEGO
+    if ((this.elemento.parametro_minimo <= this.valorObtenido) && (this.elemento.parametro_maximo >= this.valorObtenido)) {
+      this.elemento.tiene_desviacion_parametro = 0;
+    } else {
+      this.elemento.tiene_desviacion_parametro = 1;
     }
     this.estadoAccionCorrectiva = false;
     this.accionCorrectiva = '';

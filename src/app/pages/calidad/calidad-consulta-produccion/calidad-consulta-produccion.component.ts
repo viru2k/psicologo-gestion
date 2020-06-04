@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CalidadService } from '../../../services/calidad.service';
+import { AlertServiceService } from '../../../services/alert-service.service';
+import { DynamicDialogRef, MessageService, DialogService } from 'primeng/api';
+import { calendarioIdioma } from '../../../config/config';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-calidad-consulta-produccion',
@@ -7,9 +12,107 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalidadConsultaProduccionComponent implements OnInit {
 
-  constructor() { }
+  fecha_desde: Date;
+  fecha_hasta: Date;
+  _fecha_desde: string;
+  _fecha_hasta: string;
+  es: any;
+  cols: any[];
+  columns: any[];
+  elementos: any[];
+  selecteditems: any;
+  loading;
 
-  ngOnInit() {
+  
+  constructor(private calidadService: CalidadService, private alertServiceService: AlertServiceService,
+              public dialogService: DialogService, private messageService: MessageService) {
+                this.cols = [
+                  { field: 'orden_produccion_id', header: 'Prod Nª',  width: '7.5%' },
+                  { field: 'estado', header: 'Estado',  width: '12%' },
+                  { field: 'parametro_desviacion', header: 'Observación',  width: '18%' },
+                  { field: 'lote', header: 'Lote',  width: '18%' },
+                  { field: 'nombre', header: 'Producto',  width: '30%' },
+                  { field: 'maquina_nombre', header: 'Linea',  width: '18%' },
+                  { field: 'hora_inicio', header: 'Inicio',  width: '8%' },
+                  { field: 'hora_fin', header: 'Fin',  width: '8%' },
+                  { field: 'cantidad_solicitada', header: 'Solicitado',  width: '10%' },
+                  { field: '', header: 'En packs',  width: '10%' },
+                  { field: 'cantidad_producida', header: 'Realizado',  width: '10%' },
+                  { field: '', header: 'En packs',  width: '10%' },
+                  { field: '', header: '',  width: '6%' }
+                ];
   }
 
+  ngOnInit() {
+    this.es = calendarioIdioma;
+    this.fecha_desde = new Date();
+    this.fecha_hasta = new Date();
+  //  this.loadlist();
+  }
+
+  buscarByDates() {
+    this._fecha_desde = formatDate(new Date(this.fecha_desde), 'yyyy-MM-dd HH:mm', 'en');
+    this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd HH:mm', 'en');
+    this.loading = true;
+    try {
+        this.calidadService.getDesviacionesParametroCalidadByProcesoByDates(this._fecha_desde, this._fecha_hasta)
+        .subscribe(resp => {
+          if (resp[0]) {
+            this.elementos = resp;
+            console.log(this.elementos);
+              }else{
+                this.elementos = null;
+              }
+          this.loading = false;
+          console.log(resp);
+        },
+        error => { // error path
+            console.log(error);
+
+            this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+         });
+    } catch (error) {
+      this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+    }
 }
+
+
+
+colorRow(estado: string) {
+
+  if (estado === 'ACTIVO') {
+    return {'border-es-activo'  : 'null' };
+  }
+  if (estado === 'PAUSADO') {
+    return {'border-es-pausado'  : 'null' };
+  }
+  if (estado === 'CANCELADO') {
+    return {'border-es-cancelado'  : 'null' };
+  }
+  if (estado === 'FINALIZADO') {
+    return {'border-es-finalizado'  : 'null' };
+  }
+
+  if (estado === 'NEUTRAL') {
+    return {'border-es-neutral'  : 'null' };
+  }
+}
+
+iconoColor(estado: string) {
+
+  if (estado === 'ACTIVO') {
+
+    
+  }
+  if (estado === 'PAUSADO') {
+    return {'icono-warning'  : 'null' };
+  }
+  if (estado === 'CANCELADO') {
+    return {'icono-danger'  : 'null' };
+  }
+  if (estado === 'FINALIZADO') {
+    return {'icono-secondary'  : 'null' };
+  }
+}
+}
+

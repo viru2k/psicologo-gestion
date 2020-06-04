@@ -114,12 +114,9 @@
                         <td style="width: 6%">
                           <a  (click)="editarProduccion(elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>                                                  
                         </td>
-                        <td style="width: 6%">                                          
-                          <a  (click)="removerProduccion(elementos)" class="icon-hover"> <i class="fas fa-ban icon-color-danger fa-lg"></i></a>         
-                        </td>
+                      
                 </tr>
             </ng-template>
-      
-           
         </p-table>
+        <p-overlayPanel #op3 [showCloseIcon]="true" [dismissable]="false" appendTo="body"></p-overlayPanel>
       </div>
