@@ -16,7 +16,7 @@ import { OverlayPanel } from 'primeng/overlaypanel';
   styleUrls: ['./popup-orden-produccion-detalle-consulta.component.scss']
 })
 export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
-  elemento:any;
+  elemento: any;
   elementos: any[];
   userData: any;
   loading;

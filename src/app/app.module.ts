@@ -144,6 +144,7 @@ import { CalidadConsultaProduccionComponent } from './pages/calidad/calidad-cons
 import { PopupCalidadParametroProduccionIngresoComponent } from './pages/calidad/popup-calidad-parametro-produccion-ingreso/popup-calidad-parametro-produccion-ingreso.component';
 import { GrupoAnalisisComponent } from './pages/mantenimiento/grupo-analisis/grupo-analisis.component';
 import { GrupoAnalisisEditarComponent } from './pages/mantenimiento/grupo-analisis-editar/grupo-analisis-editar.component';
+import { PopupCalidadAsociadaProduccionComponent } from './pages/calidad/popup-calidad-asociada-produccion/popup-calidad-asociada-produccion.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -210,7 +211,8 @@ registerLocaleData(localeEsAR, 'es-Ar');
     CalidadConsultaProduccionComponent,
     PopupCalidadParametroProduccionIngresoComponent,
     GrupoAnalisisComponent,
-    GrupoAnalisisEditarComponent
+    GrupoAnalisisEditarComponent,
+    PopupCalidadAsociadaProduccionComponent
   ],
   imports: [
 
@@ -286,7 +288,7 @@ PopupControlParametroComponent,
 PopupControlEncabezadoComponent,
 PopupFindCalidadParametroComponent,
 PopupCalidadParametroProduccionIngresoComponent,
-
+PopupCalidadAsociadaProduccionComponent,
 /* -------------------------------------------------------------------------- */
 /*                                   INSUMOS                                  */
 /* -------------------------------------------------------------------------- */

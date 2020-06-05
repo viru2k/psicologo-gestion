@@ -4,6 +4,8 @@ import { AlertServiceService } from '../../../services/alert-service.service';
 import { DynamicDialogRef, MessageService, DialogService } from 'primeng/api';
 import { calendarioIdioma } from '../../../config/config';
 import { formatDate } from '@angular/common';
+import { OverlayPanel } from 'primeng/overlaypanel';
+import { PopupCalidadAsociadaProduccionComponent } from '../popup-calidad-asociada-produccion/popup-calidad-asociada-produccion.component';
 
 @Component({
   selector: 'app-calidad-consulta-produccion',
@@ -19,6 +21,7 @@ export class CalidadConsultaProduccionComponent implements OnInit {
   es: any;
   cols: any[];
   columns: any[];
+  elemento: any;
   elementos: any[];
   selecteditems: any;
   loading;
@@ -29,7 +32,7 @@ export class CalidadConsultaProduccionComponent implements OnInit {
                 this.cols = [
                   { field: 'orden_produccion_id', header: 'Prod Nª',  width: '7.5%' },
                   { field: 'estado', header: 'Estado',  width: '12%' },
-                  { field: 'parametro_desviacion', header: 'Observación',  width: '18%' },
+                  { field: 'parametro_desviacion', header: 'Observación',  width: '10%' },
                   { field: 'lote', header: 'Lote',  width: '18%' },
                   { field: 'nombre', header: 'Producto',  width: '30%' },
                   { field: 'maquina_nombre', header: 'Linea',  width: '18%' },
@@ -50,6 +53,30 @@ export class CalidadConsultaProduccionComponent implements OnInit {
   //  this.loadlist();
   }
 
+  accion(evt: any, overlaypanel: OverlayPanel, event: any) {
+
+    console.log(event);
+    this.elemento = event;
+    overlaypanel.toggle(evt);
+  }
+
+  verControles() {
+    console.log(this.elemento);
+    let data: any;
+    data = this.elemento;
+    const ref = this.dialogService.open(PopupCalidadAsociadaProduccionComponent, {
+    data,
+     header: 'Listado de controles en producción',
+     width: '98%',
+     height: '90%'
+    });
+
+    ref.onClose.subscribe(() => {
+          //this.buscarByDates();
+    });
+
+  }
+
   buscarByDates() {
     this._fecha_desde = formatDate(new Date(this.fecha_desde), 'yyyy-MM-dd HH:mm', 'en');
     this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd HH:mm', 'en');
@@ -60,7 +87,7 @@ export class CalidadConsultaProduccionComponent implements OnInit {
           if (resp[0]) {
             this.elementos = resp;
             console.log(this.elementos);
-              }else{
+              } else {
                 this.elementos = null;
               }
           this.loading = false;

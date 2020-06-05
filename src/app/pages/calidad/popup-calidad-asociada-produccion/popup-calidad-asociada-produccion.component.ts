@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertServiceService } from './../../../services/alert-service.service';
-import { DialogService, MessageService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/api';
+import { calendarioIdioma } from '../../../config/config';
+import { DialogService, DynamicDialogRef, DynamicDialogConfig, MessageService } from 'primeng/api';
 import { ProduccionService } from '../../../services/produccion.service';
 import { CalidadService } from '../../../services/calidad.service';
-import { OverlayPanel } from 'primeng/overlaypanel';
-import { calendarioIdioma } from '../../../config/config';
-import { formatDate } from '@angular/common';
+import { AlertServiceService } from '../../../services/alert-service.service';
 import { ControCalidadParametroValor } from '../../../models/control-calidad-parametro-valor.model';
+import { formatDate } from '@angular/common';
 
 @Component({
-  selector: 'app-popup-calidad-parametro-produccion-ingreso',
-  templateUrl: './popup-calidad-parametro-produccion-ingreso.component.html',
-  styleUrls: ['./popup-calidad-parametro-produccion-ingreso.component.scss']
+  selector: 'app-popup-calidad-asociada-produccion',
+  templateUrl: './popup-calidad-asociada-produccion.component.html',
+  styleUrls: ['./popup-calidad-asociada-produccion.component.scss']
 })
-export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
+export class PopupCalidadAsociadaProduccionComponent implements OnInit {
 
+ 
   procesoProduccionId: string;
   elemento: any = null;
   elementos: ControCalidadParametroValor[];
@@ -37,8 +37,8 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
   data: any;
 
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, 
-     private calidadService: CalidadService, public dialogService: DialogService,
-      private messageService: MessageService, private config: DynamicDialogConfig, public ref: DynamicDialogRef) {
+              private calidadService: CalidadService, public dialogService: DialogService,
+              private messageService: MessageService, private config: DynamicDialogConfig, public ref: DynamicDialogRef) {
 
     this.cols = [
       { field: 'parametro', header: 'Parámetro',  width: '35%' },
@@ -59,8 +59,7 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
     this.fecha = new Date();
     console.log(this.config.data);
     this.userData = JSON.parse(localStorage.getItem('userData'));
-    this.getCalidadControlEncabezado(this.config.data['id']);
-    this.getControlByProcesoId();
+    this.getCalidadControlEncabezado(this.config.data.id);
   }
 
 
@@ -182,7 +181,7 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
      }
  }
 
- 
+
 
  getCalidadControlParametroControl() {
 
@@ -211,32 +210,50 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
 
 
 
-getControlByProcesoId() {
 
-  console.log(this.data.produccion_proceso_id);
-  this.loading = true;
-  try {
-       this.calidadService.getControlByProcesoId(this.data.produccion_proceso_id)
-       .subscribe(resp => {
-         if (resp[0]) {
-           this.elementos = resp;
-           console.log(this.elementos);
-             } else {
-               this.elementos = null;
-             }
-         this.loading = false;
-         console.log(resp);
-       },
-       error => { // error path
-           console.log(error);
-           this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-        });
-   } catch (error) {
-     this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-   }
+nuevaProduccion(_elemento: any) {
+  /* console.log(this.elemento);
+  _elemento.es_nuevo = true;
+  this.elemento.checked = true;
+  this.elemento.checked_iniciado = true;
+  let data: any;
+  data = this.elemento;
+  const ref = this.dialogService.open(PopupAsociarProduccionComponent, {
+  data,
+   header: 'Gestionar produccion',
+   width: '70%',
+   height: '80%'
+  });
+
+  ref.onClose.subscribe((PopupAsociarProduccionComponent: any) => {
+
+    this.loadlist(this.config.data['id']);
+  }); */
+
+ }
+
+
+
+detalleProduccion(_elemento: any) {
+ /* console.log(this.elemento);
+ _elemento.es_nuevo = true;
+ this.elemento.checked = true;
+ this.elemento.checked_iniciado = true;
+ let data: any;
+ data = this.elemento;
+ const ref = this.dialogService.open(PopupOrdenProduccionDetalleConsultaComponent, {
+ data,
+  header: 'Gestionar produccion',
+  width: '70%',
+  height: '80%'
+ });
+
+ ref.onClose.subscribe((PopupAsociarProduccionComponent: any) => {
+
+   this.loadlist(this.config.data['id']);
+ });
+ */
 }
-
-
 
 
  estadistica(elemento: any) {

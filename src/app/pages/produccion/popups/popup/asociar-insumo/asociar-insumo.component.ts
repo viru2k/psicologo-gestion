@@ -59,7 +59,7 @@ export class AsociarInsumoComponent implements OnInit {
       this.cantidad_ingresada = 0;
     }
 
-
+    agregarValor() {}
 verDetalle(){
  
   console.log(this.selectedElemento);

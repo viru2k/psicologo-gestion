@@ -20,7 +20,10 @@
   
   @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-  
+  @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+  //font-family: 'Pacifico', cursive; ----------> para pagina mascotas
   
   /*//////////////////////////////////////////////////////////////////
   [ RESTYLE TAG ]*/
@@ -247,8 +250,9 @@
   .login100-form-title {
 	width: 100%;
 	display: block;
-	font-family: Poppins-Regular;
-	font-size: 30px;
+	//font-family: 'Pacifico', cursive;
+	font-family: 'Indie Flower', cursive;
+	font-size: 60px;
 	color: #333333;
 	line-height: 1.2;
 	text-align: center;
