@@ -27,7 +27,7 @@
 @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-angular-pivotview/styles/material.css';
 
-
+@import './assets/css/iconos.scss';
 /* ---------- MODIFICA LA ESTETICA DE UNA COLUMNA DE FORMA DINAMICA --------- */
 
 $custom-grid: var(--custom-primary-color);
@@ -1338,6 +1338,9 @@ body {
     color: #673AB7;
 }
 
+.texto-menu{
+    color:#455A64;
+}
 
 
 

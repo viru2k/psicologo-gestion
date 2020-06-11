@@ -6,6 +6,8 @@ import { calendarioIdioma } from '../../../config/config';
 import { formatDate } from '@angular/common';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { PopupCalidadAsociadaProduccionComponent } from '../popup-calidad-asociada-produccion/popup-calidad-asociada-produccion.component';
+import { PopupCalidadDetalleProcesoComponent } from './../popup-calidad-detalle-proceso/popup-calidad-detalle-proceso.component';
+import { ProduccionService } from '../../../services/produccion.service';
 
 @Component({
   selector: 'app-calidad-consulta-produccion',
@@ -26,15 +28,15 @@ export class CalidadConsultaProduccionComponent implements OnInit {
   selecteditems: any;
   loading;
 
-  
-  constructor(private calidadService: CalidadService, private alertServiceService: AlertServiceService,
+
+  constructor(private produccionService: ProduccionService, private alertServiceService: AlertServiceService,
               public dialogService: DialogService, private messageService: MessageService) {
                 this.cols = [
                   { field: 'orden_produccion_id', header: 'Prod Nª',  width: '7.5%' },
                   { field: 'estado', header: 'Estado',  width: '12%' },
-                  { field: 'parametro_desviacion', header: 'Observación',  width: '10%' },
+                  { field: 'parametro_desviacion', header: '',  width: '6%' },
                   { field: 'lote', header: 'Lote',  width: '18%' },
-                  { field: 'nombre', header: 'Producto',  width: '30%' },
+                  { field: 'nombre', header: 'Producto',  width: '40%' },
                   { field: 'maquina_nombre', header: 'Linea',  width: '18%' },
                   { field: 'hora_inicio', header: 'Inicio',  width: '8%' },
                   { field: 'hora_fin', header: 'Fin',  width: '8%' },
@@ -50,6 +52,7 @@ export class CalidadConsultaProduccionComponent implements OnInit {
     this.es = calendarioIdioma;
     this.fecha_desde = new Date();
     this.fecha_hasta = new Date();
+
   //  this.loadlist();
   }
 
@@ -64,7 +67,7 @@ export class CalidadConsultaProduccionComponent implements OnInit {
     console.log(this.elemento);
     let data: any;
     data = this.elemento;
-    const ref = this.dialogService.open(PopupCalidadAsociadaProduccionComponent, {
+    const ref = this.dialogService.open(PopupCalidadDetalleProcesoComponent, {
     data,
      header: 'Listado de controles en producción',
      width: '98%',
@@ -82,7 +85,7 @@ export class CalidadConsultaProduccionComponent implements OnInit {
     this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd HH:mm', 'en');
     this.loading = true;
     try {
-        this.calidadService.getDesviacionesParametroCalidadByProcesoByDates(this._fecha_desde, this._fecha_hasta)
+        this.produccionService.getProduccionProcesoByDates(this._fecha_desde, this._fecha_hasta)
         .subscribe(resp => {
           if (resp[0]) {
             this.elementos = resp;

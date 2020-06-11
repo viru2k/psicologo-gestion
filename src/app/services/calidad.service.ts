@@ -60,9 +60,18 @@ return this.http.put<any[]>(this.url + 'calidad/control/parametros/control/by/id
 }
 
 
+getControlesDetalleByIdProduccion(id: string) {
+  return this.http.get<any[]>(this.url + 'calidad/control/detalle/by/proceso/controles?produccion_proceso_id=' + id);
+}
+
+
+getControlesByIdProduccion(id: string) {
+  return this.http.get<any[]>(this.url + 'calidad/control/by/proceso/controles?produccion_proceso_id=' + id);
+}
+
 
 getControlByProcesoId(id: string) {
-  return this.http.get<any[]>(this.url + 'calidad/control/by/proceso/id?id=' + id);
+  return this.http.get<any[]>(this.url + 'calidad/control/by/proceso/id?produccion_proceso_id=' + id);
 }
 
 getControlByProcesoByDates(fechaDesde: string, fechaHasta: string) {

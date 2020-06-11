@@ -355,6 +355,7 @@ menuList() {
       {label: 'Producción', routerLink: 'orden/produccion'},
       {label: 'Procesos de producción', routerLink: '/produccion/proceso'},
       {label: 'Control de calidad', routerLink: 'control/calidad'},
+      {label: 'Controles de realizados', routerLink: '/control/calidad/produccion'},
       {label: 'Insumos', routerLink: 'gerencia/insumo'},
     ]
   },
@@ -363,11 +364,11 @@ menuList() {
     label: 'Auditoria',
     visible: !this.gestion_auditoria,
     items: [
-      {label: 'Control de producción', routerLink: '/produccion/proceso'},
+      {label: 'Control de producción', routerLink: '/control/calidad/produccion'},
       {
             label: 'Indicadores',
             items: [
-              {label: 'Indicadores de producción', visible: !this.gestion_auditoria, routerLink: 'asesoramiento/operacioncobro'},
+              {label: 'Controles realizados', visible: !this.gestion_auditoria, routerLink: '/control/calidad'},
               {label: 'Indicadores de máquina', visible: !this.gestion_auditoria, routerLink: 'asesoramiento/facturacion/rendicion'},
 
             ]

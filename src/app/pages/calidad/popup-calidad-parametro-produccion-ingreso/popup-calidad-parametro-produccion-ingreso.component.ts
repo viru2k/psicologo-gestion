@@ -8,6 +8,7 @@ import { calendarioIdioma } from '../../../config/config';
 import { formatDate } from '@angular/common';
 import { ControCalidadParametroValor } from '../../../models/control-calidad-parametro-valor.model';
 
+
 @Component({
   selector: 'app-popup-calidad-parametro-produccion-ingreso',
   templateUrl: './popup-calidad-parametro-produccion-ingreso.component.html',
@@ -15,6 +16,11 @@ import { ControCalidadParametroValor } from '../../../models/control-calidad-par
 })
 export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
 
+
+  fecha_desde: Date;
+  fecha_hasta: Date;
+  _fecha_desde: string;
+  _fecha_hasta: string;
   procesoProduccionId: string;
   elemento: any = null;
   elementos: ControCalidadParametroValor[];
@@ -35,7 +41,7 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
   es: any;
   elementoFinal: ControCalidadParametroValor[] = [];
   data: any;
-
+  tieneEstadistica;
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, 
      private calidadService: CalidadService, public dialogService: DialogService,
       private messageService: MessageService, private config: DynamicDialogConfig, public ref: DynamicDialogRef) {
@@ -61,6 +67,8 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
     this.userData = JSON.parse(localStorage.getItem('userData'));
     this.getCalidadControlEncabezado(this.config.data['id']);
     this.getControlByProcesoId();
+
+    
   }
 
 

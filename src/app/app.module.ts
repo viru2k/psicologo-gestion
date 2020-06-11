@@ -145,6 +145,10 @@ import { PopupCalidadParametroProduccionIngresoComponent } from './pages/calidad
 import { GrupoAnalisisComponent } from './pages/mantenimiento/grupo-analisis/grupo-analisis.component';
 import { GrupoAnalisisEditarComponent } from './pages/mantenimiento/grupo-analisis-editar/grupo-analisis-editar.component';
 import { PopupCalidadAsociadaProduccionComponent } from './pages/calidad/popup-calidad-asociada-produccion/popup-calidad-asociada-produccion.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { CalidadProduccionProcesoComponent } from './pages/calidad/calidad-produccion-proceso/calidad-produccion-proceso.component';
+import { PopupCalidadDetalleProcesoComponent } from './pages/calidad/popup-calidad-detalle-proceso/popup-calidad-detalle-proceso.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -212,7 +216,9 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopupCalidadParametroProduccionIngresoComponent,
     GrupoAnalisisComponent,
     GrupoAnalisisEditarComponent,
-    PopupCalidadAsociadaProduccionComponent
+    PopupCalidadAsociadaProduccionComponent,
+    CalidadProduccionProcesoComponent,
+    PopupCalidadDetalleProcesoComponent
   ],
   imports: [
 
@@ -250,7 +256,8 @@ registerLocaleData(localeEsAR, 'es-Ar');
     SweetAlert2Module.forRoot(),
     AutofocusModule,
     NgxPopper,
-    AppRoutingModule
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],
   entryComponents: [ArticuloEditarComponent,
@@ -289,6 +296,7 @@ PopupControlEncabezadoComponent,
 PopupFindCalidadParametroComponent,
 PopupCalidadParametroProduccionIngresoComponent,
 PopupCalidadAsociadaProduccionComponent,
+PopupCalidadDetalleProcesoComponent,
 /* -------------------------------------------------------------------------- */
 /*                                   INSUMOS                                  */
 /* -------------------------------------------------------------------------- */
