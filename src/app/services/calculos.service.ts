@@ -1,10 +1,10 @@
 
  import { Injectable } from '@angular/core';
- import { Chart } from './../models/chart.model';
+ import { Chart } from '../models/chart.model';
  @Injectable({
     providedIn: 'root'
   })
- export class ParametrizarChart {
+ export class CalculosService {
 
     chart: Chart;
     data: Chart[] = [];
@@ -35,5 +35,6 @@ parametrizarXY( xy: any[]): any[] {
     console.log(this.data);
     return this.data;
 }
+
 
  }

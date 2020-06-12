@@ -6,7 +6,8 @@ import { CalidadService } from '../../../services/calidad.service';
 import { calendarioIdioma } from '../../../config/config';
 
 import * as CanvasJS from '../../../../assets/canvasjs.min';
-import { ParametrizarChart } from './../../../services/parametrizar-chart.service';
+import { CalculosService } from '../../../services/calculos.service';
+import { PopupCalidadDetalleProcesoControlComponent } from './popup-calidad-detalle-proceso-control/popup-calidad-detalle-proceso-control.component';
 
 
 
@@ -47,7 +48,7 @@ export class PopupCalidadDetalleProcesoComponent implements OnInit {
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService,
               private calidadService: CalidadService, public dialogService: DialogService,
               private messageService: MessageService, private config: DynamicDialogConfig,
-              public ref: DynamicDialogRef, public parametrizarChart: ParametrizarChart) {
+              public ref: DynamicDialogRef, public calculos: CalculosService) {
 
       this.cols = [
         { field: 'calidad_titulo', header: 'Control',  width: '36%' },
@@ -75,7 +76,7 @@ export class PopupCalidadDetalleProcesoComponent implements OnInit {
 
     
     this.tieneEstadistica = true;
-    this.verEstadistica();
+   // this.verEstadistica();
   
   }
 
@@ -102,12 +103,27 @@ export class PopupCalidadDetalleProcesoComponent implements OnInit {
         this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
       }
     }
-detalle(elem: any) {
-
-}
 
 buscarByDates() {
 
+
+}
+
+detalle(elem: any) {
+  
+    console.log(elem);
+    const data: any = elem;
+   
+    const ref = this.dialogService.open(PopupCalidadDetalleProcesoControlComponent, {
+    data,
+     header: 'Detalle de controles realizados',
+     width: '98%',
+     height: '90%'
+    });
+
+    ref.onClose.subscribe(() => {
+          //this.buscarByDates();
+    });
 
 }
 
@@ -134,7 +150,7 @@ verEstadistica() {
     });
    //this.parametrizarChart.parametrizarY(y);
    let dataresp: any[] = [];
-   dataresp =  this.parametrizarChart.parametrizarXY(r);
+   dataresp =  this.calculos.parametrizarXY(r);
 
 
 

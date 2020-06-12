@@ -149,6 +149,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CalidadProduccionProcesoComponent } from './pages/calidad/calidad-produccion-proceso/calidad-produccion-proceso.component';
 import { PopupCalidadDetalleProcesoComponent } from './pages/calidad/popup-calidad-detalle-proceso/popup-calidad-detalle-proceso.component';
+import { PopupCalidadDetalleProcesoControlComponent } from './pages/calidad/popup-calidad-detalle-proceso/popup-calidad-detalle-proceso-control/popup-calidad-detalle-proceso-control.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -218,7 +219,8 @@ registerLocaleData(localeEsAR, 'es-Ar');
     GrupoAnalisisEditarComponent,
     PopupCalidadAsociadaProduccionComponent,
     CalidadProduccionProcesoComponent,
-    PopupCalidadDetalleProcesoComponent
+    PopupCalidadDetalleProcesoComponent,
+    PopupCalidadDetalleProcesoControlComponent
   ],
   imports: [
 
@@ -297,6 +299,7 @@ PopupFindCalidadParametroComponent,
 PopupCalidadParametroProduccionIngresoComponent,
 PopupCalidadAsociadaProduccionComponent,
 PopupCalidadDetalleProcesoComponent,
+PopupCalidadDetalleProcesoControlComponent,
 /* -------------------------------------------------------------------------- */
 /*                                   INSUMOS                                  */
 /* -------------------------------------------------------------------------- */

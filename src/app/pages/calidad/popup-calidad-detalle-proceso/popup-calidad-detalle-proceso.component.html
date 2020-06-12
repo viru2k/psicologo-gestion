@@ -17,23 +17,20 @@
         </div>
       </div>
     </div>
-    <div  id="chartContainer" style="width: 100%; height: 400px;"></div>
+    <!-- <div  id="chartContainer" style="width: 100%; height: 400px;"></div> -->
     <div  class="m-3">
         <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"    columnResizeMode="expand" [responsive]="true"
         scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
        
-        <ng-template pTemplate="caption">
-          <div class=" row">
-          </div>
-          
-        </ng-template>
+
       
                    <ng-template pTemplate="header" let-columns >
-                  
+             
                               <tr >
                                    
                                 <th  *ngFor="let col of columns" [pSortableColumn]="col.field"  [ngStyle]="{'width': col.width}">
                                     {{col.header}}
+                                    
                                     <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
                                 </th> 
                                 
