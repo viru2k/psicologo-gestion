@@ -33,6 +33,9 @@ export class NavbarComponent implements OnInit {
   gestion_stock = true;
   administracion_stock = true;
   gerencia = true;
+  movil_calidad = true;
+  movil_insumo = true;
+  
 
 
   public username: string;
@@ -189,6 +192,14 @@ asignarModulos(modulos: any) {
       this.gerencia = false;
     }
 
+    if (element.modulo_nombre === 'movil_calidad') {
+      this.movil_calidad = false;
+    }
+
+    if (element.modulo_nombre === 'movil_insumo') {
+      this.movil_insumo = false;
+    }
+
   });
 
   /** DESPUES DE ASIGNAR MODULOS VERIFICO LAS NOTIFICACIONES */
@@ -221,6 +232,8 @@ cerrarSesion() {
   this.administracion_produccion = true;
   this.gestion_stock = true;
   this.administracion_stock = true;
+  this.movil_calidad = true;
+  this.movil_insumo = true;
   this.user = null;
   this.elemento = null;
   this.elementoModulo = [];
@@ -323,7 +336,7 @@ menuList() {
           items: [
             {label: 'Ingresar insumos', visible: !this.gestion_produccion, routerLink: '/insumo/stock/ingreso'},
             {label: 'Stock de insumos', routerLink: '/insumo/stock'},
-            {label: 'Indicadores de stock', routerLink: '/insumo/indicadores'},
+            {label: 'Indicadores de stock insumos', routerLink: '/insumo/indicadores'},
           ]
       },
         {
@@ -369,12 +382,37 @@ menuList() {
             label: 'Indicadores',
             items: [
               {label: 'Controles realizados', visible: !this.gestion_auditoria, routerLink: '/control/calidad'},
-              {label: 'Indicadores de máquina', visible: !this.gestion_auditoria, routerLink: 'asesoramiento/facturacion/rendicion'},
+              {label: 'Lineas de producción', visible: !this.gestion_auditoria, routerLink: '/control/linea'},
 
             ]
         }
     ]
   },
+
+
+
+    {label: 'Realizar control',   visible: !this.movil_calidad, routerLink: '/movil/control/calidad'},
+    {label: 'Ingreso de insumo',  visible: !this.movil_insumo, routerLink: '/movil/insumo/stock/ingreso'},
+
+
+
+  {
+    label: 'Ventas',
+    visible: !this.gestion_auditoria,
+    items: [
+      {label: 'Orden de pedido', routerLink: '/ventas/orden/pedido'},
+      {label: 'Stock en depósito', routerLink: '/ventas/stock'},
+      {
+            label: 'Estadistica',
+            items: [
+              {label: 'Producccion', visible: !this.gestion_auditoria, routerLink: '/ventas/estadistica/produccion'},
+              {label: 'Stock', visible: !this.gestion_auditoria, routerLink: '/ventas/estadistica/stock'},
+
+            ]
+        }
+    ]
+  },
+
 
   {
 

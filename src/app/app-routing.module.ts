@@ -11,8 +11,6 @@ import { ArticuloComponent } from './pages/mantenimiento/articulo/articulo.compo
 import { ArticuloConfeccionComponent } from './pages/mantenimiento/articulo-confeccion/articulo-confeccion.component';
 import { InsumoComponent } from './pages/mantenimiento/insumo/insumo.component';
 import { UsuarioComponent } from './pages/mantenimiento/usuario/usuario.component';
-import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ingreso/orden-pedido-ingreso.component';
-import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedido.component';
 import { MovimientoProduccionComponent } from './pages/produccion/movimiento-produccion/movimiento-produccion.component';
 import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
 import { OrdenProduccionComponent } from './pages/produccion/orden-produccion/orden-produccion.component';
@@ -31,6 +29,11 @@ import { CalidadControlEncabezadoParametroComponent } from './pages/mantenimient
 import { GrupoAnalisisComponent } from './pages/mantenimiento/grupo-analisis/grupo-analisis.component';
 import { CalidadConsultaProduccionComponent } from './pages/calidad/calidad-consulta-produccion/calidad-consulta-produccion.component';
 import { CalidadProduccionProcesoComponent } from './pages/calidad/calidad-produccion-proceso/calidad-produccion-proceso.component';
+import { CalidadConsultaLineaComponent } from './pages/calidad/calidad-consulta-linea/calidad-consulta-linea.component';
+import { MobilControlCalidadConsultaComponent } from './pages/mobil/calidad/mobil-control-calidad-consulta/mobil-control-calidad-consulta.component';
+import { MobilInsumoDetalleComponent } from './pages/mobil/stock/mobil-insumo-detalle/mobil-insumo-detalle.component';
+import { OrdenPedidoComponent } from './pages/ventas/orden-pedido/orden-pedido.component';
+import { OrdenPedidoConsultaStockComponent } from './pages/ventas/orden-pedido-consulta-stock/orden-pedido-consulta-stock.component';
 
 const routes: Routes = [
 
@@ -55,12 +58,14 @@ const routes: Routes = [
 { path: 'mantenimiento/calidad/parametro', component: CalidadControlParametroComponent },
 { path: 'mantenimiento/calidad/encabezado/parametro', component: CalidadControlEncabezadoParametroComponent },
 
+
 /* -------------------------------------------------------------------------- */
 /*                                   CALIDAD                                  */
 /* -------------------------------------------------------------------------- */
 
 { path: 'calidad/indicadores', component: CalidadindicadoresComponent },
 { path: 'control/calidad', component: CalidadConsultaProduccionComponent },
+{ path: 'control/linea', component: CalidadConsultaLineaComponent },
 { path: 'control/calidad/produccion', component: CalidadProduccionProcesoComponent },
 
 /* -------------------------------------------------------------------------- */
@@ -69,7 +74,6 @@ const routes: Routes = [
 
 { path: 'produccion/indicadores', component: ProduccionindicadoresComponent },
 { path: 'orden/produccion', component: OrdenProduccionComponent },
-{ path: 'orden/produccion/estado', component: OrdenPedidoComponent },
 { path: 'produccion/ingreso', component: IngresoProduccionComponent },
 { path: 'produccion/movimientos', component: MovimientoProduccionComponent },
 { path: 'produccion/asociar/insumo', component: AsociarInsumoAltaComponent },
@@ -83,15 +87,34 @@ const routes: Routes = [
 
 
 /* -------------------------------------------------------------------------- */
+/*                                    MOVIL                                   */
+/* -------------------------------------------------------------------------- */
+
+{ path: 'movil/control/calidad', component: MobilControlCalidadConsultaComponent },
+{ path: 'movil/insumo/stock/ingreso', component: MobilInsumoDetalleComponent },
+
+/* -------------------------------------------------------------------------- */
+/*                                   VENTAS                                   */
+/* -------------------------------------------------------------------------- */
+
+{ path: 'ventas/orden/pedido', component: OrdenPedidoComponent },
+{ path: 'ventas/stock', component: OrdenPedidoConsultaStockComponent },
+{ path: 'movil/insumo/stock/ingreso', component: MobilInsumoDetalleComponent },
+{ path: 'movil/insumo/stock/ingreso', component: MobilInsumoDetalleComponent },
+
+/* -------------------------------------------------------------------------- */
 /*                              PAGINAS DEL SITIO                             */
 /* -------------------------------------------------------------------------- */
 
-{ path: '404', component: NotFoundComponent },    
+{ path: '404', component: NotFoundComponent },
 { path: '', pathMatch: 'full', redirectTo: 'inicio' },
 { path: '**', pathMatch: 'full', redirectTo: 'inicio' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
+
+
+
 
 
 

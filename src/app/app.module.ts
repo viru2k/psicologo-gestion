@@ -97,8 +97,6 @@ import { PopupInsumoConsultaComponent } from './shared/components/popups/popup-i
 // tslint:disable-next-line: max-line-length
 import { PopupArticuloDistribucionConsultaComponent } from './shared/components/popups/popup-articulo-distribucion-consulta/popup-articulo-distribucion-consulta.component';
 import { PopupUsuarioComponent } from './shared/components/popups/popup-usuario/popup-usuario.component';
-import { OrdenPedidoComponent } from './pages/produccion/orden-pedido/orden-pedido.component';
-import { OrdenPedidoIngresoComponent } from './pages/produccion/orden-pedido-ingreso/orden-pedido-ingreso.component';
 import { MovimientoProduccionComponent } from './pages/produccion/movimiento-produccion/movimiento-produccion.component';
 import { IngresoProduccionComponent } from './pages/produccion/ingreso-produccion/ingreso-produccion.component';
 import { AsociarProduccionComponent } from './pages/produccion/popups/popup/asociar-produccion/asociar-produccion.component';
@@ -109,7 +107,6 @@ import { AsociarInsumoComponent } from './pages/produccion/popups/popup/asociar-
 import { AsociarInsumoAltaComponent } from './pages/produccion/asociar-insumo/asociar-insumo-alta/asociar-insumo-alta.component';
 import { PopupCalculdorPalletsComponent } from './shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 // tslint:disable-next-line: max-line-length
-import { PopupOrdenPedidoDetalleComponent } from './pages/produccion/orden-pedido/popup-orden-pedido-detalle/popup-orden-pedido-detalle.component';
 import { ParametrosComponent } from './pages/mantenimiento/produccion/parametros/parametros.component';
 import { OrdenProduccionComponent } from './pages/produccion/orden-produccion/orden-produccion.component';
 import { ProduccionProcesoComponent } from './pages/produccion/produccion-proceso/produccion-proceso.component';
@@ -150,6 +147,18 @@ import { environment } from '../environments/environment';
 import { CalidadProduccionProcesoComponent } from './pages/calidad/calidad-produccion-proceso/calidad-produccion-proceso.component';
 import { PopupCalidadDetalleProcesoComponent } from './pages/calidad/popup-calidad-detalle-proceso/popup-calidad-detalle-proceso.component';
 import { PopupCalidadDetalleProcesoControlComponent } from './pages/calidad/popup-calidad-detalle-proceso/popup-calidad-detalle-proceso-control/popup-calidad-detalle-proceso-control.component';
+import { MobilControlCalidadConsultaComponent } from './pages/mobil/calidad/mobil-control-calidad-consulta/mobil-control-calidad-consulta.component';
+import { MobilInsumoDetalleComponent } from './pages/mobil/stock/mobil-insumo-detalle/mobil-insumo-detalle.component';
+import { MobilInsumoMovimientoComponent } from './pages/mobil/stock/mobil-insumo-movimiento/mobil-insumo-movimiento.component';
+import { CalidadConsultaLineaComponent } from './pages/calidad/calidad-consulta-linea/calidad-consulta-linea.component';
+import { PopupCalidadDetalleLineaComponent } from './pages/calidad/popup-calidad-detalle-linea/popup-calidad-detalle-linea.component';
+import { OrdenPedidoComponent } from './pages/ventas/orden-pedido/orden-pedido.component';
+import { PopupOrdenPedidoDetalleComponent } from './pages/ventas/popup-orden-pedido-detalle/popup-orden-pedido-detalle.component';
+import { PopupOrdenPedidoStockComponent } from './pages/ventas/popup-orden-pedido-stock/popup-orden-pedido-stock.component';
+import { PopupOrdenPedidoAsociarProductoComponent } from './pages/ventas/popup-orden-pedido-asociar-producto/popup-orden-pedido-asociar-producto.component';
+import { PopupVentasEstadisticaProduccionComponent } from './pages/ventas/estadistica/popup-ventas-estadistica-produccion/popup-ventas-estadistica-produccion.component';
+import { PopupVentasEstadisticaStockComponent } from './pages/ventas/estadistica/popup-ventas-estadistica-stock/popup-ventas-estadistica-stock.component';
+import { OrdenPedidoConsultaStockComponent } from './pages/ventas/orden-pedido-consulta-stock/orden-pedido-consulta-stock.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -177,8 +186,6 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopupInsumoConsultaComponent,
     PopupArticuloDistribucionConsultaComponent,
     PopupUsuarioComponent,
-    OrdenPedidoComponent,
-    OrdenPedidoIngresoComponent,
     MovimientoProduccionComponent,
     IngresoProduccionComponent,
     AsociarProduccionComponent,
@@ -187,7 +194,6 @@ registerLocaleData(localeEsAR, 'es-Ar');
     AsociarInsumoComponent,
     AsociarInsumoAltaComponent,
     PopupCalculdorPalletsComponent,
-    PopupOrdenPedidoDetalleComponent,
     ParametrosComponent,
     OrdenProduccionComponent,
     ProduccionProcesoComponent,
@@ -220,7 +226,19 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PopupCalidadAsociadaProduccionComponent,
     CalidadProduccionProcesoComponent,
     PopupCalidadDetalleProcesoComponent,
-    PopupCalidadDetalleProcesoControlComponent
+    PopupCalidadDetalleProcesoControlComponent,
+    MobilControlCalidadConsultaComponent,
+    MobilInsumoDetalleComponent,
+    MobilInsumoMovimientoComponent,
+    CalidadConsultaLineaComponent,
+    PopupCalidadDetalleLineaComponent,
+    OrdenPedidoComponent,
+    PopupOrdenPedidoDetalleComponent,
+    PopupOrdenPedidoStockComponent,
+    PopupOrdenPedidoAsociarProductoComponent,
+    PopupVentasEstadisticaProduccionComponent,
+    PopupVentasEstadisticaStockComponent,
+    OrdenPedidoConsultaStockComponent
   ],
   imports: [
 
@@ -277,7 +295,6 @@ registerLocaleData(localeEsAR, 'es-Ar');
      AsociarInsumoDetalleComponent,
      AsociarInsumoComponent,
      AsociarInsumoAltaComponent,
-     PopupOrdenPedidoDetalleComponent,
      PopupArticuloConfeccionInsumoComponent,
      PopupInsumoAsociarArticuloComponent,
      PopOrdenProduccionEditarComponent,
@@ -300,11 +317,28 @@ PopupCalidadParametroProduccionIngresoComponent,
 PopupCalidadAsociadaProduccionComponent,
 PopupCalidadDetalleProcesoComponent,
 PopupCalidadDetalleProcesoControlComponent,
+PopupCalidadDetalleLineaComponent,
+
 /* -------------------------------------------------------------------------- */
 /*                                   INSUMOS                                  */
 /* -------------------------------------------------------------------------- */
 
 PopupInsumoAltaComponent,
+
+/* -------------------------------------------------------------------------- */
+/*                                   VENTAS                                   */
+/* -------------------------------------------------------------------------- */
+PopupOrdenPedidoDetalleComponent,
+PopupOrdenPedidoStockComponent,
+PopupOrdenPedidoAsociarProductoComponent,
+PopupVentasEstadisticaProduccionComponent,
+PopupVentasEstadisticaStockComponent,
+
+/* -------------------------------------------------------------------------- */
+/*                                    MOBIL                                   */
+/* -------------------------------------------------------------------------- */
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                             POPUPS COMPARTIDOS                             */
