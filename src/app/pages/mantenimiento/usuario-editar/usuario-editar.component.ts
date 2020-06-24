@@ -134,9 +134,10 @@ export class UsuarioEditarComponent implements OnInit {
   }
 
   modificarPassword() {
-
+        
+    
         try {
-          this.userService.EditarUsuarioPassword(this.updateDataForm.value.id, this.updateDataForm.value.password)
+          this.userService.EditarUsuarioPassword(this.updateDataForm.value.id, this.updateDataForm.value)
           .subscribe(resp => {
             this.loading = false;
             console.log(resp);

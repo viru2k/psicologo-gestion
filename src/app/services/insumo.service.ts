@@ -56,6 +56,10 @@ export class InsumoService {
     return this.http.get<any[]>(this.url + 'insumos/stock/by/estado/insumo/existencia?estado=' + estado);
   }
 
+  setInsumoStock(insumos: any[]) {
+    return this.http.post<string>(this.url + 'insumos/stock/ingreso', insumos);
+  }
+
 }
 
 

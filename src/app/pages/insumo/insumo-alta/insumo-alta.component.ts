@@ -24,14 +24,12 @@ export class InsumoAltaComponent implements OnInit {
   constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [
-      { field: 'nombre', header: 'Insumo',  width: '30.5%' },
+      { field: 'nombre', header: 'Insumo',  width: '30%' },
       { field: 'fecha_ingreso', header: 'Ingresado',  width: '18%' },
       { field: 'fecha_movimiento', header: 'Ultima vez',  width: '18%' },
-      { field: 'cantidad', header: 'Cant. ingresada',  width: '15%' },
-      { field: 'cantidad_usada', header: 'Usado',  width: '15%' },
-      { field: 'cantidad_existente', header: 'Existencia',  width: '15%' },
-      { field: 'importe_acumulado', header: '$ consumido',  width: '15%' },
-      { field: 'importe_total', header: '$ Total',  width: '15%' },     
+      { field: 'cantidad', header: 'Cant. ingresada',  width: '16%' },
+      { field: 'cantidad_usada', header: 'Usado',  width: '16%' },
+      { field: 'cantidad_existente', header: 'Existencia',  width: '16%' },
       { field: '', header: '',  width: '10%' }
    ];
 
@@ -105,10 +103,9 @@ buscarExistente() {
   }
 }
 
-buscar(elemento: any) {
-  console.log(elemento);
+buscar() {
+
   let data: any;
-  data = elemento;
   const ref = this.dialogService.open(PopupInsumoAltaComponent, {
   data,
    header: 'Editar insumo',

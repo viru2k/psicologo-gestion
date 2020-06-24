@@ -42,7 +42,7 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
   elementoFinal: ControCalidadParametroValor[] = [];
   data: any;
   tieneEstadistica;
-  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, 
+  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService,
      private calidadService: CalidadService, public dialogService: DialogService,
       private messageService: MessageService, private config: DynamicDialogConfig, public ref: DynamicDialogRef) {
 
@@ -125,7 +125,6 @@ export class PopupCalidadParametroProduccionIngresoComponent implements OnInit {
      //   console.log(fecha);
       }
     }
-
       );
     console.log(this.elementoFinal);
     this.loading = true;

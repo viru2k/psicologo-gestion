@@ -49,6 +49,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {StepsModule} from 'primeng/steps';
 import {ColorPickerModule} from 'primeng/colorpicker';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 
 
@@ -79,6 +80,10 @@ import { DateFormatPipe } from './shared/pipes/date-format.pipe';
 
 
 import { NgxPopper } from 'angular-popper';
+registerLocaleData(localeEsAR, 'es-Ar');
+
+
+
 import { ProduccionindicadoresComponent } from './pages/produccion/produccionindicadores/produccionindicadores.component';
 import { CalidadindicadoresComponent } from './pages/calidad/calidadindicadores/calidadindicadores.component';
 import { ArticuloComponent } from './pages/mantenimiento/articulo/articulo.component';
@@ -160,7 +165,7 @@ import { PopupVentasEstadisticaProduccionComponent } from './pages/ventas/estadi
 import { PopupVentasEstadisticaStockComponent } from './pages/ventas/estadistica/popup-ventas-estadistica-stock/popup-ventas-estadistica-stock.component';
 import { OrdenPedidoConsultaStockComponent } from './pages/ventas/orden-pedido-consulta-stock/orden-pedido-consulta-stock.component';
 
-registerLocaleData(localeEsAR, 'es-Ar');
+
 
 @NgModule({
   declarations: [
@@ -269,6 +274,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     ProgressSpinnerModule,
     InputSwitchModule,
     PanelModule,
+    SelectButtonModule,
     ColorPickerModule,
     ToggleButtonModule,
     AutoCompleteModule,
