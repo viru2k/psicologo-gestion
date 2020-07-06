@@ -34,6 +34,7 @@ import { MobilControlCalidadConsultaComponent } from './pages/mobil/calidad/mobi
 import { MobilInsumoDetalleComponent } from './pages/mobil/stock/mobil-insumo-detalle/mobil-insumo-detalle.component';
 import { OrdenPedidoComponent } from './pages/ventas/orden-pedido/orden-pedido.component';
 import { OrdenPedidoConsultaStockComponent } from './pages/ventas/orden-pedido-consulta-stock/orden-pedido-consulta-stock.component';
+import { InsumoStockComponent } from './pages/insumo/insumo-stock/insumo-stock.component';
 
 const routes: Routes = [
 
@@ -84,6 +85,7 @@ const routes: Routes = [
 /*                                   INSUMOS                                  */
 /* -------------------------------------------------------------------------- */
 { path: 'insumo/stock/ingreso', component: InsumoAltaComponent },
+{ path: 'insumo/stock', component: InsumoStockComponent },
 
 
 /* -------------------------------------------------------------------------- */

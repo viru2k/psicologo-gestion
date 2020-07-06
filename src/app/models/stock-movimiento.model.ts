@@ -3,6 +3,8 @@ export class StockMovimiento {
 
     private id:string;
     private insumo_id:string;
+    private comprobante:string;
+    private lote:string;
     private cantidad:number;
     private cantidad_usada: number;
     private cantidad_existente: number;
@@ -17,6 +19,8 @@ export class StockMovimiento {
     constructor(
         id:string,
         insumo_id:string,
+        comprobante: string,
+        lote: string,
         cantidad:number,
         cantidad_usada: number,
         cantidad_existente: number,
@@ -31,6 +35,8 @@ export class StockMovimiento {
 
         this.id = id;
         this.insumo_id = insumo_id;
+        this.comprobante = comprobante;
+        this.lote = lote;
         this.cantidad = cantidad;
         this.cantidad_usada = cantidad_usada;
         this.cantidad_existente = cantidad_existente;

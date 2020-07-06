@@ -3,14 +3,14 @@
 
 @import "~bootstrap/scss/bootstrap.scss";
 @import url('https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|Open+Sans|Oxygen&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans|Oxygen&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap');
 /*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 
 /* -------------------------------------------------------------------------- */
@@ -31,7 +31,17 @@
 /* ---------- MODIFICA LA ESTETICA DE UNA COLUMNA DE FORMA DINAMICA --------- */
 
 $custom-grid: var(--custom-primary-color);
+//$color-menu: #a8dadc;
+ $color-menu: #714674;  //COLOR DEL MENU
+$color-menu-text: #faedcb; // COLOR DEL TEXTO
+$background-soft : #caf0f8;
 
+//BARRAS
+//#00afb9; 714674 #ef8354;
+
+//TEXTO
+
+// #faedcb; #3a506b; 4f5d75
 .change-grid-color {
     color: $custom-grid!important;
     font-weight: bold;
@@ -50,39 +60,31 @@ a{
     font-family: 'Montserrat', sans-serif !important ;
 }
 
+.texto-llamador {
+    text-align:center;
+    font-size:90px;
+    font-family: 'Varela Round', sans-serif !important;
+    color: #3d5a80 !important;
+}
 
+.background-fondo{
+    background-color: #e5e5e5 !important;
+}
+.fondor-relleno{
+    width: 100%;
+    height: 100%;
+}
 
 %font-open-sans{
     font-family: 'Open Sans', sans-serif;
 }
 
-%font-oxygen{
-    font-family: 'Oxygen', sans-serif;
-}
-
-%font-josefina{
-    font-family: 'Josefin Sans', sans-serif;
-}
-
-
-.texto-encabezado{
-    font-family: 'Oxygen', sans-serif;
-}
-
-.texto-oxygen{
-  font-family: 'Oxygen', sans-serif;
-}
 
 .texto-oepn-sans
 {
   font-family: 'Open Sans', sans-serif;
 }
 
-
-.texto-josefina
-{
-  font-family: 'Josefin Sans', sans-serif;
-}
 
 .texto-roboto
 {
@@ -102,21 +104,10 @@ a{
 }
 
 
-%font-oxigen{
-    font-family: 'Oxygen', sans-serif;
-}
-
-%font-open-sans{
-    font-family: 'Open Sans', sans-serif;
-}
-
-%font-luijian{
-    font-family: 'Liu Jian Mao Cao', cursive;
-}
-
 .prime-table{
     text-align:center;
-    font-size:12px;
+    font-size:10px;
+    font-family: 'Yellowtail', cursive !important;
   } 
 
   
@@ -210,7 +201,7 @@ a{
 
 
 .icon-color-user-setting{
-    color: #E0E0E0!important;
+    color: $color-menu-text!important;
 }
 
 .icon-color-clinica-setting{
@@ -388,58 +379,6 @@ text-danger-bold{
 /**************** fIN ANIMACIONES ******************/
 
 
-/******************* ICONOS PARA BOTNES *****************/
-/* 
-.aButton{
-    
-    width:32px;
-    height:32px;
-    cursor:pointer;
-    
-}
-
-
-#iconButtonDocument {
-    background-image:url("assets/icons/file-print.svg");
-    background-repeat:no-repeat;
-}
-
-
-.bAgregarGrey{
-    background: url(./assets/icons/grey/outline_add_circle_outline_black_18dp.png) no-repeat;
-    width:16px;
-    height:16px;
-    cursor:pointer;
-    border:none;
-    position:relative;
-}
-
-
-.bImprimirGrey{
-    background: url(./assets/icons/grey/outline_local_printshop_black_18dp.png) no-repeat;
-    width:32px;
-    height:32px;
-    cursor:pointer;
-    border:none;
-    position:relative;
-} 
-
-.bBuscarGrey{
-    background: url(./assets/icons/grey/outline_search_black_18dp.png) no-repeat;
-    width:32px;
-    height:32px;
-    cursor:pointer;
-    border:none;
-    position:relative;
-} 
-
-
-hr.rulerStyleShadow {
-	height: 3px;
-	border: 0;
-	box-shadow: 0 10px 10px -10px #8c8b8b inset;
-}
- */
 
 .es-observacion {
     background-color: #90CAF9!important;
@@ -556,7 +495,7 @@ border: 1px  #AED581!important;
   }
 
 
-  /**ç
+  /**รง
   alineaciones*/
 
   .alineacion-flexbox { 
@@ -610,42 +549,42 @@ border: 1px  #AED581!important;
 
 
   .ui-menubar  {
-    background: #A5D6A7 !important;
+    background: $color-menu !important;
     //background: #DAF7A6 !important;
    // color: #DAF7A6 !important;
-    border-color: #A5D6A7 !important;
+    border-color: $color-menu !important;
     border-radius: 0 !important;
     font-family: 'Montserrat', sans-serif;
 }
 
 .ui-menuitem{
 
-    background: #DAF7A6 !important;
-    color: #DAF7A6 !important;
-    border-color: #DAF7A6 !important;
+    background: $color-menu-text !important;
+    color: $color-menu-text !important;
+    border-color: $color-menu-text !important;
     font-family: 'Montserrat', sans-serif;
   
 }
 
 .ui-menuitem-text {
-    border-color: #DAF7A6 !important;
-    color: #424242 !important;
+    border-color: $color-menu !important;
+    color: $color-menu-text !important;
     font-family: 'Montserrat', sans-serif;
 }
 
 
 .ui-menu-list{
 
-    background: #A5D6A7 !important;
-    color: #A5D6A7 !important;
-    border-color: #A5D6A7 !important;
-    font-family: 'Montserrat', sans-serif;
+    background: $color-menu !important;
+    color: $color-menu !important;
+    border-color: $color-menu !important;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 .ui-menuitem-link{
 
-    background: #A5D6A7 !important;
-    color: #A5D6A7 !important;
+    background: $color-menu !important;
+    color: $color-menu !important;
     font-family: 'Montserrat', sans-serif;
   
 }
@@ -659,8 +598,8 @@ border: 1px  #AED581!important;
 
 
 .ui-submenu-icon{
-    color: #616161 !important;
-    background: #A5D6A7 !important;
+    color: $color-menu-text !important;
+    background: $color-menu !important;
 }
 
 
@@ -884,7 +823,7 @@ body {
     margin-top: 3px;
     min-width: 25px;
     min-height: 30px;
-    background-color: #F5F5F5;
+    background-color: #8b7f7f;
 
 }
 

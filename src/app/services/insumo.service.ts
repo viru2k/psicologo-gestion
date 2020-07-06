@@ -48,6 +48,11 @@ export class InsumoService {
     return this.http.get<any[]>(this.url + 'insumos/stock/by/estado?estado=' + estado);
   }
 
+  getStockInsumoByEstadoExistencia(estado: string, condicion: string) {
+    return this.http.get<any[]>(this.url + 'insumos/stock/by/estado/existencia/condicion?estado=' + estado + '&condicion=' + condicion);
+  }
+  
+
   getStockMovimientoByInsumoAndEstado(estado: string, insumo_id: string) {
     return this.http.get<any[]>(this.url + 'insumos/stock/by/estado/insumo?estado=' + estado + '&insumo_id=' + insumo_id);
   }
@@ -55,6 +60,19 @@ export class InsumoService {
   getStockMovimientoByEstadoConExistencia(estado: string) {
     return this.http.get<any[]>(this.url + 'insumos/stock/by/estado/insumo/existencia?estado=' + estado);
   }
+
+  getStockExistencia() {
+    return this.http.get<any[]>(this.url + 'insumos/stock/existencia');
+  }
+
+  getStockMovimientoByMovimientoId(id: string) {
+    return this.http.get<any[]>(this.url + 'insumos/stock/produccion/by/movimiento/id?id=' + id);
+  }
+
+
+  
+
+  
 
   setInsumoStock(insumos: any[]) {
     return this.http.post<string>(this.url + 'insumos/stock/ingreso', insumos);

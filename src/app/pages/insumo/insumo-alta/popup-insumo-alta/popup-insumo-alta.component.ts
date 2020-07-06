@@ -20,6 +20,8 @@ export class PopupInsumoAltaComponent implements OnInit {
   selecteditems: any;
   loading;
   cantidad = 0;
+  comprobante: string = 'X-00000-00000000';
+  lote = '';
   cantidad_calculada = 0;
   display;
   elemento: any;
@@ -37,10 +39,12 @@ export class PopupInsumoAltaComponent implements OnInit {
       { field: 'descripcion', header: 'Descripción',  width: '30%' },
       { field: 'unidad_descripcion', header: 'Unidad',  width: '16%' },
       { field: 'grupo_nombre', header: 'Grupo',  width: '16%' },
-      { field: 'cantidad_unitaria', header: 'C. unitaria',  width: '16%' },
-      { field: 'cantidad_empaque', header: 'C. Empaque',  width: '16%' },
-      { field: 'a_ingresar', header: 'A ingresar',  width: '16%' },
-      { field: '', header: '',  width: '10%' }
+      { field: 'comprobante', header: 'Comprobante',  width: '16%' },
+      { field: 'lote', header: 'Lote',  width: '16%' },
+      { field: 'cantidad_unitaria', header: 'C. unitaria',  width: '12%' },
+      { field: 'cantidad_empaque', header: 'C. Empaque',  width: '12%' },
+      { field: 'a_ingresar', header: 'A ingresar',  width: '12%' },
+      { field: '', header: '',  width: '6%' }
    ];
 
     this.tipos = [
@@ -117,8 +121,9 @@ recalcular() {
 }
 
 confirmarCantidad() {
-
+  this.elemento.comprobante = this.comprobante;
   this.elemento.a_ingresar = this.cantidad_calculada;
+  this.elemento.lote = this.lote;
   this.display = false;
   this.cantidad = 0;
   this.cantidad_calculada = 0;
@@ -134,7 +139,7 @@ guardar() {
   //  console.log(ele);
     if (Number(ele.a_ingresar) > 0 ) {
       ele.fecha = formatDate(new Date(this.fecha), 'yyyy-MM-dd', 'en') ;
-      t = new StockMovimiento('', ele.id, ele.a_ingresar, 0, ele.a_ingresar, 0, 0, 0, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO') ;
+      t = new StockMovimiento('', ele.id, ele.comprobante, ele.lote, ele.a_ingresar, 0, ele.a_ingresar, 0, 0, 0, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO') ;
       this.elementoFinal.push (t);
     }
   }
@@ -180,6 +185,23 @@ setColorColumn(color: string) {
 
  parseTrueHexa(str) {
   return str.match(/^ *[a-f0-9]+ *$/i) ? parseInt(str, 16) : NaN;
+}
+
+
+iconoColor(estado: number) {
+  
+  if (estado !== 0) {
+    return {'icono-danger'  : 'null' };
+  }
+  /* if (estado === 'PAUSADO') {
+    return {'icono-warning'  : 'null' };
+  }
+  if (estado === 'CANCELADO') {
+    return {'icono-danger'  : 'null' };
+  }
+  if (estado === 'FINALIZADO') {
+    return {'icono-secondary'  : 'null' };
+  } */
 }
 
 }

@@ -164,6 +164,9 @@ import { PopupOrdenPedidoAsociarProductoComponent } from './pages/ventas/popup-o
 import { PopupVentasEstadisticaProduccionComponent } from './pages/ventas/estadistica/popup-ventas-estadistica-produccion/popup-ventas-estadistica-produccion.component';
 import { PopupVentasEstadisticaStockComponent } from './pages/ventas/estadistica/popup-ventas-estadistica-stock/popup-ventas-estadistica-stock.component';
 import { OrdenPedidoConsultaStockComponent } from './pages/ventas/orden-pedido-consulta-stock/orden-pedido-consulta-stock.component';
+import { InsumoStockComponent } from './pages/insumo/insumo-stock/insumo-stock.component';
+import { PopUpInsumoStockComponent } from './pages/insumo/insumo-stock/popup-insumo-stock/popup-insumo-stock.component';
+import { PopupInsumoStockDetalleProduccionComponent } from './pages/insumo/insumo-stock/popup-insumo-stock-detalle-produccion/popup-insumo-stock-detalle-produccion.component';
 
 
 
@@ -243,7 +246,10 @@ import { OrdenPedidoConsultaStockComponent } from './pages/ventas/orden-pedido-c
     PopupOrdenPedidoAsociarProductoComponent,
     PopupVentasEstadisticaProduccionComponent,
     PopupVentasEstadisticaStockComponent,
-    OrdenPedidoConsultaStockComponent
+    OrdenPedidoConsultaStockComponent,
+    InsumoStockComponent,
+    PopUpInsumoStockComponent,
+    PopupInsumoStockDetalleProduccionComponent
   ],
   imports: [
 
@@ -330,6 +336,8 @@ PopupCalidadDetalleLineaComponent,
 /* -------------------------------------------------------------------------- */
 
 PopupInsumoAltaComponent,
+PopUpInsumoStockComponent,
+PopupInsumoStockDetalleProduccionComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                                   VENTAS                                   */

@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { InsumoService } from '../../../services/insumo.service';
 import { AlertServiceService } from '../../../services/alert-service.service';
-import { MessageService, DialogService } from 'primeng/api';
-import { PopupInsumoAltaComponent } from './popup-insumo-alta/popup-insumo-alta.component';
-
+import { DialogService } from 'primeng/components/common/api';
+import { MessageService } from 'primeng/api';
+import { PopUpInsumoStockComponent } from './popup-insumo-stock/popup-insumo-stock.component';
 
 @Component({
-  selector: 'app-insumo-alta',
-  templateUrl: './insumo-alta.component.html',
-  styleUrls: ['./insumo-alta.component.scss']
+  selector: 'app-insumo-stock',
+  templateUrl: './insumo-stock.component.html',
+  styleUrls: ['./insumo-stock.component.scss']
 })
-export class InsumoAltaComponent implements OnInit {
+export class InsumoStockComponent implements OnInit {
 
+  
   cols: any[];
   columns: any[];
   elementos: any[];
@@ -25,13 +26,11 @@ export class InsumoAltaComponent implements OnInit {
 
     this.cols = [
       { field: 'nombre', header: 'Insumo',  width: '30%' },
-      { field: 'comprobante', header: 'Comp. nª',  width: '18%' },
-      { field: 'lote', header: 'Lote',  width: '16%' },
-      { field: 'fecha_ingreso', header: 'Ingresado',  width: '18%' },
-      { field: 'fecha_movimiento', header: 'Ultimo consumo',  width: '18%' },
-      { field: 'cantidad', header: 'Cant. ingresada',  width: '12%' },
+      { field: 'descripcion', header: 'Descripción',  width: '30%' },
+      { field: 'cantidad', header: 'Cantidad',  width: '12%' },
       { field: 'cantidad_usada', header: 'Usado',  width: '12%' },
-      { field: 'cantidad_existente', header: 'Existencia',  width: '12%' }
+      { field: 'cantidad_existente', header: 'Existencia',  width: '12%' },
+      { field: '', header: '',  width: '6%' }
    ];
 
    
@@ -60,7 +59,7 @@ export class InsumoAltaComponent implements OnInit {
 
     this.loading = true;
     try {
-        this.insumoService.getStockInsumoByEstadoExistencia(this.selectedEstado, 'CON_EXISTENCIA')
+        this.insumoService.getStockExistencia()
         .subscribe(resp => {
           if (resp[0]) {
             this.elementos = resp;
@@ -81,40 +80,18 @@ export class InsumoAltaComponent implements OnInit {
 }
 
 
-buscarExistente() {
-  this.loading = true;
-  try {
-    this.insumoService.getStockInsumoByEstadoExistencia(this.selectedEstado, 'SIN_MOVIMIENTO')
-    .subscribe(resp => {
-      if (resp[0]) {
-        this.elementos = resp;
-        console.log(this.elementos);
-          } else {
-            this.elementos = null;
-          }
-      this.loading = false;
-      console.log(resp);
-    },
-    error => { // error path
-      console.log(error);
-      this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-   });
-} catch (error) {
-this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
-}
-}
 
-buscar() {
+detalle(elemento: any) {
 
-  let data: any;
-  const ref = this.dialogService.open(PopupInsumoAltaComponent, {
+  const data: any = elemento;
+  const ref = this.dialogService.open(PopUpInsumoStockComponent, {
   data,
-   header: 'Editar insumo',
+   header: 'Detalle del insumo',
    width: '98%',
    height: '90%'
   });
 
-  ref.onClose.subscribe((ArticuloEditarComponent: any) => {
+  ref.onClose.subscribe((PopUpInsumoStockComponent: any) => {
         this.loadlist();
   });
 
