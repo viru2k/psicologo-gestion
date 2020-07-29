@@ -31,7 +31,7 @@ export class OrdenProduccionComponent implements OnInit {
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [
-      { field: 'id', header: 'Prod Nª',  width: '7.5%' },
+      { field: 'id', header: 'Prod Nº',  width: '7.5%' },
       { field: 'estado', header: 'Estado',  width: '8%' },
       { field: 'fecha_creacion', header: 'Creado',  width: '10%' },
       { field: 'descripcion', header: 'Descripción',  width: '30%' },

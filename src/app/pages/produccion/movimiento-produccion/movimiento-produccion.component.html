@@ -20,18 +20,10 @@
         <span>   <a class="nav-link azul text-success  my-hover"   (click)="verDetalle()">Ver producción</a></span>
       
       </p-overlayPanel>  
-      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"  [loading]="loading" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
       scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
      
-      <ng-template pTemplate="caption">
-        <div class="row">
-                <div class="col-md-7" style="text-align:left">
-                            </div>
-        <div class="col-md-5" style="text-align:right">                                
-            <input  class="form-control col-md-12 form-control-sm" type="text"  placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')"  >
-        </div>
-     </div>
-    </ng-template>
+  
     
                  <ng-template pTemplate="header" let-columns >
                 

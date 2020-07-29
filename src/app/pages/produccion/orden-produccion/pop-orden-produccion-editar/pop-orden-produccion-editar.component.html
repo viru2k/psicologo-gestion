@@ -1,5 +1,5 @@
 <!-- SE AGREGAN LOS ARTICULOS Y ATRIBUTOS DE PRODUCCION-->
-<div class=" faq-title text-center pb-3 pt-2 ">
+<div class=" faq-title text-center pb-1 pt-2 ">
     <h5>ASOCIAR PRODUCTOS A PRODUCCION</h5>
   </div>
   <div class="card-rounded card-header">
@@ -50,7 +50,7 @@
 
   </div>
     <div  class="m-3">
-      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"  [loading]="loading" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
       scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
      
       <ng-template pTemplate="caption">
@@ -64,7 +64,7 @@
           
           <div class="col-8 mt-2" style="text-align: right">     
             
-            <input type="text" pInputText size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">   
+         
               <!-- ------------------------ INFORMACION DE CARGA ------------------------- -->  
 
           <i class="far fa-question-circle icono-info ml-2 mt-2" (mouseenter)="op2.show($event)"  style="font-size:24px"></i>

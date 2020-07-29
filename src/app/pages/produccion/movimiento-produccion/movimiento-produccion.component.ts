@@ -33,7 +33,7 @@ export class MovimientoProduccionComponent implements OnInit {
 
                 this.cols = [
                   { field: 'accion', header: 'Accion' , width: '6%'} ,
-                  { field: 'id', header: 'Nª',  width: '6%' },
+                  { field: 'id', header: 'Nº',  width: '6%' },
                   { field: 'fecha_pedido', header: 'Fecha pedido',  width: '10%' },
                   { field: 'descripcion', header: 'Descripcion',  width: '40%' },
                   { field: 'cantidad', header: 'Cantidad',  width: '10%' },

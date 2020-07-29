@@ -3,6 +3,10 @@ import { InsumoService } from '../../../services/insumo.service';
 import { AlertServiceService } from '../../../services/alert-service.service';
 import { MessageService, DialogService } from 'primeng/api';
 import { PopupInsumoAltaComponent } from './popup-insumo-alta/popup-insumo-alta.component';
+import { Filter } from './../../../shared/filter';
+
+import { formatDate } from '@angular/common';
+import { ExporterService } from './../../../services/exporter.service';
 
 
 @Component({
@@ -20,12 +24,20 @@ export class InsumoAltaComponent implements OnInit {
   estado: any[] = [];
   selectedEstado: string = 'ACTIVO' ;
 
+  totalCantidad = 0;
+  totalUsado = 0;
+  totalExistencia = 0;
+  elementosFiltrados:any[] = null;
+  _nombre: any[] = [];
+
+
   // tslint:disable-next-line: max-line-length
-  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) {
+  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService,
+              private exporterService: ExporterService ,private filter: Filter ) {
 
     this.cols = [
       { field: 'nombre', header: 'Insumo',  width: '30%' },
-      { field: 'comprobante', header: 'Comp. nª',  width: '18%' },
+      { field: 'comprobante', header: 'Comp. nº',  width: '18%' },
       { field: 'lote', header: 'Lote',  width: '16%' },
       { field: 'fecha_ingreso', header: 'Ingresado',  width: '18%' },
       { field: 'fecha_movimiento', header: 'Ultimo consumo',  width: '18%' },
@@ -63,8 +75,10 @@ export class InsumoAltaComponent implements OnInit {
         this.insumoService.getStockInsumoByEstadoExistencia(this.selectedEstado, 'CON_EXISTENCIA')
         .subscribe(resp => {
           if (resp[0]) {
+            this.realizarFiltroBusqueda(resp);
             this.elementos = resp;
             console.log(this.elementos);
+            this.sumarValores(this.elementos);
               } else {
                 this.elementos = null;
               }
@@ -81,12 +95,15 @@ export class InsumoAltaComponent implements OnInit {
 }
 
 
+
+
 buscarExistente() {
   this.loading = true;
   try {
     this.insumoService.getStockInsumoByEstadoExistencia(this.selectedEstado, 'SIN_MOVIMIENTO')
     .subscribe(resp => {
       if (resp[0]) {
+        this.realizarFiltroBusqueda(resp);
         this.elementos = resp;
         console.log(this.elementos);
           } else {
@@ -155,6 +172,54 @@ iconoColor(estado: string) {
   if (estado === 'FINALIZADO') {
     return {'icono-secondary'  : 'null' };
   }
+}
+
+
+sumarValores(vals: any) {
+  let i: number;
+  console.log(vals !== undefined);
+  this.totalCantidad = 0;
+  this.totalExistencia = 0;
+  this.totalUsado = 0;
+  for (i= 0; i < vals.length; i++) {
+      this.totalCantidad = this.totalCantidad + Number(vals[i]['cantidad']);
+      this.totalUsado = this.totalUsado + Number(vals[i]['cantidad_usada']);
+      this.totalExistencia = this.totalExistencia + Number(vals[i]['cantidad_existente']);
+  }
+
+}
+
+filtered(event){
+  console.log(event.filteredValue);
+  this.elementosFiltrados  = event.filteredValue;  
+  this.sumarValores(this.elementosFiltrados);
+}
+
+exportarExcel() {
+  const fecha = formatDate(new Date(), 'dd/MM/yyyy hh:mm', 'es-Ar');
+  console.log(this.elementosFiltrados);
+  if (this.elementosFiltrados == null) {
+    this.elementosFiltrados = this.elementos;
+  }
+  this.exporterService.exportAsExcelFile(  this.elementosFiltrados, '_ingreso_insumos_a_stock' );
+}
+
+exportarPdf() {}
+
+realizarFiltroBusqueda(resp: any[]){
+  // FILTRO LOS ELEMENTOS QUE SE VAN USAR PARA FILTRAR LA LISTA
+  this._nombre = [];
+  
+  
+  resp.forEach(element => {
+    this._nombre.push(element['nombre']);
+
+  });
+  
+  // ELIMINO DUPLICADOS
+  this._nombre = this.filter.filterArray(this._nombre);  
+
+
 }
 
 }

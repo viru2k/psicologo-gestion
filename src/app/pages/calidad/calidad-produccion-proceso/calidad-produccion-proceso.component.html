@@ -1,4 +1,4 @@
-<div class=" faq-title text-center pb-3 pt-2 ">
+<div class=" faq-title text-center pb-1 pt-2 ">
     <i class="far fa-question-circle icono-info ml-2 mt-2 mr-1" (mouseenter)="op2.show($event)"  style="font-size:24px"></i>
       <h5>PRODUCCIONES ACTIVAS</h5>
     </div>
@@ -37,7 +37,7 @@
       <p><b class="texto-warning"> Recordar que  se debe repetir el proceso para cada producto para completar la producción planificada</b></p>
     </p-overlayPanel>
     <div  class="m-3">
-        <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+        <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols"  [loading]="loading" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
         scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
        
         <ng-template pTemplate="caption">
@@ -100,7 +100,7 @@
   
           
     <p-overlayPanel #op appendTo="body"  [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" [showCloseIcon]="true" >                                                
-      <div class=" faq-title text-center pb-3 pt-2 ">
+      <div class=" faq-title text-center pb-1 pt-2 ">
         <h5>ACCION</h5>
       </div>
       <div class=" m-2"><a  (click)="auditarProduccion()"   class="  icon-hover" > <i class="icon-audit texto-success mr-4"></i><label class="texto-roboto  texto-menu texto-bold icon-hover">Auditar producción</label></a></div>   

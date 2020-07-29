@@ -1,34 +1,24 @@
 
-<div class=" faq-title text-center pb-3 pt-2 ">
-    <h5>CONFIGURACION DE INSUMOS</h5>
+<div class=" faq-title text-center pb-1 pt-2 ">
+    <h5>INSUMOS A INGRESAR</h5>
   </div>
 
-  <div class="d-flex justify-content-between">
+  <div class="d-flex align-content-center">
     <div class="d-flex justify-content-start">
-        <button    class="ml-2  btn-cuadrado-info"  (click)="guardar()" > <i class="fas fa-plus fa-lg mr-2"></i>Guardar</button>
-      
+        <button    class="ml-2  btn-cuadrado-success"  (click)="guardar()" > <i class="fas fa-plus fa-lg mr-2"></i>Guardar</button>
+        <button    class="ml-2  btn-cuadrado-info"  (click)="agregarInsumo()" > <i class="fas fa-plus fa-lg mr-2"></i>Agregar insumo</button>
     </div>
-    <div class="d-flex justify-content-center ">
-      <label class="mr-2 mt-1">Fecha de carga :</label>
+    <div class="  d-flex align-content-center  justify-content-center ml-4">
+     
+      <label class="mr-2 mt-2">Fecha de carga :</label>
       <p-calendar [(ngModel)]="fecha"   tabindex="0"  [locale]="es" dateFormat="DD dd/mm/yy "   [readonlyInput]="true">   </p-calendar>                
     </div>
   </div>
     <div class="row m-3">
-      <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"  [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
-      scrollHeight="500px" [scrollable]="true"    >
+      <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"   [loading]="loading" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+      scrollHeight="500px" [scrollable]="true"  loadingIcon="fas fa-spinner fa-2x icon-color-green"  >
      
-      <ng-template pTemplate="caption">
-        <div class=" row">
-            <div class="col-4" style="text-align: left" >
-          
-            </div>
-          
-          <div class="col-8 mt-2" style="text-align: right">     
-              <input   size="50" pInputText  placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-          </div>
-        </div>
-        
-      </ng-template>
+
                  <ng-template pTemplate="header" let-columns >
                 
                             <tr >
@@ -41,13 +31,10 @@
                           </tr> 
                           <tr>
                           <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">  
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                              
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'comprobante'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'lote'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_unitaria'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_empaque'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                            
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'lote'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                              
                           </th>
                           <th></th>
                       </tr>
@@ -55,19 +42,18 @@
                 
           <ng-template pTemplate="body" let-elementos  >
               <tr style="height:20px"  >
-                     
-                <td style="width: 25%" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.nombre}}</td>     
-                <td style="width: 30%" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.descripcion}}</td>
-                <td style="width: 16%" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.unidad_descripcion}}</td>
-                <td style="width: 16%;" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.grupo_nombre}}</td>
-                <td style="width: 16%" class="texto-bold texto-terthiary" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.comprobante}}</td>    
-                <td style="width: 16%" class="texto-bold texto-terthiary" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.lote}}</td>    
-                <td style="width: 12%" class="texto-bold texto-info">{{elementos.cantidad_unitaria}}</td>
-                <td style="width: 12%" class="texto-bold texto-terthiary">{{elementos.cantidad_empaque}}</td>       
-                <td style="width: 12%" class="texto-bold texto-terthiary" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.a_ingresar}}</td>    
                 <td style="width: 6%">
-                  <a  (click)="accion($event,elementos)" class="icon-hover"> <i class="fas fa-plus icon-color-info fa-lg"></i></a>     
+                  <a  (click)="eliminarSeleccionado(elementos)" class="icon-hover"> <i class="fas fa-trash icon-color-danger fa-lg"></i></a>     
                 </td>
+                <td style="width: 25%" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.nombre}}</td>     
+                <td style="width: 30%" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.descripcion}}</td>                                
+                <td style="width: 16%" class="texto-bold texto-terthiary" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.comprobante}}</td>    
+                <td style="width: 16%" class="texto-bold texto-terthiary" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.lote}}</td>         
+                <td style="width: 12%" class="texto-bold texto-terthiary" [ngClass]="iconoColor(elementos.a_ingresar)">{{elementos.cantidad}}</td>    
+                <td style="width: 6%">
+                  <a  (click)="accion($event,elementos)" class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>     
+                </td>
+              
               </tr>
           </ng-template>
          

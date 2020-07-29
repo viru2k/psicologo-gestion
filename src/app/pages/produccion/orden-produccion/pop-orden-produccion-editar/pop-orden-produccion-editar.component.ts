@@ -56,7 +56,6 @@ export class PopOrdenProduccionEditarComponent implements OnInit {
       { field: 'cantidad_existente', header: 'Restante',  width: '12%' },
       { field: 'estado', header: 'Estado',  width: '15%' },
       { field: '', header: '',  width: '6%' },
-      { field: '', header: '',  width: '6%' },
    ];
 
 

@@ -20,6 +20,7 @@ import { PopOrdenProduccionEditarComponent } from './../orden-produccion/pop-ord
 import { PopupOrdenProduccionDetalleConsultaComponent } from './popup-orden-produccion-detalle-consulta/popup-orden-produccion-detalle-consulta.component';
 import { calendarioIdioma } from './../../../config/config';
 import { formatDate } from '@angular/common';
+import { Filter } from './../../../shared/filter';
 
 /* -------------------------------------------------------------------------- */
 /*         AGREGAR UNA PRODUCCION REALIZADA A UNA ORDEN DE PRODUCCION         */
@@ -48,13 +49,13 @@ export class IngresoProduccionComponent implements OnInit {
   fecha_hasta: Date;
   _fecha_desde: string;
   _fecha_hasta: string;
-
+  _estado: any[] = [];
   constructor(private alertServiceService: AlertServiceService, 
               private articuloService: ArticuloService,private produccionService: ProduccionService,
-              public dialogService: DialogService, private messageService: MessageService) {
+              public dialogService: DialogService, private messageService: MessageService, private filter: Filter) {
 
-                this.cols = [                  
-                  { field: 'id', header: 'Prod Nª',  width: '7.5%' },
+                this.cols = [
+                  { field: 'id', header: 'Prod Nº',  width: '7.5%' },
                   { field: 'estado', header: 'Estado',  width: '8%' },
                   { field: 'fecha_creacion', header: 'Creado',  width: '10%' },
                   { field: 'descripcion', header: 'Descripción',  width: '30%' },
@@ -94,6 +95,7 @@ export class IngresoProduccionComponent implements OnInit {
         this.produccionService.getOrdenProduccionEstado('ACTIVO')
         .subscribe(resp => {
           if (resp[0]) {
+            this.realizarFiltroBusqueda(resp);
             this.elementos = resp;
             console.log(this.elementos);
               } else {
@@ -122,6 +124,28 @@ export class IngresoProduccionComponent implements OnInit {
     buscarProduccion(){
       this._fecha_desde = formatDate(new Date(this.fecha_desde), 'yyyy-MM-dd', 'en');
       this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd', 'en');
+
+      this.loading = true;
+      try {
+          this.produccionService.getOrdenProduccionByDates('ACTIVO', this._fecha_desde, this._fecha_hasta)
+          .subscribe(resp => {
+            if (resp[0]) {
+              this.realizarFiltroBusqueda(resp);
+              this.elementos = resp;
+              console.log(this.elementos);
+                } else {
+                  this.elementos = null;
+                }
+            this.loading = false;
+            console.log(resp);
+          },
+          error => { // error path
+              console.log(error);
+              this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+           });
+      } catch (error) {
+        this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+      }
     }
 
 
@@ -213,6 +237,21 @@ iconoColor(estado: string) {
   if (estado === 'FINALIZADO') {
     return {'icono-secondary'  : 'null' };
   }
+}
+
+realizarFiltroBusqueda(resp: any[]){
+  // FILTRO LOS ELEMENTOS QUE SE VAN USAR PARA FILTRAR LA LISTA
+  this._estado = [];
+
+  resp.forEach(element => {
+    this._estado.push(element['estado']);
+  });
+  
+  // ELIMINO DUPLICADOS
+  this._estado = this.filter.filterArray(this._estado);  
+  
+
+
 }
 
 }

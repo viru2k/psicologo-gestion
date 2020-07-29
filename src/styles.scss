@@ -4,9 +4,8 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import url('https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|Open+Sans|Oxygen&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans|Oxygen&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap');
-/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
+
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap');
@@ -17,7 +16,7 @@
 /*                                 PIVOT TABLE                                */
 /* -------------------------------------------------------------------------- */
 
-@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+/* @import '../node_modules/@syncfusion/ej2-base/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-grids/styles/material.css';
@@ -25,7 +24,7 @@
 @import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-angular-pivotview/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-pivotview/styles/material.css'; */
 
 @import './assets/css/iconos.scss';
 /* ---------- MODIFICA LA ESTETICA DE UNA COLUMNA DE FORMA DINAMICA --------- */
@@ -34,7 +33,7 @@ $custom-grid: var(--custom-primary-color);
 //$color-menu: #a8dadc;
  $color-menu: #714674;  //COLOR DEL MENU
 $color-menu-text: #faedcb; // COLOR DEL TEXTO
-$background-soft : #caf0f8;
+$background-soft : #EDE7F6;
 
 //BARRAS
 //#00afb9; 714674 #ef8354;
@@ -622,10 +621,31 @@ FIN  ESTILO DE LA BARRA
     border-radius: 5px;    
     outline-color: #1B5E20!important; 
     color: #FFFFFF!important;
+    outline: 0;   
+}
+
+.btn-excel-outline{
+    background:  #1B5E20!important; 
+    border:  #1B5E20!important;
+    border-radius: 5px;    
+    outline-color: #1B5E20!important; 
+    color: #FFFFFF!important;
     outline: 0;
     
 }
 
+
+
+.btn-pdf{
+    background:  #64a6bd!important; 
+    border:  #64a6bd!important;
+    border-width: medium;
+    border-radius: 3px;    
+    outline-color: #64a6bd!important; 
+    color: #ffffff!important;
+    outline: 0;
+    
+}
 
 
 
@@ -823,7 +843,7 @@ body {
     margin-top: 3px;
     min-width: 25px;
     min-height: 30px;
-    background-color: #8b7f7f;
+    background-color: #EDE7F6;
 
 }
 
@@ -892,7 +912,7 @@ body {
   .faq .card {
   border: none;
   background: none;
-  border-bottom: 1px dashed #CEE1F8;
+  border-bottom: 1px dashed #ecf8f8;
   }
   
   .faq .card .card-header {

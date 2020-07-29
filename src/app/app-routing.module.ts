@@ -35,6 +35,8 @@ import { MobilInsumoDetalleComponent } from './pages/mobil/stock/mobil-insumo-de
 import { OrdenPedidoComponent } from './pages/ventas/orden-pedido/orden-pedido.component';
 import { OrdenPedidoConsultaStockComponent } from './pages/ventas/orden-pedido-consulta-stock/orden-pedido-consulta-stock.component';
 import { InsumoStockComponent } from './pages/insumo/insumo-stock/insumo-stock.component';
+import { DepositoComponent } from './pages/mantenimiento/deposito/deposito.component';
+import { NotificacionPersonalComponent } from './pages/mantenimiento/notificacion-personal/notificacion-personal.component';
 
 const routes: Routes = [
 
@@ -46,11 +48,12 @@ const routes: Routes = [
 /*                                MANTENIMIENTO                               */
 /* -------------------------------------------------------------------------- */
 
-{ path: 'mantenimiento/articulo', component: ArticuloComponent },
+{ path: 'mantenimiento/articulo', component: ArticuloComponent ,canActivate: [AuthGuard], data: {role: 'administracion_produccion'}},
 { path: 'mantenimiento/articulo/confeccion', component: ArticuloConfeccionComponent },
 { path: 'mantenimiento/unidad', component: UnidadComponent },
 { path: 'mantenimiento/grupo/analisis', component: GrupoAnalisisComponent },
 { path: 'mantenimiento/insumo', component: InsumoComponent },
+{ path: 'mantenimiento/deposito', component: DepositoComponent },
 { path: 'mantenimiento/grupo', component: GrupoTrabajoComponent },
 { path: 'usuario', component: UsuarioComponent },
 { path: 'mantenimiento/lineas/produccion', component: MaquinaComponent },
@@ -58,16 +61,17 @@ const routes: Routes = [
 { path: 'mantenimiento/calidad/encabezado', component: CalidadControlEncabezadoComponent },
 { path: 'mantenimiento/calidad/parametro', component: CalidadControlParametroComponent },
 { path: 'mantenimiento/calidad/encabezado/parametro', component: CalidadControlEncabezadoParametroComponent },
+{ path: 'mantenimiento/notificaciones/personal', component: NotificacionPersonalComponent },
 
 
 /* -------------------------------------------------------------------------- */
 /*                                   CALIDAD                                  */
 /* -------------------------------------------------------------------------- */
 
-{ path: 'calidad/indicadores', component: CalidadindicadoresComponent },
-{ path: 'control/calidad', component: CalidadConsultaProduccionComponent },
-{ path: 'control/linea', component: CalidadConsultaLineaComponent },
-{ path: 'control/calidad/produccion', component: CalidadProduccionProcesoComponent },
+{ path: 'calidad/indicadores', component: CalidadindicadoresComponent ,canActivate: [AuthGuard], data: {role: 'administarcion_auditoria'}},
+{ path: 'control/calidad', component: CalidadConsultaProduccionComponent ,canActivate: [AuthGuard], data: {role: 'administarcion_auditoria'}},
+{ path: 'control/linea', component: CalidadConsultaLineaComponent ,canActivate: [AuthGuard], data: {role: 'administarcion_auditoria'}},
+{ path: 'control/calidad/produccion', component: CalidadProduccionProcesoComponent ,canActivate: [AuthGuard], data: {role: 'administarcion_auditoria'}},
 
 /* -------------------------------------------------------------------------- */
 /*                                 PRODUCCION                                 */

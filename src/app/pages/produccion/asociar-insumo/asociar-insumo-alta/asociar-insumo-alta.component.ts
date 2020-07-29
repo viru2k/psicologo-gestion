@@ -50,7 +50,7 @@ export class AsociarInsumoAltaComponent implements OnInit {
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService) {
 
     this.cols = [                  
-      { field: 'orden_produccion_detalle_id', header: 'Prod Nª',  width: '7.5%' },
+      { field: 'orden_produccion_detalle_id', header: 'Prod Nº',  width: '7.5%' },
       { field: 'estado', header: 'Estado',  width: '12%' },
       { field: 'fecha_produccion', header: 'A producir en',  width: '18%' },
       { field: 'lote', header: 'Lote',  width: '18%' },

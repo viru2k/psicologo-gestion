@@ -4,6 +4,8 @@ import { AlertServiceService } from '../../../services/alert-service.service';
 import { DialogService } from 'primeng/components/common/api';
 import { MessageService } from 'primeng/api';
 import { PopUpInsumoStockComponent } from './popup-insumo-stock/popup-insumo-stock.component';
+import { formatDate } from '@angular/common';
+import { ExporterService } from './../../../services/exporter.service';
 
 @Component({
   selector: 'app-insumo-stock',
@@ -19,10 +21,11 @@ export class InsumoStockComponent implements OnInit {
   selecteditems: any;
   loading;
   estado: any[] = [];
-  selectedEstado: string = 'ACTIVO' ;
+  selectedEstado = 'ACTIVO' ;
+  elementosFiltrados: any[] = null;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService) {
+  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService, private exporterService:ExporterService) {
 
     this.cols = [
       { field: 'nombre', header: 'Insumo',  width: '30%' },
@@ -133,5 +136,21 @@ iconoColor(estado: string) {
     return {'icono-secondary'  : 'null' };
   }
 }
+
+filtered(event){
+  console.log(event.filteredValue);
+  this.elementosFiltrados  = event.filteredValue;    
+}
+
+exportarExcel() {
+  const fecha = formatDate(new Date(), 'dd/MM/yyyy', 'es-Ar');
+  console.log(this.elementosFiltrados);
+  if (this.elementosFiltrados == null) {
+    this.elementosFiltrados = this.elementos;
+  }
+  this.exporterService.exportAsExcelFile(  this.elementosFiltrados,'_detalle_insumos_a_stock' );
+}
+
+expotarPdf() {}
 
 }

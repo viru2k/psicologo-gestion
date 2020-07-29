@@ -1,4 +1,4 @@
-<div class=" faq-title text-center pb-3 pt-2 ">
+<div class=" faq-title text-center pb-1 pt-2 ">
     <h5>ADMINISTRACION ORDEN DE PRODUCCION</h5>
   </div>
   
@@ -9,28 +9,16 @@
         
         </div>
         <div class="d-flex justify-content-end">
-           <label class="mr-2 text-info">Ver Ordenes de producción finalizadas</label> <p-inputSwitch [(ngModel)]="checked" class="text-info" (onChange)="handleChange($event)"></p-inputSwitch>
+       <!--     <label class="mr-2 text-info">Ver Ordenes de producción finalizadas</label> <p-inputSwitch [(ngModel)]="checked" class="text-info" (onChange)="handleChange($event)"></p-inputSwitch> -->
         </div>
     </div>
    
   </div>
     <div  class="m-3">
-      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols"  [loading]="loading" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
       scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
      
-      <ng-template pTemplate="caption">
-        <div class=" row">
-            <div class="col-4" style="text-align: left" >
-           
-            </div>
-          
-          <div class="col-8 mt-2" style="text-align: right">     
-            
-            <input type="text" pInputText size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">            
-          </div>
-        </div>
-        
-      </ng-template>
+
     
                  <ng-template pTemplate="header" let-columns >
                 

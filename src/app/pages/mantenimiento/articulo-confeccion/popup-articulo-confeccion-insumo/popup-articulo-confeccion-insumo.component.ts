@@ -5,6 +5,8 @@ import { ArticuloService } from './../../../../services/articulo.service';
 import { AlertServiceService } from './../../../../services/alert-service.service';
 import { PopupInsumoConsultaComponent } from '../../../../shared/components/popups/popup-insumo-consulta/popup-insumo-consulta.component';
 import { PopupInsumoAsociarArticuloComponent } from './popup-insumo-asociar-articulo/popup-insumo-asociar-articulo.component';
+import { formatDate } from '@angular/common';
+import { ExporterService } from './../../../../services/exporter.service';
 
 @Component({
   selector: 'app-popup-articulo-confeccion-insumo',
@@ -21,10 +23,11 @@ export class PopupArticuloConfeccionInsumoComponent implements OnInit {
   loading;
   elemento: any;
   userData: any;
-
+  elementosFiltrados:any[] = null;
 
  // tslint:disable-next-line: max-line-length
- constructor(private alertServiceService: AlertServiceService, private articuloService: ArticuloService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig) {
+ constructor(private alertServiceService: AlertServiceService, private articuloService: ArticuloService,  public dialogService: DialogService,
+             private exporterService: ExporterService, private messageService: MessageService, private config: DynamicDialogConfig) {
 
     this.cols = [
       { field: 'insumo_nombre', header: 'Insumo',  width: '30%' },
@@ -173,5 +176,22 @@ borrar(elemento){
 }
 }
 
+
+filtered(event){
+  console.log(event.filteredValue);
+  this.elementosFiltrados  = event.filteredValue;  
+  
+}
+
+exportarExcel() {
+  const fecha = formatDate(new Date(), 'dd/MM/yyyy hh:mm', 'es-Ar');
+  console.log(this.elementosFiltrados);
+  if (this.elementosFiltrados == null) {
+    this.elementosFiltrados = this.elementos;
+  }
+  this.exporterService.exportAsExcelFile(  this.elementosFiltrados, 'INSUMOS DEL PRODUCTO_'+ this.config.data.nombre + '-' );
+}
+
+exportarPdf() {}
 
 }

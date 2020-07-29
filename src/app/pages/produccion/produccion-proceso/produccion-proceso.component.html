@@ -1,16 +1,18 @@
-<div class=" faq-title text-center pb-3 pt-2 ">
-  <i class="far fa-question-circle icono-info ml-2 mt-2 mr-1" (mouseenter)="op2.show($event)"  style="font-size:24px"></i>
+<div class=" faq-title text-center pb-1 pt-2 ">
     <h5>PRODUCCIONES ACTIVAS</h5>
   </div>
   <div class="card-rounded card-header ">
     <div class="d-flex justify-content-between ">
       <div class="d-flex justify-content-start align-items-center">
-          <label class="mr-2 mt-2">Estado :</label>
-          <select [(ngModel)]="selectedEstado" class="form-control-sm text-sm texto-monserrat texto-secondary icon-hover" (change)="onChangeEstado($event)" >                        
+        <button class=" ml-2 mr-3 btn-sm btn-cuadrado-success" (click)="loadlist()">Producciones activas</button>
+  <!--         <select [(ngModel)]="selectedEstado" class="form-control-sm text-sm texto-monserrat texto-secondary icon-hover" (change)="onChangeEstado($event)" >                        
             <option  *ngFor="let grupo of estado" class="text-sm texto-monserrat texto-secondary icon-hover"    >
               <label class="icon-hover"  >{{grupo.name}}</label>              
           </option>
-        </select>
+        </select> -->
+
+        <!-- <p-multiSelect [options]="estado" [(ngModel)]="selectedEstados" defaultLabel='Estado' (change)="onChangeEstado($event)"></p-multiSelect> -->
+        
       </div>
       <div class="d-flex justify-content-center"></div>
       <div class="d-flex justify-content-end align-items-center">
@@ -26,25 +28,16 @@
     
   </div>
    
-  <p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="false" appendTo="body">
-    <p class="texto-info texto-bold">Desde aquí se gestionan los datos relacionados con cada producción :</p>
-    <p> - Finalizar una producción</p>
-    <p> - Cargar datos de auditoria</p>
-    <p> - Asociar insumos  a cada producción</p>
-    <p> - Consultar producciones por estado</p>
-    <p> - Consultar producciones por periodo de fechas de producción</p>
-    <p class="texto-secondary">----------------------------------------</p>
-    <p><b class="texto-warning"> Recordar que  se debe repetir el proceso para cada producto para completar la producción planificada</b></p>
-  </p-overlayPanel>
+
   <div  class="m-3">
-      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
-      scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
+      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"  [loading]="loading"  columnResizeMode="expand" [responsive]="true"
+      scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" (onFilter)="filtered($event)"  >
      
       <ng-template pTemplate="caption">
-        <div class=" row">
-      
-    
-
+        <div class=" d-flex justify-content-start">
+          <button  (click)="exportarExcel()" class="btn btn-sm btn- btn-excel "> <i class="fas fa-file-excel fa-lg mr-1"></i> Excel</button>     
+          <button  (click)="exportarPdf()" class="btn btn-sm btn-pdf ml-2"> <i class="fas fa-file-pdf fa-lg mr-1"></i>PDF</button>     
+        
         </div>
         
       </ng-template>
@@ -62,10 +55,10 @@
                           <tr>
                           <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                                <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'orden_produccion_detalle_id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">  
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'estado'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                               <p-multiSelect [options]="_estado" appendTo="body" defaultLabel=""   showHeader="false"  *ngIf='col.field =="estado"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'maquina_nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <p-multiSelect [options]="_maquina_nombre" appendTo="body" defaultLabel=""   showHeader="false"  *ngIf='col.field =="maquina_nombre"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_inicio'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_fin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_solicitada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
@@ -94,17 +87,28 @@
                             </td>
                     </tr>
                 </ng-template>
-     
+                <ng-template pTemplate="footer">
+                  <tr class="mt-3">
+                            <td style="width: 40%"></td>                                                  
+                            <td style="width: 20%" class="text-info font-weight-bold text-bold"  style=" font-size: 12px;" >SOLICITADO: {{totalSolicitado|  number : '1.2-2' }}</td>                                                         
+                            <td style="width: 20%" class="text-success font-weight-bold text-bold"  style=" font-size: 12px;" >REALIZADO: {{(totalCantidad ) |  number : '1.2-2' }}</td>                                         
+                            <td style="width: 20%" class="text-danger font-weight-bold text-bold"  style=" font-size: 12px;" >PENDIENTE: {{(totalSolicitado - totalCantidad ) |  number : '1.2-2' }}</td>    
+                
+                  </tr>
+               
+                  </ng-template> 
     
       </p-table>
 
         
   <p-overlayPanel #op appendTo="body"  [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" [showCloseIcon]="true" >                                                
-    <div class=" faq-title text-center pb-3 pt-2 ">
+    <div class=" faq-title text-center pb-2 pt-1 ">
       <h5>ACCION</h5>
     </div>
-      <div class=" m-2"><a  (click)="finalizarProduccion()" class="  icon-hover " > <i class="icon-robot mr-4  texto-danger "></i><label class=" texto-bold icon-hover ml-1">Finalizar producción</label></a></div>
-  <!--     <div class=" m-2"><a  (click)="auditarProduccion()"   class="  icon-hover" > <i class="far fa-calendar-check fa-lg  texto-success mr-2"></i><label class="texto-success  texto-bold icon-hover">Auditar producción</label></a></div> -->
-      <div class=" m-2"><a  (click)="stockProduccion()"     class="  icon-hover" > <i class="icon-paquetes mr-4  texto-warning "></i><label class="  texto-bold icon-hover ml-1">Stock de producción</label></a></div>
+    <button class="btn-cuadrado-warning btn--block texto-bold mb-2" (click)="finalizarProduccion()"  >Finalizar producción</button>
+    <button class="btn-cuadrado-success btn--block texto-bold mb-2" (click)="stockProduccion()"  >Stock de producción</button>
+     <!--  <div class=" m-2"><a  (click)="finalizarProduccion()" class="  icon-hover " > <i class="icon-robot mr-4  texto-danger "></i><label class=" texto-bold icon-hover ml-1">Finalizar producción</label></a></div>
+      <div class=" m-2"><a  (click)="auditarProduccion()"   class="  icon-hover" > <i class="far fa-calendar-check fa-lg  texto-success mr-2"></i><label class="texto-success  texto-bold icon-hover">Auditar producción</label></a></div>
+      <div class=" m-2"><a  (click)="stockProduccion()"     class="  icon-hover" > <i class="icon-paquetes mr-4  texto-warning "></i><label class="  texto-bold icon-hover ml-1">Stock de producción</label></a></div> -->
   </p-overlayPanel> 
   </div>

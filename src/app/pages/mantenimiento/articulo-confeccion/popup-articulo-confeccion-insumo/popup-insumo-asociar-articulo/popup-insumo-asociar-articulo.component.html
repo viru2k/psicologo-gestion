@@ -14,23 +14,10 @@
   <div  class="m-3">
    
   <div class="row mt-3  ">
-    <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+    <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"  [loading]="loading" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
     scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
    
-    <ng-template pTemplate="caption">
-      <div class=" row">
-          <div class="col-4" style="text-align: left" >
-         
-          </div>
-        
-        <div class="col-8 mt-2" style="text-align: right">     
-          
-          
-            <input   size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-        </div>
-      </div>
-      
-    </ng-template>
+   
   
                <ng-template pTemplate="header" let-columns >
               

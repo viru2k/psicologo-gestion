@@ -32,7 +32,7 @@ export class CalidadConsultaProduccionComponent implements OnInit {
   constructor(private produccionService: ProduccionService, private alertServiceService: AlertServiceService,
               public dialogService: DialogService, private messageService: MessageService) {
                 this.cols = [
-                  { field: 'orden_produccion_id', header: 'Prod Nª',  width: '7.5%' },
+                  { field: 'orden_produccion_id', header: 'Prod Nº',  width: '7.5%' },
                   { field: 'estado', header: 'Estado',  width: '12%' },
                   { field: 'parametro_desviacion', header: '',  width: '6%' },
                   { field: 'lote', header: 'Lote',  width: '18%' },

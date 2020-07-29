@@ -167,6 +167,10 @@ import { OrdenPedidoConsultaStockComponent } from './pages/ventas/orden-pedido-c
 import { InsumoStockComponent } from './pages/insumo/insumo-stock/insumo-stock.component';
 import { PopUpInsumoStockComponent } from './pages/insumo/insumo-stock/popup-insumo-stock/popup-insumo-stock.component';
 import { PopupInsumoStockDetalleProduccionComponent } from './pages/insumo/insumo-stock/popup-insumo-stock-detalle-produccion/popup-insumo-stock-detalle-produccion.component';
+import { DepositoComponent } from './pages/mantenimiento/deposito/deposito.component';
+import { DepositoEditarComponent } from './pages/mantenimiento/deposito-editar/deposito-editar.component';
+import { NotificacionPersonalComponent } from './pages/mantenimiento/notificacion-personal/notificacion-personal.component';
+import { PopupInsumoListadoComponent } from './pages/insumo/popup-insumo-listado/popup-insumo-listado.component';
 
 
 
@@ -249,7 +253,11 @@ import { PopupInsumoStockDetalleProduccionComponent } from './pages/insumo/insum
     OrdenPedidoConsultaStockComponent,
     InsumoStockComponent,
     PopUpInsumoStockComponent,
-    PopupInsumoStockDetalleProduccionComponent
+    PopupInsumoStockDetalleProduccionComponent,
+    DepositoComponent,
+    DepositoEditarComponent,
+    NotificacionPersonalComponent,
+    PopupInsumoListadoComponent
   ],
   imports: [
 
@@ -297,6 +305,7 @@ import { PopupInsumoStockDetalleProduccionComponent } from './pages/insumo/insum
      InsumoEditarComponent,
      UsuarioEditarComponent,
      UnidadEditarComponent,
+     DepositoEditarComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                        ASOCIAR PRODUCCION Y INSUMOS                        */
@@ -338,6 +347,7 @@ PopupCalidadDetalleLineaComponent,
 PopupInsumoAltaComponent,
 PopUpInsumoStockComponent,
 PopupInsumoStockDetalleProduccionComponent,
+PopupInsumoListadoComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                                   VENTAS                                   */

@@ -31,14 +31,20 @@ export class AsociarInsumoComponent implements OnInit {
   existencia =0;
   cantidad_ingresada = 0;
 
+  cantidadProyectada = 0;
+  cantidadEstimada = 0;
+  cantidadAfectada = 0;
+  selectedRow: any;
+
   constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,
               public ref: DynamicDialogRef, public config: DynamicDialogConfig, public dialogService: DialogService, private messageService: MessageService) { 
     this.cols = [
           
-      { field: 'nombre', header: 'Insumo',  width: '30%' },      
-      { field: 'cantidad_unitaria', header: 'Cant. unitaria',  width: '18%' },
-      { field: 'cantidad_empaque', header: 'Cant. Empaque',  width: '18%' },
-      { field: 'cantidad', header: 'Cant. Requerida',  width: '18%' },
+      { field: 'nombre', header: 'Insumo',  width: '40%' },      
+      { field: 'cantidad_unitaria', header: 'Cant. unitaria',  width: '12%' },      
+      { field: 'cantidad', header: 'Formula',  width: '18%' },
+      { field: 'cantidad_proyectada', header: 'Proyectado',  width: '18%' },
+      { field: 'cantidad_estimada', header: 'Realizado',  width: '18%' },
       { field: 'cantidad_afectada', header: 'Usado',  width: '18%' },
       { field: '', header: '',  width: '6%' }
     ];
@@ -51,15 +57,30 @@ export class AsociarInsumoComponent implements OnInit {
 
 
   accion(event: any, overlaypanel: OverlayPanel, elementos: any) {
-
+    this.selectedRow = elementos;
+    this.cantidadEstimada = elementos.cantidad_estimada;
+    console.log(this.selectedRow);
+    
+    
     overlaypanel.toggle(event);
     }
 
     cerrarVentanta()  {
       this.cantidad_ingresada = 0;
+      
+      
     }
 
-    agregarValor() {}
+    agregarValor(event: any, overlaypanel: OverlayPanel) {
+      
+      this.selectedRow.cantidad_afectada = this.cantidad_ingresada;
+      console.log(this.selectedRow.cantidad_afectada );
+      this.cantidad_ingresada = 0;
+      console.log(event);
+      overlaypanel.hide();
+    }
+
+
 verDetalle(){
  
   console.log(this.selectedElemento);
@@ -71,7 +92,10 @@ verDetalle(){
           let i = 0;
           this.elementos = resp;
           console.log(this.elementos);
-          resp.forEach(element => { 
+          resp.forEach(element => {
+            element.cantidad_proyectada = Number(element.cantidad) * Number(this.config.data.cantidad_solicitada);
+            element.cantidad_estimada = Number(element.cantidad) * Number(this.config.data.cantidad_producida);
+          
       /*     this.cantidad = this.elementos[i]['cantidad'];
           this.cantidad_botella = Number(this.cantidad_botella)+ Number(this.elementos[i]['cantidad_botella']);
           this.cantidad_litros =  Number(this.cantidad_litros)+ Number(this.elementos[i]['cantidad_litros']);

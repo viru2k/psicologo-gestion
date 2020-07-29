@@ -1,26 +1,14 @@
-<div class=" faq-title text-center pb-3 pt-2 ">
+<div class=" faq-title text-center pb-1 pt-2 ">
     <h5>GESTION DE GRUPOS</h5>
 </div>
 <div class="card-rounded card-header">
     <div class="ml-2">     <button    class="ml-2  btn-cuadrado-info"  (click)="nuevo()" > <i class="fas fa-plus fa-lg mr-2"></i>Grupo</button>   </div> 
   </div>
     <div class="row m-3">
-      <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"    columnResizeMode="expand" [responsive]="true"  [loading]="loading"
-      scrollHeight="300px" [scrollable]="true"    >
+      <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"   [loading]="loading"  columnResizeMode="expand" [responsive]="true"  [loading]="loading"
+      scrollHeight="300px" [scrollable]="true"  loadingIcon="fas fa-spinner fa-2x icon-color-green"  >
      
-      <ng-template pTemplate="caption">
-        <div class=" row">
-            <div class="col-4" style="text-align: left" >
-            </div>
-          
-          <div class="col-8 mt-2" style="text-align: right">     
-            
-              <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-              <input   size="50" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-          </div>
-        </div>
-        
-      </ng-template>
+
                  <ng-template pTemplate="header" let-columns >
                 
                             <tr >

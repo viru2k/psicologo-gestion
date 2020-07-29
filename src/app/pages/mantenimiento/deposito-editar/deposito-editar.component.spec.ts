@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InsumoAltaComponent } from './insumo-alta.component';
+import { DepositoEditarComponent } from './deposito-editar.component';
 
-describe('InsumoAltaComponent', () => {
-  let component: InsumoAltaComponent;
-  let fixture: ComponentFixture<InsumoAltaComponent>;
+describe('DepositoEditarComponent', () => {
+  let component: DepositoEditarComponent;
+  let fixture: ComponentFixture<DepositoEditarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InsumoAltaComponent ]
+      declarations: [ DepositoEditarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InsumoAltaComponent);
+    fixture = TestBed.createComponent(DepositoEditarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

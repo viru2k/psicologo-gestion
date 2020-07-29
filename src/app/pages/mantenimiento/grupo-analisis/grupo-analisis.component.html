@@ -1,12 +1,12 @@
-<div class=" faq-title text-center pb-3 pt-2 ">
+<div class=" faq-title text-center pb-1 pt-2 ">
     <h5>GESTION DE GRUPO DE INSUMOS</h5>
   </div>
   <div class="card-rounded card-header">
     <div class="ml-2">     <button    class="ml-2  btn-cuadrado-info"  (click)="nuevo()" > <i class="fas fa-plus fa-lg mr-2"></i>Grupo de insumo</button>  </div> 
   </div>
     <div class="row m-3">
-      <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"    columnResizeMode="expand" [responsive]="true"
-      scrollHeight="300px" [scrollable]="true"    >
+      <p-table  #dt class="pt-2"  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos"   [loading]="loading"  columnResizeMode="expand" [responsive]="true"
+      scrollHeight="300px" [scrollable]="true"  loadingIcon="fas fa-spinner fa-2x icon-color-green"  >
 
                
       <ng-template pTemplate="header" let-columns >

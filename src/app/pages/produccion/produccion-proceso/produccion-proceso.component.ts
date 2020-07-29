@@ -10,6 +10,8 @@ import { PopupAsociarProduccionComponent } from './../ingreso-produccion/popup-o
 import { formatDate } from '@angular/common';
 import { PopupCalidadParametroProduccionIngresoComponent } from './../../calidad/popup-calidad-parametro-produccion-ingreso/popup-calidad-parametro-produccion-ingreso.component';
 import { element } from 'protractor';
+import { Filter } from './../../../shared/filter';
+import { ExporterService } from './../../../services/exporter.service';
 
 @Component({
   selector: 'app-produccion-proceso',
@@ -40,16 +42,25 @@ export class ProduccionProcesoComponent implements OnInit {
   estado: any[] = [];
   selectedEstado: string = 'ACTIVO' ;
   selectedItem: any;
+  selectedEstados: string[] = [];
+  elementosFiltrados:any[] = null;
 
-  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService) {
+  totalCantidad = 0;
+  totalSolicitado = 0;  
+
+  _estado: any[] = [];
+  _maquina_nombre: any[] = [];
+
+  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService,
+              private exporterService:ExporterService, private messageService: MessageService,  private filter: Filter) {
 
     this.cols = [                  
-      { field: 'orden_produccion_detalle_id', header: 'Prod Nª',  width: '7.5%' },
+      { field: 'orden_produccion_detalle_id', header: 'Prod Nº',  width: '7.5%' },
       { field: 'estado', header: 'Estado',  width: '12%' },
-      { field: 'fecha_produccion', header: 'A producir en',  width: '18%' },
+      { field: 'fecha_produccion', header: 'A producir el',  width: '18%' },
       { field: 'lote', header: 'Lote',  width: '18%' },
       { field: 'nombre', header: 'Producto',  width: '30%' },
-      { field: 'maquina_nombre', header: 'Máquina',  width: '18%' },
+      { field: 'maquina_nombre', header: 'Linea',  width: '18%' },
       { field: 'hora_inicio', header: 'Inicio',  width: '8%' },
       { field: 'hora_fin', header: 'Fin',  width: '8%' },
       { field: 'cantidad_solicitada', header: 'Solicitado',  width: '10%' },
@@ -58,15 +69,7 @@ export class ProduccionProcesoComponent implements OnInit {
       { field: '', header: 'En packs',  width: '10%' },
       { field: '', header: '',  width: '6%' },
     ];
-   
 
-
-    this.estado = [
-    {name: 'ACTIVO',      value: 'ACTIVO'},
-    {name: 'PAUSADO',     value: 'PAUSADO'},
-    {name: 'FINALIZADO',  value: 'FINALIZADO'},
-    {name: 'CANCELADO',   value: 'CANCELADO'}
-    ];
    }
 
   ngOnInit() {
@@ -88,6 +91,8 @@ export class ProduccionProcesoComponent implements OnInit {
   }
 
   
+
+  
   onChangeEstado(e) {
     console.log(e.target.value);
     this.selectedEstado = e.target.value;
@@ -101,8 +106,10 @@ export class ProduccionProcesoComponent implements OnInit {
          this.produccionService.getProduccionProcesoByEstado(this.selectedEstado)
          .subscribe(resp => {
            if (resp[0]) {
-             this.elementos = resp;
-             console.log(this.elementos);
+            this.realizarFiltroBusqueda(resp);
+            this.elementos = resp;
+            this.sumarValores(this.elementos);
+            console.log(this.elementos);
                } else {
                  this.elementos = null;
                }
@@ -128,8 +135,10 @@ export class ProduccionProcesoComponent implements OnInit {
        this.produccionService.getProduccionProcesoByDates(this._fecha_desde, this._fecha_hasta)
        .subscribe(resp => {
          if (resp[0]) {
-           this.elementos = resp;
-           console.log(this.elementos);
+          this.realizarFiltroBusqueda(resp);
+          this.elementos = resp;
+          this.sumarValores(this.elementos);
+          console.log(this.elementos);
              } else {
                this.elementos = null;
              }
@@ -242,5 +251,59 @@ iconoColor(estado: string) {
     return {'icono-secondary'  : 'null' };
   }
 }
+
+
+sumarValores(vals: any) {
+  let i: number;
+  console.log(vals !== undefined);
+  this.totalCantidad = 0;
+  this.totalSolicitado = 0;
+
+  for (i= 0; i < vals.length; i++) {
+      this.totalSolicitado = this.totalSolicitado + Number(vals[i]['cantidad_solicitada']);
+      this.totalCantidad = this.totalCantidad + Number(vals[i]['cantidad_producida']);
+
+  }
+
 }
+
+
+
+filtered(event){
+  console.log(event.filteredValue);
+  this.elementosFiltrados  = event.filteredValue;
+  this.sumarValores(this.elementosFiltrados);
+}
+
+exportarExcel() {
+  const fecha = formatDate(new Date(), 'dd/MM/yyyy hh:mm', 'es-Ar');
+  console.log(this.elementosFiltrados);
+  if (this.elementosFiltrados == null) {
+    this.elementosFiltrados = this.elementos;
+  }
+  this.exporterService.exportAsExcelFile(  this.elementosFiltrados, 'producciones_activas' );
+}
+
+exportarPdf() {}
+
+realizarFiltroBusqueda(resp: any[]){
+  // FILTRO LOS ELEMENTOS QUE SE VAN USAR PARA FILTRAR LA LISTA
+  this._estado = [];
+  this._maquina_nombre = [];
+
+  resp.forEach(element => {
+    this._estado.push(element.estado);
+    this._maquina_nombre.push(element.maquina_nombre);
+  });
+  
+  // ELIMINO DUPLICADOS
+  this._estado = this.filter.filterArray(this._estado);
+  this._maquina_nombre = this.filter.filterArray(this._maquina_nombre);
+  
+
+
+}
+
+}
+
 

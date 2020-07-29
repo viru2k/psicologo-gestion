@@ -25,7 +25,6 @@ export class ProduccionService {
     }
 
 
-    
   updMaquinas(id: string, maquina: any) {
     return this.http.put<any[]>(this.url + 'maquina/' + id, maquina);
     }
@@ -34,6 +33,24 @@ export class ProduccionService {
   getMaquinaById(id: string) {
     return this.http.get<any[]>(this.url + 'maquina/id=' + id);
     }
+
+
+
+  getDepositos() {
+    return this.http.get<any[]>(this.url + 'deposito');
+    }
+
+
+  setDepositos(deposito: any) {
+    return this.http.post<any[]>(this.url + 'deposito', deposito);
+    }
+
+
+
+  updDepositos(id: string, deposito: any) {
+    return this.http.put<any[]>(this.url + 'deposito/' + id, deposito);
+    }
+
 
     getProduccionByFecha(articulo_id: string) {
     return this.http.get<any[]>(this.url + 'articulo/confeccion?articulo_id=' + articulo_id);
@@ -63,6 +80,12 @@ export class ProduccionService {
       getOrdenProduccionEstado(estado: string) {
         return this.http.get<any[]>(this.url + 'produccion/orden/produccion/estado?estado=' + estado);
     }
+
+    getOrdenProduccionByDates(estado: string, fechaDesde: string, fechaHasta: string) {
+      // tslint:disable-next-line: max-line-length
+      return this.http.get<any[]>(this.url + 'produccion/orden/produccion/by/dates?estado=' + estado + '&fecha_desde=' + fechaDesde + '&fecha_hasta=' + fechaHasta);
+  }
+
 
     getUnidad() {
       return this.http.get<any[]>(this.url + 'unidad');

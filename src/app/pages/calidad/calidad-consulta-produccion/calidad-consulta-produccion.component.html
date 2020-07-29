@@ -1,5 +1,5 @@
 
-<div class=" faq-title text-center pb-3 pt-2 ">
+<div class=" faq-title text-center pb-1 pt-2 ">
     <h5>CONTROLES DE CALIDAD POR PROCESO DE PRODUCCION</h5>
   </div>
 
@@ -16,7 +16,7 @@
 </div>
 
 <div  class="m-3">
-    <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+    <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols"  [loading]="loading" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
     scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
    
     <ng-template pTemplate="caption">
@@ -83,7 +83,7 @@
 
       
 <p-overlayPanel #op appendTo="body"  [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" [showCloseIcon]="true" >                                                
-  <div class=" faq-title text-center pb-3 pt-2 ">
+  <div class=" faq-title text-center pb-1 pt-2 ">
     <h5>ACCION</h5>
   </div>
   <div class=" m-2"><a  (click)="verControles()"   class="  icon-hover" > <i class="icon-schedule  texto-success mr-4"></i><label class="texto-roboto texto-menu texto-bold icon-hover">Ver controles realizados</label></a></div>

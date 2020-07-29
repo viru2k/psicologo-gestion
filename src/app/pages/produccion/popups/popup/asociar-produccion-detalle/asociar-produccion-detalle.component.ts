@@ -30,7 +30,7 @@ export class AsociarProduccionDetalleComponent implements OnInit {
               public ref: DynamicDialogRef, public config: DynamicDialogConfig) { 
     this.cols = [
       
-      { field: 'id', header: 'Nª',  width: '4%' },
+      { field: 'id', header: 'Nº',  width: '4%' },
       { field: 'fecha_pedido', header: 'Fecha',  width: '10%' },
       { field: 'descripcion', header: 'Descripción',  width: '30%' },
       { field: 'cantidad', header: 'Producción',  width: '10%' },

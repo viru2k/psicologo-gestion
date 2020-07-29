@@ -5,20 +5,10 @@
   <div  class="m-3">
   
      
-      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+      <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   [loading]="loading" columnResizeMode="expand" [responsive]="true"
       scrollHeight="300px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
      
-      <ng-template pTemplate="caption">
-        <div class="row">
-                <div class="col-md-3" style="text-align:left">
-                  
-                            </div>
-                <div class="col-md-4" style="text-align:left"></div>
-        <div class="col-md-5" style="text-align:right">                                
-            <input  class="form-control col-md-12 form-control-sm" type="text"  placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')"  >
-        </div>
-     </div>
-    </ng-template>
+
     
                  <ng-template pTemplate="header" let-columns >
                 

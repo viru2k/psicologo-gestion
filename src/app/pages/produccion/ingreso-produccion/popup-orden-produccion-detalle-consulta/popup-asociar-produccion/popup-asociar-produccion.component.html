@@ -1,5 +1,5 @@
 <app-custom-preloader *ngIf="loading"></app-custom-preloader>
-<div class=" faq-title text-center pb-3 pt-2 ">
+<div class=" faq-title text-center pb-1 pt-2 ">
   <h5>INICIAR UNA PRODUCCION</h5>
 </div>
 
@@ -19,10 +19,11 @@
       </div>
 
       <div class="d-flex justify-content-center">
-          <label class="mt-2 ml-1 mr-1">Inicio :</label>
+        <label class="mt-2 ml-1 mr-1"></label>
+        <h6 class="mt-2 ml-1 mr-1 texto-secondary">Producción realizada entre   :</h6>
           <p-calendar [(ngModel)]="fecha_desde"  [showTime]="true"   tabindex="0" [disabled]="!checked_iniciado" [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true">              
           </p-calendar> 
-          <label class="mt-2 ml-2 mr-1">Fin :</label>
+          <label class="mt-2 ml-2 mr-1">Finalizó :</label>
           <p-calendar [(ngModel)]="fecha_hasta" [showTime]="true"   tabindex="0"  [disabled] = "!checked"  [locale]="es" dateFormat="dd/mm/yy "   [readonlyInput]="true">              
           </p-calendar>           
       </div>
@@ -40,7 +41,7 @@
 <div class="card-rounded card-header mb-1">
   <div class="ml-2 row d-flex justify-content-between d-flex align-items-center">  
       <div class="d-flex justify-content-start">
-        <label class="texto-secondary mt-2 mr-2">Máquina:</label>
+        <label class="texto-secondary mt-2 mr-2">Linea:</label>
         <p-dropdown [options]="maquinas" [(ngModel)]="selectedMaquina" optionLabel="maquina_nombre"></p-dropdown>       
       </div>  
       

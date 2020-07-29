@@ -1,6 +1,6 @@
 export class StockMovimiento {
 
-
+    private descripcion: string;
     private id:string;
     private insumo_id:string;
     private comprobante:string;
@@ -15,6 +15,8 @@ export class StockMovimiento {
     private fecha_ingreso: string;
     private fecha_movimiento: string;
     private estado: string;
+    
+    private nombre: string;
 
     constructor(
         id:string,
@@ -31,6 +33,8 @@ export class StockMovimiento {
         fecha_ingreso: string,
         fecha_movimiento: string,
         estado: string,
+        descripcion: string,
+        nombre: string
     ) {
 
         this.id = id;
@@ -47,7 +51,8 @@ export class StockMovimiento {
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_movimiento = fecha_movimiento;
         this.estado = estado;
-
+        this.descripcion = descripcion;
+        this.nombre = nombre;
     }
 
 }

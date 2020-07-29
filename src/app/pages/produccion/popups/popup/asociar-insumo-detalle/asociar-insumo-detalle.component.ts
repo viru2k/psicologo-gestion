@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlertServiceService } from './../../../../../services/alert-service.service';
 import { ProduccionService } from './../../../../../services/produccion.service';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
+import { ExporterService } from './../../../../../services/exporter.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-asociar-insumo-detalle',
@@ -25,12 +27,13 @@ export class AsociarInsumoDetalleComponent implements OnInit {
   cantidad_original:number=0;
   cantidad_salida:number=0;
   existencia:number=0;
+  elementosFiltrados: any[] = null;
 
   constructor(private produccionService: ProduccionService, private alertServiceService: AlertServiceService,
-              public ref: DynamicDialogRef, public config: DynamicDialogConfig) { 
+              public ref: DynamicDialogRef, public config: DynamicDialogConfig, private exporterService:ExporterService) {
     this.cols = [
       
-      { field: 'id', header: 'Nª',  width: '4%' },
+      { field: 'id', header: 'Nº',  width: '4%' },
       { field: 'fecha_pedido', header: 'Fecha',  width: '10%' },
       { field: 'descripcion', header: 'Descripción',  width: '30%' },
       { field: 'cantidad', header: 'Producción',  width: '10%' },
@@ -122,4 +125,22 @@ verDetalle(){
       }
     }
 
-}
+
+    filtered(event){
+      console.log(event.filteredValue);
+      this.elementosFiltrados  = event.filteredValue;    
+    }
+    
+    exportarExcel() {
+      const fecha_desde = formatDate(new Date(), 'dd/MM/yyyy', 'es-Ar');
+      console.log(this.elementosFiltrados);
+      if (this.elementosFiltrados == null) {
+        this.elementosFiltrados = this.elementos;
+      }
+      this.exporterService.exportAsExcelFile(  this.elementosFiltrados, 'documento_'+ fecha_desde);
+    }
+    
+    expotarPdf() {}
+    
+    }
+    

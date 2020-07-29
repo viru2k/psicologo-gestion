@@ -5,8 +5,12 @@ import { AlertServiceService } from './../../../../services/alert-service.servic
 import { calendarioIdioma } from './../../../../config/config';
 import { OrdenProduccionDetalle } from './../../../../models/orden-produccion-detalle.model';
 import { PopupAsociarProduccionComponent } from './popup-asociar-produccion/popup-asociar-produccion.component';
+// tslint:disable-next-line: max-line-length
 import { PopupCalculdorPalletsComponent } from './../../../../shared/components/popups/popup-calculdor-pallets/popup-calculdor-pallets.component';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { formatDate } from '@angular/common';
+import { ExporterService } from './../../../../services/exporter.service';
+import { Filter } from './../../../../shared/filter';
 
 
 
@@ -21,12 +25,16 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
   userData: any;
   loading;
   selected: any;
-  cols:any;
+  cols: any;
+  elementosFiltrados: any[] = null;
+  _estado: any[] = [];
 
-  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig) {
+  constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService,
+              public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig,
+              private exporterService: ExporterService, private filter: Filter) {
 
     this.cols = [
-      { field: 'id', header: 'Prod Nª',  width: '7.5%' },
+      { field: 'id', header: 'Prod Nº',  width: '7.5%' },
       { field: 'estado', header: 'Estado',  width: '8%' },
       { field: 'fecha_produccion', header: 'A producir',  width: '13%' },
       { field: 'nombre', header: 'Producto',  width: '20%' },
@@ -36,14 +44,13 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
       { field: 'cantidad_existente', header: 'Pendiente',  width: '14%' },
       { field: '', header: '',  width: '6%' },
     ];
-   
   }
 
 
   ngOnInit() {
     console.log(this.config.data);
     this.userData = JSON.parse(localStorage.getItem('userData'));
-    this.loadlist(this.config.data['id']);
+    this.loadlist(this.config.data.id);
   }
 
   accion(evt: any, overlaypanel: OverlayPanel, event: any) {
@@ -62,8 +69,9 @@ export class PopupOrdenProduccionDetalleConsultaComponent implements OnInit {
          this.produccionService.produccionDetalleByProduccionId(produccion)
          .subscribe(resp => {
            if (resp[0]) {
-             this.elementos = resp;
-             console.log(this.elementos);
+            this.realizarFiltroBusqueda(resp);
+            this.elementos = resp;
+            console.log(this.elementos);
                } else {
                  this.elementos = null;
                }
@@ -192,6 +200,38 @@ iconoColor(estado: string) {
   if (estado === 'FINALIZADO') {
     return {'icono-secondary'  : 'null' };
   }
+}
+
+
+filtered(event){
+  console.log(event.filteredValue);
+  this.elementosFiltrados  = event.filteredValue;    
+}
+
+exportarExcel() {
+  const fecha_desde = formatDate(new Date(), 'dd/MM/yyyy', 'es-Ar');
+  console.log(this.elementosFiltrados);
+  if (this.elementosFiltrados == null) {
+    this.elementosFiltrados = this.elementos;
+  }
+  this.exporterService.exportAsExcelFile(  this.elementosFiltrados, 'documento_'+ fecha_desde);
+}
+
+expotarPdf() {}
+
+realizarFiltroBusqueda(resp: any[]){
+  // FILTRO LOS ELEMENTOS QUE SE VAN USAR PARA FILTRAR LA LISTA
+  this._estado = [];
+
+  resp.forEach(element => {
+    this._estado.push(element['estado']);
+  });
+  
+  // ELIMINO DUPLICADOS
+  this._estado = this.filter.filterArray(this._estado);  
+  
+
+
 }
 
 }

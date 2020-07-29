@@ -1,19 +1,8 @@
-<div class=" faq-title text-center pb-3 pt-2 ">
+<div class=" faq-title text-center pb-1 pt-2 ">
     <!-- ------------------------ INFORMACION DE CARGA ------------------------- -->  
 
-    <i class="far fa-question-circle icono-info mr-2 mt-2" (mouseenter)="op2.show($event)"  style="font-size:24px"></i>
-    <p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="false" appendTo="body">
-      <p class="texto-info texto-bold">Desde aquí se selecciona el producto asociando sus parametos de :</p>
-      <p> - Dia en que se va a producir</p>
-      <p> - Las horas que va a durar la produccion</p>
-      <p> - El sector que va a producir</p>
-      <p> - El grupo de empleados que trabajara</p>
-      <p class="texto-secondary">----------------------------------------</p>
-      <p class="texto-info">Para seleccionar la cantidad a producir, se debe seleccionar el icono calculadora en el renglon  que corresponda.</p>
-      <p>Calcular el total de botellas y luego darle a icono confirmar</p>
-      <p><b class="texto-warning"> Recordar que  se debe repetir el proceso para cada producto para completar la producción planificada</b></p>
-    </p-overlayPanel>  
-    <h5>ASOCIAR PRODUCTOS A PRODUCCION</h5>
+
+    <h5>CONFECCION PRODUCTOS SELECCIONADOS</h5>
   </div>
 
 <!-- ----------------------------------------------------------------------- -->
@@ -61,7 +50,7 @@
 
 
     <div  class="m-3">
-        <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"   columnResizeMode="expand" [responsive]="true"
+        <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"  [loading]="loading"  columnResizeMode="expand" [responsive]="true"
         scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
        
         <ng-template pTemplate="caption">
@@ -69,9 +58,7 @@
             <div class="d-flex justify-content-start">
               <button  class="btn-cuadrado-success btn--block  mb-1" (click)="guardar()" > <i class="fas fa-check fa-lg mr-2 mt-1"  ></i>Agregar productos</button>
             </div>
-            <div class="d-flex justify-content-end"> 
-              <input type="text" pInputText size="50" class="form-control form-control-sm" placeholder="Buscar en toda la tabla" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">            
-            </div>
+         
           </div>
           
         </ng-template>

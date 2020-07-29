@@ -12,6 +12,14 @@
           "/manifest.webmanifest",
           "/*.css",
           "/*.js"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap",
+          "https://fonts.googleapis.com/css2?family=Yellowtail&display=swap",
+          "https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap",
+          "https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap",
+          "https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&display=swap",
+          "https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
         ]
       }
     }, {
@@ -23,6 +31,18 @@
           "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "calidad",
+      "urls": ["http://productosgraziani.com.ar/api-calidad/public/api/"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 20,
+        "maxAge": "1h",
+        "timeout": "5s"
       }
     }
   ]

@@ -331,7 +331,7 @@ menuList() {
       visible: !this.gestion_produccion,
       items: [
         {
-          label: 'Stock',
+          label: 'Stock de insumos',
           visible: !this.administracion_produccion,
           items: [
             {label: 'Ingresar insumos', visible: !this.gestion_produccion, routerLink: '/insumo/stock/ingreso'},
@@ -340,12 +340,12 @@ menuList() {
           ]
       },
         {
-            label: 'Producción',
+            label: 'Planificación de producción',
             visible: !this.administracion_produccion,
             items: [
               {label: 'Orden de producción', visible: !this.gestion_produccion, routerLink: 'orden/produccion'},
               {label: 'Detalle de ordenes de producción', routerLink: '/produccion/ingreso'},
-              {label: 'Proceso de producción', routerLink: '/produccion/proceso'},
+              {label: 'Procesos de producción', routerLink: '/produccion/proceso'},
             ]
         },
         {
@@ -398,15 +398,15 @@ menuList() {
 
   {
     label: 'Ventas',
-    visible: !this.gestion_auditoria,
+    visible: !this.administracion_produccion,
     items: [
       {label: 'Orden de pedido', routerLink: '/ventas/orden/pedido'},
       {label: 'Stock en depósito', routerLink: '/ventas/stock'},
       {
             label: 'Estadistica',
             items: [
-              {label: 'Producccion', visible: !this.gestion_auditoria, routerLink: '/ventas/estadistica/produccion'},
-              {label: 'Stock', visible: !this.gestion_auditoria, routerLink: '/ventas/estadistica/stock'},
+              {label: 'Producccion', visible: !this.administracion_produccion, routerLink: '/ventas/estadistica/produccion'},
+              {label: 'Stock', visible: !this.administracion_produccion, routerLink: '/ventas/estadistica/stock'},
 
             ]
         }
@@ -427,7 +427,8 @@ menuList() {
               {label: 'Unidad', routerLink: 'mantenimiento/unidad'},
               {label: 'Grupo de insumos', routerLink: 'mantenimiento/grupo/analisis'},
               {label: 'Grupos', routerLink: 'mantenimiento/grupo'},
-              {label: 'Lineas de producción', routerLink: 'mantenimiento/lineas/produccion'}
+              {label: 'Lineas de producción', routerLink: 'mantenimiento/lineas/produccion'},
+              {label: 'Depósito', routerLink: 'mantenimiento/deposito'},
             ]
         },
         {
@@ -439,10 +440,9 @@ menuList() {
               {label: 'Confección de planilla', routerLink: 'mantenimiento/calidad/encabezado/parametro'}
           ]
       },
-      {
-       label: 'Usuario',
-       visible: !this.mantenimiento,
-      routerLink: 'usuario'},
+      {label: 'Usuario', visible: !this.mantenimiento, routerLink: 'usuario'},
+      {label: 'Notificaciones',  routerLink: 'mantenimiento/notificaciones/personal'}
+      
     ]
   }
 
