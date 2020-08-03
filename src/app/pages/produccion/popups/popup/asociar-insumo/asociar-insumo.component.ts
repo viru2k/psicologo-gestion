@@ -81,6 +81,11 @@ export class AsociarInsumoComponent implements OnInit {
     }
 
 
+    agregar(event: any, overlaypanel: OverlayPanel, elementos: any) {
+      this.selectedRow = elementos;
+      this.selectedRow.cantidad_afectada = elementos.cantidad_estimada;
+    }
+
 verDetalle(){
  
   console.log(this.selectedElemento);

@@ -37,9 +37,7 @@
         <div class=" d-flex justify-content-start">
           <button  (click)="exportarExcel()" class="btn btn-sm btn- btn-excel "> <i class="fas fa-file-excel fa-lg mr-1"></i> Excel</button>     
           <button  (click)="exportarPdf()" class="btn btn-sm btn-pdf ml-2"> <i class="fas fa-file-pdf fa-lg mr-1"></i>PDF</button>     
-        
         </div>
-        
       </ng-template>
     
                  <ng-template pTemplate="header" let-columns >
@@ -55,10 +53,11 @@
                           <tr>
                           <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                                <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'orden_produccion_detalle_id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">  
-                               <p-multiSelect [options]="_estado" appendTo="body" defaultLabel=""   showHeader="false"  *ngIf='col.field =="estado"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                               <p-multiSelect [style]="{'height':'28px', 'width': '100%', 'font-size': '8px'}" placeholder="Filtrar"  [options]="_estado" appendTo="body" defaultLabel=""    *ngIf='col.field =="estado"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
+                             <!--  <p-calendar   [locale]="es" dateFormat="dd/mm/yy " [style]="{'height':'28px', 'width': '100%'}" [inputStyle]="{'height':'28px', 'width': '100%'}" *ngIf='col.field =="fecha_produccion"'  appendTo="body" (onClearClick)="dt.filter('', 'fecha_produccion', 'equals')" [showButtonBar]="true" styleClass="ui-column-filter" placeholder="Fecha" [readonlyInput]="true" ></p-calendar>-->
+                                <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"> 
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                              <p-multiSelect [options]="_maquina_nombre" appendTo="body" defaultLabel=""   showHeader="false"  *ngIf='col.field =="maquina_nombre"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
+                              <p-multiSelect  [style]="{'height':'28px', 'width': '100%', 'font-size': '8px'}"  [options]="_maquina_nombre" appendTo="body" defaultLabel=""   showHeader="false"  *ngIf='col.field =="maquina_nombre"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_inicio'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_fin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                               <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_solicitada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
@@ -83,7 +82,7 @@
                             <td style="font-size: 12px;width: 10%; text-align: right" class="texto-success ">{{(elementos.cantidad_producida) |  number : '1.0-2'}}</td>  
                             <td style="font-size: 12px;width: 10%; text-align: right" class="texto-success texto-bold">{{(elementos.cantidad_producida / elementos.unidades) |  number : '1.0-2'}}</td>                     
                             <td style="width: 6%">
-                              <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-bars icon-color-info fa-lg"></i></a>                        
+                              <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-bars icon-color-info fa-2x"></i></a>                        
                             </td>
                     </tr>
                 </ng-template>

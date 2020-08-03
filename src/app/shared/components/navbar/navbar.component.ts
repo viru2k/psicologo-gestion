@@ -345,7 +345,7 @@ menuList() {
             items: [
               {label: 'Orden de producción', visible: !this.gestion_produccion, routerLink: 'orden/produccion'},
               {label: 'Detalle de ordenes de producción', routerLink: '/produccion/ingreso'},
-              {label: 'Procesos de producción', routerLink: '/produccion/proceso'},
+              {label: 'Producciones activas', routerLink: '/produccion/proceso'},
             ]
         },
         {

@@ -3,7 +3,7 @@
     <h5>ASOCIAR INSUMOS A PRODUCCION</h5>
   </div>
 
-  <div class="card-rounded card-header">
+  <div class="card-rounded card-header"> 
     <div class="ml-2 row d-flex justify-content-between">  
         <div class="d-flex justify-content-start">
             <h6 class="mr-2 texto-info texto-bold">PRODUCTO: {{config.data.nombre}}</h6>
@@ -46,8 +46,20 @@
                     <td style="width: 12%" >{{elementos.cantidad_unitaria}}</td>                    
                     <td style="width: 18%">{{elementos.cantidad}}</td>                      
                     <td style="width: 18%" class="texto-danger texto-bold" >{{elementos.cantidad_proyectada}}</td>
-                    <td style="width: 18%" class="texto-success texto-bold" >{{elementos.cantidad_estimada }}</td>
-                    <td style="width: 18%" >{{elementos.cantidad_afectada}}</td>
+                    <td style="width: 18%"  >
+                        <div class="d-flex justify-content-between d-flex align-item-center">
+                            <div class="d-flex justify-content-start"></div>
+                            <div class="d-flex justify-content-center mt-1">
+                               <label class="texto-success texto-bold"> {{elementos.cantidad_estimada }} </label>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a  (click)="agregar($event,op,elementos)"  class="icon-hover "> <i class="far fa-arrow-alt-circle-right icon-color-info fa-2x"></i></a> 
+                            </div>
+                        </div>
+                        
+                       
+                    </td>
+                    <td style="width: 18%" class="texto-info texto-bold" >{{elementos.cantidad_afectada}}</td>
                     <td style="width: 6%" >                   
                         <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-pen icon-color-info fa-lg"></i></a>               
                     </td>

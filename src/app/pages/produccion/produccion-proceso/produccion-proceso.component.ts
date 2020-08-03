@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrdenProduccion } from './../../../models/orden-produccion.model';
 import { OrdenProduccionDetalle } from './../../../models/orden-produccion-detalle.model';
 import { AlertServiceService } from './../../../services/alert-service.service';
@@ -12,6 +12,7 @@ import { PopupCalidadParametroProduccionIngresoComponent } from './../../calidad
 import { element } from 'protractor';
 import { Filter } from './../../../shared/filter';
 import { ExporterService } from './../../../services/exporter.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-produccion-proceso',
@@ -40,19 +41,20 @@ export class ProduccionProcesoComponent implements OnInit {
   loading;
   userData: any;
   estado: any[] = [];
-  selectedEstado: string = 'ACTIVO' ;
+  selectedEstado = 'ACTIVO' ;
   selectedItem: any;
   selectedEstados: string[] = [];
-  elementosFiltrados:any[] = null;
+  elementosFiltrados: any[] = null;
 
   totalCantidad = 0;
-  totalSolicitado = 0;  
+  totalSolicitado = 0;
 
   _estado: any[] = [];
   _maquina_nombre: any[] = [];
+  @ViewChild('dt', { static: false }) table: Table;
 
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService,
-              private exporterService:ExporterService, private messageService: MessageService,  private filter: Filter) {
+               private messageService: MessageService, private exporterService: ExporterService,  private filter: Filter) {
 
     this.cols = [                  
       { field: 'orden_produccion_detalle_id', header: 'Prod Nº',  width: '7.5%' },
@@ -286,6 +288,12 @@ exportarExcel() {
 
 exportarPdf() {}
 
+
+onDateSelect(value) {
+  this.table.filter(formatDate(value,'dd/MM/yyyy', 'es-Ar'), 'date', 'equals')
+}
+
+
 realizarFiltroBusqueda(resp: any[]){
   // FILTRO LOS ELEMENTOS QUE SE VAN USAR PARA FILTRAR LA LISTA
   this._estado = [];
@@ -303,6 +311,7 @@ realizarFiltroBusqueda(resp: any[]){
 
 
 }
+
 
 }
 

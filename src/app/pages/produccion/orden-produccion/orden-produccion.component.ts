@@ -34,7 +34,7 @@ export class OrdenProduccionComponent implements OnInit {
       { field: 'id', header: 'Prod Nº',  width: '7.5%' },
       { field: 'estado', header: 'Estado',  width: '8%' },
       { field: 'fecha_creacion', header: 'Creado',  width: '10%' },
-      { field: 'descripcion', header: 'Descripción',  width: '30%' },
+      { field: 'descripcion', header: 'Descripción',  width: '40%' },
       { field: 'observacion', header: 'Observación',  width: '25%' },
       { field: 'fecha_desde', header: 'Inicio',  width: '12%' },
       { field: 'fecha_hasta', header: 'Fin',  width: '12%' },

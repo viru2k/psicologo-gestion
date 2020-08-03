@@ -29,7 +29,7 @@
                       <tr >
                       <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">  
-                           <p-multiSelect [options]="_estado" appendTo="body" defaultLabel=" "  showHeader="false"  *ngIf='col.field =="estado"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
+                           <p-multiSelect [style]="{'height':'28px', 'width': '100%', 'font-size': '8px'}" [options]="_estado" appendTo="body" defaultLabel=" "  showHeader="false"  *ngIf='col.field =="estado"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
                           <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                           <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                           <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_solicitada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
@@ -65,7 +65,7 @@
                 
                 </td>                                
                   <td style="width: 6%">
-                    <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-bars icon-color-info fa-lg"></i></a>                        
+                    <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-bars icon-color-info fa-2x"></i></a>                        
                   </td>
           </tr>
 

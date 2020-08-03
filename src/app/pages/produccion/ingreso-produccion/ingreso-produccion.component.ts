@@ -192,8 +192,11 @@ buscar(elemento: any) {
    height: '80%'
   });
 
-  ref.onClose.subscribe(() => {
-        this.loadlist();
+  ref.onClose.subscribe((PopupOrdenProduccionDetalleConsultaComponent: any) => {
+    if(PopupOrdenProduccionDetalleConsultaComponent){
+      this.loadlist();
+    }
+      
   });
 
 }

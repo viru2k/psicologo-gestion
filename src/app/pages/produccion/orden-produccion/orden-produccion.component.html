@@ -50,13 +50,13 @@
               <td style="width: 7%; font-size: 14px;font-weight: bold;" [ngClass]="iconoColor(elementos.estado)">{{elementos.id}}</td> 
               <td style="width: 8%"  [ngClass]="iconoColor(elementos.estado)">{{elementos.estado}}</td>     
               <td style="width: 10%">{{elementos.fecha_creacion | date:'dd/MM/yyyy'}}</td>
-              <td style="width: 30%">{{elementos.descripcion}}</td>
+              <td style="width: 40%">{{elementos.descripcion}}</td>
               <td style="width: 25%">{{elementos.observacion}}</td>
               <td style="width: 12%; font-weight: bold;font-size: 11px;" class="texto-success">{{elementos.fecha_desde | date : 'dd/MM/yyyy hh:mm:ss'}}</td>
               <td style="width: 12%; font-weight: bold;font-size: 11px;" class="texto-danger-soft">{{elementos.fecha_hasta | date : 'dd/MM/yyyy hh:mm:ss'}}</td>
               <td style="font-size: 10px;width: 12%" class="texto-secondary">{{elementos.nombreyapellido}}</td>             
               <td style="width: 6%">
-                <a  (click)="buscar(elementos)" class="icon-hover"> <i class="fas fa-bars icon-color-info fa-lg"></i></a>                        
+                <a  (click)="buscar(elementos)" class="icon-hover"><i class="fas fa-bars icon-color-info fa-2x"></i></a>                         
               </td>
       </tr>
           </ng-template>

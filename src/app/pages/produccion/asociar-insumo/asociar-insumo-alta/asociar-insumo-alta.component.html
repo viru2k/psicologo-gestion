@@ -1,17 +1,18 @@
 
  <div class=" faq-title text-center pb-1 pt-2 ">
-    <i class="far fa-question-circle icono-info ml-2 mt-2 mr-1" (mouseenter)="op2.show($event)"  style="font-size:24px"></i>
+    <!-- <i class="far fa-question-circle icono-info ml-2 mt-2 mr-1" (mouseenter)="op2.show($event)"  style="font-size:24px"></i> -->
       <h5>ASOCIAR INSUMOS A LA PRODUCCION </h5>
     </div>
     <div class="card">
       <div class="d-flex justify-content-between">
         <div class="d-flex justify-content-start">
-            <label class="mr-2 mt-1">Estado :</label>
+          <button class=" ml-2 mr-3 btn-sm btn-cuadrado-success" (click)="loadlist()">Producciones activas</button>
+          <!--   <label class="mr-2 mt-1">Estado :</label>
             <select [(ngModel)]="selectedEstado" class="form-control-sm text-sm texto-monserrat texto-secondary icon-hover" (change)="onChangeEstado($event)" >                        
               <option  *ngFor="let grupo of estado" class="text-sm texto-monserrat texto-secondary icon-hover"    >
                 <label class="icon-hover"  >{{grupo.name}}</label>              
             </option>
-          </select>
+          </select> -->
         </div>
         <div class="d-flex justify-content-center"></div>
         <div class="d-flex justify-content-end align-items-center">
@@ -27,7 +28,7 @@
       
     </div>
      
-    <p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="false" appendTo="body">
+  <!--   <p-overlayPanel #op2 [showCloseIcon]="true" [dismissable]="false" appendTo="body">
       <p class="texto-info texto-bold">Desde aquí se gestionan los datos relacionados con cada producción :</p>
       <p> - Finalizar una producción</p>
       <p> - Cargar datos de auditoria</p>
@@ -36,7 +37,7 @@
       <p> - Consultar producciones por periodo de fechas de producción</p>
       <p class="texto-secondary">----------------------------------------</p>
       <p><b class="texto-warning"> Recordar que  se debe repetir el proceso para cada producto para completar la producción planificada</b></p>
-    </p-overlayPanel>
+    </p-overlayPanel> -->
     <div  class="m-3">
         <p-table  #dt class=""  tableStyleClass="prime-table" selectionMode="single" [columns]="cols" [value]="elementos" [(selection)]="selecteditems"  [loading]="loading"  columnResizeMode="expand" [responsive]="true"
         scrollHeight="500px" [scrollable]="true"  [loading]="loading" loadingIcon="fas fa-spinner fa-2x icon-color-green" >
@@ -63,10 +64,10 @@
                             <tr>
                             <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                                  <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'orden_produccion_detalle_id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">  
-                                <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'estado'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                                <p-multiSelect [style]="{'height':'28px', 'width': '100%', 'font-size': '8px'}" [options]="_estado" appendTo="body" defaultLabel=""   showHeader="false"  *ngIf='col.field =="estado"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
                                 <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'fecha_produccion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                                 <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                                <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'maquina_nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                                <p-multiSelect [style]="{'height':'28px', 'width': '100%', 'font-size': '8px'}" [options]="_maquina_nombre" appendTo="body" defaultLabel=""   showHeader="false"  *ngIf='col.field =="maquina_nombre"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
                                 <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_inicio'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                                 <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_fin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                                 <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_solicitada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
