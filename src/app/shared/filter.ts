@@ -42,4 +42,12 @@ public filterArray(arr: any) {
    return m;
    }
 
+/* -------------------------------------------------------------------------- */
+/*                             COMPLETO CON CEROS                             */
+/* -------------------------------------------------------------------------- */
+padLeft(text:string, padChar:string, size:number): string {
+// padLeft(String(resp),'0',8)
+
+  return (String(padChar).repeat(size) + text).substr( (size * -1), size) ;
+}
 }

@@ -46,10 +46,10 @@
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'lote'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'maquina_nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_inicio'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_fin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_solicitada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_existente'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                              
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_inicio'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'hora_fin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_solicitada'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_existente'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">                              
                         </th>
                         <th></th>
                     </tr>

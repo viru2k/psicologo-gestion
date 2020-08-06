@@ -138,7 +138,7 @@ export class ProduccionService {
     updProduccionDetalleEstado(produccion: any, id: string ) {
       return this.http.put<any>(this.url + 'produccion/detalle/estado/' + id, produccion);
       }
-      
+
 
       getProduccionProcesoByOrdenProduccionDetalleId(orden_produccion_detalle_id: string) {
         // tslint:disable-next-line: max-line-length
@@ -154,5 +154,13 @@ export class ProduccionService {
         return this.http.get<any[]>(this.url + 'produccion/proceso/by/dates?fecha_desde=' + fecha_desde + '&fecha_hasta=' + fecha_hasta);
       }
 
+      getStockByArmadoProducto(id: string, insumoId: string) {
+        return this.http.get<any[]>(this.url + 'produccion/stock/by/insumo/armado?articulo_id=' + id + '&insumo_id=' + insumoId);
+      }
+
+      setInsumoStockMovimientoProduccion(produccion: any) {
+        return this.http.post<any>(this.url + 'produccion/stock/movimiento/asociar', produccion);
+        }
+      
 
 }

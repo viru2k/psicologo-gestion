@@ -69,10 +69,7 @@ export class InsumoService {
     return this.http.get<any[]>(this.url + 'insumos/stock/produccion/by/movimiento/id?id=' + id);
   }
 
-
-  
-
-  
+ 
 
   setInsumoStock(insumos: any[]) {
     return this.http.post<string>(this.url + 'insumos/stock/ingreso', insumos);

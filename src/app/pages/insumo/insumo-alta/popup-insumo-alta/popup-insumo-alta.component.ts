@@ -169,6 +169,7 @@ guardar() {
       .subscribe(resp => {
         if (resp === 'ok') {
         //  this.elementos = resp;
+        this.alertServiceService.throwAlert('success', 'Se guardaron los insumos seleccionados', '', '200');
             this.ref.close(PopupInsumoAltaComponent);
             } else {
             //  this.elementos = null;

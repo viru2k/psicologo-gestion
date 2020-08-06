@@ -27,13 +27,13 @@
                           <tr>
                           <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                             <p-multiSelect [style]="{'height':'28px', 'width': '100%', 'font-size': '8px'}" [options]="_nombre" appendTo="body" defaultLabel="Filtrar"  showHeader="false"  *ngIf='col.field =="nombre"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'unidad_descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
                               <p-multiSelect [style]="{'height':'28px', 'width': '100%', 'font-size': '8px'}" [options]="_grupo_nombre" appendTo="body" defaultLabel="Filtrar"  showHeader="false"  *ngIf='col.field =="grupo_nombre"' (onChange)="dt.filter($event.value,col.field,'in')"></p-multiSelect>
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'comprobante'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'lote'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_unitaria'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_empaque'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                            
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'comprobante'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'lote'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_unitaria'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                              <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_empaque'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">                            
                           </th>
                           <th></th>
                       </tr>

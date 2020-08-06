@@ -1,16 +1,19 @@
 
 <div class=" faq-title text-center pb-1 pt-2 ">
-    <h5>ASOCIAR INSUMOS A PRODUCCION </h5>   
+    <h5>INSUMOS DISPONIBLES</h5>
   </div>
 
   <div class="card-rounded card-header"> 
-    <div class=" row d-flex justify-content-between">  
+    <div class="ml-2 row d-flex justify-content-between">  
         <div class="d-flex justify-content-start">
-            <h6 class="mr-4 texto-sdecondary texto-bold ">PRODUCCION Nº: {{ filtar(config.data.orden_produccion_detalle_id)}}</h6>
             <h6 class="mr-2 texto-info texto-bold">PRODUCTO: {{config.data.nombre}}</h6>
-            <h6 class="mr-5 texto-danger texto-bold">PROYECTADO: {{config.data.cantidad_solicitada}}</h6>
-            <h6 class="mr-2 texto-success texto-bold">REALIZADO: {{config.data.cantidad_producida}}</h6>
-        </div></div></div>
+            
+        </div>
+        <div class="d-flex justify-content-end">
+            <h6 class="mr-5 texto-danger texto-bold">REQUERIDO: {{config.data.cantidad_estimada}}</h6>
+         </div>
+    </div>     
+    </div>
 
 <div  class="m-3">
    
@@ -34,7 +37,9 @@
                         <tr>
                         <th *ngFor="let col of columns" [ngSwitch]="col.field"  >
                             <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">  
-                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'cantidad_unitaria'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">                          
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">                          
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'descomprobantecripcion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">                          
+                            <input style=" font-size: 12px;" class="form-control col-md-12 form-control-sm" *ngSwitchCase="'lote'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">      
                         </th>
                         <th></th>
                     </tr>
@@ -42,22 +47,31 @@
               
         <ng-template pTemplate="body" let-elementos  >
             <tr style="height:20px">
+                
+                <td style="width: 36%">{{elementos.nombre}}</td>                 
+                <td style="width: 26%" >{{elementos.descripcion}}</td>                    
+                <td style="width: 18%">{{elementos.comprobante}}</td>                      
+                <td style="width: 18%" >{{elementos.lote}}</td>
+                <td style="width: 18%"  >{{elementos.fecha_ingreso | date : 'dd/MM/yyyy'}}  </td>
+                <td style="width: 18%" class="texto-info texto-bold" >{{elementos.cantidad_existente}}</td>
+                <td style="width: 18%" class="texto-info texto-bold" >{{elementos.cantidad_afectada}}</td>
                 <td style="width: 6%" >                   
-                    <a  (click)="editarInsumo(elementos)"  class="icon-hover"> <i class="fas fa-pen icon-color-warning fa-lg"></i></a>               
-                </td>
-                    <td style="width: 40%">{{elementos.nombre}}</td>                 
-                    <td style="width: 12%" >{{elementos.cantidad_unitaria}}</td>                    
-                    <td style="width: 18%">{{elementos.cantidad}}</td>                      
-                    <td style="width: 18%" class="texto-danger texto-bold" >{{elementos.cantidad_proyectada}}</td>
-                    <td style="width: 18%"  >
-                        <label class="texto-success texto-bold"> {{elementos.cantidad_estimada }} </label>   
-                    </td>
-                    <td style="width: 18%" class="texto-info texto-bold" >{{elementos.cantidad_afectada}}</td>
-                    <td style="width: 6%" >                   
-                        <a  (click)="afectarStock(elementos)"  class="icon-hover"> <i class="fas fa-tasks icon-color-info fa-lg"></i></a>               
-                    </td>
+                    <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-cart-plus icon-color-info fa-lg"></i></a>               
+                </td>            
+                    
             </tr>
         </ng-template>
+
+        <ng-template pTemplate="footer">
+            <tr>                
+                <td style="width: 116%"  class="text-info"></td>
+                <td style="width: 18%"  class="text-info text-bold">ACUMULADO</td>
+                <td style="width: 18%"  class="text-info">{{acumulado}}</td>
+                <td style="width: 6%"  class="text-info"></td>
+            
+            </tr>
+        </ng-template>
+
         <p-overlayPanel  #op appendTo="body"  [showTransitionOptions]="'400ms'" [hideTransitionOptions]="'300ms'"  [dismissable]="true" [showCloseIcon]="true" (onHide)="cerrarVentanta()" >                          
 
             <!-- <span>   <a class="nav-link azul text-info  my-hover" (click)="asociarInsumo()">Asociar insumo</a></span> -->
@@ -77,5 +91,5 @@
 
   </div>
   <div class="m-1">
-    <button class="btn btn-info btn-md btn-block" (click)="verDetalleTodos()">Confirmar insumos en produccion</button>
+    <button class="btn btn-info btn-md btn-block" (click)="guardar()">Asociar insumos</button>
 </div>

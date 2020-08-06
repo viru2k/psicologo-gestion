@@ -171,6 +171,7 @@ import { DepositoComponent } from './pages/mantenimiento/deposito/deposito.compo
 import { DepositoEditarComponent } from './pages/mantenimiento/deposito-editar/deposito-editar.component';
 import { NotificacionPersonalComponent } from './pages/mantenimiento/notificacion-personal/notificacion-personal.component';
 import { PopupInsumoListadoComponent } from './pages/insumo/popup-insumo-listado/popup-insumo-listado.component';
+import { PopupAsociarInsumoStockComponent } from './pages/produccion/popups/popup-asociar-insumo-stock/popup-asociar-insumo-stock.component';
 
 
 
@@ -257,7 +258,8 @@ import { PopupInsumoListadoComponent } from './pages/insumo/popup-insumo-listado
     DepositoComponent,
     DepositoEditarComponent,
     NotificacionPersonalComponent,
-    PopupInsumoListadoComponent
+    PopupInsumoListadoComponent,
+    PopupAsociarInsumoStockComponent
   ],
   imports: [
 
@@ -357,6 +359,7 @@ PopupOrdenPedidoStockComponent,
 PopupOrdenPedidoAsociarProductoComponent,
 PopupVentasEstadisticaProduccionComponent,
 PopupVentasEstadisticaStockComponent,
+PopupAsociarInsumoStockComponent,
 
 /* -------------------------------------------------------------------------- */
 /*                                    MOBIL                                   */
