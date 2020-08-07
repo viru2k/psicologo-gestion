@@ -70,7 +70,7 @@
                     </ng-template>
                   
                     <ng-template pTemplate="body" let-elementos  >
-                      <tr style="height:20px"  [ngClass]="colorRow(elementos.estado)">
+                      <tr style="height:24px"  [ngClass]="colorRow(elementos.estado)">
                               <td style="width: 7%; font-size: 14px;font-weight: bold;" [ngClass]="iconoColor(elementos.estado)">{{elementos.orden_produccion_detalle_id}}</td> 
                               <td style="width: 12%"  [ngClass]="iconoColor(elementos.estado)">{{elementos.estado}}</td>     
                               <td style="width: 18%">{{elementos.fecha_produccion | date:'EEEE dd/MM/yyyy'}}</td>

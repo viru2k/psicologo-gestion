@@ -46,7 +46,7 @@
                   </ng-template>
                 
           <ng-template pTemplate="body" let-elementos  >
-            <tr style="height:20px"  [ngClass]="colorRow(elementos.estado)">
+            <tr style="height:24px"  [ngClass]="colorRow(elementos.estado)">
               <td style="width: 7%; font-size: 14px;font-weight: bold;" [ngClass]="iconoColor(elementos.estado)">{{elementos.id}}</td> 
               <td style="width: 8%"  [ngClass]="iconoColor(elementos.estado)">{{elementos.estado}}</td>     
               <td style="width: 10%">{{elementos.fecha_creacion | date:'dd/MM/yyyy'}}</td>

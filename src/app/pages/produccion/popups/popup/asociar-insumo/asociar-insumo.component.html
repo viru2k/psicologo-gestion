@@ -41,7 +41,7 @@
                 </ng-template>
               
         <ng-template pTemplate="body" let-elementos  >
-            <tr style="height:20px">
+            <tr style="height:24px">
                 <td style="width: 6%" >                   
                     <a  (click)="editarInsumo(elementos)"  class="icon-hover"> <i class="fas fa-pen icon-color-warning fa-lg"></i></a>               
                 </td>
@@ -49,9 +49,7 @@
                     <td style="width: 12%" >{{elementos.cantidad_unitaria}}</td>                    
                     <td style="width: 18%">{{elementos.cantidad}}</td>                      
                     <td style="width: 18%" class="texto-danger texto-bold" >{{elementos.cantidad_proyectada}}</td>
-                    <td style="width: 18%"  >
-                        <label class="texto-success texto-bold"> {{elementos.cantidad_estimada }} </label>   
-                    </td>
+                    <td style="width: 18%"  class="texto-success texto-bold">{{elementos.cantidad_estimada }}  </td>
                     <td style="width: 18%" class="texto-info texto-bold" >{{elementos.cantidad_afectada}}</td>
                     <td style="width: 6%" >                   
                         <a  (click)="afectarStock(elementos)"  class="icon-hover"> <i class="fas fa-tasks icon-color-info fa-lg"></i></a>               

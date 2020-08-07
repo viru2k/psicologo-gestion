@@ -169,6 +169,8 @@ detalleProduccion(_elemento: any) {
 
 }
 
+
+
 colorRow(estado: string) {
 
   if (estado === 'ACTIVO') {

@@ -9,7 +9,13 @@ import swal from 'sweetalert2';
 @Component({
   selector: 'app-popup-asociar-insumo-stock',
   templateUrl: './popup-asociar-insumo-stock.component.html',
-  styleUrls: ['./popup-asociar-insumo-stock.component.scss']
+  styleUrls: ['./popup-asociar-insumo-stock.component.scss'],
+  styles: [`
+  :host ::ng-deep .p-cell-editing {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+  }
+`]
 })
 export class PopupAsociarInsumoStockComponent implements OnInit {
 
@@ -36,6 +42,8 @@ export class PopupAsociarInsumoStockComponent implements OnInit {
   selectedRow: any;
   acumulado = 0;
   userData: any[];
+
+  clonedElenents: { [s: string]: any; } = {};
   // tslint:disable-next-line: max-line-length
   constructor(private insumoService: InsumoService, private produccionService: ProduccionService, private alertServiceService: AlertServiceService,
               // tslint:disable-next-line: max-line-length
@@ -193,6 +201,23 @@ asociarInsunos() {
       this.elementosAsociar = [];
     }
   
+}
+
+
+onRowEditInit(element: any) {
+  console.log(element);
+  this.clonedElenents[element.id] = {...element};
+}
+
+onRowEditSave(element: any) {
+  console.log(element);
+  //if (product.price > 0) {
+  //    delete this.clonedProducts[product.id];
+  //    this.messageService.add({severity:'success', summary: 'Success', detail:'Product is updated'});
+  //}  
+  //else {
+  //    this.messageService.add({severity:'error', summary: 'Error', detail:'Invalid Price'});
+  //}
 }
 
 }
