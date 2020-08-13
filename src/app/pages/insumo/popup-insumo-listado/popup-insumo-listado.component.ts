@@ -37,6 +37,11 @@ export class PopupInsumoListadoComponent implements OnInit {
 
   _nombre: any[] = [];
   _grupo_nombre: any[] = [];
+
+  valor_dolar_cotizacion = 1;
+  valor_dolar = 1;
+  valor_total_pesos = 1;
+
   // tslint:disable-next-line: max-line-length
   constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService, 
     public ref: DynamicDialogRef, private filter: Filter) {
@@ -107,6 +112,9 @@ accion(evt: any, event: any) {
   }
   console.log(event);
   this.elemento = event;
+  this.valor_dolar_cotizacion = 1;
+  this.valor_dolar =  Number(this.elemento.precio_unitario);
+  this.valor_total_pesos = Number(this.elemento.precio_unitario);
   this.display = true;
 }
 
@@ -114,6 +122,8 @@ accion(evt: any, event: any) {
 escape() {
   this.cantidad_calculada = 0;
   this.cantidad = 0;
+  this.valor_dolar_cotizacion =  1;
+  this.valor_total_pesos = 1;
   this.selectedTipo = 'unidad';
 }
 
@@ -128,9 +138,17 @@ recalcular() {
   }
 }
 
+recalcularCotizacion() {
+  this.valor_total_pesos = Number(this.valor_dolar) * Number(this.valor_dolar_cotizacion);
+}
+
 confirmarCantidad() {
   this.elemento.comprobante = this.comprobante;
   this.elemento.a_ingresar = this.cantidad_calculada;
+  this.elemento.valor_dolar_cotizacion = this.valor_dolar_cotizacion;
+  this.elemento.valor_dolar = this.valor_dolar;
+  this.elemento.valor_total_pesos = this.valor_total_pesos ;
+  this.elemento.total_renglon = this.valor_total_pesos * this.cantidad_calculada;
   this.elemento.lote = this.lote;
   this.display = false;
   this.cantidad = 0;
@@ -150,7 +168,8 @@ guardar() {
     if (Number(ele.a_ingresar) > 0 ) {
       console.log(ele);
       ele.fecha = formatDate(new Date(), 'yyyy-MM-dd', 'en') ;
-      t = new StockMovimiento('', ele.id, ele.comprobante, ele.lote, ele.a_ingresar, 0, ele.a_ingresar,0, 0, 0, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descripcion, ele.nombre) ;
+      // tslint:disable-next-line: max-line-length
+      t = new StockMovimiento('', ele.id, ele.comprobante, ele.lote, ele.a_ingresar, 0, ele.a_ingresar, ele.valor_total_pesos, ele.valor_dolar, ele.total_renglon, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descripcion, ele.nombre, ele.valor_dolar,ele.valor_total_pesos, ele.valor_dolar_cotizacion) ;
       this.elementoFinal.push (t);
     }
   }

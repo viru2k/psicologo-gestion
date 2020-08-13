@@ -548,57 +548,70 @@ border: 1px  #AED581!important;
 
 
   .ui-menubar  {
-    background: $color-menu !important;
-    //background: #DAF7A6 !important;
-   // color: #DAF7A6 !important;
-    border-color: $color-menu !important;
+
+    background: #457b9d !important;   
+    color: #457b9d !important;
+    border-color: #457b9d !important;
+    font-family: 'Montserrat', sans-serif;
+    padding:  0px !important;
+    padding-left: 5px;
     border-radius: 0 !important;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.ui-menuitem{
-
-    background: $color-menu-text !important;
-    color: $color-menu-text !important;
-    border-color: $color-menu-text !important;
-    font-family: 'Montserrat', sans-serif;
+    
   
 }
 
-.ui-menuitem-text {
-    border-color: $color-menu !important;
-    color: $color-menu-text !important;
-    font-family: 'Montserrat', sans-serif;
-}
-
-
 .ui-menu-list{
+    
+    background: #ffffff !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+    font-family: 'Montserrat', sans-serif;
+    padding:  0px !important;
+    border-radius: 0 !important;
+} 
 
-    background: $color-menu !important;
-    color: $color-menu !important;
-    border-color: $color-menu !important;
-    font-family: 'Montserrat', sans-serif !important;
+.ui-menuitem{
+    background-color: #457b9d !important;
+   background: #457b9d !important;
+    color: #457b9d !important;
+    border-color: #457b9d !important;
+    margin:  0em !important;
+    padding: 0em !important;
+    border-radius: 0 !important;
+  
+} 
+
+.ui-menuitem-text {
+    color: #ffffff !important;
+    font-family: 'Montserrat', sans-serif;
+    //padding: 15px;
+    padding-top: 20px;
+    padding-bottom: 25px;
+    //align-items:center ;
 }
+
+.ui-submenu-icon{
+    color: #F3E5F5 !important;
+   // background: #5C6BC0 !important;
+}
+
+
 
 .ui-menuitem-link{
 
-    background: $color-menu !important;
-    color: $color-menu !important;
+    background: #457b9d !important;
+    color: #457b9d !important;
     font-family: 'Montserrat', sans-serif;
-  
+    margin: 0px;
+    padding: 8px !important;
+    border-radius: 0 !important;
 }
 
 .ui-menuitem-icon {
-   /* background-image: url('pathToYourSprite.svg');
-    background-position: 0 0; /* closed position */
-     color: #548ddb !important;
-      background: #548ddb !important;
-}
-
-
-.ui-submenu-icon{
-    color: $color-menu-text !important;
-    background: $color-menu !important;
+    margin:  0em !important;
+    padding: 0em !important;
+     color: #457b9d !important;
+      background: #457b9d !important;
 }
 
 

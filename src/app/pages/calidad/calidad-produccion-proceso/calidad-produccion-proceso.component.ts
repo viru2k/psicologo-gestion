@@ -166,8 +166,8 @@ export class CalidadProduccionProcesoComponent implements OnInit {
 }
 
 
- auditarProduccion() {
-  const data: any = this.selectedItem;
+ auditarProduccion(event: any) {
+  const data: any = event;
   const ref = this.dialogService.open(PopupCalidadParametroProduccionIngresoComponent, {
   data,
    header: 'Cargar controles a producción',

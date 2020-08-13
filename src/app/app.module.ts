@@ -50,8 +50,8 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
 import {StepsModule} from 'primeng/steps';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {SelectButtonModule} from 'primeng/selectbutton';
-
-
+import {DataViewModule} from 'primeng/dataview';
+import {RatingModule} from 'primeng/rating';
 
 
 
@@ -294,6 +294,8 @@ import { PopupAsociarInsumoStockComponent } from './pages/produccion/popups/popu
     ColorPickerModule,
     ToggleButtonModule,
     AutoCompleteModule,
+    DataViewModule,
+    RatingModule,
     PivotViewModule ,
     SweetAlert2Module.forRoot(),
     AutofocusModule,

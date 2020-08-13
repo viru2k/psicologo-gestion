@@ -11,7 +11,8 @@ import { PopupInsumoListadoComponent } from '../../popup-insumo-listado/popup-in
 @Component({
   selector: 'app-popup-insumo-alta',
   templateUrl: './popup-insumo-alta.component.html',
-  styleUrls: ['./popup-insumo-alta.component.scss']
+  styleUrls: ['./popup-insumo-alta.component.scss'],
+  providers: [DialogService]
 })
 export class PopupInsumoAltaComponent implements OnInit {
 
@@ -35,6 +36,10 @@ export class PopupInsumoAltaComponent implements OnInit {
 
   _nombre: any[] = [];
   _grupo_nombre: any[] = [];
+
+  valor_dolar_cotizacion = 1;
+  valor_dolar = 1;
+  valor_total_pesos = 1;
   // tslint:disable-next-line: max-line-length
   constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService, 
     public ref: DynamicDialogRef, private filter: Filter) {
@@ -66,17 +71,20 @@ export class PopupInsumoAltaComponent implements OnInit {
 
     let t: StockMovimiento;
     let i = 0;
+    console.log(element);
     element.forEach(ele => {
       
       if (Number(ele.cantidad) > 0 ) {
         ele.fecha = formatDate(new Date(), 'yyyy-MM-dd', 'en') ;
         console.log(ele);
-        t = new StockMovimiento('', ele.insumo_id, ele.comprobante, ele.lote, ele.cantidad,0, ele.cantidad, 0, 0,0, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descripcion, ele.nombre) ;
-        console.log(t);
-        this.elementos.push (t);
+        
+     //   t = new StockMovimiento('', ele.insumo_id, ele.comprobante, ele.lote, ele.cantidad,0, ele.cantidad, ele.valor_total_pesos, ele.valor_total_pesos, (this.cantidad_calculada * ele.valor_total_pesos), this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descripcion, ele.nombre, ele.importe_dolares, ele.importe_total_dolares, ele.importe_cotizacion_dolar) ;
+        
+        this.elementos.push(ele);
       }
     }
       );
+      console.log(this.elementos);
 }
 
 
@@ -87,6 +95,9 @@ accion(evt: any, event: any) {
   }
   console.log(event);
   this.elemento = event;
+  this.valor_dolar_cotizacion = 1;
+  this.valor_dolar =  Number(this.elemento.precio_unitario);
+  this.valor_total_pesos = Number(this.elemento.precio_unitario);
   this.display = true;
 }
 
@@ -104,6 +115,8 @@ eliminarSeleccionado(element: any) {
 escape() {
   this.cantidad_calculada = 0;
   this.cantidad = 0;
+  this.valor_dolar_cotizacion =  1;
+  this.valor_total_pesos = 1;
   this.selectedTipo = 'unidad';
 }
 
@@ -121,11 +134,18 @@ recalcular() {
 confirmarCantidad() {
   this.elemento.comprobante = this.comprobante;
   this.elemento.a_ingresar = this.cantidad_calculada;
+  //this.elemento.valor_dolar_cotizacion = this.valor_dolar_cotizacion;
+  //this.elemento.valor_dolar = this.valor_dolar;
+  //this.valor_total_pesos = this.valor_total_pesos;
   this.elemento.lote = this.lote;
   this.display = false;
   this.cantidad = 0;
   this.cantidad_calculada = 0;
   this.selectedTipo = 'unidad';
+}
+
+recalcularCotizacion() {
+  this.valor_total_pesos = Number(this.valor_dolar) * Number(this.valor_dolar_cotizacion);
 }
 
 agregarInsumo() {
@@ -140,8 +160,7 @@ agregarInsumo() {
   ref.onClose.subscribe((PopupInsumoListadoComponent: any) => {
     if(PopupInsumoListadoComponent){
       console.log(PopupInsumoListadoComponent);
-      this.loadlist(PopupInsumoListadoComponent);
-      this.ref.close();
+      this.loadlist(PopupInsumoListadoComponent);      
     }
       
   });
@@ -158,8 +177,9 @@ guardar() {
     console.log(ele);
     if (Number(ele.cantidad) > 0 ) {
       ele.fecha = formatDate(new Date(this.fecha), 'yyyy-MM-dd', 'en') ;
-      t = new StockMovimiento('', ele.insumo_id, ele.comprobante, ele.lote, ele.cantidad, 0, ele.cantidad, 0, 0, 0, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descipcion, ele.nombre) ;
-      this.elementoFinal.push(t);
+      // tslint:disable-next-line: max-line-length
+  //    t = new StockMovimiento('', ele.insumo_id, ele.comprobante, ele.lote, ele.cantidad, 0, ele.cantidad, ele.valor_total_pesos,ele.valor_total_pesos, (this.cantidad_calculada * this.valor_total_pesos), this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descipcion, ele.nombre, ele.valor_dolar_cotizacion, ele.valor_dolar, ele.importe_cotizacion_dolar) ;
+      this.elementoFinal.push(ele);
     }
   }
     );
@@ -167,16 +187,16 @@ guardar() {
     
       this.insumoService.setInsumoStock(this.elementoFinal)
       .subscribe(resp => {
-        if (resp === 'ok') {
+        if (resp[0]) {
         //  this.elementos = resp;
         this.alertServiceService.throwAlert('success', 'Se guardaron los insumos seleccionados', '', '200');
-            this.ref.close(PopupInsumoAltaComponent);
+            this.ref.close();
             } else {
             //  this.elementos = null;
             }
         this.loading = false;
         console.log(resp);
-        this.ref.close(PopupInsumoAltaComponent);
+        this.ref.close();
       },
       error => { // error path
         console.log(error);

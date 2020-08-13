@@ -84,7 +84,7 @@
                               <td style="font-size: 12px;width: 10%; text-align: right" class="texto-success ">{{(elementos.cantidad_producida) |  number : '1.0-2'}}</td>  
                               <td style="font-size: 12px;width: 10%; text-align: right" class="texto-success texto-bold">{{(elementos.cantidad_producida / elementos.unidades) |  number : '1.0-2'}}</td>                     
                               <td style="width: 6%">
-                                <a  (click)="accion($event,op,elementos)"  class="icon-hover"> <i class="fas fa-tasks icon-color-info fa-2x"></i></a>                        
+                                <a  (click)="auditarProduccion(elementos)"  class="icon-hover"> <i class="fas fa-tasks icon-color-info fa-2x"></i></a>                        
                               </td>
                       </tr>
                   </ng-template>
@@ -97,9 +97,9 @@
       <div class=" faq-title text-center pb-1 pt-2 ">
         <h5>ACCION</h5>
       </div>
-      <div class=" m-2"><a  (click)="auditarProduccion()"   class="  icon-hover" > <i class="icon-audit texto-success mr-4"></i><label class="texto-roboto  texto-menu texto-bold icon-hover">Auditar producción</label></a></div>   
+     <!--  <div class=" m-2"><a  (click)="auditarProduccion()"   class="  icon-hover" > <i class="icon-audit texto-success mr-4"></i><label class="texto-roboto  texto-menu texto-bold icon-hover">Auditar producción</label></a></div>   
       <div class=" m-2"><a  (click)="finalizarProduccion()" class="  icon-hover " > <i class="icon-audit-important mr-4"></i><label class="texto-roboto texto-menu  texto-bold icon-hover">Finalizar producción</label></a></div>
-
+ -->
         <!-- <div class=" m-2"><a  (click)="stockProduccion()"     class="  icon-hover" > <i class="fas fa-cubes fa-lg  texto-warning mr-2"></i><label class="texto-info  texto-bold icon-hover">Stock de producción</label></a></div>  -->
     </p-overlayPanel> 
     </div>
