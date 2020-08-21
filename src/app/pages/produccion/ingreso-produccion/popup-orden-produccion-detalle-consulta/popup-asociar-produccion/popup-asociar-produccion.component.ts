@@ -28,10 +28,12 @@ export class PopupAsociarProduccionComponent implements OnInit {
   produccionProceso: ProduccionProceso;
   producir = 0;
   lote = '';
-  selectedMaquina:any;
+  selectedMaquina: any = [];
+  selectedDeposito: any = [];
   estado: any[] = [];
-  selectedEstado: string = 'ACTIVO' ;
+  selectedEstado = 'ACTIVO' ;
   maquinas: any[];
+  depositos: any[];
   data: any;
   // tslint:disable-next-line: max-line-length
   constructor(private alertServiceService: AlertServiceService, private produccionService: ProduccionService, public dialogService: DialogService, private messageService: MessageService, private config: DynamicDialogConfig, public ref: DynamicDialogRef) {
@@ -80,6 +82,32 @@ export class PopupAsociarProduccionComponent implements OnInit {
              this.selectedMaquina = this.maquinas[0];
              console.log(this.maquinas);
              this.loading = false;
+             this.loadDeposito();
+         },
+         error => { // error path
+             console.log(error);
+             this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+          });
+     } catch (error) {
+      this.loading = false;
+      this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+     }
+  }
+
+
+  
+  loadDeposito() {
+
+    console.log('maquina');
+    this.loading = true;
+    try {
+         this.produccionService.getDepositos()
+         .subscribe(resp => {
+
+             this.depositos = resp;
+             this.selectedDeposito = this.depositos[1];
+             console.log(this.depositos);
+             this.loading = false;
          },
          error => { // error path
              console.log(error);
@@ -112,13 +140,13 @@ export class PopupAsociarProduccionComponent implements OnInit {
 
     if (_cantidad_existente >= 0) {
       if (!this.checked) {
-            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, '', this.selectedEstado, this.config.data.orden_produccion_detalle_id, this.lote )
+            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, '', this.selectedEstado, this.config.data.orden_produccion_detalle_id, this.lote, this.selectedDeposito.id )
             this.setProduccion(this.produccionProceso);
         } else {
           this._fecha_hasta = formatDate(new Date(this.fecha_hasta), 'yyyy-MM-dd HH:mm:ss', 'en');
           console.log(this._fecha_hasta);
           if (this.producir > 0) {
-            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, this._fecha_hasta, 'FINALIZADO', this.config.data.orden_produccion_detalle_id, this.lote )        
+            this.produccionProceso = new ProduccionProceso('0', this.config.data.id, this.config.data.articulo_id, this.config.data.cantidad_solicitada, _cantidad_usada, _cantidad_existente, this.producir,  this.userData['id'], this.selectedMaquina['id'], this._fecha_desde, this._fecha_hasta, 'FINALIZADO', this.config.data.orden_produccion_detalle_id, this.lote, this.selectedDeposito.id  )        
             this.setProduccion(this.produccionProceso);
           } else {
             // tslint:disable-next-line: max-line-length
@@ -181,7 +209,7 @@ actualizar() {
   
         this.produccionProceso = new ProduccionProceso(this.config.data.id, this.config.data.orden_produccion_detalle_id , this.config.data.articulo_id,
            this.config.data.cantidad_solicitada, this.producir, (this.config.data.cantidad_pendiente - this.producir) , this.producir,  this.userData['id'], this.selectedMaquina['id'],
-            this._fecha_desde, this._fecha_hasta, this.selectedEstado, this.config.data.orden_produccion_detalle_id, this.lote );
+            this._fecha_desde, this._fecha_hasta, this.selectedEstado, this.config.data.orden_produccion_detalle_id, this.lote , this.selectedDeposito.id );
       //  this.setProduccion(this.produccionProceso);
   
         this.produccionService.updProduccionProceso(this.config.data.id, this.produccionProceso)

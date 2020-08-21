@@ -19,6 +19,8 @@ export class StockMovimiento {
     private importe_dolares: number;
     private importe_total_dolares: number;
     private importe_cotizacion_dolares: number;
+    private ultimo_deposito_id:string;
+
     constructor(
         id:string,
         insumo_id:string,
@@ -38,7 +40,8 @@ export class StockMovimiento {
         nombre: string,
         importe_dolares: number,
         importe_total_dolares: number,
-        importe_cotizacion_dolares:number
+        importe_cotizacion_dolares:number,
+        ultimo_deposito_id:string
     ) {
 
         this.id = id;
@@ -60,6 +63,7 @@ export class StockMovimiento {
         this.importe_dolares = importe_dolares;
         this.importe_total_dolares = importe_total_dolares;
         this.importe_cotizacion_dolares = importe_cotizacion_dolares;
+        this.ultimo_deposito_id = ultimo_deposito_id;
     }
 
 }

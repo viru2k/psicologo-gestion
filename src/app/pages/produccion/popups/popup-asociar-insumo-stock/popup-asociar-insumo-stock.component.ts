@@ -162,6 +162,8 @@ export class PopupAsociarInsumoStockComponent implements OnInit {
             element.orden_produccion_detalle_id = this.config.data.orden_produccion_detalle_id;
             element.cantidadEstimada = this.cantidadEstimada;
             element.usuario_alta_id = this.userData['id'];
+            element.deposito_id = 2;
+            element.ultimo_deposito_id = 2;
             this.elementosAsociar.push(element);
           }
           console.log(this.elementosAsociar);

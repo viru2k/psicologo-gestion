@@ -7,6 +7,7 @@ import { formatDate } from '@angular/common';
 import { StockMovimiento } from '../../../../models/stock-movimiento.model';
 import { Filter } from './../../../../shared/filter';
 import { PopupInsumoListadoComponent } from '../../popup-insumo-listado/popup-insumo-listado.component';
+import { ProduccionService } from './../../../../services/produccion.service';
 
 @Component({
   selector: 'app-popup-insumo-alta',
@@ -33,15 +34,16 @@ export class PopupInsumoAltaComponent implements OnInit {
   selectedTipo = 'unidad';
   fecha: Date;
   userData: any;
-
   _nombre: any[] = [];
   _grupo_nombre: any[] = [];
-
   valor_dolar_cotizacion = 1;
   valor_dolar = 1;
   valor_total_pesos = 1;
+  selectedDeposito: any;
+  deposito: any[] = [];
   // tslint:disable-next-line: max-line-length
-  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService, 
+  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,
+    public dialogService: DialogService, private messageService: MessageService, private produccionService: ProduccionService,
     public ref: DynamicDialogRef, private filter: Filter) {
 
     this.cols = [
@@ -67,6 +69,8 @@ export class PopupInsumoAltaComponent implements OnInit {
  //   this.loadlist();
   }
 
+
+  
   loadlist(element: any[]) {
 
     let t: StockMovimiento;
@@ -168,6 +172,36 @@ agregarInsumo() {
 
 }
 
+onChangeDeposito(e) {
+  console.log(e.target.value);
+  this.selectedDeposito = e.target.value;
+}
+
+
+
+loadDeposito() {
+
+  console.log('maquina');
+  this.loading = true;
+  try {
+       this.produccionService.getDepositos()
+       .subscribe(resp => {
+
+           this.deposito = resp;
+           this.selectedDeposito = this.deposito[0];
+           console.log(this.deposito);
+           this.loading = false;
+       },
+       error => { // error path
+           console.log(error);
+           this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+        });
+   } catch (error) {
+    this.loading = false;
+    this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+   }
+}
+
 guardar() {
   
   // ARMO EL ARREGLO DE LOS ELEMENTOS QUE TIENEN CANTIDAD
@@ -223,6 +257,7 @@ setColorColumn(color: string) {
 
   // return  'color: ' + color + '!important;';
 }
+
 
 
 

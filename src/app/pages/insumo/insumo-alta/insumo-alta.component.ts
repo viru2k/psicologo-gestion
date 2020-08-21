@@ -27,13 +27,13 @@ export class InsumoAltaComponent implements OnInit {
   totalCantidad = 0;
   totalUsado = 0;
   totalExistencia = 0;
-  elementosFiltrados:any[] = null;
+  elementosFiltrados: any[] = null;
   _nombre: any[] = [];
 
 
   // tslint:disable-next-line: max-line-length
   constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService,
-              private exporterService: ExporterService ,private filter: Filter ) {
+              private exporterService: ExporterService , private filter: Filter ) {
 
     this.cols = [
       { field: 'nombre', header: 'Insumo',  width: '30%' },

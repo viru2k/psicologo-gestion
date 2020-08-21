@@ -6,7 +6,7 @@ import { StockMovimiento } from './../../../models/stock-movimiento.model';
 import { Filter } from './../../../shared/filter';
 import { formatDate } from '@angular/common';
 import { calendarioIdioma } from 'src/app/config/config';
-
+import { ProduccionService } from './../../../services/produccion.service';
 
 
 @Component({
@@ -41,9 +41,11 @@ export class PopupInsumoListadoComponent implements OnInit {
   valor_dolar_cotizacion = 1;
   valor_dolar = 1;
   valor_total_pesos = 1;
-
+  selectedDeposito: any = [];
+  deposito: any[] = [];
   // tslint:disable-next-line: max-line-length
-  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,  public dialogService: DialogService, private messageService: MessageService, 
+  constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,
+      public dialogService: DialogService, private messageService: MessageService, private produccionService: ProduccionService,
     public ref: DynamicDialogRef, private filter: Filter) {
 
     this.cols = [
@@ -73,6 +75,7 @@ export class PopupInsumoListadoComponent implements OnInit {
     this.fecha = new Date();
     console.log('cargando insumo');
     this.loadlist();
+    
   }
 
   loadlist() {
@@ -88,7 +91,7 @@ export class PopupInsumoListadoComponent implements OnInit {
             this.elementos.forEach(ele => {
               ele.a_ingresar = 0;
             });
-
+            this.loadDeposito();
               } else {
                 this.elementos = null;
               }
@@ -116,6 +119,7 @@ accion(evt: any, event: any) {
   this.valor_dolar =  Number(this.elemento.precio_unitario);
   this.valor_total_pesos = Number(this.elemento.precio_unitario);
   this.display = true;
+  this.selectedDeposito = this.deposito[0];
 }
 
 //cuando oprimo escape
@@ -150,12 +154,44 @@ confirmarCantidad() {
   this.elemento.valor_total_pesos = this.valor_total_pesos ;
   this.elemento.total_renglon = this.valor_total_pesos * this.cantidad_calculada;
   this.elemento.lote = this.lote;
+  this.elemento.ultimo_deposito_id = this.selectedDeposito.id;
   this.display = false;
   this.cantidad = 0;
   this.cantidad_calculada = 0;
   this.comprobante = 'X-00000-00000000';
   this.lote = '';
   this.selectedTipo = 'unidad';
+  this.selectedDeposito = this.deposito[0];
+}
+
+
+onChangeDeposito() {
+ // console.log(e.target.value);
+  console.log(this.selectedDeposito);  
+}
+
+
+
+loadDeposito() {
+  
+  this.loading = true;
+  try {
+       this.produccionService.getDepositos()
+       .subscribe(resp => {
+
+           this.deposito = resp;
+           this.selectedDeposito = this.deposito[0];
+           console.log(this.deposito[0]);
+           this.loading = false;
+       },
+       error => { // error path
+           console.log(error);
+           this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+        });
+   } catch (error) {
+    this.loading = false;
+    this.alertServiceService.throwAlert('error', 'Error: ' + error.status + '  Error al cargar los registros', '', '500');
+   }
 }
 
 guardar() {
@@ -169,7 +205,7 @@ guardar() {
       console.log(ele);
       ele.fecha = formatDate(new Date(), 'yyyy-MM-dd', 'en') ;
       // tslint:disable-next-line: max-line-length
-      t = new StockMovimiento('', ele.id, ele.comprobante, ele.lote, ele.a_ingresar, 0, ele.a_ingresar, ele.valor_total_pesos, ele.valor_dolar, ele.total_renglon, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descripcion, ele.nombre, ele.valor_dolar,ele.valor_total_pesos, ele.valor_dolar_cotizacion) ;
+      t = new StockMovimiento('', ele.id, ele.comprobante, ele.lote, ele.a_ingresar, 0, ele.a_ingresar, ele.valor_total_pesos, ele.valor_dolar, ele.total_renglon, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descripcion, ele.nombre, ele.valor_dolar,ele.valor_total_pesos, ele.valor_dolar_cotizacion, ele.ultimo_deposito_id) ;
       this.elementoFinal.push (t);
     }
   }
@@ -191,6 +227,7 @@ setColorColumn(color: string) {
 
   // return  'color: ' + color + '!important;';
 }
+
 
 
 

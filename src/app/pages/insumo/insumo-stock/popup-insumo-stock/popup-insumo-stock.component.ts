@@ -4,6 +4,9 @@ import { AlertServiceService } from '../../../../services/alert-service.service'
 import { DialogService } from 'primeng/components/common/api';
 import { MessageService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/api';
 import { PopupInsumoStockDetalleProduccionComponent } from '../popup-insumo-stock-detalle-produccion/popup-insumo-stock-detalle-produccion.component';
+import { Filter } from './../../../../shared/filter';
+import { formatDate } from '@angular/common';
+import { ExporterService } from './../../../../services/exporter.service';
 
 @Component({
   selector: 'app-popup-insumo-stock',
@@ -15,9 +18,13 @@ export class PopUpInsumoStockComponent implements OnInit {
   userdata: any;
   loading;
   elementos: any[];
+  elementosFiltrados: any[] = null;
+  _descripcion: any[] = [];
+  _nombre: any[] = [];
 
   constructor(private insumoService: InsumoService, private alertServiceService: AlertServiceService,
-    public ref: DynamicDialogRef, public config: DynamicDialogConfig, public dialogService: DialogService, private messageService: MessageService) { 
+    public ref: DynamicDialogRef, public config: DynamicDialogConfig, public dialogService: DialogService, private messageService: MessageService ,
+    private exporterService: ExporterService , private filter: Filter) { 
       this.cols = [
         { field: 'nombre', header: 'Insumo',  width: '30%' },
         { field: 'comprobante', header: 'Comp. nº',  width: '18%' },
@@ -27,6 +34,7 @@ export class PopUpInsumoStockComponent implements OnInit {
         { field: 'cantidad', header: 'Cant. ingresada',  width: '12%' },
         { field: 'cantidad_usada', header: 'Usado',  width: '12%' },
         { field: 'cantidad_existente', header: 'Existencia',  width: '12%' },
+        { field: 'descripcion', header: 'Deposito',  width: '18%' },
       { field: '', header: '',  width: '6%' }
      ];
 }
@@ -46,6 +54,7 @@ export class PopUpInsumoStockComponent implements OnInit {
         this.insumoService.getStockMovimientoByInsumoAndEstado( 'ACTIVO', this.config.data.insumo_id)
         .subscribe(resp => {
           if (resp[0]) {
+            this.realizarFiltroBusqueda(resp);
             this.elementos = resp;
             console.log(this.elementos);
             this.elementos.forEach(ele => {
@@ -83,4 +92,35 @@ detalle(elemento: any) {
   });
 
 }
+
+
+exportarExcel() {
+  const fecha = formatDate(new Date(), 'dd/MM/yyyy hh:mm', 'es-Ar');
+  console.log(this.elementosFiltrados);
+  if (this.elementosFiltrados == null) {
+    this.elementosFiltrados = this.elementos;
+  }
+  this.exporterService.exportAsExcelFile(  this.elementosFiltrados, '_ingreso_insumos_a_stock' );
 }
+
+exportarPdf() {}
+
+realizarFiltroBusqueda(resp: any[]){
+  // FILTRO LOS ELEMENTOS QUE SE VAN USAR PARA FILTRAR LA LISTA
+  this._descripcion = [];
+  this._nombre = [];
+  
+  resp.forEach(element => {
+    this._descripcion.push(element.descripcion);
+    this._nombre.push(element.nombre);
+  });
+  
+  // ELIMINO DUPLICADOS
+  this._descripcion = this.filter.filterArray(this._descripcion);
+  this._nombre = this.filter.filterArray(this._nombre);
+
+
+}
+
+}
+

@@ -17,7 +17,7 @@ export class ProduccionProceso {
     private lote: string;
 
     private ProduccionProceso: [];
-
+    private deposito_id: string;
 
     constructor(
         id: string,
@@ -33,7 +33,8 @@ export class ProduccionProceso {
         hora_fin: string,
         estado: string,
         orden_produccion_detalle_id: string,
-        lote: string
+        lote: string,
+        deposito_id: string
         ){
             this.id = id;
             this.orden_produccion_id = orden_produccion_id;
@@ -49,6 +50,7 @@ export class ProduccionProceso {
             this.estado = estado;
             this.orden_produccion_detalle_id = orden_produccion_detalle_id;
             this.lote = lote;
+            this.deposito_id = deposito_id;
         }
 
 }
