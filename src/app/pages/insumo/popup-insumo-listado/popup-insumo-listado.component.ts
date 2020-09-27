@@ -26,6 +26,7 @@ export class PopupInsumoListadoComponent implements OnInit {
   cantidad = 0;
   comprobante: string = 'X-00000-00000000';
   lote = '';
+  fecha_vencimiento = new Date();
   cantidad_calculada = 0;
   display;
   elemento: any;
@@ -154,6 +155,7 @@ confirmarCantidad() {
   this.elemento.valor_total_pesos = this.valor_total_pesos ;
   this.elemento.total_renglon = this.valor_total_pesos * this.cantidad_calculada;
   this.elemento.lote = this.lote;
+  this.elemento.fecha_vencimiento = formatDate(new Date(this.fecha_vencimiento), 'yyyy-MM-dd', 'en');
   this.elemento.ultimo_deposito_id = this.selectedDeposito.id;
   this.display = false;
   this.cantidad = 0;
@@ -205,7 +207,7 @@ guardar() {
       console.log(ele);
       ele.fecha = formatDate(new Date(), 'yyyy-MM-dd', 'en') ;
       // tslint:disable-next-line: max-line-length
-      t = new StockMovimiento('', ele.id, ele.comprobante, ele.lote, ele.a_ingresar, 0, ele.a_ingresar, ele.valor_total_pesos, ele.valor_dolar, ele.total_renglon, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descripcion, ele.nombre, ele.valor_dolar,ele.valor_total_pesos, ele.valor_dolar_cotizacion, ele.ultimo_deposito_id) ;
+      t = new StockMovimiento('', ele.id, ele.comprobante, ele.lote, ele.fecha_vencimiento, ele.a_ingresar, 0, ele.a_ingresar, ele.valor_total_pesos, ele.valor_dolar, ele.total_renglon, this.userData.id, ele.fecha, ele.fecha, 'ACTIVO', ele.descripcion, ele.nombre, ele.valor_dolar,ele.valor_total_pesos, ele.valor_dolar_cotizacion, ele.ultimo_deposito_id) ;
       this.elementoFinal.push (t);
     }
   }

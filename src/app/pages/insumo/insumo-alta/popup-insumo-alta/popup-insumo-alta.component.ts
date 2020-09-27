@@ -26,6 +26,7 @@ export class PopupInsumoAltaComponent implements OnInit {
   cantidad = 0;
   comprobante: string = 'X-00000-00000000';
   lote = '';
+  fecha_vencimiento = new Date();
   cantidad_calculada = 0;
   display;
   elemento: any;

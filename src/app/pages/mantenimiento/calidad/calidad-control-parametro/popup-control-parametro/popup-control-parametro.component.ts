@@ -22,6 +22,10 @@ export class PopupControlParametroComponent implements OnInit {
   selectedForma: any;
   userData: any;
   esActivo = true;
+  rating = 3;
+  rating_msg = '';
+  opciones: any[] = [];
+  selectedOpcion: string = 'NUMERO' ;
 
   constructor(public config: DynamicDialogConfig, private calidadService: CalidadService,
               private alertServiceService: AlertServiceService, public ref: DynamicDialogRef) {
@@ -53,15 +57,30 @@ export class PopupControlParametroComponent implements OnInit {
     this.es_nuevo = true;
     console.log('es nuevo');
   }
+
+
+  this.opciones = [
+    {name: 'NUMERO',      value: 'NUMERO'},
+    {name: 'RANKING',     value: 'RANKING'},
+    {name: 'OPCION',  value: 'OPCION'}    
+];
   }
 
   ngOnInit() {
 
   }
 
+  handleRate(event) {
+    this.rating_msg = "You have rated " + event.value;
+}
+
+
+onChangeOpcion(event){
+  console.log(this.updateDataForm.value);
+}
+
   changeEstado(event){
     console.log(this.updateDataForm.value);
-
   }
 
 

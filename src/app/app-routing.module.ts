@@ -114,7 +114,9 @@ const routes: Routes = [
 
 { path: '404', component: NotFoundComponent },
 { path: '', pathMatch: 'full', redirectTo: 'inicio' },
-{ path: '**', pathMatch: 'full', redirectTo: 'inicio' }];
+{ path: '**', pathMatch: 'full', redirectTo: 'inicio' }
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],

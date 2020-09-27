@@ -4,15 +4,35 @@
                     <div class="col-8">
 
                     <div class="form-group ">
-                        <label  >Calidad Título</label>
+                        <label  >Calidad título</label>
                         <input class="form-control col-md-12 form-control-sm" formControlName="parametro"  autofocus  />
                         <div *ngIf="updateDataForm.controls['parametro'].errors?.required && updateDataForm.controls['parametro'].touched" class="alert alert-warning">
                                 * Este campo es requerido
                         </div>
                     </div> 
+
+
+                    <div class="form-group ">
+                    <label class="mt-1 ml-1 mr-1 ">Opciones :</label>         
+                    <select [(ngModel)]="selectedOpcion" class="form-control-sm text-sm texto-monserrat texto-secondary" (change)="onChangeOpcion($event)" >                        
+                      <option *ngFor="let grupo of opciones" class="text-sm texto-monserrat texto-secondary"    >
+                        <label >{{grupo.name}}</label>              
+                    </option>
+                  </select>
+                    </div>
+                    <div class="form-group ">
+                        <label  >Ranking {{rating_msg}}</label>
+                        <p-rating [(ngModel)]="rating" [cancel]="false" iconOnClass="fas fa-circle icon-color-usuario m-1" iconOffClass="far fa-circle icon-color-azul-neutro m-1" iconCancelClass="far fa-circle icon-color-danger" stars="5"  (onRate)="handleRate($event)"></p-rating>
+                    </div> 
+
+                    <div class="form-group ">
+                        <label  class="mr-2" >Válido / Invalido</label>
+                        <p-checkbox name="groupname" value="estado" formControlName="estado" binary="true" (onChange)="changeEstado($event)"></p-checkbox>                
+                    </div> 
+                 
                     <div class="form-group ">
                         <label  class="mr-2" >Activo / inactivo</label>
-             <p-checkbox name="groupname" value="estado" formControlName="estado" binary="true" (onChange)="changeEstado($event)"></p-checkbox>                
+                        <p-checkbox name="groupname" value="estado" formControlName="estado" binary="true" (onChange)="changeEstado($event)"></p-checkbox>                
                     </div> 
 
                     </div>

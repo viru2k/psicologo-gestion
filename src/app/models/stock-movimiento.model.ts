@@ -5,6 +5,7 @@ export class StockMovimiento {
     private insumo_id:string;
     private comprobante:string;
     private lote:string;
+    private fecha_vencimiento: string;
     private cantidad:number;
     private cantidad_usada: number;
     private cantidad_existente: number;
@@ -26,6 +27,7 @@ export class StockMovimiento {
         insumo_id:string,
         comprobante: string,
         lote: string,
+        fecha_vencimiento: string,
         cantidad:number,
         cantidad_usada: number,
         cantidad_existente: number,
@@ -48,6 +50,7 @@ export class StockMovimiento {
         this.insumo_id = insumo_id;
         this.comprobante = comprobante;
         this.lote = lote;
+        this.fecha_vencimiento = fecha_vencimiento;
         this.cantidad = cantidad;
         this.cantidad_usada = cantidad_usada;
         this.cantidad_existente = cantidad_existente;
