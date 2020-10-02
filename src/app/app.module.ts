@@ -3,7 +3,7 @@ import { NgModule, Injector, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { LoginComponent } from './login/login.component';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { RouterModule } from '@angular/router';
@@ -259,9 +259,11 @@ import { PopupAsociarInsumoStockComponent } from './pages/produccion/popups/popu
     DepositoEditarComponent,
     NotificacionPersonalComponent,
     PopupInsumoListadoComponent,
-    PopupAsociarInsumoStockComponent
+    PopupAsociarInsumoStockComponent,
+    LoginComponent
   ],
   imports: [
+
 
 
     BrowserModule,

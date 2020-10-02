@@ -41,9 +41,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                   }); */
                   console.log('intentando cerrar sesion');
                   this.authenticationService.logout();
-                  this.router.navigateByUrl('/inicio');
+                  this.router.navigateByUrl('/login');
                   window.location.reload();
-                if (this.router.url === '/inicio') {
+                if (this.router.url === '/login') {
                     
                 } else {
                  

@@ -6,7 +6,7 @@ import { EmptyComponent } from './pages/info/empty/empty.component';
 import { NotFoundComponent } from './pages/info/not-found/not-found.component';
 import { ProduccionindicadoresComponent } from './pages/produccion/produccionindicadores/produccionindicadores.component';
 import { CalidadindicadoresComponent } from './pages/calidad/calidadindicadores/calidadindicadores.component';
-
+import { LoginComponent } from './login/login.component';
 import { ArticuloComponent } from './pages/mantenimiento/articulo/articulo.component';
 import { ArticuloConfeccionComponent } from './pages/mantenimiento/articulo-confeccion/articulo-confeccion.component';
 import { InsumoComponent } from './pages/mantenimiento/insumo/insumo.component';
@@ -22,6 +22,7 @@ import { ProduccionProcesoComponent } from './pages/produccion/produccion-proces
 import { MaquinaComponent } from './pages/mantenimiento/maquina/maquina.component';
 import { AsociarInsumoAltaComponent } from './pages/produccion/asociar-insumo/asociar-insumo-alta/asociar-insumo-alta.component';
 import { InsumoAltaComponent } from './pages/insumo/insumo-alta/insumo-alta.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 import { CalidadControlEncabezadoComponent } from './pages/mantenimiento/calidad/calidad-control-encabezado/calidad-control-encabezado.component';
 import { CalidadControlParametroComponent } from './pages/mantenimiento/calidad/calidad-control-parametro/calidad-control-parametro.component';
@@ -40,7 +41,18 @@ import { NotificacionPersonalComponent } from './pages/mantenimiento/notificacio
 
 const routes: Routes = [
 
-{ path: 'inicio', component: EmptyComponent },
+
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                              PAGINAS DEL SITIO                             */
+/* -------------------------------------------------------------------------- */
+  { path: 'login', component: LoginComponent },
+  { path: '404', component: NotFoundComponent },
+  { path: '',
+    component: NavbarComponent,
+    children: [
 
 
 
@@ -108,18 +120,16 @@ const routes: Routes = [
 { path: 'movil/insumo/stock/ingreso', component: MobilInsumoDetalleComponent },
 { path: 'movil/insumo/stock/ingreso', component: MobilInsumoDetalleComponent },
 
-/* -------------------------------------------------------------------------- */
-/*                              PAGINAS DEL SITIO                             */
-/* -------------------------------------------------------------------------- */
-
-{ path: '404', component: NotFoundComponent },
-{ path: '', pathMatch: 'full', redirectTo: 'inicio' },
-{ path: '**', pathMatch: 'full', redirectTo: 'inicio' }
-
+    ]
+ },
+  { path: '**', component: NavbarComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
+
+
 
 
 

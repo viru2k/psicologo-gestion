@@ -1,51 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 /****************FUENTES PARA USAR ******************/
 
-@import "~bootstrap/scss/bootstrap.scss";
 @import url('https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|Open+Sans|Oxygen&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap');
 
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans|Oxygen&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap');
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 
-/* -------------------------------------------------------------------------- */
-/*                                 PIVOT TABLE                                */
-/* -------------------------------------------------------------------------- */
-
-/* @import '../node_modules/@syncfusion/ej2-base/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-grids/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
-@import '../node_modules/@syncfusion/ej2-angular-pivotview/styles/material.css'; */
-
-@import './assets/css/iconos.scss';
 /* ---------- MODIFICA LA ESTETICA DE UNA COLUMNA DE FORMA DINAMICA --------- */
 
 $custom-grid: var(--custom-primary-color);
 //$color-menu: #a8dadc;
- $color-menu: #714674;  //COLOR DEL MENU
-$color-menu-text: #faedcb; // COLOR DEL TEXTO
-$background-soft : #EDE7F6;
+ $color-menu: #457b9d; 
+$color-menu-text: #f1faee;
+$background-soft : #caf0f8;
 
-//BARRAS
-//#00afb9; 714674 #ef8354;
-
-//TEXTO
-
-// #faedcb; #3a506b; 4f5d75
 .change-grid-color {
     color: $custom-grid!important;
     font-weight: bold;
     font-family: 'Oxygen', sans-serif;
   }
+
+.fuente {
+   font-family: 'Montserrat', sans-serif !important ;
+}
+
 
 h6{
     font-family: 'Montserrat', sans-serif !important ;
@@ -59,15 +43,8 @@ a{
     font-family: 'Montserrat', sans-serif !important ;
 }
 
-.texto-llamador {
-    text-align:center;
-    font-size:90px;
-    font-family: 'Varela Round', sans-serif !important;
-    color: #3d5a80 !important;
-}
-
 .background-fondo{
-    background-color: #e5e5e5 !important;
+    background-color: $background-soft;
 }
 .fondor-relleno{
     width: 100%;
@@ -105,8 +82,7 @@ a{
 
 .prime-table{
     text-align:center;
-    font-size:10px;
-    font-family: 'Yellowtail', cursive !important;
+    font-size:12px;
   } 
 
   
@@ -197,13 +173,14 @@ a{
     cursor: pointer;
 }
 
-.icon-color-azul-neutro{
+
+
+.icon-color-blue{
     color: #457b9d!important;
 }
 
-
 .icon-color-user-setting{
-    color: $color-menu-text!important;
+    color: #E0E0E0!important;
 }
 
 .icon-color-clinica-setting{
@@ -215,9 +192,20 @@ a{
 }
 
 
+.icon-color-rosa{
+    color: #ef233c!important;
+}
+
+.icon-color-informacion{
+    color: #457b9d!important;
+}
 
 .icon-color-usuario{
     color: #00BCD4!important;
+}
+
+.icon-color-verde-oscuro{
+    color: #00a896!important;
 }
 
 .icon-color-clinica{
@@ -497,7 +485,7 @@ border: 1px  #AED581!important;
   }
 
 
-  /**รง
+  /**ç
   alineaciones*/
 
   .alineacion-flexbox { 
@@ -552,69 +540,69 @@ border: 1px  #AED581!important;
 
   .ui-menubar  {
 
-    background: #457b9d !important;   
-    color: #457b9d !important;
-    border-color: #457b9d !important;
+    
+    background: $color-menu !important;
+    color:$color-menu !important;
+    border-color: $color-menu !important;
     font-family: 'Montserrat', sans-serif;
     padding:  0px !important;
     padding-left: 5px;
-    border-radius: 0 !important;
+
     
-  
 }
 
-.ui-menu-list{
-    
-    background: #ffffff !important;
-    color: #ffffff !important;
-    border-color: #ffffff !important;
-    font-family: 'Montserrat', sans-serif;
-    padding:  0px !important;
-    border-radius: 0 !important;
-} 
-
 .ui-menuitem{
-    background-color: #457b9d !important;
-   background: #457b9d !important;
-    color: #457b9d !important;
-    border-color: #457b9d !important;
+
+    background: $color-menu-text !important;
+    color: $color-menu-text !important;
+    border-color: $color-menu-text !important;
+    font-family: 'Montserrat', sans-serif;
     margin:  0em !important;
     padding: 0em !important;
     border-radius: 0 !important;
   
-} 
+}
 
 .ui-menuitem-text {
-    color: #ffffff !important;
+    border-color: $color-menu !important;
+    color: $color-menu-text !important;
     font-family: 'Montserrat', sans-serif;
-    //padding: 15px;
-    padding-top: 20px;
-    padding-bottom: 25px;
-    //align-items:center ;
-}
-
-.ui-submenu-icon{
-    color: #F3E5F5 !important;
-   // background: #5C6BC0 !important;
+    
 }
 
 
+.ui-menu-list{
+
+    background: $color-menu !important;
+    color: $color-menu !important;
+    border-color: $color-menu !important;
+    font-family: 'Montserrat', sans-serif !important;
+    
+}
 
 .ui-menuitem-link{
 
-    background: #457b9d !important;
-    color: #457b9d !important;
+    background: $color-menu !important;
+    color: $color-menu !important;
     font-family: 'Montserrat', sans-serif;
     margin: 0px;
     padding: 8px !important;
     border-radius: 0 !important;
+    border: none;
+  
 }
 
 .ui-menuitem-icon {
-    margin:  0em !important;
-    padding: 0em !important;
-     color: #457b9d !important;
-      background: #457b9d !important;
+   /* background-image: url('pathToYourSprite.svg');
+    background-position: 0 0; /* closed position */
+     color: #548ddb !important;
+      background: #548ddb !important;
+}
+
+
+.ui-submenu-icon{
+    color: $color-menu-text !important;
+    background: $color-menu !important;
 }
 
 
@@ -637,31 +625,10 @@ FIN  ESTILO DE LA BARRA
     border-radius: 5px;    
     outline-color: #1B5E20!important; 
     color: #FFFFFF!important;
-    outline: 0;   
-}
-
-.btn-excel-outline{
-    background:  #1B5E20!important; 
-    border:  #1B5E20!important;
-    border-radius: 5px;    
-    outline-color: #1B5E20!important; 
-    color: #FFFFFF!important;
     outline: 0;
     
 }
 
-
-
-.btn-pdf{
-    background:  #64a6bd!important; 
-    border:  #64a6bd!important;
-    border-width: medium;
-    border-radius: 3px;    
-    outline-color: #64a6bd!important; 
-    color: #ffffff!important;
-    outline: 0;
-    
-}
 
 
 
@@ -859,7 +826,7 @@ body {
     margin-top: 3px;
     min-width: 25px;
     min-height: 30px;
-    background-color: #EDE7F6;
+    background-color: #F5F5F5;
 
 }
 
@@ -928,7 +895,7 @@ body {
   .faq .card {
   border: none;
   background: none;
-  border-bottom: 1px dashed #ecf8f8;
+  border-bottom: 1px dashed #CEE1F8;
   }
   
   .faq .card .card-header {
