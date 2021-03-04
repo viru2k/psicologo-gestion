@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
 
      function showValidate(input) {
          let thisAlert = $(input).parent();
- 
+
          $(thisAlert).addClass('alert-validate');
      }
      function hideValidate(input) {
@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
 
 
  });
- 
+
       /*======== FIN JQUERY DEL LOGUIN =========*/
   }
 
@@ -133,7 +133,7 @@ export class LoginComponent implements OnInit {
 
 
 login() {
-  
+
 this.loading = true;
 this.loadingmensaje = 'Validando usuario';
 this.authenticationService.login(this.f.username.value, this.f.password.value)
@@ -166,7 +166,7 @@ this.authenticationService.login(this.f.username.value, this.f.password.value)
 
 loadUser() {
 
-  this.loading = true;
+/*   this.loading = true;
   try {
     this.loadingmensaje = 'Obteniendo modulos del usuario';
     this.miServico.getItemInfoAndMenu(this.f.username.value)
@@ -198,12 +198,15 @@ loadUser() {
 
        });
   } catch (error) {
-  }
+  } */
+  const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  window.location.reload();
   }
 
   calcularRandom() {
     this.numero = Math.floor(Math.random() * 9) + 1;
-    
+
   }
 
 }

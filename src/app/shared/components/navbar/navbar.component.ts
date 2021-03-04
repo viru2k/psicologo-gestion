@@ -38,12 +38,12 @@ export class NavbarComponent implements OnInit {
   gerencia = true;
   movil_calidad = true;
   movil_insumo = true;
-  
+  userData: any = null;
 
 
   public username: string;
   public puesto: string;
-  public name: string;
+  public nombreyapellido: string;
   public email: string;
   elemento: User = null;
 
@@ -72,18 +72,18 @@ export class NavbarComponent implements OnInit {
     this.navbarOpen = !this.navbarOpen;
   }
   ngOnInit() {
-      
+
      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
      console.log(this.currentUser);
      if (this.currentUser) {
-      const userData = JSON.parse(localStorage.getItem('userData'));
-      console.log(userData);
+       this.userData = JSON.parse(localStorage.getItem('userData'));
+      console.log(this.userData);
       console.log('usuario logueado');
-      this.username = userData.username;
-      this.name = userData.name;
-      this.email = userData.email;
-      console.log(userData.access_list);
-      this.asignarModulos(userData.access_list);
+      this.username = this.userData.username;
+      this.nombreyapellido = this.userData.nombreyapellido;
+      this.email = this.userData.email;
+     // console.log(this.userData.access_list);
+     // this.asignarModulos(this.userData.access_list);
    } else {
     this.router.navigate(['/login']);
    }
@@ -120,22 +120,22 @@ export class NavbarComponent implements OnInit {
       if (element.modulo_nombre === 'gerencia') {
         this.gerencia = false;
       }
-  
+
       if (element.modulo_nombre === 'movil_calidad') {
         this.movil_calidad = false;
       }
-  
+
       if (element.modulo_nombre === 'movil_insumo') {
         this.movil_insumo = false;
       }
-  
+
     });
-  
+
     /** DESPUES DE ASIGNAR MODULOS VERIFICO LAS NOTIFICACIONES */
-  
+
   }
-  
-  
+
+
 
 accion(evt: any, overlaypanel: OverlayPanel) {
 
@@ -162,7 +162,7 @@ cerrarSesion() {
 
   console.log('sesion terminada');
   this.authenticationService.logout();
-  
+
 
 
   this.gestion_auditoria  = true;
@@ -194,135 +194,6 @@ const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 console.log(currentUser.access_token);
 }
 
-
-/* 
-
-  this.general = [
-
-    {
-
-      label: 'Producción',
-      visible: !this.gestion_produccion,
-      items: [
-        {
-          label: 'Stock de insumos',
-          visible: !this.administracion_produccion,
-          items: [
-            {label: 'Ingresar insumos', visible: !this.gestion_produccion, routerLink: '/insumo/stock/ingreso'},
-            {label: 'Stock de insumos', routerLink: '/insumo/stock'},
-            {label: 'Indicadores de stock insumos', routerLink: '/insumo/indicadores'},
-          ]
-      },
-        {
-            label: 'Planificación de producción',
-            visible: !this.administracion_produccion,
-            items: [
-              {label: 'Orden de producción', visible: !this.gestion_produccion, routerLink: 'orden/produccion'},
-              {label: 'Detalle de ordenes de producción', routerLink: '/produccion/ingreso'},
-              {label: 'Producciones activas', routerLink: '/produccion/proceso'},
-            ]
-        },
-        {
-          label: 'Gestión de producción',
-          visible: !this.gestion_produccion,
-          items: [
-            {label: 'Cargar producción', routerLink: 'produccion/ingreso'},
-            {label: 'Asociar insumos a producción', routerLink: 'produccion/asociar/insumo'},
-            {label: 'Movimientos de producción', routerLink: 'produccion/movimientos'},
-            {label: 'Movimientos de insumos', routerLink: 'insumo/movimientos'},
-          ]
-      },
-
-      ]
-  },
-  {
-    label: 'Gerencia',
-    visible: !this.gerencia,
-    items: [
-      {label: 'Producción', routerLink: 'orden/produccion'},
-      {label: 'Procesos de producción', routerLink: '/produccion/proceso'},
-      {label: 'Control de calidad', routerLink: 'control/calidad'},
-      {label: 'Controles de realizados', routerLink: '/control/calidad/produccion'},
-      {label: 'Insumos', routerLink: 'gerencia/insumo'},
-    ]
-  },
-
-  {
-    label: 'Auditoria',
-    visible: !this.gestion_auditoria,
-    items: [
-      {label: 'Control de producción', routerLink: '/control/calidad/produccion'},
-      {
-            label: 'Indicadores',
-            items: [
-              {label: 'Controles realizados', visible: !this.gestion_auditoria, routerLink: '/control/calidad'},
-              {label: 'Lineas de producción', visible: !this.gestion_auditoria, routerLink: '/control/linea'},
-
-            ]
-        }
-    ]
-  },
-
-
-
-    {label: 'Realizar control',   visible: !this.movil_calidad, routerLink: '/movil/control/calidad'},
-    {label: 'Ingreso de insumo',  visible: !this.movil_insumo, routerLink: '/movil/insumo/stock/ingreso'},
-
-
-
-  {
-    label: 'Ventas',
-    visible: !this.administracion_produccion,
-    items: [
-      {label: 'Orden de pedido', routerLink: '/ventas/orden/pedido'},
-      {label: 'Stock en depósito', routerLink: '/ventas/stock'},
-      {
-            label: 'Estadistica',
-            items: [
-              {label: 'Producccion', visible: !this.administracion_produccion, routerLink: '/ventas/estadistica/produccion'},
-              {label: 'Stock', visible: !this.administracion_produccion, routerLink: '/ventas/estadistica/stock'},
-
-            ]
-        }
-    ]
-  },
-
-
-  {
-
-    label: 'Mantenimiento',
-    items: [{
-            label: 'Parametros',
-            visible: !this.administracion_produccion,
-            items: [
-              {label: 'Producto', routerLink: 'mantenimiento/articulo'},
-              {label: 'Insumo', routerLink: 'mantenimiento/insumo'},
-              {label: 'Armado de producto', routerLink: 'mantenimiento/articulo/confeccion'},
-              {label: 'Unidad', routerLink: 'mantenimiento/unidad'},
-              {label: 'Grupo de insumos', routerLink: 'mantenimiento/grupo/analisis'},
-              {label: 'Grupos', routerLink: 'mantenimiento/grupo'},
-              {label: 'Lineas de producción', routerLink: 'mantenimiento/lineas/produccion'},
-              {label: 'Depósito', routerLink: 'mantenimiento/deposito'},
-            ]
-        },
-        {
-            label: 'Calidad',
-            visible: !this.administarcion_auditoria,
-            items: [
-              {label: 'Encabezado', routerLink: 'mantenimiento/calidad/encabezado'},
-              {label: 'Parametros', routerLink: 'mantenimiento/calidad/parametro'},
-              {label: 'Confección de planilla', routerLink: 'mantenimiento/calidad/encabezado/parametro'}
-          ]
-      },
-      {label: 'Usuario', visible: !this.mantenimiento, routerLink: 'usuario'},
-      {label: 'Notificaciones',  routerLink: 'mantenimiento/notificaciones/personal'}
-      
-    ]
-  }
-
-];
-
- */
 
 
 

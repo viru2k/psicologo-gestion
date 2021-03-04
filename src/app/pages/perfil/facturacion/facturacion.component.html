@@ -1,0 +1,35 @@
+<div class="row m-2 ui-fluid">
+    <p-table  #dt class="pt-2 mb-2" tableStyleClass="prime-table" selectionMode="single" [columns]="cols"  [value]="elementos"    columnResizeMode="expand" [responsive]="true"
+    scrollHeight="400px" [scrollable]="true" >
+             
+                <ng-template pTemplate="header" let-columns  [pSelectableRow]="elementos" > 
+                    <tr>
+                        <th  *ngFor="let col of columns" [pSortableColumn]="col.field" [width]="col.width"  >
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"  ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                        </th>
+                     
+                    </tr>
+                    <tr>
+                        <th *ngFor="let col of columns" [ngSwitch]="col.field" >
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'id_liquidacion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_fecha'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" autofocus>
+                         
+                        </th>
+                    </tr>
+                </ng-template>
+      
+                <ng-template pTemplate="body" let-elementos >
+                  <tr style="height:20px" >
+                    <td style="width: 10%">{{elementos.id_liquidacion}}</td>
+                    <td style="width: 15%">{{elementos.mat_matricula}}</td>
+                    <td style="width: 50%">{{elementos.matricula_psicologo}}</td>
+                    <td style="width: 15%">{{elementos.fecha_subida | date :'dd/MM/yyyy hh:mm:ss'}}</td>
+                    <td style="width: 10%">
+                      <a class="my-hover " href="{{this.descarga}}{{elementos.url}}" target="_blank"><i class="far fa-file-pdf icon-user-colegio fa-2x"></i></a>
+                      
+                    </td>
+               
+            </tr>
+        </ng-template>
+    </p-table>

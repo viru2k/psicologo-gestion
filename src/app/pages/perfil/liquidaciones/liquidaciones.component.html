@@ -1,0 +1,87 @@
+<div class="header-inicio   cuadro-size mb-2">
+    <div class=" faq-title text-center pb-3 ">
+        <h5 class="mt-3">  MIS LIQUIDACIONES</h5>
+    </div>
+
+    <div class="  m-3 card">
+      <div class="row mt-2 ">
+       <h6 class="d-flex justify-content-start  colorgris animated fadeIn slow ml-5">MATRICULA Nº : {{matricula}}</h6>
+
+      </div>
+      <div class=" mt-2 ">
+       <p class="d-flex justify-content-start  colorgris animated fadeIn slow ml-2 text-danger">
+          * Si el comprobante de ingresos brutos figura con el valor cero puede deberse a que todavía no han sido
+          generado los comprobantes o  en casos donde el bruto es menor a $1500 no aplica</p>
+       </div>
+
+       <div class=" mt-2 ">
+         <p class="d-flex justify-content-start  colorgris animated fadeIn slow ml-2 text-info">
+          * Recorda de ver el detalle de cada liquidación, recorda que el listado es un resumen
+           y pueden no reflejar adecuadamente el contenido
+         </p>
+         </div>
+   </div>
+
+<app-loading *ngIf="loading"></app-loading>
+<div class="card m-2">
+
+
+
+
+    <div class="row m-2 ui-fluid">
+    <p-table  #dt class="pt-2 mb-2" tableStyleClass="prime-table" selectionMode="single" [columns]="cols"  [value]="elementos"    columnResizeMode="expand" [responsive]="true"
+    scrollHeight="400px" [scrollable]="true" >
+
+                <ng-template pTemplate="header" let-columns  [pSelectableRow]="elementos" >
+                    <tr>
+                        <th  *ngFor="let col of columns" [pSortableColumn]="col.field" [width]="col.width"  >
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"  ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th *ngFor="let col of columns" [ngSwitch]="col.field" >
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'id_liquidacion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'num_comprobante'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" autofocus>
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_num_ing_bruto'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_liq_bruto'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_desc_fondo_sol'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_desc_matricula'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_gasto_admin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_imp_cheque'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_ing_brutos'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_lote_hogar'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
+                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_liq_neto'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
+                        </th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-elementos   >
+                  <tr style="height:20px" *ngIf="elementos.num_comprobante !== 0">
+                    <td style="width: 6%">{{elementos.id_liquidacion}}</td>
+                    <td style="width: 8%">{{elementos.num_comprobante}}</td>
+                    <td style="width: 8%">{{elementos.os_num_ing_bruto}}</td>
+                    <td style="width: 8%">{{elementos.os_liq_bruto}}</td>
+                    <td style="width: 8%">{{elementos.os_desc_fondo_sol |  number : '1.2-2'}}</td>
+                    <td style="width: 8%">{{elementos.os_desc_matricula |  number : '1.2-2'}}</td>
+                    <td style="width: 8%">{{elementos.os_gasto_admin |  number : '1.2-2'}}</td>
+                    <td style="width: 8%">{{elementos.os_imp_cheque |  number : '1.2-2'}}</td>
+                    <td style="width: 8%">{{elementos.os_ing_brutos |  number : '1.2-2'}}</td>
+                    <td style="width: 8%">{{elementos.os_lote_hogar |  number : '1.2-2'}}</td>
+                    <td style="width: 8%">{{elementos.os_liq_neto |  number : '1.2-2'}}</td>
+                    <td style="width: 8%">
+                        <button   type="button" class="btn btn-outline-info btn-sm" (click)="verDetalle(elementos)"    >Detalle</button>
+                    </td>
+                    <td style="width: 8%">
+                        <button   type="button" class="btn btn-outline-secondary btn-sm" (click)="generarPdfRentas(elementos)"    >Ing. Br.</button>
+                    </td>
+                    <td style="width: 12%">
+                        <button   type="button" class="btn btn-outline-success btn-sm" (click)="verFactura(elementos)"    >Subir factura</button>
+                    </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+  </div>
