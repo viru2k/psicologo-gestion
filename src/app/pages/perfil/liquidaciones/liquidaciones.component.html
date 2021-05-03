@@ -40,14 +40,13 @@
                         </th>
 
                     </tr>
-                    <tr>
+                    <!--    <tr>
                         <th *ngFor="let col of columns" [ngSwitch]="col.field" >
-                            <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'id_liquidacion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                         <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'id_liquidacion'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'num_comprobante'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" autofocus>
                             <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_num_ing_bruto'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
                             <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_liq_bruto'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_desc_fondo_sol'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-
                             <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_desc_matricula'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_gasto_admin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                             <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_imp_cheque'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
@@ -55,30 +54,31 @@
                             <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_lote_hogar'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
                             <input class="form-control col-md-12 form-control-sm"  *ngSwitchCase="'os_liq_neto'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" >
                         </th>
-                    </tr>
+                    </tr>-->
                 </ng-template>
 
                 <ng-template pTemplate="body" let-elementos   >
                   <tr style="height:20px" *ngIf="elementos.num_comprobante !== 0">
                     <td style="width: 6%">{{elementos.id_liquidacion}}</td>
+                    <td style="width: 12%">{{elementos.os_fecha | date: 'dd/MM/yyyy'}}</td>
                     <td style="width: 8%">{{elementos.num_comprobante}}</td>
                     <td style="width: 8%">{{elementos.os_num_ing_bruto}}</td>
-                    <td style="width: 8%">{{elementos.os_liq_bruto}}</td>
-                    <td style="width: 8%">{{elementos.os_desc_fondo_sol |  number : '1.2-2'}}</td>
+                <!--    <td style="width: 8%">{{elementos.os_liq_bruto}}</td>
+                     <td style="width: 8%">{{elementos.os_desc_fondo_sol |  number : '1.2-2'}}</td>
                     <td style="width: 8%">{{elementos.os_desc_matricula |  number : '1.2-2'}}</td>
                     <td style="width: 8%">{{elementos.os_gasto_admin |  number : '1.2-2'}}</td>
                     <td style="width: 8%">{{elementos.os_imp_cheque |  number : '1.2-2'}}</td>
                     <td style="width: 8%">{{elementos.os_ing_brutos |  number : '1.2-2'}}</td>
-                    <td style="width: 8%">{{elementos.os_lote_hogar |  number : '1.2-2'}}</td>
+                    <td style="width: 8%">{{elementos.os_lote_hogar |  number : '1.2-2'}}</td> -->
                     <td style="width: 8%">{{elementos.os_liq_neto |  number : '1.2-2'}}</td>
-                    <td style="width: 8%">
-                        <button   type="button" class="btn btn-outline-info btn-sm" (click)="verDetalle(elementos)"    >Detalle</button>
-                    </td>
-                    <td style="width: 8%">
-                        <button   type="button" class="btn btn-outline-secondary btn-sm" (click)="generarPdfRentas(elementos)"    >Ing. Br.</button>
-                    </td>
                     <td style="width: 12%">
-                        <button   type="button" class="btn btn-outline-success btn-sm" (click)="verFactura(elementos)"    >Subir factura</button>
+                        <button   type="button" class="btn btn-outline-info btn-sm" (click)="verDetalle(elementos)"    ><i class="fas fa-list-ol mr-1"></i>Detalle</button>
+                    </td>
+                    <td style="width: 20%">
+                        <button   type="button" class="btn btn-outline-secondary btn-sm" (click)="generarPdfRentas(elementos)"    > <i class="fas fa-cloud-download-alt mr-1"></i> Descargar Ing. Brutos</button>
+                    </td>
+                    <td style="width: 18%">
+                        <button   type="button" class="btn btn-outline-success btn-sm" (click)="verFactura(elementos)"    ><i class="fas fa-cloud-upload-alt mr-1"></i>Subir factura</button>
                     </td>
 
             </tr>

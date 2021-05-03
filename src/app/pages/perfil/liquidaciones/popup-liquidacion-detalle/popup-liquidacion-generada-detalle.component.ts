@@ -115,7 +115,6 @@ export class PopupLiquidacionGeneradaDetalleComponent implements OnInit {
           {field: 'mat_estado', header: 'Estado' , width: '8%'},
           {field: 'mat_tipo_pago', header: 'Tipo' , width: '8%'},
           {field: 'id_liquidacion_detalle', header: 'N°', width: '8%' },
-          {field: 'nombreyapellido', header: 'Usuario' , width: '14%'},
           ];
 
       this.columnsOrden = [
@@ -355,14 +354,16 @@ imprimirResumen(){
   doc.text('Lote hogar: ' + this.cp.transform(this.config.data.os_lote_hogar, '', 'symbol-narrow', '1.2-2'), 65, currentY + 20, null, null);
   doc.text('Gastos adm.: ' + this.cp.transform(this.config.data.os_gasto_admin, '', 'symbol-narrow', '1.2-2'), 105, currentY + 20, null);
   doc.text('Imp. cheque: ' + this.cp.transform(this.config.data.os_imp_cheque, '', 'symbol-narrow', '1.2-2'), 155, currentY + 20, null);
-  doc.text('Matricula: ' + this.cp.transform(this.config.data.os_desc_matricula, '', 'symbol-narrow', '1.2-2'), 15, currentY + 24, null, null);
+  doc.line(15, currentY + 24, pageWidth - 15, currentY + 24);
+/*   doc.text('Matricula: ' + this.cp.transform(this.config.data.os_desc_matricula, '', 'symbol-narrow', '1.2-2'), 15, currentY + 24, null, null);
   doc.text('Fondo solidario: ' + this.cp.transform(this.config.data.os_desc_fondo_sol, '', 'symbol-narrow', '1.2-2'), 65, currentY + 24, null, null);
   doc.text('Otros descuentos: ' + this.cp.transform(this.config.data.os_descuentos, '', '', '1.2-2'), 105,currentY + 24, null, null);
-  doc.line(15, currentY + 28, pageWidth - 15, currentY + 28);
+  doc.line(15, currentY + 28, pageWidth - 15, currentY + 28);*/
 
 // MATRICULA
 
-doc.setFontSize(9);
+
+  doc.setFontSize(9);
   doc.text('DESCUENTOS REALIZADOS', pageWidth / 2, currentY + 34, null, null, 'center');
   doc.setFontSize(8);
   doc.autoTable(this.columnsMatricula, this.elemento,
@@ -374,8 +375,9 @@ doc.setFontSize(9);
         }
         );
 
+let finalY = doc.autoTable.previous.finalY;
 
-  let finalY = doc.autoTable.previous.finalY;
+
   doc.setLineWidth(0.4);
 
   doc.setFontSize(10);

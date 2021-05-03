@@ -34,19 +34,20 @@ export class LiquidacionesComponent implements OnInit {
     this.cols = [
 
       { field: 'id_liquidacion', header: 'Liq. nº' , width: '6%'} ,
+      { field: 'os_fecha', header: 'Fecha liq.' , width: '12%'} ,
       { field: 'num_comprobante', header: 'Comp.' , width: '8%'},
       { field: 'os_num_ing_bruto', header: 'Nº I.B' , width: '8%'},
-      { field: 'os_liq_bruto', header: 'Bruto' , width: '8%'},
+     /*  { field: 'os_liq_bruto', header: 'Bruto' , width: '8%'},
       { field: 'os_desc_fondo_sol', header: 'F. sol',  width: '8%' },
       {field: 'os_desc_matricula', header: 'Matricula' , width: '8%' },
       { field: 'os_gasto_admin', header: 'G. adm.',  width: '8%' },
       { field: 'os_imp_cheque', header: 'Imp. ch,',  width: '8%' },
       { field: 'os_ing_brutos', header: 'Ing. B' , width: '8%'},
-      { field: 'os_lote_hogar', header: 'Lote h.' , width: '8%'},
+      { field: 'os_lote_hogar', header: 'Lote h.' , width: '8%'}, */
       { field: 'os_liq_neto', header: 'A cobrar' , width: '8%'},
-      {field: 'boton', header: '', width: '8%' },
-      {field: 'boton', header: '' , width: '8%'},
-      {field: 'boton', header: '' , width: '12%'},
+      {field: 'boton', header: '', width: '12%' },
+      {field: 'boton', header: '' , width: '20%'},
+      {field: 'boton', header: '' , width: '18%'},
    ];
 
   }
